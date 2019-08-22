@@ -2,6 +2,9 @@
 .gradle
 /local.properties
 /.idea/caches
+/.idea/codeStyles/Project.xml
+.idea/codeStyles/Project.xml
+/.idea/misc.xml
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
@@ -11,3 +14,4 @@
 /build
 /captures
 .externalNativeBuild
+
