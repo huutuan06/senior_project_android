@@ -5,13 +5,6 @@ import com.android.project.di.component.DaggerAppComponent
 import com.android.project.di.module.AppModule
 import com.android.project.di.module.ServiceModule
 
-/**
- * Created by vuongluis on 4/14/2018.
- *
- * @author vuongluis
- * @version 0.0.1
- */
-
 class Application : android.app.Application() {
 
     private var appComponent: AppComponent? = null

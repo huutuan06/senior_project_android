@@ -73,7 +73,7 @@ class ConfigVMImpl(context: Context, service: BookService, disposableManager: Di
     }
 
     private fun saveInfoConfigureApp(configuration: Config) {
-        SessionManager.getInstance(mContext).appVersion = configuration.appVersion
+        SessionManager.getInstance(mContext).appVersion = configuration.appVersion!!
     }
 }
 

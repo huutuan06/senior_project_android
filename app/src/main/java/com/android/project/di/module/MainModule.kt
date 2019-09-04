@@ -13,12 +13,6 @@ import com.android.project.viewmodel.ConfigureVM
 import dagger.Module
 import dagger.Provides
 
-/**
- * Created by vuongluis on 4/14/2018.
- * @author vuongluis
- * @version 0.0.1
- */
-
 @Module
 class MainModule(private val activity: MainActivity, private val view: MainView) {
 

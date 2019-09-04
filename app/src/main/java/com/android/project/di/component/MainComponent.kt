@@ -6,13 +6,6 @@ import com.android.project.view.ui.activity.MainActivity
 
 import dagger.Subcomponent
 
-/**
- * Created by vuongluis on 4/14/2018.
- *
- * @author vuongluis
- * @version 0.0.1
- */
-
 @ActivityScope
 @Subcomponent(modules = [MainModule::class])
 interface MainComponent {
