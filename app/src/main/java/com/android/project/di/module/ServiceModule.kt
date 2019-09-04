@@ -1,90 +1,94 @@
 package com.android.project.di.module;
 
-import android.content.Context;
+import android.content.Context
+import com.android.project.BuildConfig
+import com.android.project.app.Application
+import com.android.project.service.connect.TrustHtppS
+import com.android.project.service.connect.rx.DisposableManager
+import com.android.project.service.repository.BookService
+import dagger.Module
+import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
 
-import com.android.project.BuildConfig;
-import com.android.project.app.Application;
+@Module
+class ServiceModule(application: Application, context: Context) {
 
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Named;
-import javax.inject.Singleton;
-import javax.xml.validation.Validator;
-
-import dagger.Provides;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class ServiceModule {
-
-    public ServiceModule(Application application, Context context) {
-        Application mApplication = application;
-        Context mContext = context;
+    init {
+        val mApplication = application
+        val mContext = context
     }
 
     @Singleton
     @Provides
-    HttpLoggingInterceptor provideHttpLoggingInterceptor() {
-        return new HttpLoggingInterceptor();
+    internal fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor()
     }
 
     @Singleton
     @Provides
     @Named("ok-1")
-    OkHttpClient.Builder provideOkHttpClient1(HttpLoggingInterceptor interceptor) {
-        return new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true);
+    internal fun provideOkHttpClient1(interceptor: HttpLoggingInterceptor): OkHttpClient.Builder {
+        return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
     }
 
     @Singleton
     @Provides
     @Named("ok-2")
-    OkHttpClient.Builder provideOkHttpClient2(HttpLoggingInterceptor interceptor) {
-        return new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true);
+    internal fun provideOkHttpClient2(interceptor: HttpLoggingInterceptor): OkHttpClient.Builder {
+        return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
     }
 
     @Singleton
     @Provides
-    TrustHtppS provideTrustHtppS(@Named("ok-1") OkHttpClient.Builder client) {
-        return new TrustHtppS(client);
+    internal fun provideTrustHtppS(@Named("ok-1") client: OkHttpClient.Builder): TrustHtppS {
+        return TrustHtppS(client)
     }
 
     @Singleton
     @Provides
     @Named("url-configure")
-    String provideBaseURL1() {
-        return BuildConfig.BASE_URL;
+    internal fun provideBaseURL1(): String {
+        return BuildConfig.BASE_URL
     }
-
 
     @Singleton
     @Provides
-    Retrofit provideRetrofit(TrustHtppS trustHtppS, @Named("ok-1") OkHttpClient.Builder client, @Named("url-configure") String baseUrl) {
-        trustHtppS.intializeCertificate();
-        return new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(client.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
+    internal fun provideRetrofit(trustHtppS: TrustHtppS, @Named("ok-1") client: OkHttpClient.Builder, @Named("url-configure") baseUrl: String): Retrofit {
+        trustHtppS.intializeCertificate()
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(client.build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
     }
 
     @Provides
     @Singleton
-    ApiService provideVogoApiService(Retrofit retrofit) {
-        return retrofit.create(ApiService.class);
+    internal fun provideBookService(retrofit: Retrofit): BookService {
+        return retrofit.create(BookService::class.java)
     }
 
+    @Provides
+    @Singleton
+    internal fun provideDisposableManager() : DisposableManager {
+        return DisposableManager()
+    }
 }

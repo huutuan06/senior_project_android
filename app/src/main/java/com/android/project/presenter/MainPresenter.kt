@@ -1,10 +1,16 @@
-package com.android.project.view.ui.callback
+package com.android.project.presenter
 
 import com.android.project.service.model.Config
 import io.reactivex.disposables.Disposable
 
-interface MainView {
+interface MainPresenter {
+
     fun setDisposable(disposable: Disposable)
+
+    fun loadApplicationSettings()
+
     fun loadAppConfigurationSuccess(config: Config)
+
     fun loadAppConfigurationFailure(error: String)
+
 }

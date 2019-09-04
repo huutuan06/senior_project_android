@@ -3,6 +3,7 @@ package com.android.project.app
 import com.android.project.di.component.AppComponent
 import com.android.project.di.component.DaggerAppComponent
 import com.android.project.di.module.AppModule
+import com.android.project.di.module.ServiceModule
 
 /**
  * Created by vuongluis on 4/14/2018.
@@ -29,6 +30,7 @@ class Application : android.app.Application() {
     private fun initAppComponent() {
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this, this.applicationContext))
+            .serviceModule(ServiceModule(this, this.applicationContext))
             .build()
     }
 
