@@ -82,7 +82,7 @@ class ServiceModule(application: Application, context: Context) {
 
     @Provides
     @Singleton
-    internal fun provideBookService(retrofit: Retrofit): BookService {
+    internal fun provideBookService(retrofit: Retrofit) : BookService {
         return retrofit.create(BookService::class.java)
     }
 

@@ -4,6 +4,7 @@ import com.android.project.app.Application
 import com.android.project.di.module.AppModule
 import com.android.project.di.module.MainModule
 import com.android.project.di.module.ServiceModule
+import com.android.project.view.ui.activity.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,4 +13,6 @@ import javax.inject.Singleton
 interface AppComponent {
     operator fun plus(application: Application)
     operator fun plus(module: MainModule): MainComponent
+
+    fun inject(activity: MainActivity)
 }
