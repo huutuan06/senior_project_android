@@ -14,8 +14,8 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         distributedDaggerComponents()
         setContentView(layoutRes)
-        initAttributes()
         initViews()
+        initAttributes()
     }
 
     abstract fun distributedDaggerComponents()
@@ -23,8 +23,4 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     protected abstract fun initAttributes()
 
     protected abstract fun initViews()
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }
