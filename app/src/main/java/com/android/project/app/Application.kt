@@ -7,28 +7,20 @@ import com.android.project.di.module.ServiceModule
 
 class Application : android.app.Application() {
 
-    private var appComponent: AppComponent? = null
-
     companion object {
         lateinit var instance: Application
     }
 
     override fun onCreate() {
         super.onCreate()
-        initAppComponent()
         instance = this
-        appComponent!!.plus(this)
-    }
-
-    private fun initAppComponent() {
-        appComponent = DaggerAppComponent.builder()
-            .appModule(AppModule(this, this.applicationContext))
-            .serviceModule(ServiceModule(this, this.applicationContext))
-            .build()
     }
 
     fun getAppComponent(): AppComponent? {
-        return appComponent
+        return DaggerAppComponent.builder()
+            .appModule(AppModule(this, this.applicationContext))
+            .serviceModule(ServiceModule(this, this.applicationContext))
+            .build()
     }
 
 }

@@ -94,6 +94,9 @@ dependencies {
 
     //google play service
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    //login facebook
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
 
 repositories {

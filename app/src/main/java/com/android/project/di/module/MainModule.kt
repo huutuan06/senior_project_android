@@ -19,25 +19,25 @@ class MainModule(private val activity: MainActivity, private val view: MainView)
 
     @Provides
     @ActivityScope
-    internal fun provideActivity(): MainActivity {
+    fun provideActivity(): MainActivity {
         return activity
     }
 
     @Provides
     @ActivityScope
-    internal fun provideView(): MainView {
+    fun provideView(): MainView {
         return view
     }
 
     @Provides
     @ActivityScope
-    internal fun provideMainPresenter(view: MainView, model: ConfigureVM): MainPresenter {
+    fun provideMainPresenter(view: MainView, model: ConfigureVM): MainPresenter {
         return MainPresenterImpl(view, model)
     }
 
     @Provides
     @ActivityScope
-    internal fun provideConfigViewMode(context: Context, apiService: BookService, disposableManager: DisposableManager): ConfigureVM {
+    fun provideConfigViewMode(context: Context, apiService: BookService, disposableManager: DisposableManager): ConfigureVM {
         return ConfigVMImpl(context, apiService, disposableManager)
     }
 
