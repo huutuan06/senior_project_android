@@ -8,9 +8,7 @@ import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.LoginModule
 import com.app.bookselling.view.ui.callback.LoginView
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
+import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
@@ -70,7 +68,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView {
             }
 
             override fun onCancel() {
-                Log.d("LoginActivity", "Facebook onCancel!")
+                if (AccessToken.getCurrentAccessToken() != null) {
+                    GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permission/", null, HttpMethod.DELETE, GraphRequest.Callback {
+                        AccessToken.setCurrentAccessToken(null)
+                        LoginManager.getInstance().logOut()
+                    }).executeAsync()
+                }
             }
 
             override fun onError(exception: FacebookException) {
@@ -88,6 +91,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView {
         super.onActivityResult(requestCode, resultCode, data)
 
         mCallbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun loadUserProfile( newAccessToken: AccessToken) {
+//        var request: GraphRequest = GraphRequest.newMeRequest(newAccessToken,  )
     }
 
 }
