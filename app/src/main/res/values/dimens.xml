@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_text">20dp</dimen>
+    <dimen name="title">18dp</dimen>
+    <dimen name="normal">12dp</dimen>
+    <dimen name="category">20dp</dimen>
+    <dimen name="text_descrition_book_on_list">9dp</dimen>
+    <dimen name="price_and_rate">34dp</dimen>
+    <dimen name="prive_small">20dp</dimen>
+</resources>
