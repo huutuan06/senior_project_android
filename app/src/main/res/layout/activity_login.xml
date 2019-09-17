@@ -55,11 +55,12 @@
             app:layout_constraintTop_toBottomOf="@+id/tvDescription"
             tools:ignore="SpUsage" />
 
-    <com.facebook.login.widget.LoginButton
+    <ImageButton
             android:id="@+id/btnSignInByFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:padding="0dp"
             android:contentDescription="@string/img_register_facebook"
             android:src="@drawable/ic_register_facebook"
             app:layout_constraintLeft_toLeftOf="parent"
