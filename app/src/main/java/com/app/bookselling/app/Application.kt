@@ -13,6 +13,8 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+
 
 class Application : android.app.Application() {
 
