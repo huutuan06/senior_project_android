@@ -1,11 +1,15 @@
 package com.app.bookselling.model
 
+import android.net.Uri
+import javax.inject.Singleton
+
+@Singleton
 class User {
-    private lateinit var mPictureUrl: String
+    private lateinit var mPictureUrl: Uri
     private lateinit var mNameUser: String
     private lateinit var mEmailUser: String
 
-    constructor(pictureUrl: String, nameUser: String, emailUser: String) {}
+    constructor(pictureUrl: Uri?, nameUser: String?, emailUser: String?) {}
 
-    constructor(pictureUrl: String, nameUser: String) {}
+    constructor(pictureUrl: Uri?, nameUser: String?) {}
 }

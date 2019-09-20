@@ -1,6 +1,7 @@
 package com.app.bookselling.view.ui.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Toast
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.LoginModule
+import com.app.bookselling.model.User
 import com.app.bookselling.view.ui.callback.LoginView
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -125,6 +127,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
     private fun configureGoogleSignIn() {
         val signInOptions: GoogleSignInOptions =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.server_client_id))
                 .requestEmail().build()
         googleApiClient =
             GoogleApiClient.Builder(applicationContext).enableAutoManage(mActivity, this)
@@ -139,8 +142,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
     private fun handleResult(googleSignInResult: GoogleSignInResult) {
         if (googleSignInResult.isSuccess) {
             val account: GoogleSignInAccount? = googleSignInResult.signInAccount
+            val imageUrl: Uri? = account?.photoUrl
             val name: String? = account?.displayName
-            var email: String? = account?.email
+            val email: String? = account?.email
+
+            val user = User(imageUrl, name, email)
 
             Log.d("LoginActivity", "Token Google: $name")
         }

@@ -27,7 +27,7 @@ class Application : android.app.Application() {
         super.onCreate()
         instance = this
         generateHashKey()
-        initFacebook()
+//        initFacebook()
     }
 
     private fun generateHashKey() {
@@ -57,9 +57,9 @@ class Application : android.app.Application() {
             .build()
     }
 
-    fun initFacebook() {
-        FacebookSdk.sdkInitialize(applicationContext)
-        AppEventsLogger.activateApp(this)
-    }
+//    fun initFacebook() {
+//        FacebookSdk.sdkInitialize(applicationContext)
+//        AppEventsLogger.activateApp(this)
+//    }
 
 }
