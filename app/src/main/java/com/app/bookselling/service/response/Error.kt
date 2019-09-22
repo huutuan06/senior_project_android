@@ -8,6 +8,7 @@ class Error {
     @Expose
     var code: Int = 0
         private set
+
     @SerializedName("message")
     @Expose
     var message: String? = null

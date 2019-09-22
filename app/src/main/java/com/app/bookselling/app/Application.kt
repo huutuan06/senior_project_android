@@ -34,7 +34,7 @@ class Application : android.app.Application() {
         try {
             @SuppressLint("PackageManagerGetSignatures")
             val info = packageManager.getPackageInfo(
-                "com.game.millionaire",
+                "com.app.bookselling",
                 PackageManager.GET_SIGNATURES
             )
             for (signature in info.signatures) {

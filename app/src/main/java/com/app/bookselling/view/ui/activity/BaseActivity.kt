@@ -3,9 +3,8 @@ package com.app.bookselling.view.ui.activity
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.app.bookselling.view.ui.callback.BaseView
 
-abstract class BaseActivity : AppCompatActivity(), BaseView {
+abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract val layoutRes: Int
 

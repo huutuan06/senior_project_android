@@ -1,3 +1,6 @@
 package com.app.bookselling.view.ui.callback
 
-interface BaseView
+interface BaseView {
+    fun showDialogProgress()
+    fun closeDialogProgress()
+}

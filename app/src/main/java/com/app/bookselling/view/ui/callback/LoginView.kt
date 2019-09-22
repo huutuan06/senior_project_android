@@ -1,3 +1,5 @@
 package com.app.bookselling.view.ui.callback
 
-interface LoginView
+interface LoginView : BaseView {
+    fun errorConnection()
+}

@@ -1,6 +1,7 @@
 package com.app.bookselling.service.connect.rx
 
 import com.app.bookselling.service.response.ConfigResponse
+import com.app.bookselling.service.response.UserResponse
 
 import javax.inject.Inject
 
@@ -34,5 +35,28 @@ constructor() {
                     _interface.onApiFailure(e)
                 }
             })
+    }
+
+    fun user(observable: Observable<Response<UserResponse>>, _interface: IDisposableListener<UserResponse>) : Disposable {
+        return observable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableObserver<Response<UserResponse>>() {
+                override fun onComplete() {
+                    _interface.onComplete()
+                }
+
+                override fun onNext(value: Response<UserResponse>) {
+                    if (value.isSuccessful) {
+                        _interface.onHandleData(value.body())
+                    } else {
+                        _interface.onRequestWrongData(value.code())
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+                    _interface.onApiFailure(e)
+                }
+            })
+
     }
 }

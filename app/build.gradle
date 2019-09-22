@@ -12,7 +12,7 @@ def daggerVersion = '2.24'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.android.project"
+        applicationId "com.app.bookselling"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
@@ -42,7 +42,7 @@ android {
         def BASE_URL = "BASE_URL"
         dev {
             resValue "string", "app_name", "TestApp"
-            buildConfigField "String", BASE_URL, '"http://google.com.vn"'
+            buildConfigField "String", BASE_URL, '"https://ezmillionaire.luisnguyen.com/"'
         }
     }
     compileOptions {
