@@ -15,6 +15,7 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView {
 
+
     var mContext: Context? = null
         @Inject set
 
@@ -27,7 +28,7 @@ class MainActivity : BaseActivity(), MainView {
 
     @SuppressLint("SetTextI18n")
     override fun initAttributes() {
-        txtDemo!!.text = "Hello Ben!. Please tak a look and I will explain you about the structure!!"
+        txtDemo!!.text = intent.extras!!.getString("Name")
     }
 
     override fun initViews() {
@@ -48,4 +49,5 @@ class MainActivity : BaseActivity(), MainView {
     override fun loadAppConfigurationFailure(error: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
 }

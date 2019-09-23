@@ -36,7 +36,7 @@ class LoginModule(private val activity: LoginActivity, private val view: LoginVi
 
     @Provides
     @ActivityScope
-    fun provideUserVM(context: Context, disposableManager: DisposableManager, bookService: BookService) : UserViewModel = UserViewModelImpl(context, bookService, disposableManager)
+    fun provideUserViewModel(context: Context, disposableManager: DisposableManager, bookService: BookService) : UserViewModel = UserViewModelImpl(context, bookService, disposableManager)
 
     @Provides
     @ActivityScope

@@ -27,14 +27,12 @@ import com.google.gson.JsonParser
 import org.json.JSONObject
 import javax.inject.Inject
 
-
-
 class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
     GoogleApiClient.OnConnectionFailedListener {
 
+
     override fun onConnectionFailed(p0: ConnectionResult) {
     }
-
 
     private var btnSignInByFacebook: ImageButton? = null
     private var imgBtnSignInByGoogle: ImageButton? = null
@@ -76,7 +74,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
 
     override fun initAttributes() {
         btnSignInByFacebook!!.setOnClickListener(this)
-        //Google
         imgBtnSignInByGoogle!!.setOnClickListener(this)
 
         configureGoogleSignIn()
@@ -101,12 +98,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
         LoginManager.getInstance()
             .registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult?) {
-                    Log.i(FACEBOOK, "onSuccess: " + loginResult?.accessToken)
-                    Log.i(FACEBOOK, "Token: " + loginResult?.accessToken?.token?.length)
                     val mGraphRequest: GraphRequest = GraphRequest.newMeRequest(
                         loginResult?.accessToken
                     ) { `object`, _ -> generateJsonFacebook(`object`)}
-
 
                     val parameters = Bundle()
                     parameters.putString("fields", "id, name, first_name, last_name, email")
@@ -131,7 +125,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
         Log.i(FACEBOOK, jsonObject?.getString("last_name"))
         Log.i(FACEBOOK, jsonObject?.getString("email"))
         Log.i(FACEBOOK, "https://graph.facebook.com/" + jsonObject?.getString("id") + "/picture?type=normal")
-        var jsonParser : JsonParser = JsonParser()
+        val jsonParser : JsonParser = JsonParser()
         mPresenter.loginSocial(jsonParser.parse(jsonObject.toString()) as JsonObject)
     }
 
@@ -159,7 +153,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
             Log.i(GOOGLE, "User_name: $name")
             Log.i(GOOGLE, "User_email: $email")
             Log.i(GOOGLE, "User_image_url: $imageUrl")
-            var obj : JsonObject = JsonObject()
+            val obj : JsonObject = JsonObject()
             obj.addProperty("id" , "")
             obj.addProperty("email", email)
 
@@ -178,7 +172,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
     }
 
     override fun errorConnection() {
-        Toast.makeText(mContext, "No connection", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "No connection", Toast.LENGTH_SHORT).show()
     }
 
     override fun showDialogProgress() {
@@ -187,5 +181,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
 
     override fun closeDialogProgress() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
+    override fun loadUser(fullName: String?, email: String?) {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("Name", fullName)
+        intent.putExtra("Email", email)
+        startActivity(intent)
+        finish()
     }
 }

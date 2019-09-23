@@ -1,6 +1,7 @@
 package com.app.bookselling.viewmodel
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.app.bookselling.presenter.LoginPresenter
 import com.app.bookselling.service.connect.rx.DisposableManager
 import com.app.bookselling.service.connect.rx.IDisposableListener
@@ -12,7 +13,7 @@ import com.app.bookselling.service.response.UserResponse
 import com.app.bookselling.utils.Utils
 import com.google.gson.JsonObject
 
-class UserViewModelImpl(private var context: Context, private var service: BookService, private var disposableManager: DisposableManager) :
+class UserViewModelImpl(private val context: Context, private val service: BookService, private val disposableManager: DisposableManager) :
     UserViewModel {
 
     private var mloginPresenter: LoginPresenter? = null
@@ -24,8 +25,8 @@ class UserViewModelImpl(private var context: Context, private var service: BookS
     override fun loginSocial(jsonObject: JsonObject) {
         if (Utils.isInternetOn(context)) {
 
-            var dummyJson = JsonObject()
-            dummyJson.addProperty("email", "abc11@gmail.com")
+            val dummyJson = JsonObject()
+            dummyJson.addProperty("email", "a3889@gmail.com")
             dummyJson.addProperty("name", "abc11")
             dummyJson.addProperty("password", "abfdjhsd21231HN@@")
             dummyJson.addProperty("picture", "abc11")
@@ -37,9 +38,15 @@ class UserViewModelImpl(private var context: Context, private var service: BookS
 
                 override fun onHandleData(response: UserResponse?) {
 //                    val configuration = response!!.data
-                    var error: Error? = response!!.error
-                    var data: UserData? = response.data
-                    var user: User? = response.data!!.user
+                    val error: Error? = response!!.error
+                    val data: UserData? = response.data
+                    val user: User? = response.data!!.user
+
+                    val pref: SharedPreferences = context.getSharedPreferences("LoginPref", 0)
+                    val editor: SharedPreferences.Editor = pref.edit()
+                    editor.putString("Token",data?.token).apply()
+
+                    mloginPresenter!!.loadUser(user?.fullName, user?.email)
                 }
 
                 override fun onRequestWrongData(code: Int) {

@@ -11,9 +11,6 @@ import com.app.bookselling.di.module.ServiceModule
 import com.facebook.CallbackManager
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 
 class Application : android.app.Application() {
@@ -27,7 +24,6 @@ class Application : android.app.Application() {
         super.onCreate()
         instance = this
         generateHashKey()
-//        initFacebook()
     }
 
     private fun generateHashKey() {
@@ -51,15 +47,9 @@ class Application : android.app.Application() {
     }
 
     fun getAppComponent(): AppComponent? {
-        return DaggerAppComponent.builder()
+        return DaggerAppComponent.builder() 
             .appModule(AppModule(this, this.applicationContext))
             .serviceModule(ServiceModule(this, this.applicationContext))
             .build()
     }
-
-//    fun initFacebook() {
-//        FacebookSdk.sdkInitialize(applicationContext)
-//        AppEventsLogger.activateApp(this)
-//    }
-
 }

@@ -5,6 +5,12 @@ import com.app.bookselling.viewmodel.UserViewModel
 import com.google.gson.JsonObject
 
 class LoginPresenterImpl(private val view: LoginView, private val userViewModel: UserViewModel) : LoginPresenter {
+
+    override fun loadUser(fullName: String?, email: String?) {
+        // Using view to get data to Login Screen
+        view.loadUser(fullName, email)
+    }
+
     override fun loginFailure() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

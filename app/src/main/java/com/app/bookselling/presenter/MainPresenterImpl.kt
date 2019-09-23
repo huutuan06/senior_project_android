@@ -3,9 +3,11 @@ package com.app.bookselling.presenter
 import com.app.bookselling.service.model.Config
 import com.app.bookselling.view.ui.callback.MainView
 import com.app.bookselling.viewmodel.ConfigureVM
+import com.app.bookselling.viewmodel.UserViewModel
 import io.reactivex.disposables.Disposable
 
 class MainPresenterImpl(private val view: MainView, private val model: ConfigureVM) : MainPresenter {
+
 
     init {
         model.attachPresenter(this)

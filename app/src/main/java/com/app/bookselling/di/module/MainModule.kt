@@ -10,6 +10,7 @@ import com.app.bookselling.view.ui.activity.MainActivity
 import com.app.bookselling.view.ui.callback.MainView
 import com.app.bookselling.viewmodel.ConfigVMImpl
 import com.app.bookselling.viewmodel.ConfigureVM
+import com.app.bookselling.viewmodel.UserViewModel
 import dagger.Module
 import dagger.Provides
 
@@ -37,7 +38,7 @@ class MainModule(private val activity: MainActivity, private val view: MainView)
 
     @Provides
     @ActivityScope
-    fun provideConfigViewMode(context: Context, apiService: BookService, disposableManager: DisposableManager): ConfigureVM {
+    fun provideConfigViewModel(context: Context, apiService: BookService, disposableManager: DisposableManager): ConfigureVM {
         return ConfigVMImpl(context, apiService, disposableManager)
     }
 
