@@ -2,12 +2,17 @@ package com.app.bookselling.view.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.MainModule
 import com.app.bookselling.presenter.MainPresenter
 import com.app.bookselling.service.model.Config
 import com.app.bookselling.view.ui.callback.MainView
+import com.app.bookselling.view.ui.fragment.HomeFragment
+import com.app.bookselling.view.ui.fragment.PersonalFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
@@ -28,10 +33,12 @@ class MainActivity : BaseActivity(), MainView {
     @SuppressLint("SetTextI18n")
     override fun initAttributes() {
 //        txtDemo!!.text = intent.extras!!.getString("Name")
+       onClickBottomNavigation()
     }
 
     override fun initViews() {
-
+        val homeFragment = HomeFragment()
+        openFragment(homeFragment)
     }
 
     public override val layoutRes: Int
@@ -47,6 +54,31 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun loadAppConfigurationFailure(error: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun onClickBottomNavigation() {
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_bar)
+        bottomNavigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_item_home -> {
+                    val homeFragment = HomeFragment()
+                    openFragment(homeFragment)
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.menu_item_personal -> {
+                    val personalFragment = PersonalFragment()
+                    openFragment(personalFragment)
+                    return@setOnNavigationItemSelectedListener true
+                }
+            }
+            false
+
+        }
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.frame_container, fragment)
+                .commit()
     }
 
 }

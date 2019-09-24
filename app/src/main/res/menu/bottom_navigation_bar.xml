@@ -4,14 +4,14 @@
     <item
         android:id="@+id/menu_item_home"
         android:title="@string/bottom_navigation_bar_home"
-        android:icon="@drawable/ic_menu_home_active"
+        android:icon="@drawable/ic_menu_home"
         android:enabled="true"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_item_personal"
         android:title="@string/bottom_navigation_bar_personal"
-        android:icon="@drawable/ic_menu_personal_active"
+        android:icon="@drawable/ic_menu_personal"
         android:enabled="true"
         app:showAsAction="always"/>
 </menu>

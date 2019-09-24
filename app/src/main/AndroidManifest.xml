@@ -16,6 +16,9 @@
         <activity android:name=".view.ui.activity.LogoutActivity"></activity>
         <activity android:name=".view.ui.activity.LoginActivity"
                 android:theme="@style/LoginTheme">
+
+        </activity>
+        <activity android:name=".view.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,12 +31,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                        android:host="google.com"
-                        android:pathPattern="/fdsfds"
-                        android:scheme="http" />
+                    android:host="google.com"
+                    android:pathPattern="/fdsfds"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ui.activity.MainActivity"></activity>
 
         <meta-data
                 android:name="com.facebook.sdk.ApplicationId"
