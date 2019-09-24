@@ -9,7 +9,6 @@ import com.app.bookselling.presenter.MainPresenter
 import com.app.bookselling.service.model.Config
 import com.app.bookselling.view.ui.callback.MainView
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
@@ -28,7 +27,7 @@ class MainActivity : BaseActivity(), MainView {
 
     @SuppressLint("SetTextI18n")
     override fun initAttributes() {
-        txtDemo!!.text = intent.extras!!.getString("Name")
+//        txtDemo!!.text = intent.extras!!.getString("Name")
     }
 
     override fun initViews() {
