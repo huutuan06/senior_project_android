@@ -1,6 +1,7 @@
 package com.app.bookselling.di.module
 
 import android.content.Context
+import android.widget.Toolbar
 import com.app.bookselling.di.scope.ActivityScope
 import com.app.bookselling.presenter.MainPresenter
 import com.app.bookselling.presenter.MainPresenterImpl
@@ -41,5 +42,4 @@ class MainModule(private val activity: MainActivity, private val view: MainView)
     fun provideConfigViewModel(context: Context, apiService: BookService, disposableManager: DisposableManager): ConfigureVM {
         return ConfigVMImpl(context, apiService, disposableManager)
     }
-
 }

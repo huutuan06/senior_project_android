@@ -51,13 +51,19 @@ android {
     }
 }
 
+ext {
+    nav_version = "2.1.0"
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
-
-    //bottom navigation bar
     implementation 'com.android.support:design:28.0.0'
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
