@@ -30,47 +30,47 @@ class ConfigVMImpl(context: Context, service: BookService, disposableManager: Di
     }
 
     override fun loadApplicationSettings() {
-        if (Utils.isInternetOn(mContext)) {
-            mPresenter!!.setDisposable(
-                mDisposableManager!!.configure(
-                    mService!!.configuration,
-                    object :
-                        IDisposableListener<ConfigResponse> {
-                        override fun onComplete() {
-
-                        }
-
-                        override fun onHandleData(response: ConfigResponse) {
-                            when (response.error!!.code) {
-                                0 -> {
-                                    val configuration = response.data
-                                    if (configuration != null) {
-                                        mPresenter!!.loadAppConfigurationSuccess(configuration)
-                                    }
-                                    if (configuration != null) {
-                                        saveInfoConfigureApp(configuration)
-                                    }
-                                }
-                                else -> mPresenter!!.loadAppConfigurationFailure(
-                                    mContext!!.getString(
-                                        R.string.no_internet_connection
-                                    )
-                                )
-                            }
-                        }
-
-                        override fun onRequestWrongData(code: Int) {
-
-                        }
-
-                        override fun onApiFailure(error: Throwable) {
-
-                        }
-                    })
-            )
-        } else {
-            mPresenter!!.loadAppConfigurationFailure(mContext!!.getString(R.string.no_internet_connection))
-        }
+//        if (Utils.isInternetOn(mContext)) {
+//            mPresenter!!.setDisposable(
+//                mDisposableManager!!.configure(
+//                    mService!!.configuration,
+//                    object :
+//                        IDisposableListener<ConfigResponse> {
+//                        override fun onComplete() {
+//
+//                        }
+//
+//                        override fun onHandleData(response: ConfigResponse) {
+//                            when (response.error!!.code) {
+//                                0 -> {
+//                                    val configuration = response.data
+//                                    if (configuration != null) {
+//                                        mPresenter!!.loadAppConfigurationSuccess(configuration)
+//                                    }
+//                                    if (configuration != null) {
+//                                        saveInfoConfigureApp(configuration)
+//                                    }
+//                                }
+//                                else -> mPresenter!!.loadAppConfigurationFailure(
+//                                    mContext!!.getString(
+//                                        R.string.no_internet_connection
+//                                    )
+//                                )
+//                            }
+//                        }
+//
+//                        override fun onRequestWrongData(code: Int) {
+//
+//                        }
+//
+//                        override fun onApiFailure(error: Throwable) {
+//
+//                        }
+//                    })
+//            )
+//        } else {
+//            mPresenter!!.loadAppConfigurationFailure(mContext!!.getString(R.string.no_internet_connection))
+//        }
     }
 
     private fun saveInfoConfigureApp(configuration: Config) {

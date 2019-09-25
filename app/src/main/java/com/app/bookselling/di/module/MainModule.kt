@@ -1,23 +1,20 @@
 package com.app.bookselling.di.module
 
-import android.content.Context
-import android.widget.Toolbar
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.app.bookselling.R
 import com.app.bookselling.di.scope.ActivityScope
 import com.app.bookselling.presenter.MainPresenter
 import com.app.bookselling.presenter.MainPresenterImpl
-import com.app.bookselling.service.connect.rx.DisposableManager
-import com.app.bookselling.service.repository.BookService
 import com.app.bookselling.view.ui.activity.MainActivity
 import com.app.bookselling.view.ui.callback.MainView
-import com.app.bookselling.viewmodel.ConfigVMImpl
-import com.app.bookselling.viewmodel.ConfigureVM
-import com.app.bookselling.viewmodel.UserViewModel
 import dagger.Module
 import dagger.Provides
 
 @Module
-class MainModule(private val activity: MainActivity, private val view: MainView) {
+class MainModule() {
 
+    constructor(private val activity: MainActivity, private val view: MainView)
 
     @Provides
     @ActivityScope
@@ -33,13 +30,15 @@ class MainModule(private val activity: MainActivity, private val view: MainView)
 
     @Provides
     @ActivityScope
-    fun provideMainPresenter(view: MainView, model: ConfigureVM): MainPresenter {
-        return MainPresenterImpl(view, model)
+    fun provideMainPresenter(): MainPresenter {
+        return MainPresenterImpl()
     }
 
     @Provides
     @ActivityScope
-    fun provideConfigViewModel(context: Context, apiService: BookService, disposableManager: DisposableManager): ConfigureVM {
-        return ConfigVMImpl(context, apiService, disposableManager)
-    }
+    fun provideNavHostFragment() : NavHostFragment = activity.supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment
+
+    @Provides
+    @ActivityScope
+    fun provideNavController(navHostFragment: NavHostFragment) : NavController = NavHostFragment.findNavController(navHostFragment)
 }

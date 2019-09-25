@@ -13,7 +13,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.ui.activity.LogoutActivity"></activity>
+        <activity android:name=".view.ui.activity.LogoutActivity"/>
         <activity android:name=".view.ui.activity.LoginActivity"
                 android:theme="@style/LoginTheme">
 
