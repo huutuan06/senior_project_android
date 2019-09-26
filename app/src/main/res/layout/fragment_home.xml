@@ -27,28 +27,28 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar_home">
 
         <TextView
-                android:id="@+id/a"
+                android:id="@+id/text_view_common"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="A" />
+                android:text="@string/text_books_common" />
 
         <TextView
-                android:id="@+id/b"
+                android:id="@+id/text_view_top_selling"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="B" />
+                android:text="@string/text_books_top_selling" />
 
         <TextView
-                android:id="@+id/c"
+                android:id="@+id/text_view_new_release"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="C" />
+                android:text="@string/text_book_new_release" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager

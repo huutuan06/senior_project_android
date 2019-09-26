@@ -12,20 +12,31 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class MainModule() {
+class MainModule {
 
-    constructor(private val activity: MainActivity, private val view: MainView)
+    private var activity: MainActivity? = null
+    private var view: MainView? = null
+
+    // Default Constructor
+    constructor(activity: MainActivity, view: MainView)  {
+        this.activity = activity
+        this.view = view
+    }
+
+    constructor(activity: MainActivity)  {
+        this.activity = activity
+    }
 
     @Provides
     @ActivityScope
     fun provideActivity(): MainActivity {
-        return activity
+        return activity!!
     }
 
     @Provides
     @ActivityScope
     fun provideView(): MainView {
-        return view
+        return view!!
     }
 
     @Provides
@@ -36,7 +47,7 @@ class MainModule() {
 
     @Provides
     @ActivityScope
-    fun provideNavHostFragment() : NavHostFragment = activity.supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment
+    fun provideNavHostFragment() : NavHostFragment = activity!!.supportFragmentManager.findFragmentById(R.id.fragment_nav_host) as NavHostFragment
 
     @Provides
     @ActivityScope

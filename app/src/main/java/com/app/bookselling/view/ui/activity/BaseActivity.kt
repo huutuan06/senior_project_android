@@ -11,8 +11,8 @@ abstract class BaseActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        distributedDaggerComponents()
         setContentView(layoutRes)
+        distributedDaggerComponents()
         initViews()
         initAttributes()
     }

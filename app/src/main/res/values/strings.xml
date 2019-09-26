@@ -14,5 +14,11 @@
     //Bottom navigation bar
     <string name="bottom_navigation_bar_home">Home</string>
     <string name="bottom_navigation_bar_personal">Personal</string>
+    <string name="text_books_common">Common</string>
+    <string name="text_books_top_selling">Top Selling</string>
+    <string name="text_book_new_release">New Release</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
