@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -30,6 +31,9 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
     @Inject lateinit var mActivity: MainActivity
 
     @Inject lateinit var mFragment: HomeFragment
+
+    @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+
 
     @BindView(R.id.bottom_navigation_bar)
     @JvmField var mBottomNavigation: BottomNavigationView? = null
@@ -66,6 +70,9 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
         mNavController.setGraph(R.navigation.navigation_graph_home)
         mNavController.addOnDestinationChangedListener(this)
         Application.instance.setCurrentFragment(mFragment)
+        mActivity.setSupportActionBar(mToolbar)
+        mToolbar.title = "Book Selling Online"
+
     }
 
     @OnClick(R.id.text_view_common, R.id.text_view_top_selling, R.id.text_view_new_release)

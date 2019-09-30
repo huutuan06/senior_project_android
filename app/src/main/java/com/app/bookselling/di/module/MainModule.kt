@@ -1,5 +1,6 @@
 package com.app.bookselling.di.module
 
+import android.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.app.bookselling.R
@@ -52,4 +53,11 @@ class MainModule {
     @Provides
     @ActivityScope
     fun provideNavController(/*@Named("Main") */navHostFragment: NavHostFragment) : NavController = NavHostFragment.findNavController(navHostFragment)
+
+    @Provides
+    @ActivityScope
+    fun provideCreateToolbar(): androidx.appcompat.widget.Toolbar = activity!!.findViewById(R.id.toolbar_main) as androidx.appcompat.widget.Toolbar
+
+
+
 }

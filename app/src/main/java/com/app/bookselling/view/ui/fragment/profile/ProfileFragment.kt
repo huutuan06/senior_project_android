@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -19,8 +20,11 @@ import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
 
-    @Inject
-    lateinit var mAdapter: ManageOrderAdapter
+    @Inject lateinit var mAdapter: ManageOrderAdapter
+
+    @Inject lateinit var mActivity: MainActivity
+
+    @Inject lateinit var mToolbar: Toolbar
 
     @BindView(R.id.recycler_view_personal)
     @JvmField var rcvPersonal : RecyclerView? = null
@@ -43,6 +47,9 @@ class ProfileFragment : BaseFragment() {
         rcvPersonal?.layoutManager = LinearLayoutManager(context)
         rcvPersonal?.hasFixedSize()
         rcvPersonal?.adapter = mAdapter
+
+        mActivity.setSupportActionBar(mToolbar)
+        mToolbar.title = "Personal"
     }
 
     fun showList(arr : ArrayList<ItemManageOrders>) {

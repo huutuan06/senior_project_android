@@ -14,7 +14,7 @@ abstract class BaseFragment : Fragment() {
     private lateinit var mUnbinder: Unbinder
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = provideYourFragmentView(inflater, container, savedInstanceState)
+        val view = provideYourFragmentView(inflater, container, savedInstanceState)
         mUnbinder = ButterKnife.bind(this, view)
         distributedDaggerComponents()
         initAttributes()

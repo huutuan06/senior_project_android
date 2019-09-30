@@ -25,6 +25,8 @@ class MainActivity : BaseActivity(), MainView,
 
     @Inject lateinit var mMainPresenter: MainPresenter
 
+    @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+
     @BindView(R.id.bottom_navigation_bar)
     @JvmField var mBottomNavigation: BottomNavigationView? = null
 
@@ -36,6 +38,7 @@ class MainActivity : BaseActivity(), MainView,
         mBottomNavigation!!.setOnNavigationItemSelectedListener(this)
         mNavController.setGraph(R.navigation.navigation_graph)
         mNavController.addOnDestinationChangedListener(this)
+        mToolbar.title = "Book Selling Online"
     }
 
     public override val layoutRes: Int
