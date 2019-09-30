@@ -51,5 +51,5 @@ class MainModule {
 
     @Provides
     @ActivityScope
-    fun provideNavController(navHostFragment: NavHostFragment) : NavController = NavHostFragment.findNavController(navHostFragment)
+    fun provideNavController(/*@Named("Main") */navHostFragment: NavHostFragment) : NavController = NavHostFragment.findNavController(navHostFragment)
 }

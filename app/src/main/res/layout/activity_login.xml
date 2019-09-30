@@ -56,7 +56,7 @@
             tools:ignore="SpUsage" />
 
     <ImageButton
-            android:id="@+id/btnSignInByFacebook"
+            android:id="@+id/imvSignInByFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -67,7 +67,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSignIn" />
     <ImageButton
-            android:id="@+id/btnSignInByGoogle"
+            android:id="@+id/imvSignInByGoogle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -75,7 +75,7 @@
             android:src="@drawable/ic_register_google"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnSignInByFacebook"
+            app:layout_constraintTop_toBottomOf="@id/imvSignInByFacebook"
             android:contentDescription="@string/img_register_google" />
 
 

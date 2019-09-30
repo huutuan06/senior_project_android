@@ -16,7 +16,6 @@
         <activity android:name=".view.ui.activity.LogoutActivity"/>
         <activity android:name=".view.ui.activity.LoginActivity"
                 android:theme="@style/LoginTheme">
-
         </activity>
         <activity android:name=".view.ui.activity.MainActivity">
             <intent-filter>

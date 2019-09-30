@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/homeCommonFragment">
+
+    <fragment
+        android:id="@+id/homeCommonFragment"
+        android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeCommonFragment"
+        android:label="HomeCommonFragment" >
+        <action
+            android:id="@+id/action_homeCommonFragment_to_homeCommonDetailFragment"
+            app:destination="@id/homeCommonDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeTopSellingFragment"
+        android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeTopSellingFragment"
+        android:label="HomeTopSellingFragment" />
+    <fragment
+        android:id="@+id/homeNewReleaseFragment"
+        android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeNewReleaseFragment"
+        android:label="HomeNewReleaseFragment" />
+    <fragment
+        android:id="@+id/homeCommonDetailFragment"
+        android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeCommonDetailFragment"
+        android:label="HomeCommonDetailFragment" />
+</navigation>

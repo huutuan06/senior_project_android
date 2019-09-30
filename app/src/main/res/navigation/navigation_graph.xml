@@ -8,27 +8,12 @@
     <fragment
         android:id="@+id/homeFragment"
         android:label="homeFragment"
-        android:name="com.app.bookselling.view.ui.fragment.HomeFragment"
+        android:name="com.app.bookselling.view.ui.fragment.home.HomeFragment"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/personalFragment"
         android:label="personalFragment"
-        android:name="com.app.bookselling.view.ui.fragment.PersonalFragment"
-        tools:layout="@layout/fragment_personal" />
-    <fragment
-        android:id="@+id/homeCommonFragment"
-        android:label="homeCommonFragment"
-        android:name="com.app.bookselling.view.ui.fragment.HomeCommonFragment"
-        tools:layout="@layout/fragment_home_common" />
-    <fragment
-        android:id="@+id/homeTopSellingFragment"
-        android:label="homeTopSellingFragment"
-        android:name="com.app.bookselling.view.ui.fragment.HomeTopSellingFragment"
-        tools:layout="@layout/fragment_home_top_selling" />
-    <fragment
-        android:id="@+id/homeReleaseFragment"
-        android:label="homeReleaseFragment"
-        android:name="com.app.bookselling.view.ui.fragment.HomeTopSellingFragment"
-        tools:layout="@layout/fragment_home_new_release" />
+        android:name="com.app.bookselling.view.ui.fragment.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

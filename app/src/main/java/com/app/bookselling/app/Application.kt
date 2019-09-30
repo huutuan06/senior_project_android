@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.util.Base64
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.app.bookselling.di.component.DaggerAppComponent
 import com.app.bookselling.di.component.AppComponent
 import com.app.bookselling.di.module.AppModule
@@ -19,6 +20,8 @@ class Application : android.app.Application() {
         lateinit var instance: Application
         lateinit var mCallbackManager: CallbackManager
     }
+
+    private lateinit var mRootFragment : Fragment
 
     override fun onCreate() {
         super.onCreate()
@@ -52,4 +55,10 @@ class Application : android.app.Application() {
             .serviceModule(ServiceModule(this, this.applicationContext))
             .build()
     }
+
+    fun setCurrentFragment(fragment: Fragment) {
+        mRootFragment = fragment
+    }
+
+    fun getCurrentFragment() = mRootFragment
 }

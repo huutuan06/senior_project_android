@@ -20,5 +20,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="img_profile">TODO</string>
+    <string name="move_to_manage_orders">move to manage orders screen</string>
 
 </resources>

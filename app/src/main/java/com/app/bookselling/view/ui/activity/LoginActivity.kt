@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
+import butterknife.BindView
+import butterknife.OnClick
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.LoginModule
@@ -27,32 +29,24 @@ import com.google.gson.JsonParser
 import org.json.JSONObject
 import javax.inject.Inject
 
-class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
+class LoginActivity : BaseActivity(), LoginView,
     GoogleApiClient.OnConnectionFailedListener {
 
+    @BindView(R.id.imvSignInByFacebook)
+    @JvmField var imvSignInByFacebook: ImageButton? = null
 
-    override fun onConnectionFailed(p0: ConnectionResult) {
-    }
+    @BindView(R.id.imvSignInByGoogle)
+    @JvmField var imvSignInByGoogle: ImageButton? = null
 
-    private var btnSignInByFacebook: ImageButton? = null
-    private var imgBtnSignInByGoogle: ImageButton? = null
+    @Inject lateinit var mContext: Context
+    @Inject lateinit var mActivity: LoginActivity
+    @Inject lateinit var mPresenter: LoginPresenter
+    @Inject lateinit var mCallbackManager: CallbackManager
 
     private var googleApiClient: GoogleApiClient? = null
 
-    @Inject lateinit var mContext: Context
-
-    @Inject
-    lateinit var mActivity: LoginActivity
-
-    @Inject
-    lateinit var mPresenter: LoginPresenter
-
-    @Inject
-    lateinit var mCallbackManager: CallbackManager
-
     public override val layoutRes: Int
         get() = R.layout.activity_login
-
 
     companion object {
         const val EMAIL = "email"
@@ -66,25 +60,18 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
         Application.instance.getAppComponent()!!.plus(LoginModule(this, this)).inject(this)
     }
 
-    override fun initViews() {
-        Application.mCallbackManager = mCallbackManager
-        btnSignInByFacebook = findViewById(R.id.btnSignInByFacebook)
-        imgBtnSignInByGoogle = findViewById(R.id.btnSignInByGoogle)
-    }
-
     override fun initAttributes() {
-        btnSignInByFacebook!!.setOnClickListener(this)
-        imgBtnSignInByGoogle!!.setOnClickListener(this)
-
+        Application.mCallbackManager = mCallbackManager
         configureGoogleSignIn()
     }
 
-    override fun onClick(view: View?) {
-        when (view!!.id) {
-            R.id.btnSignInByFacebook -> {
+    @OnClick(R.id.imvSignInByGoogle, R.id.imvSignInByFacebook)
+    fun processEventClick(v : View) {
+        when(v.id) {
+            R.id.imvSignInByFacebook -> {
                 loginFacebookApp()
             }
-            R.id.btnSignInByGoogle -> {
+            R.id.imvSignInByGoogle -> {
                 loginGoogleApp()
             }
         }
@@ -153,12 +140,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
             Log.i(GOOGLE, "User_name: $name")
             Log.i(GOOGLE, "User_email: $email")
             Log.i(GOOGLE, "User_image_url: $imageUrl")
-            val obj : JsonObject = JsonObject()
+            val obj = JsonObject()
             obj.addProperty("id" , "")
             obj.addProperty("email", email)
-
             mPresenter.loginSocial(obj)
-//            mPresenter.loginSocial(JSONObject("""{"id": "", "name": "$name", "first_name": "$name", "last_name": "$name", "email": "$email"}"""))
         }
     }
 
@@ -176,13 +161,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
     }
 
     override fun showDialogProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO
     }
 
     override fun closeDialogProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO
     }
-
 
     override fun loadUser(fullName: String?, email: String?) {
         val intent = Intent(this, MainActivity::class.java)
@@ -190,5 +174,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LoginView,
         intent.putExtra("Email", email)
         startActivity(intent)
         finish()
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        // TODO
     }
 }

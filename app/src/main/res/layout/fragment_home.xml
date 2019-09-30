@@ -3,19 +3,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:orientation="vertical">
-
-    <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_home"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/colorPrimary"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="Book Selling Online">
-
-    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
             android:id="@+id/tablayout_book_list"
@@ -24,7 +13,7 @@
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_home">
+            app:layout_constraintTop_toTopOf="parent">
 
         <TextView
                 android:id="@+id/text_view_common"
@@ -51,13 +40,16 @@
                 android:text="@string/text_book_new_release" />
     </LinearLayout>
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager_book_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tablayout_book_list" />
+    <fragment
+        android:id="@+id/fragment_nav_host_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tablayout_book_list"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

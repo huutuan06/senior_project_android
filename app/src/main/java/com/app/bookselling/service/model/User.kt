@@ -20,7 +20,7 @@ class User() : Parcelable {
     @Expose
     var fullName: String? = null
 
-    @SerializedName("avatar")
+    @SerializedName("fake_avatar")
     @Expose
     var avatar: String? = null
 

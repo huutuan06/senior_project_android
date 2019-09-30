@@ -3,6 +3,7 @@ package com.app.bookselling.view.ui.activity
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import butterknife.ButterKnife
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -13,7 +14,7 @@ abstract class BaseActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(layoutRes)
         distributedDaggerComponents()
-        initViews()
+        ButterKnife.bind(this)
         initAttributes()
     }
 
@@ -21,5 +22,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract fun initAttributes()
 
-    protected abstract fun initViews()
+    override fun onDestroy() {
+        ButterKnife.bind(this).unbind()
+        super.onDestroy()
+    }
 }

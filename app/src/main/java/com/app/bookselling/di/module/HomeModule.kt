@@ -1,7 +1,7 @@
 package com.app.bookselling.di.module
 
 import com.app.bookselling.di.scope.FragmentScope
-import com.app.bookselling.view.ui.fragment.HomeFragment
+import com.app.bookselling.view.ui.fragment.home.HomeFragment
 import dagger.Module
 import dagger.Provides
 
