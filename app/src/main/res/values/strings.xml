@@ -23,5 +23,6 @@
     <string name="img_profile">TODO</string>
     <string name="move_to_manage_orders">move to manage orders screen</string>
     <string name="img_move">move to detail page</string>
+    <string name="img_book">Book Image</string>
 
 </resources>

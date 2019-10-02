@@ -30,9 +30,11 @@ class HomeCommonFragment : BaseFragment() {
 //    @BindView(R.id.tvTest)
 //    @JvmField var mEventTest: TextView? = null
 
-    lateinit var mArrayList: ArrayList<ItemCommon>
+    private var mArrayList= ArrayList<ItemCommon>()
 
     @Inject lateinit var mAdapter : CommonAdapter
+
+    @Inject lateinit var homeFragment: HomeFragment
 
     @BindView(R.id.recycler_view_common)
     @JvmField var rcvCommon : RecyclerView? = null
@@ -54,11 +56,12 @@ class HomeCommonFragment : BaseFragment() {
     override fun initAttributes() {
 //        if (arguments != null)
 //            Log.i("TAG", arguments!!.getString("name"))
-        mArrayList.add(ItemCommon("a"))
-        mArrayList.add(ItemCommon("a"))
-        mArrayList.add(ItemCommon("a"))
-        mArrayList.add(ItemCommon("a"))
-        mArrayList.add(ItemCommon("a"))
+
+        mArrayList.add(ItemCommon("Comic Collection"))
+        mArrayList.add(ItemCommon("On Vietnam"))
+        mArrayList.add(ItemCommon("Comics"))
+        mArrayList.add(ItemCommon("Business"))
+        mArrayList.add(ItemCommon("Book for you"))
         showList(mArrayList)
 
         rcvCommon?.layoutManager = LinearLayoutManager(context)
@@ -66,7 +69,7 @@ class HomeCommonFragment : BaseFragment() {
         rcvCommon?.adapter = mAdapter
     }
 
-    fun showList(arrayList: ArrayList<ItemCommon>) {
+    private fun showList(arrayList: ArrayList<ItemCommon>) {
         mAdapter.setList(arrayList)
     }
 

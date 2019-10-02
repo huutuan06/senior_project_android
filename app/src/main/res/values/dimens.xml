@@ -2,7 +2,9 @@
 <resources>
     <dimen name="login_text">20dp</dimen>
     <dimen name="title">18dp</dimen>
+    <dimen name="fragment_books_title">15dp</dimen>
     <dimen name="normal">14dp</dimen>
-    <dimen name="category">20dp</dimen>
+    <dimen name="category">18dp</dimen>
+    <dimen name="icon_category_move">15dp</dimen>
     <dimen name="text_description_book_on_list">9dp</dimen>
 </resources>

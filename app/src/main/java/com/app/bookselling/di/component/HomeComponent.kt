@@ -13,5 +13,4 @@ interface HomeComponent {
     fun plus(homeCommonModule: HomeCommonModule) : HomeCommonComponent
 
     fun inject(homeFragment: HomeFragment): HomeFragment
-    fun inject(homeCommonFragment: HomeCommonFragment): HomeCommonFragment
 }

@@ -2,6 +2,7 @@ package com.app.bookselling.di.module
 
 import android.content.Context
 import com.app.bookselling.di.scope.FragmentScope
+import com.app.bookselling.di.scope.SubFragmentScope
 import com.app.bookselling.utils.ItemCommon
 import com.app.bookselling.view.adapter.CommonAdapter
 import com.app.bookselling.view.ui.fragment.home.tabs.HomeCommonFragment
@@ -12,12 +13,12 @@ import dagger.Provides
 class HomeCommonModule (private val fragment : HomeCommonFragment) {
 
     @Provides
-    @FragmentScope
+    @SubFragmentScope
     fun provideFragment() : HomeCommonFragment {
         return fragment
     }
 
     @Provides
-    @FragmentScope
+    @SubFragmentScope
     fun provideCommonAdapter(context: Context) =  CommonAdapter(context, ArrayList<ItemCommon>())
 }

@@ -9,7 +9,8 @@ import com.app.bookselling.R
 import com.app.bookselling.utils.ItemCommon
 import kotlinx.android.synthetic.main.item_home_common.view.*
 
-class CommonAdapter (private var context: Context, private var commonList: ArrayList<ItemCommon>) :RecyclerView.Adapter<CommonAdapter.ViewHolder>() {
+class CategoryAdapter (private var context: Context, private var commonList: ArrayList<ItemCommon>) :
+    RecyclerView.Adapter<CommonAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // TODO
@@ -34,4 +35,3 @@ class CommonAdapter (private var context: Context, private var commonList: Array
         commonList = arr
         notifyDataSetChanged()
     }
-}

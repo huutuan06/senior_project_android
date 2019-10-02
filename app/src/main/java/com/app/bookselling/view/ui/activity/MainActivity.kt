@@ -2,6 +2,7 @@ package com.app.bookselling.view.ui.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.navigation.NavController
@@ -86,6 +87,11 @@ class MainActivity : BaseActivity(), MainView,
 
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar, menu)
+        return true
     }
 
 }
