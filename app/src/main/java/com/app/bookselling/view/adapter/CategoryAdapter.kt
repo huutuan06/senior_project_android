@@ -16,11 +16,11 @@ class CategoryAdapter(private var context: Context, private var categoriesList: 
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = categoriesList[position].title
-        holder.price.text = categoriesList[position].price
+        holder.txtTitle.text = categoriesList[position].title
+        holder.txtPrice.text = categoriesList[position].price
 
-        Picasso.get().load(categoriesList[position].image).resize(180,  280)
-            .centerCrop().into(holder.image)
+        Picasso.get().load(categoriesList[position].image).resize(200,  300)
+            .centerCrop().into(holder.imgBook)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,9 +38,9 @@ class CategoryAdapter(private var context: Context, private var categoriesList: 
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var title = itemView.text_view_book_title!!
-        var image = itemView.image_book!!
-        var price = itemView.text_view_book_price!!
+        var txtTitle = itemView.text_view_book_title!!
+        var imgBook = itemView.image_book!!
+        var txtPrice = itemView.text_view_book_price!!
     }
 
 

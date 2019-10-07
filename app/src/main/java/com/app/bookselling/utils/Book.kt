@@ -6,13 +6,15 @@ class Book {
     lateinit var author: String
     lateinit var price: String
     lateinit var page: String
+    lateinit var rate: String
 
 
-    constructor(title: String, image: String, author: String, page: String) {
+    constructor(title: String, image: String, author: String, rate: String, price: String) {
         this.title = title
         this.image = image
         this.author = author
-        this.page = page
+        this.rate = rate
+        this.price = price
     }
 
     constructor(title: String, image: String, price: String) {
@@ -20,6 +22,5 @@ class Book {
         this.image = image
         this.price = price
     }
-
 
 }
