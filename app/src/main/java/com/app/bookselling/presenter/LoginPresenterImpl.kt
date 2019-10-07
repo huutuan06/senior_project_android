@@ -12,7 +12,7 @@ class LoginPresenterImpl(private val view: LoginView, private val userViewModel:
     }
 
     override fun loginFailure() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO
     }
 
     init {

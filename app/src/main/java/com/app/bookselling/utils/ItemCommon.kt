@@ -1,3 +1,3 @@
 package com.app.bookselling.utils
 
-data class ItemCommon (var category: String)
+data class ItemCommon (var title: String)
