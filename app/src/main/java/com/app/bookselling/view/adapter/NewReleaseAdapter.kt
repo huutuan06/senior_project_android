@@ -13,25 +13,31 @@ import com.app.bookselling.utils.Book
 import com.app.bookselling.utils.ItemCommon
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_home_common.view.*
+import kotlinx.android.synthetic.main.item_home_new_release.view.*
 import kotlinx.android.synthetic.main.item_home_top_selling.view.*
+import kotlinx.android.synthetic.main.item_home_top_selling.view.image_book
+import kotlinx.android.synthetic.main.item_home_top_selling.view.text_view_book_author
+import kotlinx.android.synthetic.main.item_home_top_selling.view.text_view_book_price
+import kotlinx.android.synthetic.main.item_home_top_selling.view.text_view_book_title
+import kotlinx.android.synthetic.main.item_home_top_selling.view.text_view_rate
 
-class TopSellingAdapter(private var context: Context, private var topSellingList: ArrayList<Book>) :
-    RecyclerView.Adapter<TopSellingAdapter.ViewHolder>() {
+class NewReleaseAdapter(private var context: Context, private var newReleaseList: ArrayList<Book>) :
+    RecyclerView.Adapter<NewReleaseAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.txtTitle.text = topSellingList[position].title
-        Picasso.get().load(topSellingList[position].image).resize(160,  240)
+        holder.txtTitle.text = newReleaseList[position].title
+        Picasso.get().load(newReleaseList[position].image).resize(160,  240)
             .centerCrop().into(holder.imgBook)
-        holder.txtAuthor.text = topSellingList[position].author
-        holder.txtRate.text = topSellingList[position].rate
-        holder.txtPrice.text = topSellingList[position].price
+        holder.txtAuthor.text = newReleaseList[position].author
+        holder.txtRate.text = newReleaseList[position].rate
+        holder.txtPrice.text = newReleaseList[position].price
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.item_home_top_selling,
+                R.layout.item_home_new_release,
                 parent,
                 false
             )
@@ -39,11 +45,11 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
     }
 
     override fun getItemCount(): Int {
-        return topSellingList.size
+        return newReleaseList.size
     }
 
     open class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var txtRank: TextView = itemView.text_view_selling_rank
+        var txtRank: TextView = itemView.text_view_new_release
         var txtTitle: TextView = itemView.text_view_book_title
         var imgBook: ImageView = itemView.image_book
         var txtAuthor: TextView = itemView.text_view_book_author
@@ -52,7 +58,7 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
     }
 
     fun setList(arr: ArrayList<Book>) {
-        topSellingList = arr
+        newReleaseList = arr
         notifyDataSetChanged()
     }
 

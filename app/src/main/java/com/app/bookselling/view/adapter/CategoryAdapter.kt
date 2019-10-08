@@ -19,7 +19,7 @@ class CategoryAdapter(private var context: Context, private var categoriesList: 
         holder.txtTitle.text = categoriesList[position].title
         holder.txtPrice.text = categoriesList[position].price
 
-        Picasso.get().load(categoriesList[position].image).resize(200,  300)
+        Picasso.get().load(categoriesList[position].image).resize(180,  270)
             .centerCrop().into(holder.imgBook)
     }
 

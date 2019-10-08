@@ -24,13 +24,10 @@ import javax.inject.Inject
 
 class HomeTopSellingFragment : BaseFragment() {
 
-    private var mToppSellingArrayList= ArrayList<Book>()
+    private var mTopSellingArrayList= ArrayList<Book>()
 
     @Inject
     lateinit var mTopSellingAdapter : TopSellingAdapter
-
-    @Inject
-    lateinit var homeFragment: HomeFragment
 
     @BindView(R.id.recycler_view_top_selling)
     @JvmField var rcvTopSelling : RecyclerView? = null
@@ -51,18 +48,18 @@ class HomeTopSellingFragment : BaseFragment() {
     }
 
     override fun initAttributes() {
-        mToppSellingArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://vignette.wikia.nocookie.net/wingsoffire/images/7/78/Dragonslayer_Placeholder.jpg/revision/latest?cb=20190507040739","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://about.canva.com/wp-content/uploads/sites/3/2015/01/art_bookcover.png","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/91lKQ1w00DL.jpg?auto=format&q=60&fit=max&w=930","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://www.creativeparamita.com/wp-content/uploads/2018/12/spy-in-the-house.jpg","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8a7nxItx2AB4lA--bEOjsMQLscGmxw3wmk28vu5jfysNzb0HEbw","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://www.bookbaby.com/plugins/coverscarousel/images/basic/EverlastingJoy.jpg","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://www.bookbaby.com/plugins/coverscarousel/images/basic/EverlastingJoy.jpg","Ryze", "4.5","100USD"))
-        mToppSellingArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://www.creativeparamita.com/wp-content/uploads/2018/12/spy-in-the-house.jpg","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8a7nxItx2AB4lA--bEOjsMQLscGmxw3wmk28vu5jfysNzb0HEbw","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://www.bookbaby.com/plugins/coverscarousel/images/basic/EverlastingJoy.jpg","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://www.bookbaby.com/plugins/coverscarousel/images/basic/EverlastingJoy.jpg","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://vignette.wikia.nocookie.net/wingsoffire/images/7/78/Dragonslayer_Placeholder.jpg/revision/latest?cb=20190507040739","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://about.canva.com/wp-content/uploads/sites/3/2015/01/art_bookcover.png","Ryze", "4.5","100USD"))
+        mTopSellingArrayList.add(Book("Harry Potter","https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/91lKQ1w00DL.jpg?auto=format&q=60&fit=max&w=930","Ryze", "4.5","100USD"))
 
-        showListOfTopSelling(mToppSellingArrayList)
+        showListOfTopSelling(mTopSellingArrayList)
 
         rcvTopSelling?.layoutManager = LinearLayoutManager(context)
         rcvTopSelling?.hasFixedSize()
