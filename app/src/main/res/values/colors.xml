@@ -6,4 +6,5 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="colorControlNormal">#62BCF9</color>
+    <color name="colorTextBlack">#000000</color>
 </resources>

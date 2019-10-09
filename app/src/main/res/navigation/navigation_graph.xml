@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/personalFragment"
         android:label="personalFragment"
-        android:name="com.app.bookselling.view.ui.fragment.profile.ProfileFragment"
-        tools:layout="@layout/fragment_profile" />
+        android:name="com.app.bookselling.view.ui.fragment.profile.PersonalFragment"
+        tools:layout="@layout/fragment_personal" />
 
 </navigation>

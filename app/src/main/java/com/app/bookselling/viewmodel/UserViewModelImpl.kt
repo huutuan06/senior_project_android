@@ -26,7 +26,7 @@ class UserViewModelImpl(private val context: Context, private val service: BookS
         if (Utils.isInternetOn(context)) {
 
             val dummyJson = JsonObject()
-            dummyJson.addProperty("email", "abss9@gmail.com")
+            dummyJson.addProperty("email", "a1s57@gmail.com")
             dummyJson.addProperty("name", "abc11")
             dummyJson.addProperty("password", "abfdjhsd21231HN@@")
             dummyJson.addProperty("picture", "abc11")

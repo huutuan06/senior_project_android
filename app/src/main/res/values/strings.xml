@@ -16,13 +16,14 @@
     <string name="bottom_navigation_bar_personal">Personal</string>
     <string name="text_books_common">Common</string>
     <string name="text_books_top_selling">Top Selling</string>
-    <string name="text_book_new_release">New Release</string>
+    <string name="text_books_new_release">New Release</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="img_profile">TODO</string>
-    <string name="move_to_manage_orders">move to manage orders screen</string>
-    <string name="img_move">move to detail page</string>
+    //Book
     <string name="img_book">Book Image</string>
+    <string name="rate">Rate</string>
+    <string name="image_star">image star</string>
+    <string name="image_manage_order">image for manage order</string>
+    <string name="text_logout">LOG OUT</string>
+    <string name="image_profile">image profile</string>
 
 </resources>

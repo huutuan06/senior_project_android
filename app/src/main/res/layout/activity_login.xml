@@ -27,8 +27,7 @@
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imvLogo"
-            tools:ignore="SpUsage" />
+            app:layout_constraintTop_toBottomOf="@+id/imvLogo"/>
 
     <TextView
             android:id="@+id/tvDescription"
@@ -36,11 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/Description"
-            android:textSize="@dimen/normal"
+            android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAppName"
-            tools:ignore="SpUsage" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
 
     <TextView
             android:id="@+id/tvSignIn"
@@ -52,8 +50,7 @@
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-            tools:ignore="SpUsage" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
     <ImageButton
             android:id="@+id/imvSignInByFacebook"
