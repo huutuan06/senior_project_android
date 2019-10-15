@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -28,15 +29,17 @@ class MainActivity : BaseActivity(), MainView,
 
     @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
 
-    @BindView(R.id.bottom_navigation_bar)
-    @JvmField var mBottomNavigation: BottomNavigationView? = null
+    @Inject lateinit var mBottomNavigation: BottomNavigationView
+
+//    @BindView(R.id.bottom_navigation_bar)
+//    @JvmField var mBottomNavigation: BottomNavigationView? = null
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this, this)).inject(this)
     }
 
     override fun initAttributes() {
-        mBottomNavigation!!.setOnNavigationItemSelectedListener(this)
+        mBottomNavigation.setOnNavigationItemSelectedListener(this)
         mNavController.setGraph(R.navigation.navigation_graph)
         mNavController.addOnDestinationChangedListener(this)
         mToolbar.title = "Book Selling Online"
@@ -62,6 +65,7 @@ class MainActivity : BaseActivity(), MainView,
                 return true
             }
         }
+
         return false
     }
 

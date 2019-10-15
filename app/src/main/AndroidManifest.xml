@@ -19,10 +19,6 @@
 
         </activity>
         <activity android:name=".view.ui.activity.MainActivity">
-
-        </activity>
-
-        <activity android:name=".view.ui.activity.BookDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

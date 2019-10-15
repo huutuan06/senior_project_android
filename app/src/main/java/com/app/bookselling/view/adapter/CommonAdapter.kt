@@ -13,10 +13,27 @@ import com.app.bookselling.utils.ItemCommon
 import kotlinx.android.synthetic.main.item_home_common.view.*
 
 class CommonAdapter(private var context: Context, private var commonList: ArrayList<ItemCommon>) :
-    RecyclerView.Adapter<CommonAdapter.ViewHolder>() {
+    RecyclerView.Adapter<CommonAdapter.ViewHolder>(), CategoryAdapter.CategoryEventListener {
+
+    override fun navigateToBookDetail(book: Book) {
+        /**
+         *
+         */
+        mCommonEventListener.navigateToBookDetail(book)
+    }
+
+    interface CommonEventListener {
+        fun navigateToBookDetail(book: Book)
+    }
+
+    lateinit var mCommonEventListener : CommonEventListener
+
+    fun setInterface(listener: CommonEventListener) {
+        mCommonEventListener = listener
+    }
 
     private var mCategoryArrayList= ArrayList<Book>()
-    private var mCategoryAdapter = CategoryAdapter(context, mCategoryArrayList)
+    private var mCategoryAdapter = CategoryAdapter(context, mCategoryArrayList, this)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.txtCategory.text = commonList[position].title
@@ -31,6 +48,8 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
         showListOfCategory(mCategoryArrayList)
         holder.rcvCategory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.rcvCategory.adapter = mCategoryAdapter
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

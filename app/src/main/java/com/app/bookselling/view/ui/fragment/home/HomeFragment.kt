@@ -113,6 +113,6 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
         }
     }
 
-    public fun getNavController() = mNavController
+    fun getNavController() = mNavController
 
 }

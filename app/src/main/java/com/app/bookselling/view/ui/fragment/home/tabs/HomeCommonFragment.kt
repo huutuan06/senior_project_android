@@ -1,12 +1,15 @@
 package com.app.bookselling.view.ui.fragment.home.tabs
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
+import butterknife.OnClick
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.HomeCommonModule
@@ -21,15 +24,17 @@ import com.app.bookselling.view.ui.fragment.BaseFragment
 import com.app.bookselling.view.ui.fragment.home.HomeFragment
 import javax.inject.Inject
 
-class HomeCommonFragment : BaseFragment() {
+class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener {
 
-//    @Inject
-//    lateinit var mFragment: HomeFragment
+    @Inject
+    lateinit var mFragment: HomeFragment
 
 //    @BindView(R.id.tvTest)
 //    @JvmField var mEventTest: TextView? = null
 
     private var mCommonArrayList= ArrayList<ItemCommon>()
+
+    @Inject lateinit var mContext : Context
 
     @Inject lateinit var mCommonAdapter : CommonAdapter
 
@@ -68,6 +73,7 @@ class HomeCommonFragment : BaseFragment() {
         rcvCommon?.layoutManager = LinearLayoutManager(context)
         rcvCommon?.hasFixedSize()
         rcvCommon?.adapter = mCommonAdapter
+        mCommonAdapter.setInterface(this)
     }
 
     private fun showListOfCommon(arrayListOfCommon: ArrayList<ItemCommon>) {
@@ -83,4 +89,9 @@ class HomeCommonFragment : BaseFragment() {
 //            }
 //        }
 //    }
+
+    override fun navigateToBookDetail(book: Book) {
+        Toast.makeText(mContext, "Here", Toast.LENGTH_SHORT).show()
+        mFragment.getNavController().navigate(R.id.action_homeCommonFragment_to_bookDetailFragment)
+    }
 }

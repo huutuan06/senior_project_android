@@ -72,7 +72,7 @@ class PersonalFragment : BaseFragment() {
         menu.findItem(R.id.menu_item_search).isVisible = false
     }
 
-    fun showList(arr : ArrayList<ItemPersonal>) {
+    private fun showList(arr : ArrayList<ItemPersonal>) {
         mAdapter.setList(arr)
     }
 }

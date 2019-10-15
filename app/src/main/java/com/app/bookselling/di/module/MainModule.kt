@@ -9,6 +9,7 @@ import com.app.bookselling.presenter.MainPresenter
 import com.app.bookselling.presenter.MainPresenterImpl
 import com.app.bookselling.view.ui.activity.MainActivity
 import com.app.bookselling.view.ui.callback.MainView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.Module
 import dagger.Provides
 
@@ -53,6 +54,10 @@ class MainModule {
     @Provides
     @ActivityScope
     fun provideNavController(/*@Named("Main") */navHostFragment: NavHostFragment) : NavController = NavHostFragment.findNavController(navHostFragment)
+
+    @Provides
+    @ActivityScope
+    fun provideBottomNavigation() :  BottomNavigationView = activity!!.findViewById(R.id.bottom_navigation_bar) as BottomNavigationView
 
     @Provides
     @ActivityScope

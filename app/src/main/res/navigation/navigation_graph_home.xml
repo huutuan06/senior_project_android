@@ -7,10 +7,10 @@
     <fragment
         android:id="@+id/homeCommonFragment"
         android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeCommonFragment"
-        android:label="HomeCommonFragment" >
+        android:label="HomeCommonFragment">
         <action
-            android:id="@+id/action_homeCommonFragment_to_homeCommonDetailFragment"
-            app:destination="@id/homeCommonDetailFragment" />
+            android:id="@+id/action_homeCommonFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeTopSellingFragment"
@@ -21,7 +21,7 @@
         android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeNewReleaseFragment"
         android:label="HomeNewReleaseFragment" />
     <fragment
-        android:id="@+id/homeCommonDetailFragment"
-        android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeCommonDetailFragment"
-        android:label="HomeCommonDetailFragment" />
+        android:id="@+id/bookDetailFragment"
+        android:name="com.app.bookselling.view.ui.fragment.BookDetailFragment"
+        android:label="HomeNewReleaseFragment" />
 </navigation>
