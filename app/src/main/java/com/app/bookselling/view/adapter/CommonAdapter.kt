@@ -16,17 +16,14 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
     RecyclerView.Adapter<CommonAdapter.ViewHolder>(), CategoryAdapter.CategoryEventListener {
 
     override fun navigateToBookDetail(book: Book) {
-        /**
-         *
-         */
-        mCommonEventListener.navigateToBookDetail(book)
+          mCommonEventListener.navigateToBookDetail(book)
     }
 
     interface CommonEventListener {
         fun navigateToBookDetail(book: Book)
     }
 
-    lateinit var mCommonEventListener : CommonEventListener
+    private lateinit var mCommonEventListener : CommonEventListener
 
     fun setInterface(listener: CommonEventListener) {
         mCommonEventListener = listener

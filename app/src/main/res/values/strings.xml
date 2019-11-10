@@ -27,4 +27,6 @@
     <string name="image_profile">image profile</string>
 
     <string name="text_add_to_cart">ADD TO CART</string>
+    <string name="text_item_toolbar_search">Search</string>
+    <string name="text_item_toolbar_cart">Cart</string>
 </resources>

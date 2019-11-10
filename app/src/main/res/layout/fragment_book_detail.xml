@@ -187,7 +187,7 @@
                     android:id="@+id/txt_book_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/relative_layout_rate"
+                    android:layout_toStartOf="@+id/relative_layout_rate"
                     android:text="4.0"
                     android:textColor="#000000"
                     android:textSize="40dp" />
@@ -201,9 +201,11 @@
 
                     <RatingBar
                         android:id="@+id/rating_bar"
-                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:saveEnabled="true"
+                        style="?android:attr/ratingBarStyleSmall"
                         android:progressTint="#62BCF9" />
 
                     <TextView

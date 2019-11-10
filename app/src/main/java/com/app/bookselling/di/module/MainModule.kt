@@ -1,5 +1,6 @@
 package com.app.bookselling.di.module
 
+import android.widget.LinearLayout
 import android.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -63,6 +64,8 @@ class MainModule {
     @ActivityScope
     fun provideCreateToolbar(): androidx.appcompat.widget.Toolbar = activity!!.findViewById(R.id.toolbar_main) as androidx.appcompat.widget.Toolbar
 
-
+    @Provides
+    @ActivityScope
+    fun provideTabLayout(): LinearLayout = activity!!.findViewById(R.id.tablayout_book_list) as LinearLayout
 
 }

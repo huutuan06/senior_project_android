@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.RatingBar
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.MainModule
@@ -19,6 +21,9 @@ class BookDetailFragment : BaseFragment() {
 
     @Inject lateinit var mBottomNavigation: BottomNavigationView
 
+    @Inject lateinit var mTabLayout: LinearLayout
+
+//    private lateinit var ratingBar: RatingBar
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,7 +37,14 @@ class BookDetailFragment : BaseFragment() {
     }
 
     override fun initAttributes() {
+//        mToolbar.setNavigationIcon(R.drawable.ic_toolbar_back)
+//        ratingBar = findViewById(R.id.rating_bar)
+//        ratingBar.rating
+        mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
+        mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
+//        mActivity.onSupportNavigateUp()
         mBottomNavigation.visibility = View.GONE
+        mTabLayout.visibility = View.GONE
     }
-
 }

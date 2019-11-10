@@ -23,5 +23,5 @@
     <fragment
         android:id="@+id/bookDetailFragment"
         android:name="com.app.bookselling.view.ui.fragment.BookDetailFragment"
-        android:label="HomeNewReleaseFragment" />
+        android:label="BookDetailFragment" />
 </navigation>

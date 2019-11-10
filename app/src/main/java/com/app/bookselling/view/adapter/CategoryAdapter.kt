@@ -1,4 +1,4 @@
-package com.app.bookselling.view.adapter
+ package com.app.bookselling.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -24,7 +24,7 @@ class CategoryAdapter(private var context: Context, private var categoriesList: 
         Picasso.get().load(categoriesList[position].image).resize(180,  270)
             .centerCrop().into(holder.imgBook)
 
-        holder.mItemBook!!.setOnClickListener({
+        holder.mItemBook.setOnClickListener({
              mCategoryEventListener.navigateToBookDetail(categoriesList.get(position))
         })
     }
@@ -49,9 +49,7 @@ class CategoryAdapter(private var context: Context, private var categoriesList: 
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @BindView(R.id.fragment_item_category)
-        @JvmField var mItemBook: ConstraintLayout? = null
-
+        var mItemBook :ConstraintLayout = itemView.fragment_item_category
         var txtTitle = itemView.text_view_book_title!!
         var imgBook = itemView.image_book!!
         var txtPrice = itemView.text_view_book_price!!

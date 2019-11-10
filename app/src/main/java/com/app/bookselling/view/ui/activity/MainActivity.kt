@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import butterknife.BindView
+import butterknife.OnClick
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.MainModule
@@ -43,6 +44,9 @@ class MainActivity : BaseActivity(), MainView,
         mNavController.setGraph(R.navigation.navigation_graph)
         mNavController.addOnDestinationChangedListener(this)
         mToolbar.title = "Book Selling Online"
+        setSupportActionBar(mToolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        supportActionBar!!.setDisplayShowHomeEnabled(false)
     }
 
     public override val layoutRes: Int
@@ -98,4 +102,8 @@ class MainActivity : BaseActivity(), MainView,
         return true
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }
