@@ -7,13 +7,32 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:label="homeFragment"
+        android:label="@string/label_home"
         android:name="com.app.bookselling.view.ui.fragment.home.HomeFragment"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/personalFragment"
-        android:label="personalFragment"
+        android:label="@string/label_personal"
         android:name="com.app.bookselling.view.ui.fragment.profile.PersonalFragment"
-        tools:layout="@layout/fragment_personal" />
+        tools:layout="@layout/fragment_personal" >
+        <action
+            android:id="@+id/action_personalFragment_to_manageOrdersFragment"
+            app:destination="@id/manageOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:label="@string/label_cart"
+        android:name="com.app.bookselling.view.ui.fragment.CartFragment"
+        tools:layout="@layout/fragment_personal" >
+        <action
+            android:id="@+id/action_cartFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/manageOrdersFragment"
+        android:label="@string/label_manage_orders"
+        android:name="com.app.bookselling.view.ui.fragment.ManageOrdersFragment"
+        tools:layout="@layout/fragment_manage_orders" />
 
 </navigation>

@@ -4,12 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import butterknife.BindView
-import butterknife.OnClick
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.MainModule
@@ -32,9 +28,6 @@ class MainActivity : BaseActivity(), MainView,
 
     @Inject lateinit var mBottomNavigation: BottomNavigationView
 
-//    @BindView(R.id.bottom_navigation_bar)
-//    @JvmField var mBottomNavigation: BottomNavigationView? = null
-
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this, this)).inject(this)
     }
@@ -45,8 +38,8 @@ class MainActivity : BaseActivity(), MainView,
         mNavController.addOnDestinationChangedListener(this)
         mToolbar.title = "Book Selling Online"
         setSupportActionBar(mToolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        supportActionBar!!.setDisplayShowHomeEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
     }
 
     public override val layoutRes: Int
@@ -73,37 +66,81 @@ class MainActivity : BaseActivity(), MainView,
         return false
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar, menu)
+        visibleIconInFragments(menu)
+        return true
+    }
+
+    /**
+     * Here where you want to get event click.
+     * What you want to change. Please show me fragment you want to update?
+     */
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            R.id.menu_item_cart -> {
+                mNavController.navigate(R.id.cartFragment)
+                return true
+            }
+        }
+        return false
+    }
+
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         when (destination.label.toString()) {
-            "homeFragment" -> {
-                Toast.makeText(mContext, "Home", Toast.LENGTH_SHORT).show()
+            mContext.getString(R.string.label_home) -> {
+//                Toast.makeText(mContext, "Home", Toast.LENGTH_SHORT).show()
             }
-            "personalFragment" -> {
-                Toast.makeText(mContext, "Personal", Toast.LENGTH_SHORT).show()
+            mContext.getString(R.string.label_personal) -> {
+//                Toast.makeText(mContext, "Personal", Toast.LENGTH_SHORT).show()
             }
-            "homeCommonFragment" -> {
-                Toast.makeText(mContext, "homeCommon", Toast.LENGTH_SHORT).show()
+            mContext.getString(R.string.label_cart) -> {
+                /**
+                 * When you switch to CardFragment.
+                 * YOu can hidden icon what you want.
+                 * and call method invalidateOptionsMenu
+                 * I will be update automatically in MainActivity.
+                 * Let try it.
+                 */
+                invalidateOptionsMenu()
             }
-            "homeTopSellingFragment" -> {
-                Toast.makeText(mContext, "homeTopSellingFragment", Toast.LENGTH_SHORT).show()
-            }
-            "homeReleaseFragment" -> {
-                Toast.makeText(mContext, "homeReleaseFragment", Toast.LENGTH_SHORT).show()
+            mContext.getString(R.string.label_manage_orders) -> {
+                invalidateOptionsMenu()
             }
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    private fun visibleIconInFragments(menu: Menu?) {
+        // Get all MenuItem from Toolbar and customize it.
+        val searchItem = menu!!.findItem(R.id.menu_item_search) as MenuItem
+        val cartItem = menu.findItem(R.id.menu_item_cart) as MenuItem
+        when(mNavController.currentDestination!!.label) {
+            mContext.getString(R.string.label_home) -> {
+                // TODO what you want
+            }
+            mContext.getString(R.string.label_personal) -> {
+                searchItem.isVisible = false
+                cartItem.isVisible = true
+            }
+            mContext.getString(R.string.label_cart) -> {
+                // TODO what you want
+                // I assume that I want to hidden search when go to cardFragment.
+                // We you tab CardFragment. onDestinationChanged will be called
+                // After call invalidateOptionsMenu and allow specify exactly fragment are in nav controller do you job.
+                searchItem.isVisible = false
+                cartItem.isVisible = false
+            }
+            mContext.getString(R.string.label_manage_orders) -> {
+                searchItem.isVisible = false
+                cartItem.isVisible = false
+            }
+        }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar, menu)
-        return true
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

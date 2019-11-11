@@ -28,6 +28,8 @@ class HomeNewReleaseFragment : BaseFragment() {
     @Inject
     lateinit var mNewReleaseAdapter: NewReleaseAdapter
 
+    @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+
     @BindView(R.id.recycler_view_new_release)
     @JvmField var rcvNewRelease : RecyclerView? = null
 
@@ -47,6 +49,8 @@ class HomeNewReleaseFragment : BaseFragment() {
     }
 
     override fun initAttributes() {
+        mToolbar.title = "Book Selling Online"
+
         mNewReleaseArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","Ryze", "4.5","100USD"))
         mNewReleaseArrayList.add(Book("Harry Potter","https://vignette.wikia.nocookie.net/wingsoffire/images/7/78/Dragonslayer_Placeholder.jpg/revision/latest?cb=20190507040739","Ryze", "4.5","100USD"))
         mNewReleaseArrayList.add(Book("Harry Potter","https://about.canva.com/wp-content/uploads/sites/3/2015/01/art_bookcover.png","Ryze", "4.5","100USD"))

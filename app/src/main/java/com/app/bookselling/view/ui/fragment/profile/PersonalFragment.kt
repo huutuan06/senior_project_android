@@ -2,7 +2,10 @@ package com.app.bookselling.view.ui.fragment.profile
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -15,17 +18,25 @@ import com.app.bookselling.utils.ItemPersonal
 import com.app.bookselling.view.adapter.PersonalAdapter
 import com.app.bookselling.view.ui.activity.MainActivity
 import com.app.bookselling.view.ui.fragment.BaseFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import javax.inject.Inject
 
-class PersonalFragment : BaseFragment() {
-    private var mItemPersonalArrayList = ArrayList<ItemPersonal>()
+class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
 
+
+    private var mItemPersonalArrayList = ArrayList<ItemPersonal>()
 
     @Inject lateinit var mAdapter: PersonalAdapter
 
     @Inject lateinit var mActivity: MainActivity
 
     @Inject lateinit var mToolbar: Toolbar
+
+    @Inject
+    lateinit var mBottomNavigation: BottomNavigationView
+
+//    @Inject
+//    private lateinit var mNavController : NavController
 
     @BindView(R.id.recycler_view_personal)
     @JvmField var rcvPersonal : RecyclerView? = null
@@ -61,15 +72,19 @@ class PersonalFragment : BaseFragment() {
         rcvPersonal?.layoutManager = LinearLayoutManager(context)
         rcvPersonal?.hasFixedSize()
         rcvPersonal?.adapter = mAdapter
+        mAdapter.setInterface(this)
 
         mActivity.setSupportActionBar(mToolbar)
+        mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        mActivity.supportActionBar!!.setDisplayShowHomeEnabled(false)
         mToolbar.title = "Personal"
         setHasOptionsMenu(true)
+        mBottomNavigation.visibility = View.VISIBLE
+
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.menu_item_search).isVisible = false
+    override fun navigateToManageOrders() {
+        mActivity.mNavController.navigate(R.id.manageOrdersFragment)
     }
 
     private fun showList(arr : ArrayList<ItemPersonal>) {

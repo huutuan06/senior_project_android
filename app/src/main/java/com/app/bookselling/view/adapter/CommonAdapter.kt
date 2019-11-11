@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookselling.R
@@ -15,15 +16,17 @@ import kotlinx.android.synthetic.main.item_home_common.view.*
 class CommonAdapter(private var context: Context, private var commonList: ArrayList<ItemCommon>) :
     RecyclerView.Adapter<CommonAdapter.ViewHolder>(), CategoryAdapter.CategoryEventListener {
 
+    private lateinit var mCommonEventListener : CommonEventListener
+
     override fun navigateToBookDetail(book: Book) {
           mCommonEventListener.navigateToBookDetail(book)
     }
 
     interface CommonEventListener {
         fun navigateToBookDetail(book: Book)
+        fun navigateToBookCollection(title: String)
     }
 
-    private lateinit var mCommonEventListener : CommonEventListener
 
     fun setInterface(listener: CommonEventListener) {
         mCommonEventListener = listener
@@ -34,7 +37,9 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.txtCategory.text = commonList[position].title
-
+        holder.moveToCategory.setOnClickListener{
+            mCommonEventListener.navigateToBookCollection(commonList[position].title)
+        }
         mCategoryArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","100 USD"))
         mCategoryArrayList.add(Book("Harry Potter","https://vignette.wikia.nocookie.net/wingsoffire/images/7/78/Dragonslayer_Placeholder.jpg/revision/latest?cb=20190507040739","100 USD"))
         mCategoryArrayList.add(Book("Harry Potter","https://about.canva.com/wp-content/uploads/sites/3/2015/01/art_bookcover.png","100 USD"))
@@ -45,8 +50,6 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
         showListOfCategory(mCategoryArrayList)
         holder.rcvCategory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.rcvCategory.adapter = mCategoryAdapter
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -66,6 +69,7 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
     open class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var txtCategory: TextView = itemView.text_view_category
         var rcvCategory: RecyclerView = itemView.recycler_view_category
+        var moveToCategory: ConstraintLayout = itemView.category
     }
 
     fun setList(arr: ArrayList<ItemCommon>) {

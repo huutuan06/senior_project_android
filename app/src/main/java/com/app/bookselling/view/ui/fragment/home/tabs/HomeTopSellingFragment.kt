@@ -29,6 +29,8 @@ class HomeTopSellingFragment : BaseFragment() {
     @Inject
     lateinit var mTopSellingAdapter : TopSellingAdapter
 
+    @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+
     @BindView(R.id.recycler_view_top_selling)
     @JvmField var rcvTopSelling : RecyclerView? = null
 
@@ -48,6 +50,8 @@ class HomeTopSellingFragment : BaseFragment() {
     }
 
     override fun initAttributes() {
+        mToolbar.title = "Book Selling Online"
+
         mTopSellingArrayList.add(Book("Harry Potter","https://www.creativeparamita.com/wp-content/uploads/2018/12/spy-in-the-house.jpg","Ryze", "4.5","100USD"))
         mTopSellingArrayList.add(Book("Harry Potter","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8a7nxItx2AB4lA--bEOjsMQLscGmxw3wmk28vu5jfysNzb0HEbw","Ryze", "4.5","100USD"))
         mTopSellingArrayList.add(Book("Harry Potter","https://www.bookbaby.com/plugins/coverscarousel/images/basic/EverlastingJoy.jpg","Ryze", "4.5","100USD"))

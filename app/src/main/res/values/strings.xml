@@ -29,4 +29,14 @@
     <string name="text_add_to_cart">ADD TO CART</string>
     <string name="text_item_toolbar_search">Search</string>
     <string name="text_item_toolbar_cart">Cart</string>
+
+    <string name="label_home">homeFragment</string>
+    <string name="label_cart">cartFragment</string>
+    <string name="label_personal">personalFragment</string>
+    <string name="label_home_common">homeCommonFragment</string>
+    <string name="label_home_top_selling">homeTopSellingFragment</string>
+    <string name="label_home_new_release">homeNewReleaseFragment</string>
+    <string name="label_book_detail">bookDetailFragment</string>
+    <string name="label_book_collection">bookCollectionFragment</string>
+    <string name="label_manage_orders">manageOrdersFragment</string>
 </resources>

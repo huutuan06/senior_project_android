@@ -101,14 +101,14 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
         arguments: Bundle?
     ) {
         when (destination.label.toString()) {
-            "homeCommonFragment" -> {
-                Toast.makeText(mContext, "homeCommon", Toast.LENGTH_SHORT).show()
+            mContext.getString(R.string.label_home_common) -> {
+//                Toast.makeText(mContext, "homeCommon", Toast.LENGTH_SHORT).show()
             }
-            "homeTopSellingFragment" -> {
-                Toast.makeText(mContext, "homeTopSellingFragment", Toast.LENGTH_SHORT).show()
+            mContext.getString(R.string.label_home_top_selling) -> {
+//                Toast.makeText(mContext, "homeTopSellingFragment", Toast.LENGTH_SHORT).show()
             }
-            "homeReleaseFragment" -> {
-                Toast.makeText(mContext, "homeReleaseFragment", Toast.LENGTH_SHORT).show()
+            mContext.getString(R.string.label_home_new_release) -> {
+//                Toast.makeText(mContext, "homeReleaseFragment", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookselling.R
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.item_personal_manage_order.view.*
 import kotlinx.android.synthetic.main.item_personal_profile.view.*
 
 class PersonalAdapter (private var context: Context, private var itemManageList: ArrayList<ItemPersonal>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private lateinit var mPersonalEventListener : PersonalEventListener
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder.itemViewType) {
@@ -28,6 +30,11 @@ class PersonalAdapter (private var context: Context, private var itemManageList:
 //                Picasso.get().load(itemManageList[position].imgManage).resize(60,  60)
 //                    .centerCrop().into(manageOrdersViewHolder.imgManageOrder)
                 manageOrdersViewHolder.txtManageOrder.text = itemManageList[position].txtManage
+//                if (manageOrdersViewHolder.txtManageOrder.text == itemManageList[0].txtManage){
+                    manageOrdersViewHolder.relativeLayout.setOnClickListener{
+                        mPersonalEventListener.navigateToManageOrders()
+//                    }
+                }
             }
             2 -> {
 
@@ -64,6 +71,7 @@ class PersonalAdapter (private var context: Context, private var itemManageList:
     open class ManageOrdersViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var imgManageOrder: ImageView = itemView.image_manage_order
         var txtManageOrder: TextView = itemView.text_view_manage_order
+        var relativeLayout: RelativeLayout = itemView.relative_layout_manage_orders
     }
 
     open class LogoutViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
@@ -73,5 +81,10 @@ class PersonalAdapter (private var context: Context, private var itemManageList:
         notifyDataSetChanged()
     }
 
-
+    interface PersonalEventListener {
+        fun navigateToManageOrders()
+    }
+    fun setInterface(listener: PersonalEventListener) {
+        mPersonalEventListener = listener
+    }
 }

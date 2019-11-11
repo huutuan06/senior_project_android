@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -28,7 +27,7 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener {
 
     @Inject lateinit var mFragment: HomeFragment
 
-    private var mCommonArrayList= ArrayList<ItemCommon>()
+    private var mCommonArrayList = ArrayList<ItemCommon>()
 
     @Inject lateinit var mContext : Context
 
@@ -41,6 +40,8 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener {
     @Inject lateinit var mBottomNavigation: BottomNavigationView
 
     @Inject lateinit var mTabLayout: LinearLayout
+
+    @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
 
 
     @BindView(R.id.recycler_view_category)
@@ -67,6 +68,7 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener {
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(false)
 
+        mToolbar.title = "Book Selling Online"
         mBottomNavigation.visibility = View.VISIBLE
         mTabLayout.visibility = View.VISIBLE
 
@@ -89,5 +91,11 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener {
 
     override fun navigateToBookDetail(book: Book) {
         mFragment.getNavController().navigate(R.id.action_homeCommonFragment_to_bookDetailFragment)
+    }
+
+    override fun navigateToBookCollection(title: String) {
+        val bundle = Bundle()
+        bundle.putString("title", title)
+        mFragment.getNavController().navigate(R.id.action_homeCommonFragment_to_bookCollectionFragment,bundle)
     }
 }

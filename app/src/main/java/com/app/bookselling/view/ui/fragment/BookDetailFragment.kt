@@ -23,7 +23,6 @@ class BookDetailFragment : BaseFragment() {
 
     @Inject lateinit var mTabLayout: LinearLayout
 
-//    private lateinit var ratingBar: RatingBar
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,13 +36,9 @@ class BookDetailFragment : BaseFragment() {
     }
 
     override fun initAttributes() {
-//        mToolbar.setNavigationIcon(R.drawable.ic_toolbar_back)
-//        ratingBar = findViewById(R.id.rating_bar)
-//        ratingBar.rating
         mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
-//        mActivity.onSupportNavigateUp()
         mBottomNavigation.visibility = View.GONE
         mTabLayout.visibility = View.GONE
     }
