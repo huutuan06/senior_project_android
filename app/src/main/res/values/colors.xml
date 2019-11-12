@@ -5,6 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
-    <color name="colorControlNormal">#62BCF9</color>
+    <color name="colorControlActive">#62BCF9</color>
+    <color name="colorControlNormal">#707070</color>
     <color name="colorTextBlack">#000000</color>
+    <color name="textColorAccent">#707070</color>
 </resources>

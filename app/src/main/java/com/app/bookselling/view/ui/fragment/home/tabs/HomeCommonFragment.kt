@@ -72,6 +72,7 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener {
         mBottomNavigation.visibility = View.VISIBLE
         mTabLayout.visibility = View.VISIBLE
 
+        mCommonArrayList.clear()
         mCommonArrayList.add(ItemCommon("Comic Collection"))
         mCommonArrayList.add(ItemCommon("On Vietnam"))
         mCommonArrayList.add(ItemCommon("Comics"))

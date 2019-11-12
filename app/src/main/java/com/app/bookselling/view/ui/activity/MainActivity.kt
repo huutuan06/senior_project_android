@@ -107,6 +107,9 @@ class MainActivity : BaseActivity(), MainView,
             mContext.getString(R.string.label_manage_orders) -> {
                 invalidateOptionsMenu()
             }
+            mContext.getString(R.string.label_write_review) -> {
+                invalidateOptionsMenu()
+            }
         }
     }
 
@@ -131,6 +134,10 @@ class MainActivity : BaseActivity(), MainView,
                 cartItem.isVisible = false
             }
             mContext.getString(R.string.label_manage_orders) -> {
+                searchItem.isVisible = false
+                cartItem.isVisible = false
+            }
+            mContext.getString(R.string.label_write_review) -> {
                 searchItem.isVisible = false
                 cartItem.isVisible = false
             }

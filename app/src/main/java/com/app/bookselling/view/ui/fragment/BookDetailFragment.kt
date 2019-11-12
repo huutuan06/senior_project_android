@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RatingBar
+import butterknife.OnClick
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.MainModule
@@ -41,5 +42,14 @@ class BookDetailFragment : BaseFragment() {
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mBottomNavigation.visibility = View.GONE
         mTabLayout.visibility = View.GONE
+    }
+
+    @OnClick(R.id.button_write_review)
+    fun processEventClick(view: View) {
+        when (view.id) {
+            R.id.button_write_review -> {
+                mActivity.mNavController.navigate(R.id.writeReviewFragment)
+            }
+        }
     }
 }

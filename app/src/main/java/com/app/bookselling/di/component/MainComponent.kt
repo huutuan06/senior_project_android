@@ -5,10 +5,7 @@ import com.app.bookselling.di.module.MainModule
 import com.app.bookselling.di.module.PersonalModule
 import com.app.bookselling.di.scope.ActivityScope
 import com.app.bookselling.view.ui.activity.MainActivity
-import com.app.bookselling.view.ui.fragment.BookDetailFragment
-import com.app.bookselling.view.ui.fragment.CartFragment
-import com.app.bookselling.view.ui.fragment.BookCollectionFragment
-import com.app.bookselling.view.ui.fragment.ManageOrdersFragment
+import com.app.bookselling.view.ui.fragment.*
 import com.app.bookselling.view.ui.fragment.profile.PersonalFragment
 
 import dagger.Subcomponent
@@ -24,4 +21,5 @@ interface MainComponent {
     fun inject(cartFragment: CartFragment) : CartFragment
     fun inject(bookCollectionFragment: BookCollectionFragment) : BookCollectionFragment
     fun inject(manageOrdersFragment: ManageOrdersFragment) : ManageOrdersFragment
+    fun inject(writeReviewFragment: WriteReviewFragment) : WriteReviewFragment
 }

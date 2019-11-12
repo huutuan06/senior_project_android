@@ -204,7 +204,7 @@
                         android:numStars="5"
                         android:saveEnabled="true"
                         style="?android:attr/ratingBarStyleSmall"
-                        android:progressTint="#62BCF9" />
+                        android:rating="4"/>
 
                     <TextView
                         android:id="@+id/txt_number_pages"
@@ -212,7 +212,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rating_bar"
                         android:layout_centerHorizontal="true"
-                        android:text="425" />
+                        android:text="425"/>
                 </RelativeLayout>
             </RelativeLayout>
 

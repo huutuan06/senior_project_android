@@ -40,6 +40,7 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
         holder.moveToCategory.setOnClickListener{
             mCommonEventListener.navigateToBookCollection(commonList[position].title)
         }
+        mCategoryArrayList.clear()
         mCategoryArrayList.add(Book("Harry Potter","https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg","100 USD"))
         mCategoryArrayList.add(Book("Harry Potter","https://vignette.wikia.nocookie.net/wingsoffire/images/7/78/Dragonslayer_Placeholder.jpg/revision/latest?cb=20190507040739","100 USD"))
         mCategoryArrayList.add(Book("Harry Potter","https://about.canva.com/wp-content/uploads/sites/3/2015/01/art_bookcover.png","100 USD"))

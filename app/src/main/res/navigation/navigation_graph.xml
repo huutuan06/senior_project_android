@@ -35,4 +35,10 @@
         android:name="com.app.bookselling.view.ui.fragment.ManageOrdersFragment"
         tools:layout="@layout/fragment_manage_orders" />
 
+    <fragment
+        android:id="@+id/writeReviewFragment"
+        android:label="@string/label_write_review"
+        android:name="com.app.bookselling.view.ui.fragment.WriteReviewFragment"
+        tools:layout="@layout/fragment_write_review" />
+
 </navigation>

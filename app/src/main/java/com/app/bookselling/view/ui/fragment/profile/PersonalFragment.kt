@@ -35,9 +35,6 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
     @Inject
     lateinit var mBottomNavigation: BottomNavigationView
 
-//    @Inject
-//    private lateinit var mNavController : NavController
-
     @BindView(R.id.recycler_view_personal)
     @JvmField var rcvPersonal : RecyclerView? = null
 
@@ -56,7 +53,7 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
     }
 
     override fun initAttributes() {
-
+        mItemPersonalArrayList.clear()
         mItemPersonalArrayList.add(ItemPersonal("https://image.shutterstock.com/image-vector/male-profile-picture-placeholder-vector-260nw-228952291.jpg", "Nguyễn Hữu Tuấn","",""))
         mItemPersonalArrayList.add(ItemPersonal("","","","Manage orders"))
         mItemPersonalArrayList.add(ItemPersonal("","","","The orders have been seen"))

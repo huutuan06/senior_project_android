@@ -2,7 +2,11 @@ package com.app.bookselling.view.ui.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
+import android.widget.RatingBar
+import android.widget.Toast
 import androidx.navigation.NavController
+import butterknife.BindView
 import butterknife.OnClick
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
@@ -11,7 +15,7 @@ import com.app.bookselling.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import javax.inject.Inject
 
-class CartFragment : BaseFragment() {
+class WriteReviewFragment : BaseFragment() {
 
     @Inject
     lateinit var mActivity: MainActivity
@@ -25,13 +29,19 @@ class CartFragment : BaseFragment() {
     @Inject
     lateinit var mBottomNavigation: BottomNavigationView
 
+    @BindView(R.id.rating_bar)
+    lateinit var ratingBar: RatingBar
+
+    @BindView(R.id.edit_text_review)
+    lateinit var editTextReview: EditText
+
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        return inflater.inflate(R.layout.fragment_write_review, container, false)
     }
 
     override fun distributedDaggerComponents() {
@@ -40,23 +50,22 @@ class CartFragment : BaseFragment() {
     }
 
     override fun initAttributes() {
+        editTextReview.requestFocus()
         mBottomNavigation.setOnNavigationItemSelectedListener(mActivity)
         mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
-        mToolbar.title = "Cart"
+        mToolbar.title = "Write Review"
+
 
         mBottomNavigation.visibility = View.GONE
     }
 
-    @OnClick(R.id.button_go_shopping)
+    @OnClick(R.id.rating_bar)
     fun processEventClick(view: View) {
         when (view.id) {
-            R.id.button_go_shopping -> {
-//                mNavController.popBackStack()
-//                mNavController.popBackStack()
-//                mBottomNavigation.selectedItemId = R.id.menu_item_home
-                mNavController.navigate(R.id.homeFragment)
+            R.id.rating_bar -> {
+                Toast.makeText(context, ratingBar.rating.toString(), Toast.LENGTH_SHORT).show()
             }
         }
     }
