@@ -30,6 +30,15 @@
     </fragment>
 
     <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="com.app.bookselling.view.ui.fragment.BookDetailFragment"
+        android:label="@string/label_book_detail" />
+    <fragment
+        android:id="@+id/bookCollectionFragment"
+        android:name="com.app.bookselling.view.ui.fragment.BookCollectionFragment"
+        android:label="@string/label_book_collection" />
+
+    <fragment
         android:id="@+id/manageOrdersFragment"
         android:label="@string/label_manage_orders"
         android:name="com.app.bookselling.view.ui.fragment.ManageOrdersFragment"

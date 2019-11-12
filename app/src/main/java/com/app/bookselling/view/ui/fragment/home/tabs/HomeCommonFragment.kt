@@ -91,12 +91,12 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener {
     }
 
     override fun navigateToBookDetail(book: Book) {
-        mFragment.getNavController().navigate(R.id.action_homeCommonFragment_to_bookDetailFragment)
+        mActivity.mNavController.navigate(R.id.bookDetailFragment)
     }
 
     override fun navigateToBookCollection(title: String) {
         val bundle = Bundle()
         bundle.putString("title", title)
-        mFragment.getNavController().navigate(R.id.action_homeCommonFragment_to_bookCollectionFragment,bundle)
+        mActivity.mNavController.navigate(R.id.bookCollectionFragment, bundle)
     }
 }

@@ -53,9 +53,9 @@ class CartFragment : BaseFragment() {
     fun processEventClick(view: View) {
         when (view.id) {
             R.id.button_go_shopping -> {
-//                mNavController.popBackStack()
-//                mNavController.popBackStack()
-//                mBottomNavigation.selectedItemId = R.id.menu_item_home
+                mNavController.popBackStack()
+                mNavController.popBackStack()
+                mBottomNavigation.selectedItemId = R.id.menu_item_home
                 mNavController.navigate(R.id.homeFragment)
             }
         }

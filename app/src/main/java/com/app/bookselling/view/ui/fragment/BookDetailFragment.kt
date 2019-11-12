@@ -22,8 +22,6 @@ class BookDetailFragment : BaseFragment() {
 
     @Inject lateinit var mBottomNavigation: BottomNavigationView
 
-    @Inject lateinit var mTabLayout: LinearLayout
-
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,10 +36,10 @@ class BookDetailFragment : BaseFragment() {
 
     override fun initAttributes() {
         mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
+        mToolbar.title = "Book Selling Online"
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mBottomNavigation.visibility = View.GONE
-        mTabLayout.visibility = View.GONE
     }
 
     @OnClick(R.id.button_write_review)

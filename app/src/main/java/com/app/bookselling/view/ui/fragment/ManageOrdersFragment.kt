@@ -53,6 +53,8 @@ class ManageOrdersFragment : BaseFragment() {
         when (view.id) {
             R.id.button_go_shopping -> {
                 mNavController.popBackStack()
+                mNavController.popBackStack()
+                mBottomNavigation.selectedItemId = R.id.menu_item_home
                 mNavController.navigate(R.id.homeFragment)
             }
         }
