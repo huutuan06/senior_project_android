@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
-class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackbarInterface {
+class AccountFragment : BaseFragment() {
 
 
     @Inject lateinit var mActivity: MainActivity
@@ -23,16 +23,12 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackbarInterf
 
     @Inject lateinit var mBottomNavigation: BottomNavigationView
 
-    @Inject lateinit var mSnackbar: Snackbar
-
-    @Inject lateinit var mSnackbarLayout: Snackbar.SnackbarLayout
-
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_book_detail, container, false)
+        return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
     override fun distributedDaggerComponents() {
@@ -41,29 +37,11 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackbarInterf
 
     override fun initAttributes() {
         mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
-        mToolbar.title = "Book Selling Online"
+        mToolbar.title = "Account"
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mBottomNavigation.visibility = View.GONE
 
-//        mSnackbarLayout.setInterface(this)
     }
 
-    @OnClick(R.id.button_write_review, R.id.button_add_to_cart)
-    fun processEventClick(view: View) {
-        when (view.id) {
-            R.id.button_write_review -> {
-                mActivity.mNavController.navigate(R.id.writeReviewFragment)
-            }
-            R.id.button_add_to_cart -> {
-                showSnackBar()
-            }
-        }
-    }
-    override fun showSnackBar() {
-        if (mSnackbar.isShown)
-            mSnackbar.dismiss()
-        else
-            mSnackbar.show()
-    }
 }

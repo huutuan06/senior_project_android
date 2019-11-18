@@ -1,6 +1,7 @@
 package com.app.bookselling.view.adapter
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +20,11 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
     RecyclerView.Adapter<TopSellingAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.layoutParams.width = Resources.getSystem().displayMetrics.widthPixels
+        holder.itemView.layoutParams.height =  Resources.getSystem().displayMetrics.heightPixels /7
+
         holder.txtTitle.text = topSellingList[position].title
-        Picasso.get().load(topSellingList[position].image).resize(160,  240)
+        Picasso.get().load(topSellingList[position].image).resize(holder.itemView.layoutParams.height*2/3,  holder.itemView.layoutParams.height)
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = topSellingList[position].author
         holder.txtRate.text = topSellingList[position].rate

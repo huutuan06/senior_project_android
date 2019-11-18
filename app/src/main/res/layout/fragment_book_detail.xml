@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:text="Alibaba: The House That Jack Ma Built"
                         android:textColor="#000000"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView

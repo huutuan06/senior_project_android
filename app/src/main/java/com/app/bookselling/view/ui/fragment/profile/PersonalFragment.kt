@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
+import butterknife.OnClick
 import com.app.bookselling.R
 import com.app.bookselling.app.Application
 import com.app.bookselling.di.module.MainModule
@@ -54,16 +55,14 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
 
     override fun initAttributes() {
         mItemPersonalArrayList.clear()
-        mItemPersonalArrayList.add(ItemPersonal("https://image.shutterstock.com/image-vector/male-profile-picture-placeholder-vector-260nw-228952291.jpg", "Nguyễn Hữu Tuấn","",""))
-        mItemPersonalArrayList.add(ItemPersonal("","","","Manage orders"))
-        mItemPersonalArrayList.add(ItemPersonal("","","","The orders have been seen"))
-        mItemPersonalArrayList.add(ItemPersonal("","","","The orders have been confirmed"))
-        mItemPersonalArrayList.add(ItemPersonal("","","","The orders are being shipped"))
-        mItemPersonalArrayList.add(ItemPersonal("","","","The orders successful"))
-        mItemPersonalArrayList.add(ItemPersonal("","","","The orders canceled"))
-        mItemPersonalArrayList.add(ItemPersonal("","","","The books have been purchased"))
-        mItemPersonalArrayList.add(ItemPersonal("","","","My comments"))
-        mItemPersonalArrayList.add(ItemPersonal("","","",""))
+        mItemPersonalArrayList.add(ItemPersonal("Manage orders"))
+        mItemPersonalArrayList.add(ItemPersonal("The orders have been seen"))
+        mItemPersonalArrayList.add(ItemPersonal("The orders have been confirmed"))
+        mItemPersonalArrayList.add(ItemPersonal("The orders are being shipped"))
+        mItemPersonalArrayList.add(ItemPersonal("The orders successful"))
+        mItemPersonalArrayList.add(ItemPersonal("The orders canceled"))
+        mItemPersonalArrayList.add(ItemPersonal("The books have been purchased"))
+        mItemPersonalArrayList.add(ItemPersonal("My comments"))
         showList(mItemPersonalArrayList)
 
         rcvPersonal?.layoutManager = LinearLayoutManager(context)
@@ -82,6 +81,15 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
 
     override fun navigateToManageOrders() {
         mActivity.mNavController.navigate(R.id.manageOrdersFragment)
+    }
+
+    @OnClick(R.id.card_view_personal)
+    fun processEventClick(view: View){
+        when (view.id) {
+            R.id.card_view_personal -> {
+                mActivity.mNavController.navigate(R.id.accountFragment)
+            }
+        }
     }
 
     private fun showList(arr : ArrayList<ItemPersonal>) {

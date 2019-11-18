@@ -43,7 +43,7 @@ class ManageOrdersFragment : BaseFragment() {
         mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
-        mToolbar.title = "Mange Orders"
+        mToolbar.title = "Manage Orders"
 
         mBottomNavigation.visibility = View.GONE
     }

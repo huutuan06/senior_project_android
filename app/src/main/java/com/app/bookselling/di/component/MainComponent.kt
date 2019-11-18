@@ -5,6 +5,7 @@ import com.app.bookselling.di.module.MainModule
 import com.app.bookselling.di.module.PersonalModule
 import com.app.bookselling.di.scope.ActivityScope
 import com.app.bookselling.view.ui.activity.MainActivity
+import com.app.bookselling.view.ui.activity.SearchActivity
 import com.app.bookselling.view.ui.fragment.*
 import com.app.bookselling.view.ui.fragment.profile.PersonalFragment
 
@@ -22,4 +23,7 @@ interface MainComponent {
     fun inject(bookCollectionFragment: BookCollectionFragment) : BookCollectionFragment
     fun inject(manageOrdersFragment: ManageOrdersFragment) : ManageOrdersFragment
     fun inject(writeReviewFragment: WriteReviewFragment) : WriteReviewFragment
+    fun inject(accountFragment: AccountFragment) : AccountFragment
+
+    fun inject(searchActivity: SearchActivity) : SearchActivity
 }

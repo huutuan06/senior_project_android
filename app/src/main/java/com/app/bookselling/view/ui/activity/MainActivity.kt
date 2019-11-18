@@ -1,6 +1,7 @@
 package com.app.bookselling.view.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -72,15 +73,15 @@ class MainActivity : BaseActivity(), MainView,
         return true
     }
 
-    /**
-     * Here where you want to get event click.
-     * What you want to change. Please show me fragment you want to update?
-     */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.menu_item_cart -> {
                 mNavController.navigate(R.id.cartFragment)
                 return true
+            }
+            R.id.menu_item_search -> {
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivity(intent)
             }
         }
         return false
@@ -111,6 +112,9 @@ class MainActivity : BaseActivity(), MainView,
                 invalidateOptionsMenu()
             }
             mContext.getString(R.string.label_book_detail) -> {
+                invalidateOptionsMenu()
+            }
+            mContext.getString(R.string.label_account) -> {
                 invalidateOptionsMenu()
             }
         }
@@ -147,6 +151,10 @@ class MainActivity : BaseActivity(), MainView,
             mContext.getString(R.string.label_book_detail) -> {
                 searchItem.isVisible = true
                 cartItem.isVisible = true
+            }
+            mContext.getString(R.string.label_account) -> {
+                searchItem.isVisible = false
+                cartItem.isVisible = false
             }
         }
     }

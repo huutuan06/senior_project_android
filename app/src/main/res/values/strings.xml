@@ -40,4 +40,5 @@
     <string name="label_book_collection">bookCollectionFragment</string>
     <string name="label_manage_orders">manageOrdersFragment</string>
     <string name="label_write_review">writeReviewFragment</string>
+    <string name="label_account" >accountFragment</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.app.bookselling.view.adapter
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +27,11 @@ class NewReleaseAdapter(private var context: Context, private var newReleaseList
     RecyclerView.Adapter<NewReleaseAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.layoutParams.width = Resources.getSystem().displayMetrics.widthPixels
+        holder.itemView.layoutParams.height =  Resources.getSystem().displayMetrics.heightPixels /7
+
         holder.txtTitle.text = newReleaseList[position].title
-        Picasso.get().load(newReleaseList[position].image).resize(160,  240)
+        Picasso.get().load(newReleaseList[position].image).resize(holder.itemView.layoutParams.height*2/3,  holder.itemView.layoutParams.height)
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = newReleaseList[position].author
         holder.txtRate.text = newReleaseList[position].rate
