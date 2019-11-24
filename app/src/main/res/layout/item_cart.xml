@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:paddingEnd="1dp"
                 android:singleLine="false"
                 android:textSize="@dimen/small_title_book"
                 android:textStyle="bold"/>

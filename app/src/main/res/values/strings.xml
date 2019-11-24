@@ -41,4 +41,5 @@
     <string name="label_manage_orders">manageOrdersFragment</string>
     <string name="label_write_review">writeReviewFragment</string>
     <string name="label_account" >accountFragment</string>
+    <string name="label_confirm_order">confirmOrderFragment</string>
 </resources>

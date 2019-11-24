@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:label="@string/label_home"
-        android:name="com.app.bookselling.view.ui.fragment.home.HomeFragment"
+        android:name="com.app.vogobook.view.ui.fragment.home.HomeFragment"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_bookCollectionFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/personalFragment"
         android:label="@string/label_personal"
-        android:name="com.app.bookselling.view.ui.fragment.profile.PersonalFragment"
+        android:name="com.app.vogobook.view.ui.fragment.profile.PersonalFragment"
         tools:layout="@layout/fragment_personal" >
         <action
             android:id="@+id/action_personalFragment_to_manageOrdersFragment"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/cartFragment"
         android:label="@string/label_cart"
-        android:name="com.app.bookselling.view.ui.fragment.CartFragment"
+        android:name="com.app.vogobook.view.ui.fragment.CartFragment"
         tools:layout="@layout/fragment_personal" >
         <action
             android:id="@+id/action_cartFragment_to_homeFragment"
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/bookDetailFragment"
-        android:name="com.app.bookselling.view.ui.fragment.BookDetailFragment"
+        android:name="com.app.vogobook.view.ui.fragment.BookDetailFragment"
         android:label="@string/label_book_detail" >
         <action
             android:id="@+id/action_bookDetailFragment_to_cartFragment"
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookCollectionFragment"
-        android:name="com.app.bookselling.view.ui.fragment.BookCollectionFragment"
+        android:name="com.app.vogobook.view.ui.fragment.BookCollectionFragment"
         android:label="@string/label_book_collection" >
         <action
             android:id="@+id/action_bookCollectionFragment_to_cartFragment"
@@ -56,18 +56,24 @@
     <fragment
         android:id="@+id/manageOrdersFragment"
         android:label="@string/label_manage_orders"
-        android:name="com.app.bookselling.view.ui.fragment.ManageOrdersFragment"
+        android:name="com.app.vogobook.view.ui.fragment.ManageOrdersFragment"
         tools:layout="@layout/fragment_manage_orders" />
 
     <fragment
         android:id="@+id/writeReviewFragment"
         android:label="@string/label_write_review"
-        android:name="com.app.bookselling.view.ui.fragment.WriteReviewFragment"
+        android:name="com.app.vogobook.view.ui.fragment.WriteReviewFragment"
         tools:layout="@layout/fragment_write_review" />
     <fragment
         android:id="@+id/accountFragment"
         android:label="@string/label_account"
-        android:name="com.app.bookselling.view.ui.fragment.AccountFragment"
+        android:name="com.app.vogobook.view.ui.fragment.AccountFragment"
         tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/confirmOrderFragment"
+        android:label="@string/label_confirm_order"
+        android:name="com.app.vogobook.view.ui.fragment.ConfirmOrderFragment"
+        tools:layout="@layout/fragment_confirm_order" />
 
 </navigation>

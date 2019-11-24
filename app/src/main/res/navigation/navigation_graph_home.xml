@@ -6,15 +6,15 @@
 
     <fragment
         android:id="@+id/homeCommonFragment"
-        android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeCommonFragment"
+        android:name="com.app.vogobook.view.ui.fragment.home.tabs.HomeCommonFragment"
         android:label="@string/label_home_common"/>
     <fragment
         android:id="@+id/homeTopSellingFragment"
-        android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeTopSellingFragment"
+        android:name="com.app.vogobook.view.ui.fragment.home.tabs.HomeTopSellingFragment"
         android:label="@string/label_home_top_selling" />
     <fragment
         android:id="@+id/homeNewReleaseFragment"
-        android:name="com.app.bookselling.view.ui.fragment.home.tabs.HomeNewReleaseFragment"
+        android:name="com.app.vogobook.view.ui.fragment.home.tabs.HomeNewReleaseFragment"
         android:label="@string/label_home_new_release" />
 
 </navigation>
