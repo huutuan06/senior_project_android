@@ -58,20 +58,22 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
                 mActivity.mNavController.navigate(R.id.writeReviewFragment)
             }
             R.id.button_add_to_cart -> {
-                showSnackBar()
+                mSnackbar.show()
             }
         }
     }
 
-    private fun showSnackBar() {
-        if (mSnackbar.isShown)
-            mSnackbar.dismiss()
-        else
-            mSnackbar.show()
-    }
-
     override fun hello(text: String) {
         Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
+        mSnackbar.dismiss()
+    }
 
+    override fun dismissSnackbar() {
+        mSnackbar.dismiss()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mSnackbar.dismiss()
     }
 }

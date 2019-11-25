@@ -25,6 +25,7 @@ class CartSnackBarLayout(context: Context) : ConstraintLayout(context) {
         // You can update param here and send it to BookDetailFragment.
 
         fun hello(text: String)
+        fun dismissSnackbar()
     }
 
     private var listener: CartSnackBarLayoutInterface? = null
@@ -44,11 +45,18 @@ class CartSnackBarLayout(context: Context) : ConstraintLayout(context) {
         ButterKnife.bind(this, view)
     }
 
-    @OnClick(R.id.button_go_to_cart)
-    fun onClick() {
+    @OnClick(R.id.button_go_to_cart, R.id.button_close)
+    fun onClick(view: View) {
         // This is where you get data
         // Here, I set string = "HEllo Ben"
-        listener!!.hello(tvNameOFBook!!.text as String)
+        when (view.id) {
+            R.id.button_go_to_cart -> {
+                listener!!.hello(tvNameOFBook!!.text as String)
+            }
+            R.id.button_close -> {
+                listener!!.dismissSnackbar()
+            }
+        }
     }
 
     fun attachDialogInterface(_interface: CartSnackBarLayoutInterface?) {
