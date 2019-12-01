@@ -45,7 +45,7 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
     override fun initAttributes() {
         mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
         mCartSnackBarLayout.attachDialogInterface(this)
-        mToolbar.title = "Book Selling Online"
+        mToolbar.title = "Vogo Book"
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mBottomNavigation.visibility = View.GONE

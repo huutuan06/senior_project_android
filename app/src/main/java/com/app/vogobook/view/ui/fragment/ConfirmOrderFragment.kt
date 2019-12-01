@@ -14,7 +14,7 @@ import butterknife.BindView
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
-import com.app.vogobook.service.model.Book
+import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.view.adapter.ConfirmOrderAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -64,34 +64,34 @@ class ConfirmOrderFragment : BaseFragment() {
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mToolbar.title = "Confirm Order"
 
-        mConFirmOrderArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/81WWiiLgEyL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mConFirmOrderArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/81h2gWPTYJL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mConFirmOrderArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/81XR45UdqkL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mConFirmOrderArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/91ibhD5nhUL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
+//        mConFirmOrderArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/81WWiiLgEyL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mConFirmOrderArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/81h2gWPTYJL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mConFirmOrderArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/81XR45UdqkL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mConFirmOrderArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/91ibhD5nhUL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
 
         setList(mConFirmOrderArrayList)
         rcvConfirmOrder.layoutParams.height = Resources.getSystem().displayMetrics.heightPixels*23/32

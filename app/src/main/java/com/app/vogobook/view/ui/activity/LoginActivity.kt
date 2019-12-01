@@ -28,6 +28,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.util.CollectionUtils.listOf
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import io.reactivex.disposables.Disposable
 import org.json.JSONObject
 import javax.inject.Inject
 
@@ -165,6 +166,10 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun setDisposable(disposable: Disposable) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

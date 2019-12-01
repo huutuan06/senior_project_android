@@ -52,7 +52,6 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // This is object View.
         mViewFrag = inflater.inflate(R.layout.fragment_home, container, false)
         return mViewFrag
     }
@@ -71,7 +70,7 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
         Application.instance.setCurrentFragment(mFragment)
         Application.instance.setView(mViewFrag)
         mActivity.setSupportActionBar(mToolbar)
-        mToolbar.title = "Book Selling Online"
+        mToolbar.title = "Vogo Book"
 
     }
 

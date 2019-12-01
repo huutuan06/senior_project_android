@@ -13,7 +13,7 @@ import butterknife.OnClick
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
-import com.app.vogobook.service.model.Book
+import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.view.adapter.CartAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -70,77 +70,77 @@ class CartFragment : BaseFragment() {
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mToolbar.title = "Cart"
 
-        mCartArrayList.clear()
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/81WWiiLgEyL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/81h2gWPTYJL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/81XR45UdqkL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/91ibhD5nhUL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/71LVKXutJmL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/91rhzcPiXAL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/41ILRrgp5-L._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/91HHxxtA1wL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/81HCcHPXZnL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
-        mCartArrayList.add(
-            Book(
-                "Alibaba: The House That Jack Ma Built",
-                "https://images-na.ssl-images-amazon.com/images/I/81dKveFv2%2BL._AC_UL200_SR200,200_.jpg",
-                "$100"
-            )
-        )
+//        mCartArrayList.clear()
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/81WWiiLgEyL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/81h2gWPTYJL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/81XR45UdqkL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/91ibhD5nhUL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/71LVKXutJmL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/91rhzcPiXAL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/41ILRrgp5-L._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/91HHxxtA1wL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/81HCcHPXZnL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
+//        mCartArrayList.add(
+//            Book(
+//                "Alibaba: The House That Jack Ma Built",
+//                "https://images-na.ssl-images-amazon.com/images/I/81dKveFv2%2BL._AC_UL200_SR200,200_.jpg",
+//                "$100"
+//            )
+//        )
 
         setList(mCartArrayList)
         rcvCart.layoutParams.height = Resources.getSystem().displayMetrics.heightPixels*23/32
@@ -181,7 +181,7 @@ class CartFragment : BaseFragment() {
     fun totalPrice(): Float {
         var totalPrice : Float = 0F
         for (item in mCartArrayList) {
-            totalPrice += item.price.substring(1).toFloat()
+            totalPrice += item.price!!.substring(1).toFloat()
         }
         return totalPrice
     }

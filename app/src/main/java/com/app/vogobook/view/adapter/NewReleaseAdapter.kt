@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
-import com.app.vogobook.service.model.Book
+import com.app.vogobook.localstorage.entities.Book
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_home_new_release.view.*
 import kotlinx.android.synthetic.main.item_home_top_selling.view.image_book
@@ -29,7 +29,7 @@ class NewReleaseAdapter(private var context: Context, private var newReleaseList
         Picasso.get().load(newReleaseList[position].image).resize(holder.itemView.layoutParams.height*2/3,  holder.itemView.layoutParams.height)
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = newReleaseList[position].author
-        holder.txtRate.text = newReleaseList[position].rate
+//        holder.txtRate.text = newReleaseList[position].rate
         holder.txtPrice.text = newReleaseList[position].price
 
     }

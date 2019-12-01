@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.app.vogobook.di.component.DaggerAppComponent
 import com.app.vogobook.di.component.AppComponent
 import com.app.vogobook.di.module.AppModule
+import com.app.vogobook.di.module.RoomModule
 import com.app.vogobook.di.module.ServiceModule
 import com.facebook.CallbackManager
 import java.security.MessageDigest
@@ -28,33 +29,13 @@ class Application : android.app.Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        generateHashKey()
-    }
-
-    private fun generateHashKey() {
-        try {
-            @SuppressLint("PackageManagerGetSignatures")
-            val info = packageManager.getPackageInfo(
-                "com.app.bookselling",
-                PackageManager.GET_SIGNATURES
-            )
-            for (signature in info.signatures) {
-                val md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                Log.i("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
-            }
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        } catch (e: NoSuchAlgorithmException) {
-            e.printStackTrace()
-        }
-
     }
 
     fun getAppComponent(): AppComponent? {
         return DaggerAppComponent.builder() 
             .appModule(AppModule(this, this.applicationContext))
-            .serviceModule(ServiceModule(this, this.applicationContext))
+            .serviceModule(ServiceModule())
+            .roomModule(RoomModule(this))
             .build()
     }
 
@@ -64,7 +45,7 @@ class Application : android.app.Application() {
 
     fun getCurrentFragment() = mRootFragment
 
-    fun getView() = mView;
+    fun getView() = mView
 
     fun setView(view: View) {
         mView = view

@@ -37,7 +37,7 @@ class MainActivity : BaseActivity(), MainView,
         mBottomNavigation.setOnNavigationItemSelectedListener(this)
         mNavController.setGraph(R.navigation.navigation_graph)
         mNavController.addOnDestinationChangedListener(this)
-        mToolbar.title = "Book Selling Online"
+        mToolbar.title = "Vogo Book"
         setSupportActionBar(mToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)

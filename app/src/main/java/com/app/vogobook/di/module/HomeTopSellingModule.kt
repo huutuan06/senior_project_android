@@ -2,7 +2,7 @@ package com.app.vogobook.di.module
 
 import android.content.Context
 import com.app.vogobook.di.scope.SubFragmentScope
-import com.app.vogobook.service.model.Book
+import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.view.adapter.TopSellingAdapter
 import com.app.vogobook.view.ui.fragment.home.tabs.HomeTopSellingFragment
 import dagger.Module

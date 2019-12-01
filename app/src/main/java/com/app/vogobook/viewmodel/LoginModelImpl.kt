@@ -10,13 +10,13 @@ import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.utils.objects.Utils
 import com.google.gson.JsonObject
 
-class UserViewModelImpl(
+class LoginModelImpl(
     private val context: Context,
     private val service: BookService,
     private val disposableManager: DisposableManager,
     private val sessionManager: SessionManager
 ) :
-    UserViewModel {
+    LoginModel {
 
     private var mloginPresenter: LoginPresenter? = null
 

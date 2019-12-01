@@ -1,8 +1,6 @@
 package com.app.vogobook.di.module;
 
-import android.content.Context
 import com.app.vogobook.BuildConfig
-import com.app.vogobook.app.Application
 import com.app.vogobook.service.connect.TrustHtppS
 import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.repository.BookService
@@ -18,12 +16,8 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class ServiceModule(application: Application, context: Context) {
+class ServiceModule {
 
-    init {
-        val mApplication = application
-        val mContext = context
-    }
 
     @Singleton
     @Provides

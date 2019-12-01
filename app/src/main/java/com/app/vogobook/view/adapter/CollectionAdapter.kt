@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.ButterKnife
 import com.app.vogobook.R
-import com.app.vogobook.service.model.Book
+import com.app.vogobook.localstorage.entities.Book
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_home_common_category.view.*
 

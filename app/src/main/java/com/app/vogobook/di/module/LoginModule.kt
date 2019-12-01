@@ -10,8 +10,8 @@ import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.utils.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.LoginActivity
 import com.app.vogobook.view.ui.callback.LoginView
-import com.app.vogobook.viewmodel.UserViewModel
-import com.app.vogobook.viewmodel.UserViewModelImpl
+import com.app.vogobook.viewmodel.LoginModel
+import com.app.vogobook.viewmodel.LoginModelImpl
 import com.facebook.CallbackManager
 import dagger.Module
 import dagger.Provides
@@ -37,11 +37,11 @@ class LoginModule(private val activity: LoginActivity, private val view: LoginVi
 
     @Provides
     @ActivityScope
-    fun provideUserViewModel(context: Context, disposableManager: DisposableManager, bookService: BookService, sessionManager: SessionManager) : UserViewModel = UserViewModelImpl(context, bookService, disposableManager, sessionManager)
+    fun provideUserViewModel(context: Context, disposableManager: DisposableManager, bookService: BookService, sessionManager: SessionManager) : LoginModel = LoginModelImpl(context, bookService, disposableManager, sessionManager)
 
     @Provides
     @ActivityScope
-    fun provideLoginPresenter(userViewModel : UserViewModel) : LoginPresenter =  LoginPresenterImpl(view, userViewModel)
+    fun provideLoginPresenter(loginModel : LoginModel) : LoginPresenter =  LoginPresenterImpl(view, loginModel)
 
     @Provides
     @ActivityScope

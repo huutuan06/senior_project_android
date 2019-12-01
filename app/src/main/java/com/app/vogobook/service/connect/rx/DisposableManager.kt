@@ -1,6 +1,6 @@
 package com.app.vogobook.service.connect.rx
 
-import com.app.vogobook.service.response.ConfigResponse
+import com.app.vogobook.service.response.HomeCommonResponse
 import com.app.vogobook.service.response.UserResponse
 
 import javax.inject.Inject
@@ -15,15 +15,15 @@ import retrofit2.Response
 class DisposableManager @Inject
 constructor() {
 
-    fun configure(observable: Observable<Response<ConfigResponse>>, _interface: IDisposableListener<ConfigResponse>): Disposable {
+    fun login(observable: Observable<Response<UserResponse>>, _interface: IDisposableListener<UserResponse>) : Disposable {
         return observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableObserver<Response<ConfigResponse>>() {
+            .subscribeWith(object : DisposableObserver<Response<UserResponse>>() {
                 override fun onComplete() {
                     _interface.onComplete()
                 }
 
-                override fun onNext(value: Response<ConfigResponse>) {
+                override fun onNext(value: Response<UserResponse>) {
                     if (value.isSuccessful) {
                         _interface.onHandleData(value.body())
                     } else {
@@ -35,17 +35,18 @@ constructor() {
                     _interface.onApiFailure(e)
                 }
             })
+
     }
 
-    fun login(observable: Observable<Response<UserResponse>>, _interface: IDisposableListener<UserResponse>) : Disposable {
+    fun getCommonBooks(observable: Observable<Response<HomeCommonResponse>>, _interface: IDisposableListener<HomeCommonResponse>) : Disposable {
         return observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableObserver<Response<UserResponse>>() {
+            .subscribeWith(object : DisposableObserver<Response<HomeCommonResponse>>() {
                 override fun onComplete() {
                     _interface.onComplete()
                 }
 
-                override fun onNext(value: Response<UserResponse>) {
+                override fun onNext(value: Response<HomeCommonResponse>) {
                     if (value.isSuccessful) {
                         _interface.onHandleData(value.body())
                     } else {
