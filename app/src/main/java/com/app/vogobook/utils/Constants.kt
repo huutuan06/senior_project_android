@@ -13,7 +13,7 @@ class Constants {
 
         const val TIME_DELAY = 1000.toLong()
 
-        const val DB_VERSION = 0
+        const val DB_VERSION = 1
 
         const val DB_TABLE_BOOK = "books"
         const val TABLE_BOOK_ID = "id"
