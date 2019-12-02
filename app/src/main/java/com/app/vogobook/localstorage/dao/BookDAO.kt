@@ -8,13 +8,13 @@ import io.reactivex.Maybe
 @Dao
 interface BookDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveAll(vararg book: List<Book>?)
+    fun saveAll(book: List<Book>?)
 
     @Update
-    fun update(vararg book: Book)
+    fun update(book: Book)
 
     @Delete
-    fun delete(vararg book: Book)
+    fun delete(book: Book)
 
     @Query("SELECT * FROM " + Constants.DB_TABLE_BOOK)
     fun getBooks() : Maybe<List<Book>>

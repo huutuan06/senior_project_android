@@ -9,13 +9,13 @@ import com.app.vogobook.localstorage.entities.Category
 class RoomUIManager(private var mBookDAO: BookDAO,  private var mCategoryDAO: CategoryDAO) {
 
     fun saveAllBooks(listBooks: List<Book>?) {
-        AsyncTask.execute(Runnable {
+        AsyncTask.execute({
             mBookDAO.saveAll(listBooks)
         })
     }
 
     fun saveAllCategories(listCategories: List<Category>?) {
-        AsyncTask.execute(Runnable {
+        AsyncTask.execute({
             mCategoryDAO.saveAll(listCategories)
         })
     }

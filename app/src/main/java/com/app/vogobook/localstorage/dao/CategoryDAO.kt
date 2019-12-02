@@ -8,13 +8,13 @@ import io.reactivex.Maybe
 @Dao
 interface CategoryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveAll(vararg category: List<Category>?)
+    fun saveAll(category: List<Category>?)
 
     @Update
-    fun update(vararg category: Category)
+    fun update(category: Category)
 
     @Delete
-    fun delete(vararg category: Category)
+    fun delete(category: Category)
 
     @Query("SELECT * FROM " + Constants.DB_TABLE_CATEGORY)
     fun getCategories() : Maybe<List<Category>>
