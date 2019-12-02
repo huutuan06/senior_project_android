@@ -16,7 +16,7 @@ class CollectionAdapter(private var bookList: ArrayList<Book>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.txtTitle.text = bookList[position].title
-        holder.txtPrice.text = bookList[position].price
+//        holder.txtPrice.text = bookList[position].price
 
         Picasso.get().load(bookList[position].image).resize(180,  270)
             .centerCrop().into(holder.imgBook)

@@ -10,6 +10,8 @@ import butterknife.OnClick
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
+import com.app.vogobook.localstorage.entities.Book
+import com.app.vogobook.utils.Constants
 import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,6 +32,8 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
     @Inject lateinit var mCartSnackBarLayout: CartSnackBarLayout
 
+    var mBook: Book? = null
+
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +53,8 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mBottomNavigation.visibility = View.GONE
+
+        mBook = arguments!!.getParcelable(Constants.BOOK)
     }
 
     @OnClick(R.id.button_write_review, R.id.button_add_to_cart)

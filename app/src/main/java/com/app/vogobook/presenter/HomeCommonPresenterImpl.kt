@@ -40,7 +40,15 @@ class HomeCommonPresenterImpl(
         categories: List<Category>,
         books: List<Book>
     ) {
-        Log.i("TAG", "Categories: " + categories.size)
-        Log.i("TAG", "Books: " + books.size)
+        for  (category in categories) {
+            val temps: ArrayList<Book> = ArrayList()
+            for (book in books) {
+                if (book.category_id == category.id) {
+                    temps.add(book)
+                }
+            }
+            category.arrBooks = temps
+        }
+        view.loadCommonBooksSuccess(categories)
     }
 }

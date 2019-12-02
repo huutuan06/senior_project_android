@@ -25,7 +25,7 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = topSellingList[position].author
 //        holder.txtRate.text = topSellingList[position].rate
-        holder.txtPrice.text = topSellingList[position].price
+//        holder.txtPrice.text = topSellingList[position].price
 
     }
 

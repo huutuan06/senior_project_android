@@ -30,7 +30,7 @@ class NewReleaseAdapter(private var context: Context, private var newReleaseList
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = newReleaseList[position].author
 //        holder.txtRate.text = newReleaseList[position].rate
-        holder.txtPrice.text = newReleaseList[position].price
+//        holder.txtPrice.text = newReleaseList[position].price
 
     }
 

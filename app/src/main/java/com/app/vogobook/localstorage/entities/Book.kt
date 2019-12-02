@@ -30,7 +30,7 @@ class Book() : Parcelable {
     @ColumnInfo(name = Constants.TABLE_BOOK_CATEGORY_ID)
     @SerializedName("category_id")
     @Expose
-    var category_id: String? = null
+    var category_id: Int? = null
 
     @ColumnInfo(name = Constants.TABLE_BOOK_DESCRIPTION)
     @SerializedName("description")
@@ -40,12 +40,12 @@ class Book() : Parcelable {
     @ColumnInfo(name = Constants.TABLE_BOOK_PRICE)
     @SerializedName("price")
     @Expose
-    var price: String? = null
+    var price: Float? = null
 
     @ColumnInfo(name = Constants.TABLE_BOOK_AMOUNT)
     @SerializedName("amount")
     @Expose
-    var amount: String? = null
+    var amount: Int? = null
 
     @ColumnInfo(name = Constants.TABLE_BOOK_AUTHOR)
     @SerializedName("author")
@@ -66,10 +66,10 @@ class Book() : Parcelable {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         title = parcel.readString()
         image = parcel.readString()
-        category_id = parcel.readString()
+        category_id = parcel.readValue(Int::class.java.classLoader) as? Int
         description = parcel.readString()
-        price = parcel.readString()
-        amount = parcel.readString()
+        price = parcel.readValue(Float::class.java.classLoader) as? Float
+        amount = parcel.readValue(Int::class.java.classLoader) as? Int
         author = parcel.readString()
         created_at = parcel.readString()
         updated_at = parcel.readString()
@@ -79,10 +79,10 @@ class Book() : Parcelable {
         parcel.writeValue(id)
         parcel.writeString(title)
         parcel.writeString(image)
-        parcel.writeString(category_id)
+        parcel.writeValue(category_id)
         parcel.writeString(description)
-        parcel.writeString(price)
-        parcel.writeString(amount)
+        parcel.writeValue(price)
+        parcel.writeValue(amount)
         parcel.writeString(author)
         parcel.writeString(created_at)
         parcel.writeString(updated_at)
@@ -101,5 +101,6 @@ class Book() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 
 }

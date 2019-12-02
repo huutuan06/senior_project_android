@@ -31,7 +31,7 @@ class CartAdapter(private var cartList: ArrayList<Book>) :
             holder.itemView.layoutParams.height * 9 / 10
         )
             .centerCrop().into(holder.imgBook)
-        holder.txtPrice.text = cartList[position].price
+//        holder.txtPrice.text = cartList[position].price
 
 
         holder.btnDelete!!.setOnClickListener {

@@ -16,13 +16,12 @@ import kotlinx.android.synthetic.main.item_home_common_category.view.*
  class CategoryAdapter(private var context: Context, private var categoriesList: ArrayList<Book>, private var mCategoryEventListener: CategoryEventListener) :
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.layoutParams.width = Resources.getSystem().displayMetrics.widthPixels *4/15
         holder.itemView.layoutParams.height = holder.itemView.layoutParams.width * 2
 
         holder.txtTitle.text = categoriesList[position].title
-        holder.txtPrice.text = categoriesList[position].price
+        holder.txtPrice.text = categoriesList[position].price.toString()
         Picasso.get().load(categoriesList[position].image).resize(holder.itemView.layoutParams.width,  holder.itemView.layoutParams.width*3/2)
             .centerCrop().into(holder.imgBook)
 
@@ -46,7 +45,6 @@ import kotlinx.android.synthetic.main.item_home_common_category.view.*
     }
 
     interface CategoryEventListener {
-        // You can pass object Book to method
         fun navigateToBookDetail(book: Book)
     }
 
@@ -59,10 +57,5 @@ import kotlinx.android.synthetic.main.item_home_common_category.view.*
         init {
             ButterKnife.bind(this, itemView)
         }
-    }
-
-    fun setList(arr: ArrayList<Book>) {
-        categoriesList = arr
-        notifyDataSetChanged()
     }
 }

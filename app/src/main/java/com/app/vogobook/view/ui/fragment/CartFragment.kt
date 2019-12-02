@@ -181,7 +181,7 @@ class CartFragment : BaseFragment() {
     fun totalPrice(): Float {
         var totalPrice : Float = 0F
         for (item in mCartArrayList) {
-            totalPrice += item.price!!.substring(1).toFloat()
+//            totalPrice += item.price!!.substring(1).toFloat()
         }
         return totalPrice
     }

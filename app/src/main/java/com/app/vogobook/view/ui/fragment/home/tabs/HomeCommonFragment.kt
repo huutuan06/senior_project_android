@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -16,7 +17,8 @@ import com.app.vogobook.di.module.HomeModule
 import com.app.vogobook.di.module.MainModule
 import com.app.vogobook.presenter.HomeCommonPresenter
 import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.utils.ItemCommon
+import com.app.vogobook.localstorage.entities.Category
+import com.app.vogobook.utils.Constants
 import com.app.vogobook.view.adapter.CommonAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.HomeCommonView
@@ -29,8 +31,6 @@ import javax.inject.Inject
 class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, HomeCommonView {
 
     @Inject lateinit var mFragment: HomeFragment
-
-    private var mCommonArrayList = ArrayList<ItemCommon>()
 
     @Inject lateinit var mContext : Context
 
@@ -48,12 +48,14 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
 
     @Inject lateinit var mPresenter: HomeCommonPresenter
 
-
-    @BindView(R.id.recycler_view_category)
-    @JvmField var rcvCommonCategory : RecyclerView? = null
-
     @BindView(R.id.recycler_view_common)
     @JvmField var rcvCommon : RecyclerView? = null
+
+    @BindView(R.id.lnError)
+    @JvmField var lnError : LinearLayout? = null
+
+    @BindView(R.id.nestedRcvCategories)
+    @JvmField var lnEnestedRcvCategoriesrror : NestedScrollView? = null
 
     private var mDisposable: Disposable? = null
 
@@ -79,8 +81,6 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
         mBottomNavigation.visibility = View.VISIBLE
         mTabLayout.visibility = View.VISIBLE
 
-        showListOfCommon(mCommonArrayList)
-
         rcvCommon?.layoutManager = LinearLayoutManager(context)
         rcvCommon?.hasFixedSize()
         rcvCommon?.adapter = mCommonAdapter
@@ -88,12 +88,10 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
         mPresenter.getCommonBooks()
     }
 
-    private fun showListOfCommon(arrayListOfCommon: ArrayList<ItemCommon>) {
-        mCommonAdapter.setList(arrayListOfCommon)
-    }
-
     override fun navigateToBookDetail(book: Book) {
-        mActivity.mNavController.navigate(R.id.bookDetailFragment)
+        val bundle = Bundle()
+        bundle.putParcelable(Constants.BOOK,book)
+        mActivity.mNavController.navigate(R.id.bookDetailFragment, bundle)
     }
 
     override fun navigateToBookCollection(title: String) {
@@ -102,12 +100,23 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
         mActivity.mNavController.navigate(R.id.bookCollectionFragment, bundle)
     }
 
+    override fun loadCommonBooksSuccess(categories: List<Category>) {
+        if  (categories.isEmpty()) {
+            lnError!!.visibility = View.VISIBLE
+            lnEnestedRcvCategoriesrror!!.visibility = View.GONE
+        } else {
+            lnError!!.visibility = View.GONE
+            lnEnestedRcvCategoriesrror!!.visibility = View.VISIBLE
+            mCommonAdapter.setList(categories as ArrayList<Category>)
+        }
+    }
+
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO
     }
 
     override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO
     }
 
     override fun setDisposable(disposable: Disposable) {

@@ -26,6 +26,7 @@ class Constants {
         const val TABLE_BOOK_AUTHOR = "author"
         const val TABLE_BOOK_CREATED_AT = "created_at"
         const val TABLE_BOOK_UPDATED_AT = "updated_at"
+
         const val DB_TABLE_CATEGORY = "categories"
         const val TABLE_CATEGORY_ID = "id"
         const val TABLE_CATEGORY_NAME = "name"
@@ -33,5 +34,8 @@ class Constants {
         const val TABLE_CATEGORY_TOTAL_BOOKS = "total_books"
         const val TABLE_CATEGORY_CREATED_AT = "created_at"
         const val TABLE_CATEGORY_UPDATED_UP = "updated_at"
+        const val TABLE_CATEGORY_BOOKS = "books"
+
+        const val BOOK = "book"
     }
 }

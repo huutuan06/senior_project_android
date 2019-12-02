@@ -45,4 +45,5 @@
 
     <string name="label_error">Error</string>
     <string name="label_no_internet">No Internet Connection</string>
+    <string name="label_error_no_data">No Data Available</string>
 </resources>

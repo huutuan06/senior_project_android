@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textSize="@dimen/text_book_description_category"
-        android:text="Title"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:lines="2"
         app:layout_constraintTop_toBottomOf="@id/card_view_img_book" />
 
     <TextView
@@ -39,7 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_book_description_category"
-        android:text="$1000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_book_title" />
 

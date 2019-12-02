@@ -2,9 +2,8 @@ package com.app.vogobook.localstorage.entities
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.app.vogobook.localstorage.typeconverter.BookTypeConverter
 import com.app.vogobook.utils.Constants
 
 import com.google.gson.annotations.Expose
@@ -44,6 +43,10 @@ class Category() : Parcelable {
     @Expose
     var updated_at: String? = null
 
+    @TypeConverters(BookTypeConverter::class)
+    @ColumnInfo(name = Constants.TABLE_CATEGORY_BOOKS)
+    var arrBooks : List<Book>? = ArrayList()
+
     constructor(parcel: Parcel) : this() {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         name = parcel.readString()
@@ -51,6 +54,7 @@ class Category() : Parcelable {
         total_books = parcel.readString()
         created_at = parcel.readString()
         updated_at = parcel.readString()
+        arrBooks = parcel.createTypedArrayList(Book)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -60,6 +64,7 @@ class Category() : Parcelable {
         parcel.writeString(total_books)
         parcel.writeString(created_at)
         parcel.writeString(updated_at)
+        parcel.writeTypedList(arrBooks)
     }
 
     override fun describeContents(): Int {
@@ -75,4 +80,5 @@ class Category() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 }

@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.utils.ItemCommon
+import com.app.vogobook.localstorage.entities.Category
 import kotlinx.android.synthetic.main.item_home_common.view.*
 
-class CommonAdapter(private var context: Context, private var commonList: ArrayList<ItemCommon>) :
+class CommonAdapter(private var context: Context, private var commonList: ArrayList<Category>) :
     RecyclerView.Adapter<CommonAdapter.ViewHolder>(), CategoryAdapter.CategoryEventListener {
 
     private lateinit var mCommonEventListener : CommonEventListener
@@ -32,67 +31,10 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
         mCommonEventListener = listener
     }
 
-    private var mCategoryArrayList= ArrayList<Book>()
-    private var mCategoryAdapter = CategoryAdapter(context, mCategoryArrayList, this)
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.txtCategory.text = commonList[position].title
-        holder.moveToCategory.setOnClickListener{
-            mCommonEventListener.navigateToBookCollection(commonList[position].title)
-        }
-        mCategoryArrayList.clear()
-//        mCategoryArrayList.add(
-//            Book(
-//                "Harry Potter",
-//                "https://blog-cdn.reedsy.com/directories/gallery/38/large_60b66e669d1d08645dcc69c28d68f027.jpeg",
-//                "100 USD"
-//            )
-//        )
-//        mCategoryArrayList.add(
-//            Book(
-//                "Harry Potter",
-//                "https://vignette.wikia.nocookie.net/wingsoffire/images/7/78/Dragonslayer_Placeholder.jpg/revision/latest?cb=20190507040739",
-//                "100 USD"
-//            )
-//        )
-//        mCategoryArrayList.add(
-//            Book(
-//                "Harry Potter",
-//                "https://about.canva.com/wp-content/uploads/sites/3/2015/01/art_bookcover.png",
-//                "100 USD"
-//            )
-//        )
-//        mCategoryArrayList.add(
-//            Book(
-//                "Harry Potter",
-//                "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/91lKQ1w00DL.jpg?auto=format&q=60&fit=max&w=930",
-//                "100 USD"
-//            )
-//        )
-//        mCategoryArrayList.add(
-//            Book(
-//                "Harry Potter",
-//                "https://www.creativeparamita.com/wp-content/uploads/2018/12/spy-in-the-house.jpg",
-//                "100 USD"
-//            )
-//        )
-//        mCategoryArrayList.add(
-//            Book(
-//                "Harry Potter",
-//                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8a7nxItx2AB4lA--bEOjsMQLscGmxw3wmk28vu5jfysNzb0HEbw",
-//                "100 USD"
-//            )
-//        )
-//        mCategoryArrayList.add(
-//            Book(
-//                "Harry Potter",
-//                "https://www.bookbaby.com/plugins/coverscarousel/images/basic/EverlastingJoy.jpg",
-//                "100 USD"
-//            )
-//        )
-        showListOfCategory(mCategoryArrayList)
-        holder.rcvCategory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        holder.rcvCategory.adapter = mCategoryAdapter
+        holder.tvName.text = commonList[position].name
+        holder.rcvBooks.adapter = CategoryAdapter(context,
+            commonList[position].arrBooks as ArrayList<Book>, this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -110,17 +52,15 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
     }
 
     open class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var txtCategory: TextView = itemView.text_view_category
-        var rcvCategory: RecyclerView = itemView.recycler_view_category
-        var moveToCategory: ConstraintLayout = itemView.category
+        var tvName: TextView = itemView.tv_category_name
+        var rcvBooks: RecyclerView = itemView.rcv_books
+        init {
+            rcvBooks.layoutManager =  LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
-    fun setList(arr: ArrayList<ItemCommon>) {
+    fun setList(arr: ArrayList<Category>) {
         commonList = arr
         notifyDataSetChanged()
-    }
-
-    private fun showListOfCategory(arrayListOfCategory: ArrayList<Book>) {
-        mCategoryAdapter.setList(arrayListOfCategory)
     }
 }
