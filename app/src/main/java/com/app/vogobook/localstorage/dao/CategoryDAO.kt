@@ -8,7 +8,7 @@ import io.reactivex.Maybe
 @Dao
 interface CategoryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveAll(vararg category: List<Category>?)
+    fun saveAll(vararg category: Category?)
 
     @Update
     fun update(vararg category: Category)

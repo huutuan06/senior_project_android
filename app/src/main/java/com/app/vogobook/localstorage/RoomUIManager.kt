@@ -10,13 +10,13 @@ class RoomUIManager(private var mBookDAO: BookDAO,  private var mCategoryDAO: Ca
 
     fun saveAllBooks(listBooks: List<Book>?) {
         AsyncTask.execute(Runnable {
-            mBookDAO.saveAll(listBooks)
+            mBookDAO.saveAll(*listBooks)
         })
     }
 
     fun saveAllCategories(listCategories: List<Category>?) {
         AsyncTask.execute(Runnable {
-            mCategoryDAO.saveAll(listCategories)
+            mCategoryDAO.saveAll(*listCategories)
         })
     }
 }
