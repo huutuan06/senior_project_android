@@ -19,7 +19,13 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class BookDetailModule {
+class BookDetailModule(private val bookDetailFragment: BookDetailFragment) {
+
+    @Provides
+    @FragmentScope
+    fun provideFragment() : BookDetailFragment {
+        return bookDetailFragment
+    }
 
     @SuppressLint("RestrictedApi")
     @Provides

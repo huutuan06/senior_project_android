@@ -71,7 +71,7 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity)).plus(
-            BookDetailModule()
+            BookDetailModule(this)
         ).inject(this)
     }
 
