@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
@@ -23,7 +24,7 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
 
     interface CommonEventListener {
         fun navigateToBookDetail(book: Book)
-        fun navigateToBookCollection(title: String)
+        fun navigateToBookCollection(category: Category)
     }
 
 
@@ -35,6 +36,10 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
         holder.tvName.text = commonList[position].name
         holder.rcvBooks.adapter = CategoryAdapter(context,
             commonList[position].arrBooks as ArrayList<Book>, this)
+
+        holder.categoryMore.setOnClickListener {
+            mCommonEventListener.navigateToBookCollection(commonList[position])
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,6 +59,7 @@ class CommonAdapter(private var context: Context, private var commonList: ArrayL
     open class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvName: TextView = itemView.tv_category_name
         var rcvBooks: RecyclerView = itemView.rcv_books
+        var categoryMore: ConstraintLayout = itemView.category_more
         init {
             rcvBooks.layoutManager =  LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
         }

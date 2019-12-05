@@ -1,5 +1,6 @@
 package com.app.vogobook.service.repository;
 
+import com.app.vogobook.service.response.BookCollectionResponse
 import com.app.vogobook.service.response.HomeCommonResponse
 import com.app.vogobook.service.response.UserResponse
 import com.google.gson.JsonObject

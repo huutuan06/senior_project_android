@@ -37,5 +37,6 @@ class Constants {
         const val TABLE_CATEGORY_BOOKS = "books"
 
         const val BOOK = "book"
+        const val CATEGORY = "category"
     }
 }

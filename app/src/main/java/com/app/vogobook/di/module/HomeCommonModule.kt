@@ -17,23 +17,33 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class HomeCommonModule (private val fragment : HomeCommonFragment, private val view : HomeCommonView) {
+class HomeCommonModule(private val fragment: HomeCommonFragment, private val view: HomeCommonView) {
 
     @Provides
     @SubFragmentScope
-    fun provideFragment() : HomeCommonFragment {
+    fun provideFragment(): HomeCommonFragment {
         return fragment
     }
 
     @Provides
     @SubFragmentScope
-    fun provideCommonAdapter(context: Context) =  CommonAdapter(context, ArrayList())
+    fun provideCommonAdapter(context: Context) = CommonAdapter(context, ArrayList())
 
     @Provides
     @SubFragmentScope
-    fun provideHomeCommonViewModel(context: Context, disposableManager: DisposableManager, bookService: BookService, mainActivity: MainActivity, roomUIManager: RoomUIManager) : HomeCommonModel = HomeCommonModelImpl(context, bookService, disposableManager, mainActivity, roomUIManager)
+    fun provideHomeCommonViewModel(
+        context: Context,
+        disposableManager: DisposableManager,
+        bookService: BookService,
+        mainActivity: MainActivity,
+        roomUIManager: RoomUIManager
+    ): HomeCommonModel =
+        HomeCommonModelImpl(context, bookService, disposableManager, mainActivity, roomUIManager)
 
     @Provides
     @SubFragmentScope
-    fun provideHomeCommonPresenter(homeCommonModel: HomeCommonModel, context: Context) : HomeCommonPresenter =  HomeCommonPresenterImpl(view, homeCommonModel, context)
+    fun provideHomeCommonPresenter(
+        homeCommonModel: HomeCommonModel,
+        context: Context
+    ): HomeCommonPresenter = HomeCommonPresenterImpl(view, homeCommonModel, context)
 }

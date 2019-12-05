@@ -77,7 +77,7 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(false)
 
-        mToolbar.title = "Vogo Book"
+        mToolbar.title = context!!.getString(R.string.label_app_name)
         mBottomNavigation.visibility = View.VISIBLE
         mTabLayout.visibility = View.VISIBLE
 
@@ -94,9 +94,9 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
         mActivity.mNavController.navigate(R.id.bookDetailFragment, bundle)
     }
 
-    override fun navigateToBookCollection(title: String) {
+    override fun navigateToBookCollection(category: Category) {
         val bundle = Bundle()
-        bundle.putString("title", title)
+        bundle.putParcelable(Constants.CATEGORY, category)
         mActivity.mNavController.navigate(R.id.bookCollectionFragment, bundle)
     }
 

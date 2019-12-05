@@ -32,6 +32,7 @@
         android:textSize="@dimen/text_book_description_category"
         app:layout_constraintLeft_toLeftOf="parent"
         android:lines="2"
+        android:ellipsize="marquee"
         app:layout_constraintTop_toBottomOf="@id/card_view_img_book" />
 
     <TextView

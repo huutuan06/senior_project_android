@@ -70,7 +70,7 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
         Application.instance.setCurrentFragment(mFragment)
         Application.instance.setView(mViewFrag)
         mActivity.setSupportActionBar(mToolbar)
-        mToolbar.title = "Vogo Book"
+        mToolbar.title = context!!.getString(R.string.label_app_name)
 
     }
 

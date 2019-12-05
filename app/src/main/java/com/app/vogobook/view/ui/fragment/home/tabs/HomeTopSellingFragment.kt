@@ -47,7 +47,7 @@ class HomeTopSellingFragment : BaseFragment() {
     }
 
     override fun initAttributes() {
-        mToolbar.title = "Vogo Book"
+        mToolbar.title = context!!.getString(R.string.label_app_name)
 
 //        mTopSellingArrayList.add(
 //            Book(

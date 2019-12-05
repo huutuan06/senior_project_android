@@ -1,7 +1,6 @@
 package com.app.vogobook.presenter
 
 import android.content.Context
-import android.util.Log
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Category

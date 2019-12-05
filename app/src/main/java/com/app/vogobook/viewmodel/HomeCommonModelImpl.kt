@@ -29,9 +29,6 @@ class HomeCommonModelImpl(
         mPresenter = presenter
     }
 
-    /**
-     * Login with social
-     */
     override fun getCommonBooks(){
         mPresenter!!.setDisposable(disposableManager.getCommonBooks((service.getCommonBooks()), object : IDisposableListener<HomeCommonResponse> {
             override fun onComplete() {

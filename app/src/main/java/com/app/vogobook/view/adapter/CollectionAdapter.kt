@@ -1,5 +1,6 @@
  package com.app.vogobook.view.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,10 @@ class CollectionAdapter(private var bookList: ArrayList<Book>) :
     RecyclerView.Adapter<CollectionAdapter.ViewHolder>() {
 
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.txtTitle.text = bookList[position].title
-//        holder.txtPrice.text = bookList[position].price
+        holder.txtPrice.text = "$" + bookList[position].price.toString()
 
         Picasso.get().load(bookList[position].image).resize(180,  270)
             .centerCrop().into(holder.imgBook)

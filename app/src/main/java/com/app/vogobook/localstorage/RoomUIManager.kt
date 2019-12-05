@@ -41,4 +41,15 @@ class RoomUIManager(private var mBookDAO: BookDAO,  private var mCategoryDAO: Ca
             }
         }
     }
+
+    fun getBooksByCategory(category_id: Int?, _interface: IRoomListener<Book>) {
+        AsyncTask.execute {
+            mBookDAO.getBooksByCategory(category_id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Book>? ->
+                if (t != null) {
+                    _interface.showListData(t)
+                }
+            }
+        }
+    }
+
 }
