@@ -9,8 +9,8 @@
     app:layout_constraintBottom_toBottomOf="parent"
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
-    android:paddingStart="30dp"
-    android:paddingRight="30dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
     android:background="@color/windowBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,11 +92,6 @@
                 android:layout_height="wrap_content"
                 android:text="Duncan Clark"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="HarperColins" />
 
             <TextView
                 android:id="@+id/text_view_book_price"

@@ -11,6 +11,7 @@ import butterknife.OnClick
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.LoginModule
+import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.LoginPresenter
 import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.objects.Utils
@@ -103,13 +104,20 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     private fun generateJsonFacebook(jsonObject: JSONObject?) {
-        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("id"))
-        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("name"))
-        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("first_name"))
-        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("last_name"))
-        Utils.showLog(Utils.LogType.INFO, TAG, "https://graph.facebook.com/" + jsonObject?.getString("id") + "/picture?type=normal")
+//        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("id"))
+//        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("name"))
+//        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("first_name"))
+//        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("last_name"))
+//        Utils.showLog(Utils.LogType.INFO, TAG, "https://graph.facebook.com/" + jsonObject?.getString("id") + "/picture?type=normal")
+
+        val jsonFacebookServer = JSONObject()
+        jsonFacebookServer.put("name", jsonObject?.getString("name"))
+        jsonFacebookServer.put("email", jsonObject?.getString("email"))
+        jsonFacebookServer.put("image", "https://graph.facebook.com/" + jsonObject?.getString("id") + "/picture?type=normal")
+        jsonFacebookServer.put("platform", Constants.FACEBOOK)
+
         val jsonParser  = JsonParser()
-        mPresenter.loginSocial(jsonParser.parse(jsonObject.toString()) as JsonObject)
+        mPresenter.loginSocial(jsonParser.parse(jsonFacebookServer.toString()) as JsonObject)
     }
 
     private fun configureGoogleSignIn() {
@@ -153,10 +161,9 @@ class LoginActivity : BaseActivity(), LoginView,
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun loadUser(fullName: String?, email: String?) {
+    override fun loadUserSuccess(user: User) {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("Name", fullName)
-        intent.putExtra("Email", email)
+        intent.putExtra(Constants.USER, user)
         startActivity(intent)
         finish()
     }

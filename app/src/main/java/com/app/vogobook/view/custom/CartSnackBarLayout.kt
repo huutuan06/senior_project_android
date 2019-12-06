@@ -1,9 +1,12 @@
 package com.app.vogobook.view.custom
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import butterknife.BindView
@@ -13,6 +16,7 @@ import com.app.vogobook.R
 import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.view.ui.fragment.BookDetailFragment
+import com.squareup.picasso.Picasso
 
 
 /**
@@ -21,8 +25,18 @@ import com.app.vogobook.view.ui.fragment.BookDetailFragment
  */
 class CartSnackBarLayout(context: Context, fragment: BookDetailFragment) : ConstraintLayout(context) {
 
+
+    @BindView(R.id.image_book)
+    @JvmField var image : ImageView? = null
+
     @BindView(R.id.text_view_book_title)
-    @JvmField var tvNameOFBook: TextView? = null
+    @JvmField var title: TextView? = null
+
+    @BindView(R.id.text_view_book_author)
+    @JvmField var author: TextView? = null
+
+    @BindView(R.id.text_view_book_price)
+    @JvmField var price: TextView? = null
 
     interface CartSnackBarLayoutInterface {
         // You can change name of function hello by your name
@@ -39,8 +53,13 @@ class CartSnackBarLayout(context: Context, fragment: BookDetailFragment) : Const
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = mInflater.inflate(R.layout.snackbar_add_to_cart, this, true)
         fragment.attachDialogInterface(object : BookDetailFragment.BookDetailListener {
+            @SuppressLint("SetTextI18n")
             override fun sendBook(book: Book?) {
-                Log.i("TAG", book!!.title)
+                Picasso.get().load(book!!.image).resize(Resources.getSystem().displayMetrics.widthPixels ,  Resources.getSystem().displayMetrics.widthPixels*3/2)
+                    .centerCrop().into(image)
+                title!!.text = book!!.title.toString()
+                author!!.text = book.author.toString()
+                price!!.text = "$" + book.price.toString()
             }
         })
         ButterKnife.bind(this, view)
@@ -50,7 +69,7 @@ class CartSnackBarLayout(context: Context, fragment: BookDetailFragment) : Const
     fun onClick(view: View) {
         when (view.id) {
             R.id.button_go_to_cart -> {
-                listener!!.hello(tvNameOFBook!!.text as String)
+                listener!!.hello(title!!.text as String)
             }
             R.id.button_close -> {
                 listener!!.dismissSnackbar()

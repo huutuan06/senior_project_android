@@ -1,6 +1,5 @@
 package com.app.vogobook.service.repository;
 
-import com.app.vogobook.service.response.BookCollectionResponse
 import com.app.vogobook.service.response.HomeCommonResponse
 import com.app.vogobook.service.response.UserResponse
 import com.google.gson.JsonObject
@@ -13,7 +12,7 @@ import retrofit2.http.POST
 
 interface BookService {
 
-    @POST("api/v1/mobile/user/loginSocialNetwork")
+    @POST("api/v1/mobile/user/login")
     fun login(@Body jsonObject: JsonObject) : Observable<Response<UserResponse>>
 
 

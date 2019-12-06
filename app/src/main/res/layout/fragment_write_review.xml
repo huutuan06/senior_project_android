@@ -67,11 +67,6 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="HarperColins" />
-
-                        <TextView
                             android:id="@+id/text_view_book_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -110,6 +105,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="60dp"
                 android:inputType="textMultiLine"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:hint="Write your review for this book"
                 android:textColor="@color/textColorAccent"/>
 

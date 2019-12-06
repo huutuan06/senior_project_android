@@ -1,5 +1,7 @@
 package com.app.vogobook.view.ui.callback
 
+import com.app.vogobook.localstorage.entities.User
+
 interface LoginView : BaseView {
-    fun loadUser(fullName: String?, email: String?)
+    fun loadUserSuccess(user: User)
 }

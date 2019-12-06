@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.item_home_common_category.view.*
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.layoutParams.width = Resources.getSystem().displayMetrics.widthPixels *4/15
-        holder.itemView.layoutParams.height = holder.itemView.layoutParams.width * 2
+        holder.itemView.layoutParams.height = holder.itemView.layoutParams.width * 205/100
 
         holder.txtTitle.text = categoriesList[position].title
         holder.txtPrice.text = "$" + categoriesList[position].price.toString()

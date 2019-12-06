@@ -6,4 +6,5 @@ import com.google.gson.JsonObject
 interface LoginModel {
     fun attachPresenter(loginPresenter: LoginPresenter)
     fun loginSocial(jsonObject: JsonObject)
+    fun loadUserFromLocal()
 }

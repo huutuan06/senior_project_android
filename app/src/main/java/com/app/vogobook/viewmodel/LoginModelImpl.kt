@@ -1,27 +1,38 @@
 package com.app.vogobook.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.AsyncTask
+import com.app.vogobook.localstorage.IRoomListener
+import com.app.vogobook.localstorage.RoomUIManager
+import com.app.vogobook.localstorage.entities.Book
+import com.app.vogobook.localstorage.entities.Category
+import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.LoginPresenter
 import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.connect.rx.IDisposableListener
 import com.app.vogobook.service.repository.BookService
+import com.app.vogobook.service.response.HomeCommonResponse
 import com.app.vogobook.service.response.UserResponse
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.utils.objects.Utils
+import com.app.vogobook.view.ui.activity.LoginActivity
 import com.google.gson.JsonObject
 
 class LoginModelImpl(
     private val context: Context,
     private val service: BookService,
     private val disposableManager: DisposableManager,
-    private val sessionManager: SessionManager
+    private val mActivity: LoginActivity,
+    private val sessionManager: SessionManager,
+    private val mRoomUIManager: RoomUIManager
 ) :
     LoginModel {
 
-    private var mloginPresenter: LoginPresenter? = null
+    private var mPresenter: LoginPresenter? = null
 
     override fun attachPresenter(loginPresenter: LoginPresenter) {
-        mloginPresenter = loginPresenter
+        mPresenter = loginPresenter
     }
 
     /**
@@ -29,32 +40,64 @@ class LoginModelImpl(
      */
     override fun loginSocial(jsonObject: JsonObject) {
         if (Utils.isInternetOn(context)) {
-            disposableManager.login((service.login(jsonObject)), object : IDisposableListener<UserResponse> {
-                override fun onComplete() {
-                }
-                override fun onHandleData(response: UserResponse?) {
-                    /*val error: Error? = response!!.error
-                    val data: UserData? = response.data
-                    val user: User? = response.data!!.user
+            disposableManager.login(
+                (service.login(jsonObject)),
+                object : IDisposableListener<UserResponse> {
+                    override fun onComplete() {
+                    }
 
-                    val pref: SharedPreferences = context.getSharedPreferences("LoginPref", 0)
-                    val editor: SharedPreferences.Editor = pref.edit()
-                    editor.putString("Token",data?.token).apply()
+                    override fun onHandleData(response: UserResponse?) {
+                        if (response!!.error!!.code == 0) {
+                            mActivity.runOnUiThread {
+                                ProcessDatabase().execute(response)
+                            }
+                        } else {
+                            loadUserFromLocal()
+                        }
+                    }
 
-                    mloginPresenter!!.loadUser(user?.fullName, user?.email)*/
-                }
-
-                override fun onRequestWrongData(code: Int) {
+                    override fun onRequestWrongData(code: Int) {
 //                    mloginPresenter!!.loginFailure()
-                }
+                    }
 
-                override fun onApiFailure(error: Throwable?) {
+                    override fun onApiFailure(error: Throwable?) {
 //                    mloginPresenter!!.loginFailure()
+                    }
+                })
+        } else {
+            mPresenter!!.loginFailure()
+        }
+    }
+
+    override fun loadUserFromLocal() {
+        mRoomUIManager.getUser(object : IRoomListener<User> {
+            override fun showListData(users: List<User>) {
+                mPresenter!!.loadUserSuccess(users[0])
+            }
+
+        })
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    inner class ProcessDatabase : AsyncTask<UserResponse, UserResponse, Boolean>() {
+
+        override fun doInBackground(vararg response: UserResponse): Boolean {
+            mRoomUIManager.saveUser(response[0].data!!.user)
+            mRoomUIManager.getUser(object : IRoomListener<User> {
+                override fun showListData(t: List<User>) {
+                    onPostExecute(true)
                 }
             })
-        } else {
-            mloginPresenter!!.loginFailure()
+            return false
         }
+
+        override fun onPostExecute(result: Boolean?) {
+            if (result!!) {
+                mActivity.runOnUiThread { loadUserFromLocal() }
+            }
+        }
+
     }
 }
 

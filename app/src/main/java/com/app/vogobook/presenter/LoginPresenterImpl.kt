@@ -1,5 +1,6 @@
 package com.app.vogobook.presenter
 
+import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.view.ui.callback.LoginView
 import com.app.vogobook.viewmodel.LoginModel
 import com.google.gson.JsonObject
@@ -11,8 +12,8 @@ class LoginPresenterImpl(private val view: LoginView, private val loginModel: Lo
         loginModel.attachPresenter(this)
     }
 
-    override fun loadUser(fullName: String?, email: String?) {
-        view.loadUser(fullName, email)
+    override fun loadUserSuccess(user: User) {
+        view.loadUserSuccess(user)
     }
 
     override fun setDisposable(disposable: Disposable) {

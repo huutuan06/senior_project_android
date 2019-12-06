@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.app.vogobook.localstorage.dao.BookDAO
 import com.app.vogobook.localstorage.dao.CategoryDAO
+import com.app.vogobook.localstorage.dao.UserDAO
 import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Category
 import com.app.vogobook.utils.Constants
@@ -16,4 +17,5 @@ abstract class AppDatabase : RoomDatabase() {
     }
     abstract fun getBookDAO() : BookDAO
     abstract fun getCategoryDAO() : CategoryDAO
+    abstract fun getUserDAO() : UserDAO
 }

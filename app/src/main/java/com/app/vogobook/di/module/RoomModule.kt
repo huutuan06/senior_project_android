@@ -6,6 +6,7 @@ import com.app.vogobook.localstorage.AppDatabase
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.dao.BookDAO
 import com.app.vogobook.localstorage.dao.CategoryDAO
+import com.app.vogobook.localstorage.dao.UserDAO
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -36,8 +37,14 @@ class RoomModule(application: Application) {
 
     @Singleton
     @Provides
-    fun provideRoomUIManager(bookDAO: BookDAO, categoryDAO: CategoryDAO): RoomUIManager {
-        return RoomUIManager(bookDAO, categoryDAO)
+    fun provideUserDAO(appDatabase: AppDatabase) : UserDAO {
+        return appDatabase.getUserDAO()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRoomUIManager(bookDAO: BookDAO, categoryDAO: CategoryDAO, userDAO: UserDAO): RoomUIManager {
+        return RoomUIManager(bookDAO, categoryDAO, userDAO)
     }
 
 }

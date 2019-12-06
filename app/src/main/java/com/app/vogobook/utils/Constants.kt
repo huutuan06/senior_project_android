@@ -11,6 +11,8 @@ class Constants {
         const val FIELDS = "fields"
         const val FACEBOOK_PARAMS = "id, name, first_name, last_name, email"
 
+        const val FACEBOOK = "facebook"
+
         const val TIME_DELAY = 1000.toLong()
 
         const val DB_VERSION = 1
@@ -36,7 +38,23 @@ class Constants {
         const val TABLE_CATEGORY_UPDATED_UP = "updated_at"
         const val TABLE_CATEGORY_BOOKS = "books"
 
+        const val DB_TABLE_USER = "users"
+        const val TABLE_USER_ID = "users"
+        const val TABLE_USER_NAME = "users"
+        const val TABLE_USER_EMAIL = "users"
+        const val TABLE_USER_PASSWORD = "users"
+        const val TABLE_USER_PHONE_NUMBER = "users"
+        const val TABLE_USER_BIRTH_DAY = "users"
+        const val TABLE_USER_GENDER = "users"
+        const val TABLE_USER_AVATAR = "users"
+        const val TABLE_USER_ADDRESS = "users"
+        const val TABLE_USER_IS_VERIFIED = "users"
+        const val TABLE_USER_REMEMBER_TOKEN = "users"
+        const val TABLE_USER_CREATED_AT = "users"
+        const val TABLE_USER_UPDATED_AT = "users"
+
         const val BOOK = "book"
         const val CATEGORY = "category"
+        const val USER = "user"
     }
 }

@@ -85,7 +85,7 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
         mBottomNavigation.visibility = View.GONE
 
         mBook = arguments!!.getParcelable(Constants.BOOK)
-        Picasso.get().load(mBook!!.image).resize(Resources.getSystem().displayMetrics.widthPixels ,  Resources.getSystem().displayMetrics.heightPixels)
+        Picasso.get().load(mBook!!.image).resize(Resources.getSystem().displayMetrics.widthPixels ,  Resources.getSystem().displayMetrics.widthPixels*3/2)
             .centerCrop().into(imgBook)
         title.text = mBook!!.title.toString()
         author.text = mBook!!.author.toString()
@@ -96,7 +96,9 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
     fun processEventClick(view: View) {
         when (view.id) {
             R.id.button_write_review -> {
-                mActivity.mNavController.navigate(R.id.writeReviewFragment)
+                val bundle = Bundle()
+                bundle.putParcelable(Constants.BOOK, mBook)
+                mActivity.mNavController.navigate(R.id.writeReviewFragment,bundle)
             }
             R.id.button_add_to_cart -> {
                 mBookDetailListener.sendBook(mBook)
@@ -109,7 +111,7 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
         }
     }
 
-    public fun attachDialogInterface(_interface: BookDetailListener) {
+    fun attachDialogInterface(_interface: BookDetailListener) {
         mBookDetailListener  = _interface
     }
 

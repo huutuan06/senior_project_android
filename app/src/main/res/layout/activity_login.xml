@@ -75,6 +75,4 @@
             app:layout_constraintTop_toBottomOf="@id/imvSignInByFacebook"
             android:contentDescription="@string/img_register_google" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

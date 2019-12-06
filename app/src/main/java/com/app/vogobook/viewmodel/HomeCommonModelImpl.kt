@@ -89,7 +89,6 @@ class HomeCommonModelImpl(
                 mActivity.runOnUiThread { loadCommonBooksFromLocal() }
             }
         }
-
     }
 
 }
