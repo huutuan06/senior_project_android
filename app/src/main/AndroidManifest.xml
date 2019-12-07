@@ -20,6 +20,13 @@
         <activity
             android:name="com.app.vogobook.view.ui.activity.LoginActivity"
             android:theme="@style/LoginTheme">
+
+        </activity>
+        <activity android:name="com.app.vogobook.view.ui.activity.SearchActivity" />
+        <activity android:name="com.app.vogobook.view.ui.activity.MainActivity">
+
+        </activity>
+        <activity android:name=".view.ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,13 +43,6 @@
                     android:pathPattern="/fdsfds"
                     android:scheme="http" />
             </intent-filter>
-        </activity>
-        <activity android:name="com.app.vogobook.view.ui.activity.SearchActivity" />
-        <activity android:name="com.app.vogobook.view.ui.activity.MainActivity">
-
-        </activity>
-        <activity android:name=".view.ui.activity.SplashActivity">
-
         </activity>
 
         <meta-data

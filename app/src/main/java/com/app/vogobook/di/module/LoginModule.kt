@@ -2,6 +2,7 @@ package com.app.vogobook.di.module
 
 import android.content.Context
 import com.app.vogobook.di.scope.ActivityScope
+import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.presenter.LoginPresenter
 import com.app.vogobook.presenter.LoginPresenterImpl
 import com.app.vogobook.service.connect.rx.DisposableManager
@@ -37,7 +38,7 @@ class LoginModule(private val activity: LoginActivity, private val view: LoginVi
 
     @Provides
     @ActivityScope
-    fun provideUserViewModel(context: Context, disposableManager: DisposableManager, bookService: BookService, sessionManager: SessionManager) : LoginModel = LoginModelImpl(context, bookService, disposableManager, sessionManager)
+    fun provideUserViewModel(context: Context, activity: LoginActivity,disposableManager: DisposableManager, bookService: BookService, sessionManager: SessionManager, roomUIManager: RoomUIManager) : LoginModel = LoginModelImpl(context, activity, bookService, disposableManager, sessionManager, roomUIManager)
 
     @Provides
     @ActivityScope

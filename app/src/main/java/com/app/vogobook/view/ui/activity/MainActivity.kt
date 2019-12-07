@@ -5,12 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
+import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.MainPresenter
+import com.app.vogobook.utils.Constants
 import com.app.vogobook.view.ui.callback.MainView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
@@ -29,6 +32,8 @@ class MainActivity : BaseActivity(), MainView,
 
     @Inject lateinit var mBottomNavigation: BottomNavigationView
 
+    var user = User()
+
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this, this)).inject(this)
     }
@@ -41,6 +46,7 @@ class MainActivity : BaseActivity(), MainView,
         setSupportActionBar(mToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+        user = intent.getParcelableExtra(Constants.USER)
     }
 
     public override val layoutRes: Int

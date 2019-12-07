@@ -1,7 +1,10 @@
 package com.app.vogobook.view.ui.fragment.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +19,7 @@ import com.app.vogobook.view.adapter.PersonalAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.fragment.BaseFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
@@ -23,17 +27,30 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
 
     private var mItemPersonalArrayList = ArrayList<ItemPersonal>()
 
-    @Inject lateinit var mAdapter: PersonalAdapter
+    @Inject
+    lateinit var mAdapter: PersonalAdapter
 
-    @Inject lateinit var mActivity: MainActivity
+    @Inject
+    lateinit var mActivity: MainActivity
 
-    @Inject lateinit var mToolbar: Toolbar
+    @Inject
+    lateinit var mToolbar: Toolbar
 
     @Inject
     lateinit var mBottomNavigation: BottomNavigationView
 
     @BindView(R.id.recycler_view_personal)
-    @JvmField var rcvPersonal : RecyclerView? = null
+    @JvmField
+    var rcvPersonal: RecyclerView? = null
+
+    @BindView(R.id.image_profile)
+    lateinit var mImageProfile: ImageView
+
+    @BindView(R.id.text_view_name)
+    lateinit var mName: TextView
+
+    @BindView(R.id.text_view_member_date)
+    lateinit var mDate: TextView
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
@@ -44,12 +61,19 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
     }
 
     override fun distributedDaggerComponents() {
-        Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity)).plus(
-            PersonalModule(this)
-        ).inject(this)
+        Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity))
+            .plus(
+                PersonalModule(this)
+            ).inject(this)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initAttributes() {
+
+        Picasso.get().load(mActivity.user.avatar).into(mImageProfile)
+        mName.text = mActivity.user.name.toString()
+        mDate.text = "Member from " + mActivity.user.created_at.toString()
+
         mItemPersonalArrayList.clear()
         mItemPersonalArrayList.add(ItemPersonal("Manage orders"))
         mItemPersonalArrayList.add(ItemPersonal("The orders have been seen"))
@@ -80,7 +104,7 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
     }
 
     @OnClick(R.id.card_view_personal)
-    fun processEventClick(view: View){
+    fun processEventClick(view: View) {
         when (view.id) {
             R.id.card_view_personal -> {
                 mActivity.mNavController.navigate(R.id.accountFragment)
@@ -88,7 +112,7 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
         }
     }
 
-    private fun showList(arr : ArrayList<ItemPersonal>) {
+    private fun showList(arr: ArrayList<ItemPersonal>) {
         mAdapter.setList(arr)
     }
 }

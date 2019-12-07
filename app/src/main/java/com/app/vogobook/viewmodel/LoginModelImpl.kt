@@ -3,16 +3,14 @@ package com.app.vogobook.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
+import android.util.Log
 import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.RoomUIManager
-import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.localstorage.entities.Category
 import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.LoginPresenter
 import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.connect.rx.IDisposableListener
 import com.app.vogobook.service.repository.BookService
-import com.app.vogobook.service.response.HomeCommonResponse
 import com.app.vogobook.service.response.UserResponse
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.utils.objects.Utils
@@ -21,11 +19,11 @@ import com.google.gson.JsonObject
 
 class LoginModelImpl(
     private val context: Context,
+    private val activity: LoginActivity,
     private val service: BookService,
     private val disposableManager: DisposableManager,
-    private val mActivity: LoginActivity,
     private val sessionManager: SessionManager,
-    private val mRoomUIManager: RoomUIManager
+    private val roomUIManager: RoomUIManager
 ) :
     LoginModel {
 
@@ -48,7 +46,7 @@ class LoginModelImpl(
 
                     override fun onHandleData(response: UserResponse?) {
                         if (response!!.error!!.code == 0) {
-                            mActivity.runOnUiThread {
+                            activity.runOnUiThread {
                                 ProcessDatabase().execute(response)
                             }
                         } else {
@@ -70,7 +68,7 @@ class LoginModelImpl(
     }
 
     override fun loadUserFromLocal() {
-        mRoomUIManager.getUser(object : IRoomListener<User> {
+        roomUIManager.getUser(object : IRoomListener<User> {
             override fun showListData(users: List<User>) {
                 mPresenter!!.loadUserSuccess(users[0])
             }
@@ -83,9 +81,10 @@ class LoginModelImpl(
     inner class ProcessDatabase : AsyncTask<UserResponse, UserResponse, Boolean>() {
 
         override fun doInBackground(vararg response: UserResponse): Boolean {
-            mRoomUIManager.saveUser(response[0].data!!.user)
-            mRoomUIManager.getUser(object : IRoomListener<User> {
+            roomUIManager.saveUser(response[0].data!!.user)
+            roomUIManager.getUser(object : IRoomListener<User> {
                 override fun showListData(t: List<User>) {
+                    sessionManager.token = response[0].data!!.token.toString()
                     onPostExecute(true)
                 }
             })
@@ -94,7 +93,7 @@ class LoginModelImpl(
 
         override fun onPostExecute(result: Boolean?) {
             if (result!!) {
-                mActivity.runOnUiThread { loadUserFromLocal() }
+                activity.runOnUiThread { loadUserFromLocal() }
             }
         }
 

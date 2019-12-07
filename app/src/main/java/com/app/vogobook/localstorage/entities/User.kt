@@ -17,7 +17,7 @@ class User() : Parcelable {
     @ColumnInfo(name = Constants.TABLE_USER_ID)
     @SerializedName("id")
     @Expose
-    var id: String? = null
+    var id: Int? = 0
 
     @ColumnInfo(name = Constants.TABLE_USER_NAME)
     @SerializedName("name")
@@ -62,7 +62,17 @@ class User() : Parcelable {
     @ColumnInfo(name = Constants.TABLE_USER_IS_VERIFIED)
     @SerializedName("is_verified")
     @Expose
-    var is_verified: String? = null
+    var verified: Int? = null
+
+    @ColumnInfo(name = Constants.TABLE_USER_TYPE)
+    @SerializedName("type")
+    @Expose
+    var type: String? = null
+
+    @ColumnInfo(name = Constants.TABLE_USER_PLATFORM)
+    @SerializedName("platform")
+    @Expose
+    var platform: String? = null
 
     @ColumnInfo(name = Constants.TABLE_USER_REMEMBER_TOKEN)
     @SerializedName("remember_token")
@@ -80,7 +90,7 @@ class User() : Parcelable {
     var updated_at: String? = null
 
     constructor(parcel: Parcel) : this() {
-        id = parcel.readString()
+        id = parcel.readValue(Int::class.java.classLoader) as? Int
         name = parcel.readString()
         email = parcel.readString()
         password = parcel.readString()
@@ -89,14 +99,16 @@ class User() : Parcelable {
         gender = parcel.readString()
         avatar = parcel.readString()
         address = parcel.readString()
-        is_verified = parcel.readString()
+        type = parcel.readString()
+        verified = parcel.readInt()
+        platform = parcel.readString()
         remember_token = parcel.readString()
         created_at = parcel.readString()
         updated_at = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
+        parcel.writeValue(id)
         parcel.writeString(name)
         parcel.writeString(email)
         parcel.writeString(password)
@@ -105,7 +117,9 @@ class User() : Parcelable {
         parcel.writeString(gender)
         parcel.writeString(avatar)
         parcel.writeString(address)
-        parcel.writeString(is_verified)
+        parcel.writeString(type)
+        parcel.writeValue(verified)
+        parcel.writeString(platform)
         parcel.writeString(remember_token)
         parcel.writeString(created_at)
         parcel.writeString(updated_at)

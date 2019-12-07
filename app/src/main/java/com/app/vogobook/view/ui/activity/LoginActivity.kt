@@ -146,8 +146,9 @@ class LoginActivity : BaseActivity(), LoginView,
             Utils.showLog(Utils.LogType.INFO, TAG, "User_image_url: $imageUrl")
 
             val obj = JsonObject()
-            obj.addProperty("id" , "")
+            obj.addProperty("name" , name)
             obj.addProperty("email", email)
+            obj.addProperty("image", imageUrl.toString())
             mPresenter.loginSocial(obj)
         }
     }

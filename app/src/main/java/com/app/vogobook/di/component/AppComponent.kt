@@ -9,4 +9,5 @@ import javax.inject.Singleton
 interface AppComponent {
     fun plus(module: MainModule): MainComponent
     fun plus(module: LoginModule): LoginComponent
+    fun plus(module: SplashModule): SplashComponent
 }

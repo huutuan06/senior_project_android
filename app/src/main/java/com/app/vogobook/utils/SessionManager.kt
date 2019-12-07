@@ -5,14 +5,16 @@ import android.content.SharedPreferences
 
 import javax.inject.Inject
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class SessionManager @Inject constructor(context: Context) {
     private val pref: SharedPreferences
     private val editor: SharedPreferences.Editor
 
-    var appVersion: String
-        get() = pref.getString(APP_VERSION, Constants.EMPTY_STRING)
-        set(appVersion) {
-            editor.putString(APP_VERSION, appVersion)
+    var token: String
+
+        get() = pref.getString(ACCESS_TOKEN, Constants.EMPTY_STRING)
+        set(token) {
+            editor.putString(ACCESS_TOKEN, token)
             editor.apply()
         }
 
@@ -23,22 +25,13 @@ class SessionManager @Inject constructor(context: Context) {
     }
 
     fun clear() {
-        editor.remove(APP_VERSION)
+        editor.remove(ACCESS_TOKEN)
         editor.apply()
     }
 
     companion object {
-
-        private val APP_VERSION = "app_version"
+        private val ACCESS_TOKEN = "access_token"
         private val PREF_NAME = "book_shared_pref"
-        private var instance: SessionManager? = null
-
-        fun getInstance(context: Context?): SessionManager {
-            if (instance == null) {
-                instance = SessionManager(context!!)
-            }
-            return instance as SessionManager
-        }
     }
 
 }
