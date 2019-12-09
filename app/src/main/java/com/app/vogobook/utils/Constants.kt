@@ -3,6 +3,10 @@ package com.app.vogobook.utils
 class Constants {
 
     companion object {
+
+        const val PERMISSION_CODE = 100
+        const val IMAGE_PICK_CODE = 101
+
         const val EMAIL = "email"
         const val PUBLIC_PROFILE = "public_profile"
         const val RC_SIGN_IN = 1
@@ -12,6 +16,7 @@ class Constants {
         const val FACEBOOK_PARAMS = "id, name, first_name, last_name, email"
 
         const val FACEBOOK = "facebook"
+        const val GOOGLE = "google"
 
         const val TIME_DELAY = 1000.toLong()
 

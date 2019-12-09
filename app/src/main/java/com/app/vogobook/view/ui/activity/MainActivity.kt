@@ -8,29 +8,54 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.room.Room
 import com.app.vogobook.R
+import com.app.vogobook.analytics.VogoAnalytics
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
+import com.app.vogobook.localstorage.IRoomListener
+import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.MainPresenter
 import com.app.vogobook.utils.Constants
+import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.ui.callback.MainView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.disposables.Disposable
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView,
-        BottomNavigationView.OnNavigationItemSelectedListener, NavController.OnDestinationChangedListener {
+    BottomNavigationView.OnNavigationItemSelectedListener,
+    NavController.OnDestinationChangedListener {
 
-    @Inject lateinit var mContext: Context
+    @Inject
+    lateinit var mContext: Context
 
-    @Inject lateinit var mNavController: NavController
+    @Inject
+    lateinit var mNavController: NavController
 
-    @Inject lateinit var mMainPresenter: MainPresenter
+    @Inject
+    lateinit var mMainPresenter: MainPresenter
 
-    @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+    @Inject
+    lateinit var mToolbar: androidx.appcompat.widget.Toolbar
 
-    @Inject lateinit var mBottomNavigation: BottomNavigationView
+    @Inject
+    lateinit var mBottomNavigation: BottomNavigationView
+
+    @Inject
+    lateinit var mRoom: RoomUIManager
+
+    @Inject
+    lateinit var mFirebaseAnalytics: FirebaseAnalytics
+
+    @Inject
+    lateinit var mVogoAnalytics: VogoAnalytics
+
+    @Inject
+    lateinit var mSessionManager: SessionManager
 
     var user = User()
 
@@ -46,7 +71,13 @@ class MainActivity : BaseActivity(), MainView,
         setSupportActionBar(mToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        user = intent.getParcelableExtra(Constants.USER)
+        mRoom.getUser(object : IRoomListener<User>{
+            override fun showListData(t: List<User>) {
+                if (t.isNotEmpty())
+                    user = t[0]
+            }
+
+        })
     }
 
     public override val layoutRes: Int
@@ -93,7 +124,11 @@ class MainActivity : BaseActivity(), MainView,
         return false
     }
 
-    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
         when (destination.label.toString()) {
             mContext.getString(R.string.label_home) -> {
 //                Toast.makeText(mContext, "Home", Toast.LENGTH_SHORT).show()
@@ -130,7 +165,7 @@ class MainActivity : BaseActivity(), MainView,
         // Get all MenuItem from Toolbar and customize it.
         val searchItem = menu!!.findItem(R.id.menu_item_search) as MenuItem
         val cartItem = menu.findItem(R.id.menu_item_cart) as MenuItem
-        when(mNavController.currentDestination!!.label) {
+        when (mNavController.currentDestination!!.label) {
             mContext.getString(R.string.label_home) -> {
                 // TODO what you want
             }
@@ -164,11 +199,18 @@ class MainActivity : BaseActivity(), MainView,
             }
         }
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun onDestroy() {
+        mVogoAnalytics.reportDevideInfor(mFirebaseAnalytics, Locale.getDefault().getDisplayLanguage(), System.currentTimeMillis() - mSessionManager.time_using)
+        super.onDestroy()
     }
 }

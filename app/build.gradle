@@ -6,6 +6,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
 def daggerVersion = '2.24'
 
 android {
@@ -142,6 +144,8 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$room"
     implementation "android.arch.persistence.room:rxjava2:$room"
     kapt "android.arch.persistence.room:compiler:$room"
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
 
 }
 

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "640021356755",
+    "firebase_url": "https://seniorproject-252704.firebaseio.com",
+    "project_id": "seniorproject-252704",
+    "storage_bucket": "seniorproject-252704.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640021356755:android:3b04186ebbc41d3ac2b426",
+        "android_client_info": {
+          "package_name": "com.app.vogobook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640021356755-tru9ralds14hqrjbesc9pt2mtt30r6u4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.vogobook",
+            "certificate_hash": "61a5acdb39c4ee3bb80aac340ce0ecd1be2fc4a4"
+          }
+        },
+        {
+          "client_id": "640021356755-ko7vfte7j89ilnh4fo9ffs2i2q802b8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDftju_F6Nq1Wo_KULcXU3hsbAUQsOHerM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640021356755-ko7vfte7j89ilnh4fo9ffs2i2q802b8m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

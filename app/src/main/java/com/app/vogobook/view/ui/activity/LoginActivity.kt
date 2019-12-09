@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import butterknife.BindView
 import butterknife.OnClick
 import com.app.vogobook.R
+import com.app.vogobook.analytics.VogoAnalytics
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.LoginModule
 import com.app.vogobook.localstorage.entities.User
@@ -27,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.util.CollectionUtils.listOf
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import io.reactivex.disposables.Disposable
@@ -48,6 +50,11 @@ class LoginActivity : BaseActivity(), LoginView,
     @Inject lateinit var mCallbackManager: CallbackManager
     @Inject lateinit var mDialog: VogoLoadingDialog
 
+    @Inject
+    lateinit var mFirebaseAnalytics: FirebaseAnalytics
+    @Inject
+    lateinit var mVogoAnalytics: VogoAnalytics
+
     private var googleApiClient: GoogleApiClient? = null
     private val  TAG = LoginActivity::class.qualifiedName
 
@@ -56,6 +63,8 @@ class LoginActivity : BaseActivity(), LoginView,
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(LoginModule(this, this)).inject(this)
+        mVogoAnalytics.reportScreen(mFirebaseAnalytics, this, Utils.replaceAvitityByScreen(SplashActivity::class.java.simpleName))
+
     }
 
     override fun initAttributes() {
@@ -67,9 +76,11 @@ class LoginActivity : BaseActivity(), LoginView,
     fun processEventClick(v : View) {
         when(v.id) {
             R.id.imvSignInByFacebook -> {
+                mVogoAnalytics.reportLoginSocialNetwork(mFirebaseAnalytics, Constants.FACEBOOK)
                 loginFacebookApp()
             }
             R.id.imvSignInByGoogle -> {
+                mVogoAnalytics.reportLoginSocialNetwork(mFirebaseAnalytics, Constants.GOOGLE)
                 loginGoogleApp()
             }
         }
@@ -149,6 +160,7 @@ class LoginActivity : BaseActivity(), LoginView,
             obj.addProperty("name" , name)
             obj.addProperty("email", email)
             obj.addProperty("image", imageUrl.toString())
+            obj.addProperty("platform", Constants.GOOGLE)
             mPresenter.loginSocial(obj)
         }
     }
@@ -164,7 +176,6 @@ class LoginActivity : BaseActivity(), LoginView,
 
     override fun loadUserSuccess(user: User) {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra(Constants.USER, user)
         startActivity(intent)
         finish()
     }

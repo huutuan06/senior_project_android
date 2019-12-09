@@ -17,6 +17,12 @@ class SessionManager @Inject constructor(context: Context) {
             editor.putString(ACCESS_TOKEN, token)
             editor.apply()
         }
+    var time_using: Long
+        get() = pref.getLong(TIME_USING_APP, 0)
+        set(time_using) {
+            editor.putLong(TIME_USING_APP, time_using)
+            editor.apply()
+        }
 
     init {
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -32,6 +38,7 @@ class SessionManager @Inject constructor(context: Context) {
     companion object {
         private val ACCESS_TOKEN = "access_token"
         private val PREF_NAME = "book_shared_pref"
+        private val TIME_USING_APP = "time_using_app"
     }
 
 }

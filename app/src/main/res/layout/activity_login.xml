@@ -8,26 +8,14 @@
 
     <ImageView
             android:id="@+id/imvLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_marginTop="120dp"
             android:contentDescription="@string/img_desc"
-            android:src="@drawable/ic_desc"
+            android:src="@drawable/ic_launcher"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/tvAppName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/book_selling"
-            android:textSize="@dimen/login_text"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imvLogo"/>
 
     <TextView
             android:id="@+id/tvDescription"
@@ -38,19 +26,7 @@
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
-
-    <TextView
-            android:id="@+id/tvSignIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/signIn"
-            android:textSize="@dimen/login_text"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/imvLogo" />
 
     <ImageButton
             android:id="@+id/imvSignInByFacebook"
@@ -62,7 +38,7 @@
             android:src="@drawable/ic_register_facebook"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSignIn" />
+            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
     <ImageButton
             android:id="@+id/imvSignInByGoogle"
             android:layout_width="wrap_content"

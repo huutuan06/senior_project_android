@@ -27,4 +27,12 @@ object Utils {
             }
     }
 
+    fun replaceAvitityByScreen(name: String) : String {
+        return name.substring(0,name.indexOf("Activity"))+"Screen"
+    }
+
+    fun replaceFragmentByScreen(name: String) : String {
+        return name.substring(0,name.indexOf("Fragment"))+"Screen"
+    }
+
 }

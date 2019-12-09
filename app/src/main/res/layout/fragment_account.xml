@@ -5,13 +5,23 @@
     android:layout_height="match_parent"
     android:padding="30dp">
 
+    <ImageView
+        android:id="@+id/image_view_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/label_image_avatar" />
+
     <LinearLayout
         android:id="@+id/area_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/image_view_avatar"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,14 +52,26 @@
             android:layout_height="wrap_content"
             android:text="Birthday" />
 
-        <EditText
-            android:id="@+id/edit_text_birthday"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/textColorAccent"
-            android:hint="Please enter your birthday"
-            android:singleLine="true"
-            android:textSize="14sp" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/edit_text_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorAccent"
+                android:singleLine="true"
+                android:inputType="none"
+                android:textSize="14sp"
+                android:layout_weight="3"/>
+            <ImageView
+                android:id="@+id/image_view_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_date"
+                android:layout_weight="0"/>
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -77,20 +99,29 @@
             android:hint="Your Address" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/text_view_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/area_address"
+        android:layout_marginTop="15dp"/>
+
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/area_address"
+        app:layout_constraintTop_toBottomOf="@id/text_view_gender"
         android:layout_marginTop="15dp">
 
         <RadioButton
             android:id="@+id/radioButton_male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:checked="false"
             android:layout_marginEnd="10dp"
             android:text="Male" />
 
@@ -106,9 +137,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp">
 
         <Button
             android:id="@+id/button_submit"

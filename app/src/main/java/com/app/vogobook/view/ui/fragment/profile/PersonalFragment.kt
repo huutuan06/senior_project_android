@@ -16,6 +16,7 @@ import com.app.vogobook.di.module.MainModule
 import com.app.vogobook.di.module.PersonalModule
 import com.app.vogobook.utils.ItemPersonal
 import com.app.vogobook.view.adapter.PersonalAdapter
+import com.app.vogobook.view.custom.CircleTransform
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.fragment.BaseFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -70,7 +71,7 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener {
     @SuppressLint("SetTextI18n")
     override fun initAttributes() {
 
-        Picasso.get().load(mActivity.user.avatar).into(mImageProfile)
+        Picasso.get().load(mActivity.user.avatar).transform(CircleTransform()).into(mImageProfile)
         mName.text = mActivity.user.name.toString()
         mDate.text = "Member from " + mActivity.user.created_at.toString()
 
