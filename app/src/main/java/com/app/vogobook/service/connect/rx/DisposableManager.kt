@@ -2,6 +2,7 @@ package com.app.vogobook.service.connect.rx
 
 import com.app.vogobook.service.response.BookCollectionResponse
 import com.app.vogobook.service.response.HomeCommonResponse
+import com.app.vogobook.service.response.PersonalResponse
 import com.app.vogobook.service.response.UserResponse
 
 import javax.inject.Inject
@@ -62,15 +63,15 @@ constructor() {
 
     }
 
-    fun getBookCollection(observable: Observable<Response<BookCollectionResponse>>, _interface: IDisposableListener<BookCollectionResponse>): Disposable {
+    fun logOut(observable: Observable<Response<PersonalResponse>>, _interface: IDisposableListener<PersonalResponse>) : Disposable {
         return observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableObserver<Response<BookCollectionResponse>>(){
+            .subscribeWith(object : DisposableObserver<Response<PersonalResponse>>() {
                 override fun onComplete() {
                     _interface.onComplete()
                 }
 
-                override fun onNext(value: Response<BookCollectionResponse>) {
+                override fun onNext(value: Response<PersonalResponse>) {
                     if (value.isSuccessful) {
                         _interface.onHandleData(value.body())
                     } else {

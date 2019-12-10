@@ -31,7 +31,8 @@ class SessionManager @Inject constructor(context: Context) {
     }
 
     fun clear() {
-        editor.remove(ACCESS_TOKEN)
+        editor.remove(ACCESS_TOKEN) // Clear any key you want, here clear ACCESS_TOKEN
+        editor.remove(TIME_USING_APP)
         editor.apply()
     }
 

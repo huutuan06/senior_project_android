@@ -14,7 +14,7 @@
     //Bottom navigation bar
     <string name="bottom_navigation_bar_home">Home</string>
     <string name="bottom_navigation_bar_personal">Personal</string>
-    <string name="text_books_common">Common</string>
+    <string name="text_books_popular">Popular</string>
     <string name="text_books_top_selling">Top Selling</string>
     <string name="text_books_new_release">New Release</string>
 
@@ -49,4 +49,7 @@
     <string name="label_app_name">Vogo Book</string>
     <string name="label_book_description">Description</string>
     <string name="label_image_avatar">avatar</string>
+    <string name="label_personal_string">Personal</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="partten_birthday_local">MMM dd, yyyy</string>
 </resources>

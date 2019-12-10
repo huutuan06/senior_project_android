@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -74,6 +75,8 @@ class AccountFragment : BaseFragment(), AccountView {
     lateinit var btnSubmit: Button
 
     var pathImage: String? = null
+    val mCalendar = Calendar.getInstance()
+
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
@@ -137,7 +140,7 @@ class AccountFragment : BaseFragment(), AccountView {
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("image", pathImage)
                 jsonObject.addProperty("name", edtName.text.toString())
-                jsonObject.addProperty("date_of_birth", edtBirthday.text.toString())
+                jsonObject.addProperty("date_of_birth", mCalendar.time.time/1000)
                 jsonObject.addProperty("address", edtAddress.text.toString())
                 if (rbMale.isChecked)
                     jsonObject.addProperty("gender", 0)
@@ -148,26 +151,24 @@ class AccountFragment : BaseFragment(), AccountView {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     fun initDatePicker() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val year = mCalendar.get(Calendar.YEAR)
+        val month = mCalendar.get(Calendar.MONTH)
+        val day = mCalendar.get(Calendar.DAY_OF_MONTH)
 
-        val formatMonth: String = "MMM"
-        val monthDate = SimpleDateFormat(formatMonth)
         val dpd = DatePickerDialog(
             context,
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                val thisMonth = monthOfYear + 1
-                edtBirthday.setText("$thisMonth $dayOfMonth $year")
+//                val thisMonth = monthOfYear + 1
+                val simpleDateFormat = SimpleDateFormat(context!!.getString(R.string.partten_birthday_local))
+                mCalendar.set(year, monthOfYear, dayOfMonth)
+                edtBirthday.setText(simpleDateFormat.format(mCalendar.time.time))
             },
             year,
             month,
             day
         )
-
         dpd.show()
     }
 
@@ -203,15 +204,15 @@ class AccountFragment : BaseFragment(), AccountView {
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO
     }
 
     override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO
     }
 
     override fun setDisposable(disposable: Disposable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO
     }
 
 }

@@ -86,7 +86,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/button_layout_color"
-                android:text="LOG OUT"
+                android:text="@string/log_out"
                 android:textSize="@dimen/text_action_button"
                 android:textStyle="bold"
                 android:textColor="@color/windowBackground" />

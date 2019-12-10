@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.app.vogobook.R
@@ -15,6 +17,7 @@ import com.app.vogobook.di.module.LoginModule
 import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.LoginPresenter
 import com.app.vogobook.utils.Constants
+import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.utils.VogoLoadingDialog
 import com.app.vogobook.view.ui.callback.LoginView
@@ -49,6 +52,7 @@ class LoginActivity : BaseActivity(), LoginView,
     @Inject lateinit var mPresenter: LoginPresenter
     @Inject lateinit var mCallbackManager: CallbackManager
     @Inject lateinit var mDialog: VogoLoadingDialog
+    @Inject lateinit var mSessionManager: SessionManager
 
     @Inject
     lateinit var mFirebaseAnalytics: FirebaseAnalytics
@@ -64,7 +68,6 @@ class LoginActivity : BaseActivity(), LoginView,
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(LoginModule(this, this)).inject(this)
         mVogoAnalytics.reportScreen(mFirebaseAnalytics, this, Utils.replaceAvitityByScreen(SplashActivity::class.java.simpleName))
-
     }
 
     override fun initAttributes() {

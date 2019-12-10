@@ -1,0 +1,48 @@
+package com.app.vogobook.viewmodel
+
+import android.content.Context
+import com.app.vogobook.localstorage.RoomUIManager
+import com.app.vogobook.presenter.PersonalPresenter
+import com.app.vogobook.service.connect.rx.DisposableManager
+import com.app.vogobook.service.connect.rx.IDisposableListener
+import com.app.vogobook.service.repository.BookService
+import com.app.vogobook.service.response.PersonalResponse
+import com.app.vogobook.utils.SessionManager
+import com.app.vogobook.view.ui.activity.MainActivity
+
+class PersonalModelImpl (
+    private val context: Context,
+    private val service: BookService,
+    private val disposableManager: DisposableManager,
+    private var mActivity: MainActivity,
+    private val mRoomUIManager: RoomUIManager,
+    private val mSessionManager: SessionManager
+) : PersonalModel {
+
+    private var mPresenter: PersonalPresenter? = null
+
+    override fun attachPresenter(presenter: PersonalPresenter) {
+        mPresenter = presenter
+    }
+
+    override fun logOut() {
+        mPresenter!!.setDisposable(disposableManager.logOut((service.logOut(mSessionManager.token)), object : IDisposableListener<PersonalResponse> {
+            override fun onComplete() {
+                //TODO
+            }
+
+            override fun onHandleData(t: PersonalResponse?) {
+                mPresenter!!.logoutSuccess()
+            }
+
+            override fun onRequestWrongData(code: Int) {
+                mPresenter!!.logoutSuccess()
+            }
+
+            override fun onApiFailure(error: Throwable?) {
+                mPresenter!!.logoutSuccess()
+            }
+
+        }))
+    }
+}

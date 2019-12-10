@@ -11,6 +11,7 @@ import com.app.vogobook.presenter.HomeCommonPresenter
 import com.app.vogobook.presenter.HomeCommonPresenterImpl
 import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.repository.BookService
+import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.CommonAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.AccountView
@@ -40,9 +41,10 @@ class AccountModule(private val fragment: AccountFragment, private val view: Acc
         disposableManager: DisposableManager,
         bookService: BookService,
         mainActivity: MainActivity,
-        roomUIManager: RoomUIManager
+        roomUIManager: RoomUIManager,
+        sessionManager: SessionManager
     ): AccountModel =
-        AccountModelImpl(context, bookService, disposableManager, mainActivity, roomUIManager)
+        AccountModelImpl(context, bookService, disposableManager, mainActivity, roomUIManager,sessionManager)
 
     @Provides
     @FragmentScope
