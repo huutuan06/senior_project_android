@@ -9,9 +9,9 @@ import com.app.vogobook.service.response.UserResponse
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.gson.JsonObject
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,7 +44,7 @@ class AccountModelImpl (
         builder.addFormDataPart(
             "file",
             file.name,
-            RequestBody.create(MediaType.parse("image/*"), file)
+            file.asRequestBody("image/*".toMediaTypeOrNull())
         )
         val requestBody = builder.build()
         val call = service.profile(mSessionManager.token, requestBody) as Call<UserResponse>

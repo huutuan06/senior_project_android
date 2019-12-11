@@ -10,7 +10,7 @@
 
     // Facebook Login
     <string name="facebook_app_id">446760892615954</string>
-    <string name="fb_login_protocol_scheme">fb446760892615954</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb446760892615954</string>
 
     //Bottom navigation bar
     <string name="bottom_navigation_bar_home">Home</string>

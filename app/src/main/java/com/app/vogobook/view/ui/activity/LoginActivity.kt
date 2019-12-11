@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.app.vogobook.R
@@ -18,6 +17,7 @@ import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.LoginPresenter
 import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.SessionManager
+import com.app.vogobook.utils.Utilities
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.utils.VogoLoadingDialog
 import com.app.vogobook.view.ui.callback.LoginView
@@ -53,13 +53,12 @@ class LoginActivity : BaseActivity(), LoginView,
     @Inject lateinit var mCallbackManager: CallbackManager
     @Inject lateinit var mDialog: VogoLoadingDialog
     @Inject lateinit var mSessionManager: SessionManager
-
-    @Inject
-    lateinit var mFirebaseAnalytics: FirebaseAnalytics
-    @Inject
-    lateinit var mVogoAnalytics: VogoAnalytics
+    @Inject lateinit var mPgDialog: VogoLoadingDialog
+    @Inject lateinit var mFirebaseAnalytics: FirebaseAnalytics
+    @Inject lateinit var mVogoAnalytics: VogoAnalytics
 
     private var googleApiClient: GoogleApiClient? = null
+
     private val  TAG = LoginActivity::class.qualifiedName
 
     public override val layoutRes: Int
@@ -118,12 +117,6 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     private fun generateJsonFacebook(jsonObject: JSONObject?) {
-//        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("id"))
-//        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("name"))
-//        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("first_name"))
-//        Utils.showLog(Utils.LogType.INFO, TAG, "" + jsonObject?.getString("last_name"))
-//        Utils.showLog(Utils.LogType.INFO, TAG, "https://graph.facebook.com/" + jsonObject?.getString("id") + "/picture?type=normal")
-
         val jsonFacebookServer = JSONObject()
         jsonFacebookServer.put("name", jsonObject?.getString("name"))
         jsonFacebookServer.put("email", jsonObject?.getString("email"))
@@ -184,18 +177,25 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (isShowProgressDialog) {
+            if (!mPgDialog.isShowing) {
+                mPgDialog.show()
+            }
+        } else {
+            if (!mActivity.isDestroyed && mPgDialog.isShowing)
+                mPgDialog.dismiss()
+        }
     }
 
     override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO
     }
 
     override fun setDisposable(disposable: Disposable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Utils.showLog(Utils.LogType.DEBUG, TAG,p0.errorMessage.toString())
     }
 }

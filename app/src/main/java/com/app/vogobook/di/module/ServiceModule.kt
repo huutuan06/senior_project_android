@@ -1,7 +1,7 @@
 package com.app.vogobook.di.module;
 
 import com.app.vogobook.BuildConfig
-import com.app.vogobook.service.connect.TrustHtppS
+import com.app.vogobook.service.connect.TrustHTTPS
 import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.repository.BookService
 import dagger.Module
@@ -51,8 +51,8 @@ class ServiceModule {
 
     @Singleton
     @Provides
-    internal fun provideTrustHtppS(@Named("ok-1") client: OkHttpClient.Builder): TrustHtppS {
-        return TrustHtppS(client)
+    internal fun provideTrustHtppS(@Named("ok-1") client: OkHttpClient.Builder): TrustHTTPS {
+        return TrustHTTPS(client)
     }
 
     @Singleton
@@ -64,8 +64,8 @@ class ServiceModule {
 
     @Singleton
     @Provides
-    internal fun provideRetrofit(trustHtppS: TrustHtppS, @Named("ok-1") client: OkHttpClient.Builder, @Named("url-configure") baseUrl: String): Retrofit {
-        trustHtppS.intializeCertificate()
+    internal fun provideRetrofit(trustHTTPS: TrustHTTPS, @Named("ok-1") client: OkHttpClient.Builder, @Named("url-configure") baseUrl: String): Retrofit {
+        trustHTTPS.intializeCertificate()
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client.build())

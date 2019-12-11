@@ -5,10 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.room.Room
 import com.app.vogobook.R
 import com.app.vogobook.analytics.VogoAnalytics
 import com.app.vogobook.app.Application
@@ -17,7 +16,6 @@ import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.MainPresenter
-import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.ui.callback.MainView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,6 +30,9 @@ class MainActivity : BaseActivity(), MainView,
 
     @Inject
     lateinit var mContext: Context
+
+    @Inject
+    lateinit var mActivity: MainActivity
 
     @Inject
     lateinit var mNavController: NavController

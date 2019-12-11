@@ -47,4 +47,10 @@ class LoginModule(private val activity: LoginActivity, private val view: LoginVi
     @Provides
     @ActivityScope
     fun provideVogoLoadingDialog() : VogoLoadingDialog = VogoLoadingDialog(activity)
+
+    @Provides
+    @ActivityScope
+    fun provideProgressDialog(activity: LoginActivity): VogoLoadingDialog {
+        return VogoLoadingDialog(activity)
+    }
 }

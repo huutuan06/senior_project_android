@@ -6,7 +6,6 @@ import android.text.TextUtils
 import com.app.vogobook.R
 import com.app.vogobook.analytics.VogoAnalytics
 import com.app.vogobook.app.Application
-import com.app.vogobook.di.module.MainModule
 import com.app.vogobook.di.module.SplashModule
 import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.SessionManager
@@ -14,6 +13,9 @@ import com.app.vogobook.utils.objects.Utils
 import com.google.firebase.analytics.FirebaseAnalytics
 import javax.inject.Inject
 
+/**
+ * Created by ben on 7/October/2019.
+ */
 class SplashActivity : BaseActivity() {
 
     @Inject
@@ -40,7 +42,6 @@ class SplashActivity : BaseActivity() {
             }
         }
     }
-
 
     override val layoutRes: Int
         get() = R.layout.activity_splash

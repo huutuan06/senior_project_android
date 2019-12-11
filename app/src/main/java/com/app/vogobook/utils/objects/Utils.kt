@@ -1,7 +1,9 @@
 package com.app.vogobook.utils.objects
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.DisplayMetrics
 import android.util.Log
 import com.app.vogobook.BuildConfig
 
@@ -33,6 +35,19 @@ object Utils {
 
     fun replaceFragmentByScreen(name: String) : String {
         return name.substring(0,name.indexOf("Fragment"))+"Screen"
+    }
+
+    enum class Metrics {
+        WIDTH, HEIGH
+    }
+
+    fun getWidth(activity: Activity, type: Metrics): Int {
+        var size = 0
+        val displayMetrics = DisplayMetrics()
+        activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        if (type == Metrics.WIDTH) size = displayMetrics.widthPixels
+        if (type == Metrics.HEIGH) size = displayMetrics.heightPixels
+        return size
     }
 
 }
