@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import butterknife.BindView
@@ -17,7 +16,6 @@ import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.LoginPresenter
 import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.SessionManager
-import com.app.vogobook.utils.Utilities
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.utils.VogoLoadingDialog
 import com.app.vogobook.view.ui.callback.LoginView
@@ -51,9 +49,8 @@ class LoginActivity : BaseActivity(), LoginView,
     @Inject lateinit var mActivity: LoginActivity
     @Inject lateinit var mPresenter: LoginPresenter
     @Inject lateinit var mCallbackManager: CallbackManager
-    @Inject lateinit var mDialog: VogoLoadingDialog
     @Inject lateinit var mSessionManager: SessionManager
-    @Inject lateinit var mPgDialog: VogoLoadingDialog
+//    @Inject lateinit var mPgDialog: VogoLoadingDialog
     @Inject lateinit var mFirebaseAnalytics: FirebaseAnalytics
     @Inject lateinit var mVogoAnalytics: VogoAnalytics
 
@@ -177,14 +174,14 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
-        if (isShowProgressDialog) {
-            if (!mPgDialog.isShowing) {
-                mPgDialog.show()
-            }
-        } else {
-            if (!mActivity.isDestroyed && mPgDialog.isShowing)
-                mPgDialog.dismiss()
-        }
+//        if (isShowProgressDialog) {
+//            if (!mPgDialog.isShowing) {
+//                mPgDialog.show()
+//            }
+//        } else {
+//            if (!mActivity.isDestroyed && mPgDialog.isShowing)
+//                mPgDialog.dismiss()
+//        }
     }
 
     override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {

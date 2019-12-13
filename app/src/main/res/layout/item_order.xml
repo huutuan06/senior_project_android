@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_marginBottom="2dp">
+
+    <TextView
+        android:id="@+id/text_view_order_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:lines="2"
+        android:text="Order name"
+        android:textSize="16sp"
+        android:textColor="@color/colorTextBlack"/>
+
+    <TextView
+        android:id="@+id/text_view_order_code_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_order_id_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_order_name"/>
+
+    <TextView
+        android:id="@+id/text_view_order_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/text_view_order_code_text"
+        app:layout_constraintTop_toBottomOf="@id/text_view_order_name"
+        android:text="0123456789"/>
+
+    <TextView
+        android:id="@+id/text_view_order_date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_order_code_text"
+        android:text="@string/label_order_date_text"/>
+
+    <TextView
+        android:id="@+id/text_view_order_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/text_view_order_date_text"
+        app:layout_constraintTop_toBottomOf="@id/text_view_order_code_text"
+        android:text="11-12-2019"/>
+
+    <TextView
+        android:id="@+id/text_view_order_status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_order_date_text"
+        android:text="@string/label_order_status_text"/>
+
+    <TextView
+        android:id="@+id/text_view_order_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/text_view_order_status_text"
+        app:layout_constraintTop_toBottomOf="@id/text_view_order_date_text"
+        android:text="OK"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

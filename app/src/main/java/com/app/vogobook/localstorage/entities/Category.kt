@@ -38,7 +38,7 @@ class Category() : Parcelable {
     @Expose
     var created_at: String? = null
 
-    @ColumnInfo(name = Constants.TABLE_CATEGORY_UPDATED_UP)
+    @ColumnInfo(name = Constants.TABLE_CATEGORY_UPDATED_AT)
     @SerializedName("updated_at")
     @Expose
     var updated_at: String? = null

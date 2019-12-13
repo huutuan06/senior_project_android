@@ -1,6 +1,7 @@
 package com.app.vogobook.service.repository;
 
 import com.app.vogobook.service.response.HomeCommonResponse
+import com.app.vogobook.service.response.OrdersResponse
 import com.app.vogobook.service.response.PersonalResponse
 import com.app.vogobook.service.response.UserResponse
 import com.google.gson.JsonObject
@@ -31,5 +32,8 @@ interface BookService {
 
     @POST("api/v1/mobile/user/profile")
     fun profile(@Header("Authorization") accessToken: String, @Body requestBody: RequestBody) : Call<UserResponse>
+
+    @GET("api/v1/mobile/user/manageorders")
+    fun getOrder(@Header("Authorization") accessToken: String) : Observable<Response<OrdersResponse>>
 
 }

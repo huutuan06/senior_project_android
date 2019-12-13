@@ -1,6 +1,7 @@
 package com.app.vogobook.view.ui.fragment.profile
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -16,7 +17,9 @@ import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
 import com.app.vogobook.di.module.PersonalModule
+import com.app.vogobook.localstorage.entities.Order
 import com.app.vogobook.presenter.PersonalPresenter
+import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.ItemPersonal
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.PersonalAdapter
@@ -53,6 +56,12 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
     @Inject
     lateinit var mSessionManager: SessionManager
 
+    @Inject
+    lateinit var mContext: Context
+
+    @Inject
+    lateinit var mOrderList: ArrayList<Order>
+
     @BindView(R.id.recycler_view_personal)
     @JvmField
     var rcvPersonal: RecyclerView? = null
@@ -65,6 +74,7 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
 
     @BindView(R.id.text_view_member_date)
     lateinit var mDate: TextView
+
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
@@ -111,10 +121,56 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
         setHasOptionsMenu(true)
         mBottomNavigation.visibility = View.VISIBLE
 
+        mPresenter.getOrders()
+
     }
 
-    override fun navigateToManageOrders() {
-        mActivity.mNavController.navigate(R.id.manageOrdersFragment)
+    override fun navigateToManageOrders(position: Int) {
+        val bundle = Bundle()
+        val listOrder = ArrayList<Order>()
+        when (position) {
+            0 -> {
+                mOrderList.forEach {
+                    listOrder.add(it)
+                }
+            }
+            1 -> {
+                //TODO
+            }
+            2 -> {
+                mOrderList.forEach {
+                    if (it.confirm_ordering == 1)
+                        listOrder.add(it)
+                }
+            }
+            3 -> {
+                mOrderList.forEach {
+                    if (it.delivery == 1)
+                        listOrder.add(it)
+                }
+            }
+            4 -> {
+                mOrderList.forEach {
+                    if (it.success == 1)
+                        listOrder.add(it)
+                }
+            }
+            5 -> {
+                mOrderList.forEach {
+                    if (it.cancel == 1)
+                        listOrder.add(it)
+                }
+            }
+            6 -> {
+                mOrderList.forEach {
+                    if (it.payment == 1)
+                        listOrder.add(it)
+                }
+            }
+        }
+        bundle.putString(mContext.getString(R.string.label_manage_orders), mItemPersonalArrayList[position].txtManage)
+        bundle.putParcelableArrayList(Constants.LIST_ORDERS, listOrder)
+        mActivity.mNavController.navigate(R.id.manageOrdersFragment, bundle)
     }
 
     @OnClick(R.id.card_view_personal, R.id.button_logout)
@@ -151,6 +207,10 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         mActivity.startActivity(intent)
         mActivity.finish()
+    }
+
+    override fun getOrdersSuccess(orders: List<Order>) {
+       mOrderList = ArrayList(orders)
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {

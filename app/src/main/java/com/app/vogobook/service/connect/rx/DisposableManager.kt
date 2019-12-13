@@ -1,9 +1,6 @@
 package com.app.vogobook.service.connect.rx
 
-import com.app.vogobook.service.response.BookCollectionResponse
-import com.app.vogobook.service.response.HomeCommonResponse
-import com.app.vogobook.service.response.PersonalResponse
-import com.app.vogobook.service.response.UserResponse
+import com.app.vogobook.service.response.*
 
 import javax.inject.Inject
 
@@ -82,6 +79,29 @@ constructor() {
                 override fun onError(e: Throwable) {
                     _interface.onApiFailure(e)
                 }
+            })
+    }
+
+    fun getOrders(observable: Observable<Response<OrdersResponse>>, _interface: IDisposableListener<OrdersResponse>): Disposable {
+        return observable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableObserver<Response<OrdersResponse>>(){
+                override fun onComplete() {
+                    _interface.onComplete()
+                }
+
+                override fun onNext(value: Response<OrdersResponse>) {
+                    if (value.isSuccessful) {
+                        _interface.onHandleData(value.body())
+                    } else {
+                        _interface.onRequestWrongData(value.code())
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+                    _interface.onApiFailure(e)
+                }
+
             })
     }
 }

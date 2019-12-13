@@ -1,15 +1,29 @@
 package com.app.vogobook.view.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import butterknife.BindView
 import butterknife.OnClick
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
+import com.app.vogobook.di.module.ManageOrdersModule
+import com.app.vogobook.localstorage.entities.Order
+import com.app.vogobook.utils.Constants
+import com.app.vogobook.view.adapter.ManageOrdersAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import javax.inject.Inject
+import kotlin.reflect.jvm.internal.impl.types.model.ArgumentList
+
 
 class ManageOrdersFragment : BaseFragment() {
 
@@ -25,6 +39,25 @@ class ManageOrdersFragment : BaseFragment() {
     @Inject
     lateinit var mBottomNavigation: BottomNavigationView
 
+    @Inject
+    lateinit var mContext: Context
+
+    @Inject
+    lateinit var mAdapter: ManageOrdersAdapter
+
+    @BindView(R.id.recycler_view_manage_orders)
+    @JvmField
+    var mRecyclerView: RecyclerView? = null
+
+    @BindView(R.id.layout_empty_order)
+    lateinit var mLayoutEmptyOrders: ConstraintLayout
+
+    @BindView(R.id.layout_value_orders)
+    lateinit var mLayoutValueOrders: ConstraintLayout
+
+    private var mTitle: String? = null
+
+    private var mOrderArraylist = ArrayList<Order>()
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
@@ -36,16 +69,32 @@ class ManageOrdersFragment : BaseFragment() {
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity))
-            .inject(this)
+            .plus(ManageOrdersModule(this)).inject(this)
     }
 
     override fun initAttributes() {
         mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
-        mToolbar.title = "Manage Orders"
+        mTitle = arguments!!.getString(mContext.getString(R.string.label_manage_orders))
+        mToolbar.title = mTitle
 
         mBottomNavigation.visibility = View.GONE
+        mOrderArraylist = arguments!!.getParcelableArrayList(Constants.LIST_ORDERS)
+        if (mOrderArraylist.isEmpty()) {
+            mLayoutValueOrders.visibility = View.GONE
+            mLayoutEmptyOrders.visibility = View.VISIBLE
+        } else {
+            mLayoutValueOrders.visibility = View.VISIBLE
+            mLayoutEmptyOrders.visibility = View.GONE
+            mAdapter.setList(mOrderArraylist)
+        }
+
+
+        mRecyclerView?.layoutManager = LinearLayoutManager(context)
+        mRecyclerView?.hasFixedSize()
+        mRecyclerView?.adapter = mAdapter
+
     }
 
     @OnClick(R.id.button_go_shopping)

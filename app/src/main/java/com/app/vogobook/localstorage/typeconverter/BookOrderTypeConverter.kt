@@ -1,27 +1,27 @@
 package com.app.vogobook.localstorage.typeconverter
 
 import androidx.room.TypeConverter
-import com.app.vogobook.localstorage.entities.Book
+import com.app.vogobook.utils.BookOrder
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
 
-class BookTypeConverter {
+class BookOrderTypeConverter {
 
     private val gson = Gson()
 
     @TypeConverter
-    fun stringToList(data: String?): List<Book> {
+    fun stringToList(data: String?): List<BookOrder> {
         if (data == null) {
             return emptyList()
         }
-        val listType: Type = object : TypeToken<List<Book?>?>() {}.type
-        return gson.fromJson<List<Book>>(data, listType)
+        val listType: Type = object : TypeToken<List<BookOrder?>?>() {}.type
+        return gson.fromJson<List<BookOrder>>(data, listType)
     }
 
     @TypeConverter
-    fun ListToString(someObjects: List<Book?>?): String {
+    fun ListToString(someObjects: List<BookOrder?>?): String {
         return gson.toJson(someObjects)
     }
 }

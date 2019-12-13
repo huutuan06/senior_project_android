@@ -2,6 +2,7 @@ package com.app.vogobook.presenter
 
 import android.content.Context
 import com.app.vogobook.R
+import com.app.vogobook.localstorage.entities.Order
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.ui.callback.PersonalView
 import com.app.vogobook.viewmodel.PersonalModel
@@ -31,6 +32,14 @@ class PersonalPresenterImpl(
 
     override fun logoutSuccess() {
         view.logoutSuccess()
+    }
+
+    override fun getOrders() {
+        model.getOrders()
+    }
+
+    override fun getOrdersSuccess(orders: List<Order>) {
+        view.getOrdersSuccess(orders)
     }
 
     override fun setDisposable(disposable: Disposable) {

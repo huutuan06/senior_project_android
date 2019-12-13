@@ -20,7 +20,7 @@ class PersonalAdapter (private var context: Context, private var itemManageList:
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.txtManageOrder.text = itemManageList[position].txtManage
         holder.relativeLayout.setOnClickListener {
-            mPersonalEventListener.navigateToManageOrders()
+            mPersonalEventListener.navigateToManageOrders(position)
         }
     }
 
@@ -51,7 +51,7 @@ class PersonalAdapter (private var context: Context, private var itemManageList:
     }
 
     interface PersonalEventListener {
-        fun navigateToManageOrders()
+        fun navigateToManageOrders(position: Int)
     }
     fun setInterface(listener: PersonalEventListener) {
         mPersonalEventListener = listener

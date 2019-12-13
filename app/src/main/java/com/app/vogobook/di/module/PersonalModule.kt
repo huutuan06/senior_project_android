@@ -3,6 +3,7 @@ package com.app.vogobook.di.module
 import android.content.Context
 import com.app.vogobook.di.scope.FragmentScope
 import com.app.vogobook.localstorage.RoomUIManager
+import com.app.vogobook.localstorage.entities.Order
 import com.app.vogobook.presenter.PersonalPresenter
 import com.app.vogobook.presenter.PersonalPresenterImpl
 import com.app.vogobook.service.connect.rx.DisposableManager
@@ -29,7 +30,11 @@ class PersonalModule(private val fragment: PersonalFragment, private val view: P
 
     @Provides
     @FragmentScope
-    fun providePersonalAdapter(context : Context) = PersonalAdapter(context, ArrayList<ItemPersonal>())
+    fun providePersonalAdapter(context : Context) = PersonalAdapter(context, ArrayList())
+
+    @Provides
+    @FragmentScope
+    fun provideOrdersList() = ArrayList<Order>()
 
     @Provides
     @FragmentScope

@@ -52,4 +52,10 @@
     <string name="label_personal_string">Personal</string>
     <string name="log_out">LOG OUT</string>
     <string name="partten_birthday_local">MMM dd, yyyy</string>
+    <string name="label_go_shopping">Let\'s go shopping</string>
+    <string name="label_image_cart">cart image</string>
+    <string name="label_notice_no_order">You don\'t have any order</string>
+    <string name="label_order_id_text">Code order:\u0020</string>
+    <string name="label_order_date_text">Order date:\u0020</string>
+    <string name="label_order_status_text">Status:\u0020 </string>
 </resources>
