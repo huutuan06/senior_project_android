@@ -25,7 +25,7 @@ import javax.inject.Inject
 import kotlin.reflect.jvm.internal.impl.types.model.ArgumentList
 
 
-class ManageOrdersFragment : BaseFragment() {
+class ManageOrdersFragment : BaseFragment(), ManageOrdersAdapter.ManageOrderListener {
 
     @Inject
     lateinit var mActivity: MainActivity
@@ -95,6 +95,7 @@ class ManageOrdersFragment : BaseFragment() {
         mRecyclerView?.hasFixedSize()
         mRecyclerView?.adapter = mAdapter
 
+        mAdapter.setInterface(this)
     }
 
     @OnClick(R.id.button_go_shopping)
@@ -107,6 +108,10 @@ class ManageOrdersFragment : BaseFragment() {
                 mNavController.navigate(R.id.homeFragment)
             }
         }
+    }
+
+    override fun NavigateToOrderDetail() {
+        mActivity.mNavController.navigate(R.id.orderDetailFragment)
     }
 
 }

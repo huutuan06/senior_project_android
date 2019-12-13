@@ -58,4 +58,9 @@
     <string name="label_order_id_text">Code order:\u0020</string>
     <string name="label_order_date_text">Order date:\u0020</string>
     <string name="label_order_status_text">Status:\u0020 </string>
+    <string name="label_payment_type">Payment</string>
+    <string name="label_order_information">Information of the order</string>
+    <string name="label_total_price">Total</string>
+    <string name="label_order">Order</string>
+    <string name="label_order_detail">orderDetailFragment</string>
 </resources>

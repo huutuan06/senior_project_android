@@ -127,12 +127,10 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
 
     override fun navigateToManageOrders(position: Int) {
         val bundle = Bundle()
-        val listOrder = ArrayList<Order>()
+        var listOrder = ArrayList<Order>()
         when (position) {
             0 -> {
-                mOrderList.forEach {
-                    listOrder.add(it)
-                }
+                listOrder = mOrderList
             }
             1 -> {
                 //TODO

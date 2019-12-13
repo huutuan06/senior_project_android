@@ -26,6 +26,7 @@ interface MainComponent {
     fun inject(writeReviewFragment: WriteReviewFragment) : WriteReviewFragment
 //    fun inject(accountFragment: AccountFragment) : AccountFragment
     fun inject(confirmOrderFragment: ConfirmOrderFragment) : ConfirmOrderFragment
+    fun inject(orderDetailFragment: OrderDetailFragment) : OrderDetailFragment
 
     fun inject(searchActivity: SearchActivity) : SearchActivity
 }

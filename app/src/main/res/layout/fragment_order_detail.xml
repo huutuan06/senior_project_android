@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/text_view_order_code_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_order_id_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorTextBlack"/>
+
+        <TextView
+            android:id="@+id/text_view_order_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/text_view_order_code_text"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorTextBlack"
+            android:text="0123456789"/>
+
+        <TextView
+            android:id="@+id/text_view_order_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_order_code_text"
+            android:text="@string/label_order_date_text"/>
+
+        <TextView
+            android:id="@+id/text_view_order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/text_view_order_date_text"
+            app:layout_constraintTop_toBottomOf="@id/text_view_order_code_text"
+            android:text="11-12-2019"/>
+
+        <TextView
+            android:id="@+id/text_view_order_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_order_date_text"
+            android:text="@string/label_order_status_text"/>
+
+        <TextView
+            android:id="@+id/text_view_order_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/text_view_order_status_text"
+            app:layout_constraintTop_toBottomOf="@id/text_view_order_date_text"
+            android:text="OK"/>
+
+        <LinearLayout
+            android:id="@+id/layout_space"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_order_status_text"
+            android:orientation="horizontal"
+            android:background="@color/textColorAccent"/>
+
+        <TextView
+            android:id="@+id/text_view_payment_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_space"
+            android:text="@string/label_payment_type"
+            android:textColor="@color/colorTextBlack"/>
+
+        <TextView
+            android:id="@+id/text_view_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_payment_text"
+            android:text="Cast"/>
+
+        <LinearLayout
+            android:id="@+id/layout_space_2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_payment"
+            android:orientation="horizontal"
+            android:background="@color/textColorAccent"/>
+
+        <TextView
+            android:id="@+id/text_view_order_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_order_information"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_space_2"
+            android:textColor="@color/colorTextBlack"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_books"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_order_information"/>
+
+        <TextView
+            android:id="@+id/text_view_total_price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_books"
+            android:text="@string/label_total_price"
+            android:textColor="@color/colorTextBlack"/>
+        <TextView
+            android:id="@+id/text_view_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_books"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/colorTextBlack"
+            android:text="$400"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

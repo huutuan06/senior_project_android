@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Order
@@ -17,21 +18,40 @@ import kotlinx.android.synthetic.main.item_personal_manage_order.view.*
 class ManageOrdersAdapter(private var context: Context, private var orderList: ArrayList<Order>) :
     RecyclerView.Adapter<ManageOrdersAdapter.ViewHolder>() {
 
+    lateinit var mListener: ManageOrderListener
+
+    interface ManageOrderListener {
+        fun NavigateToOrderDetail()
+    }
+
+    fun setInterface(listener: ManageOrderListener) {
+        mListener = listener
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.txtOrderName.text = orderList[position].name.toString()
         holder.txtOrderCode.text = orderList[position].code.toString()
         holder.txtOrderDate.text = orderList[position].updated_at.toString()
-        if (orderList[position].confirm_ordering == 1) {
-            holder.txtOrderStatus.text = "Confirmed"
-        } else if (orderList[position].unsuccessfull_payment == 1) {
-            holder.txtOrderStatus.text = "Payment failed"
-        }else if (orderList[position].delivery == 1) {
-            holder.txtOrderStatus.text = "Being transported"
-        }else if (orderList[position].success == 1) {
-            holder.txtOrderStatus.text = "Successfull"
-        }else if (orderList[position].cancel == 1) {
-            holder.txtOrderStatus.text = "Canceled"
+        when {
+            orderList[position].confirm_ordering == 1 -> {
+                holder.txtOrderStatus.text = "Confirmed"
+            }
+            orderList[position].unsuccessfull_payment == 1 -> {
+                holder.txtOrderStatus.text = "Payment failed"
+            }
+            orderList[position].delivery == 1 -> {
+                holder.txtOrderStatus.text = "Being transported"
+            }
+            orderList[position].success == 1 -> {
+                holder.txtOrderStatus.text = "Successfull"
+            }
+            orderList[position].cancel == 1 -> {
+                holder.txtOrderStatus.text = "Canceled"
+            }
+        }
+
+        holder.itemOrder.setOnClickListener {
+            mListener.NavigateToOrderDetail()
         }
     }
 
@@ -54,6 +74,7 @@ class ManageOrdersAdapter(private var context: Context, private var orderList: A
         var txtOrderCode: TextView = itemView.text_view_order_code
         var txtOrderDate: TextView = itemView.text_view_order_date
         var txtOrderStatus: TextView = itemView.text_view_order_status
+        var itemOrder: ConstraintLayout = itemView.item_order
     }
 
 

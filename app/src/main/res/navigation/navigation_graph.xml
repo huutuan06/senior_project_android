@@ -76,4 +76,9 @@
         android:name="com.app.vogobook.view.ui.fragment.ConfirmOrderFragment"
         tools:layout="@layout/fragment_confirm_order" />
 
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:label="@string/label_order_detail"
+        android:name="com.app.vogobook.view.ui.fragment.OrderDetailFragment"
+        tools:layout="@layout/fragment_order_detail" />
 </navigation>
