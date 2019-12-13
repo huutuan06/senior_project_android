@@ -4,16 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Order
-import com.app.vogobook.utils.ItemPersonal
-import kotlinx.android.synthetic.main.item_order.view.*
-import kotlinx.android.synthetic.main.item_personal_manage_order.view.*
+import kotlinx.android.synthetic.main.item_manage_order.view.*
 
 class ManageOrdersAdapter(private var context: Context, private var orderList: ArrayList<Order>) :
     RecyclerView.Adapter<ManageOrdersAdapter.ViewHolder>() {
@@ -58,7 +54,7 @@ class ManageOrdersAdapter(private var context: Context, private var orderList: A
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.item_order,
+                R.layout.item_manage_order,
                 parent,
                 false
             )

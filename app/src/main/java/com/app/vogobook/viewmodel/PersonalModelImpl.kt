@@ -65,10 +65,11 @@ class PersonalModelImpl (
                 } else {
                     loadOrdersFromLocal()
                 }
-
             }
 
             override fun onRequestWrongData(code: Int) {
+                if (code == 401)
+                    mPresenter!!.logOut()
                 loadOrdersFromLocal()
             }
 
