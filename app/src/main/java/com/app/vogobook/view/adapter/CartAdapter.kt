@@ -9,11 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Book
+import com.app.vogobook.localstorage.entities.Cart
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_cart.view.*
 
 
-class CartAdapter(private var cartList: ArrayList<Book>) :
+class CartAdapter(private var cartList: ArrayList<Cart>) :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -25,7 +26,7 @@ class CartAdapter(private var cartList: ArrayList<Book>) :
             Resources.getSystem().displayMetrics.widthPixels * 3 / 5
 
 
-        holder.txtTitle.text = cartList[position].title
+        holder.txtTitle.text = cartList[position].book_title
         Picasso.get().load(cartList[position].image).resize(
             holder.itemView.layoutParams.height * 9 / 15,
             holder.itemView.layoutParams.height * 9 / 10
@@ -76,7 +77,7 @@ class CartAdapter(private var cartList: ArrayList<Book>) :
         var txtCount: TextView? = itemView.text_view_count_book
     }
 
-    fun setList(arr: ArrayList<Book>) {
+    fun setList(arr: ArrayList<Cart>) {
         cartList = arr
         notifyDataSetChanged()
     }

@@ -8,7 +8,6 @@ import com.app.vogobook.presenter.PersonalPresenter
 import com.app.vogobook.presenter.PersonalPresenterImpl
 import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.repository.BookService
-import com.app.vogobook.utils.ItemPersonal
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.PersonalAdapter
 import com.app.vogobook.view.ui.activity.MainActivity

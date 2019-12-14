@@ -6,7 +6,7 @@ import com.app.vogobook.localstorage.dao.*
 import com.app.vogobook.localstorage.entities.*
 import com.app.vogobook.utils.Constants
 
-@Database(entities = [Book::class, Category::class, User::class, Order::class, Review::class], version = Constants.DB_VERSION, exportSchema = false)
+@Database(entities = [Book::class, Category::class, User::class, Order::class, Review::class, Cart::class], version = Constants.DB_VERSION, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
@@ -17,4 +17,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getUserDAO() : UserDAO
     abstract fun getOrderDAO() : OrderDAO
     abstract fun getReviewDAO() : ReviewDAO
+    abstract fun getCartDAO() : CartDAO
 }

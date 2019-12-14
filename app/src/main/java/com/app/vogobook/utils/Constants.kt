@@ -90,6 +90,16 @@ class Constants {
         const val TABLE_REVIEW_CREATED_AT = "created_at"
         const val TABLE_REVIEW_UPDATED_AT = "updated_at"
 
+        const val DB_TABLE_CART = "carts"
+        const val TABLE_CART_ID = "id"
+        const val TABLE_CART_USER_ID = "user_id"
+        const val TABLE_CART_BOOK_ID = "book_id"
+        const val TABLE_CART_BOOK_TITLE = "book_title"
+        const val TABLE_CART_TOTAL_BOOK = "total_book"
+        const val TABLE_CART_PRICE = "price"
+        const val TABLE_CART_IMAGE = "image"
+
+
         const val BOOK = "book"
         const val CATEGORY = "category"
         const val USER = "user"

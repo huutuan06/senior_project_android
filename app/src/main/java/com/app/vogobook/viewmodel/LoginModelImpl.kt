@@ -82,6 +82,7 @@ class LoginModelImpl(
             roomUIManager.getUser(object : IRoomListener<User> {
                 override fun showListData(t: List<User>) {
                     sessionManager.token = response[0].data!!.token.toString()
+                    sessionManager.user_id = response[0].data!!.user!!.id!!
                     onPostExecute(true)
                 }
             })

@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.*
 import com.app.vogobook.localstorage.typeconverter.BookOrderTypeConverter
-import com.app.vogobook.utils.BookOrder
+import com.app.vogobook.service.model.BookOrder
 import com.app.vogobook.utils.Constants
 
 import com.google.gson.annotations.Expose

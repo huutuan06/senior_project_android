@@ -1,7 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/image_view_avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/text_view_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/image_view_avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        android:text="Name"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:alpha="0.8"/>
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/image_view_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_user_name"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_marginStart="10dp"
+        android:numStars="5"
+        android:saveEnabled="true"
+        android:stepSize="0.5"/>
+
+    <TextView
+        android:id="@+id/text_view_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/rating_bar"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_user_name"
+        android:layout_marginStart="10dp"
+        android:text="Dec 12 2019"/>
+
+    <TextView
+        android:id="@+id/text_view_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/image_view_avatar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rating_bar"
+        android:layout_marginStart="10dp"
+        android:text="Text"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

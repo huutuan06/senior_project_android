@@ -3,6 +3,7 @@ package com.app.vogobook.localstorage
 import android.os.AsyncTask
 import com.app.vogobook.localstorage.dao.*
 import com.app.vogobook.localstorage.entities.*
+import com.app.vogobook.utils.objects.Utils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -11,7 +12,8 @@ class RoomUIManager(
     private var mCategoryDAO: CategoryDAO,
     private var mUserDAO: UserDAO,
     private var mOrderDAO: OrderDAO,
-    private var mReviewDAO: ReviewDAO
+    private var mReviewDAO: ReviewDAO,
+    private val mCartDAO: CartDAO
 ) {
 
     fun saveAllBooks(listBooks: List<Book>?) {
@@ -45,6 +47,17 @@ class RoomUIManager(
                     _interface.showListData(t)
                 }
             }
+        }
+    }
+
+    fun getAllCarts(userID: Int?, _interface: IRoomListener<Cart>) {
+        AsyncTask.execute {
+            mCartDAO.getCartsByUserID(userID).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Cart>? ->
+                    if (t != null) {
+                        _interface.showListData(t)
+                    }
+                }
         }
     }
 
@@ -114,6 +127,32 @@ class RoomUIManager(
                 .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Review>? ->
                     if (t != null) {
                         _interface.showListData(t)
+                    }
+                }
+        }
+    }
+
+    fun saveCart(book: Book?, user_id : Int?) {
+        AsyncTask.execute {
+            var cart = Cart()
+            cart.book_id = book!!.id
+            cart.book_title = book.title
+            cart.image = book.image
+            cart.price = book.price
+            cart.user_id = user_id
+            cart.total_book = 1
+            var total_book = 1
+            mCartDAO.getCartsByBookID(book.id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Cart>? ->
+                    if (t != null) {
+                        if (t.size > 0) {
+                            total_book++
+                            cart.total_book = total_book
+                            AsyncTask.execute { mCartDAO.update(cart) }
+                        } else {
+                            cart.total_book = total_book
+                            AsyncTask.execute { mCartDAO.saveCart(cart) }
+                        }
                     }
                 }
         }

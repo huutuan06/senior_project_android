@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.app.vogobook.R
-import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.utils.BookOrder
+import com.app.vogobook.service.model.BookOrder
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_order.view.*
 
 class OrderDetailAdapter(private var context: Context, private var listBooks: ArrayList<BookOrder>) :
     RecyclerView.Adapter<OrderDetailAdapter.ViewHolder>() {

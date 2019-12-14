@@ -53,8 +53,14 @@ class RoomModule(application: Application) {
 
     @Singleton
     @Provides
-    fun provideRoomUIManager(bookDAO: BookDAO, categoryDAO: CategoryDAO, userDAO: UserDAO, orderDAO: OrderDAO, reviewDAO: ReviewDAO): RoomUIManager {
-        return RoomUIManager(bookDAO, categoryDAO, userDAO, orderDAO, reviewDAO)
+    fun provideCartDAO(appDatabase: AppDatabase) : CartDAO {
+        return appDatabase.getCartDAO()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRoomUIManager(bookDAO: BookDAO, categoryDAO: CategoryDAO, userDAO: UserDAO, orderDAO: OrderDAO, reviewDAO: ReviewDAO, cartDAO: CartDAO): RoomUIManager {
+        return RoomUIManager(bookDAO, categoryDAO, userDAO, orderDAO, reviewDAO, cartDAO)
     }
 
 }

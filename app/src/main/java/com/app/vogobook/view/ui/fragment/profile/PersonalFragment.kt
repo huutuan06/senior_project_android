@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,7 @@ import com.app.vogobook.di.module.PersonalModule
 import com.app.vogobook.localstorage.entities.Order
 import com.app.vogobook.presenter.PersonalPresenter
 import com.app.vogobook.utils.Constants
-import com.app.vogobook.utils.ItemPersonal
+import com.app.vogobook.service.model.ItemPersonal
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.PersonalAdapter
 import com.app.vogobook.view.custom.CircleTransform

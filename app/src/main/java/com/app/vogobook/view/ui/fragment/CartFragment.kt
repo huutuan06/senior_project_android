@@ -13,7 +13,10 @@ import butterknife.OnClick
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
-import com.app.vogobook.localstorage.entities.Book
+import com.app.vogobook.localstorage.IRoomListener
+import com.app.vogobook.localstorage.RoomUIManager
+import com.app.vogobook.localstorage.entities.Cart
+import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.CartAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,6 +29,12 @@ class CartFragment : BaseFragment() {
 
     @Inject
     lateinit var mNavController: NavController
+
+    @Inject
+    lateinit var mSessionManager: SessionManager
+
+    @Inject
+    lateinit var mRoomUIManager : RoomUIManager
 
     @Inject
     lateinit var mToolbar: androidx.appcompat.widget.Toolbar
@@ -45,9 +54,7 @@ class CartFragment : BaseFragment() {
     @BindView(R.id.text_view_total_price)
     lateinit var txtTotalPrice: TextView
 
-    private var mCartArrayList = ArrayList<Book>()
-
-    private var mCartAdapter = CartAdapter(mCartArrayList)
+    private var mCartAdapter : CartAdapter? = null
 
 
     override fun provideYourFragmentView(
@@ -69,19 +76,16 @@ class CartFragment : BaseFragment() {
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mToolbar.title = "Cart"
-
-        setList(mCartArrayList)
         rcvCart.layoutParams.height = Resources.getSystem().displayMetrics.heightPixels*23/32
         rcvCart.layoutManager = LinearLayoutManager(context)
         rcvCart.hasFixedSize()
+        mCartAdapter = CartAdapter(ArrayList())
         rcvCart.adapter = mCartAdapter
-
-        if (mCartArrayList.size == 0) {
-            valueCartScreen.visibility = View.GONE
-        } else {
-            emptyCartScreen.visibility = View.GONE
-            txtTotalPrice.text = "$".plus(totalPrice().toString())
-        }
+        mRoomUIManager.getAllCarts(mSessionManager.user_id, object : IRoomListener<Cart> {
+            override fun showListData(carts: List<Cart>) {
+                mCartAdapter!!.setList(carts as ArrayList<Cart>)
+            }
+        })
         mBottomNavigation.visibility = View.GONE
     }
 
@@ -99,18 +103,5 @@ class CartFragment : BaseFragment() {
                 mNavController.navigate(R.id.confirmOrderFragment)
             }
         }
-    }
-
-    private fun setList(arr: ArrayList<Book>) {
-        mCartAdapter.setList(arr)
-
-    }
-
-    fun totalPrice(): Float {
-        var totalPrice : Float = 0F
-        for (item in mCartArrayList) {
-//            totalPrice += item.price!!.substring(1).toFloat()
-        }
-        return totalPrice
     }
 }

@@ -3,7 +3,6 @@ package com.app.vogobook.view.custom
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -13,7 +12,6 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.app.vogobook.R
-import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.view.ui.fragment.BookDetailFragment
 import com.squareup.picasso.Picasso
@@ -42,7 +40,7 @@ class CartSnackBarLayout(context: Context, fragment: BookDetailFragment) : Const
         // You can change name of function hello by your name
         // You can update param here and send it to BookDetailFragment.
 
-        fun hello(text: String)
+        fun navigateToCart(text: String)
         fun dismissSnackbar()
     }
 
@@ -69,7 +67,7 @@ class CartSnackBarLayout(context: Context, fragment: BookDetailFragment) : Const
     fun onClick(view: View) {
         when (view.id) {
             R.id.button_go_to_cart -> {
-                listener!!.hello(title!!.text as String)
+                listener!!.navigateToCart(title!!.text as String)
             }
             R.id.button_close -> {
                 listener!!.dismissSnackbar()

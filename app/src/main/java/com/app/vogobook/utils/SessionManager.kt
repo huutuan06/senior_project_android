@@ -24,6 +24,13 @@ class SessionManager @Inject constructor(context: Context) {
             editor.apply()
         }
 
+    var user_id: Int
+        get() = pref.getInt(USER_ID, 0)
+        set(user_id) {
+            editor.putInt(USER_ID, user_id)
+            editor.apply()
+        }
+
     init {
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         editor = pref.edit()
@@ -38,6 +45,7 @@ class SessionManager @Inject constructor(context: Context) {
 
     companion object {
         private val ACCESS_TOKEN = "access_token"
+        private val USER_ID = "user_id"
         private val PREF_NAME = "book_shared_pref"
         private val TIME_USING_APP = "time_using_app"
     }

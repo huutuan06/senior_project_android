@@ -1,11 +1,15 @@
 package com.app.vogobook.utils.objects
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.DisplayMetrics
 import android.util.Log
 import com.app.vogobook.BuildConfig
+import com.app.vogobook.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Utils {
 
@@ -48,6 +52,15 @@ object Utils {
         if (type == Metrics.WIDTH) size = displayMetrics.widthPixels
         if (type == Metrics.HEIGH) size = displayMetrics.heightPixels
         return size
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun getDate(context: Context, timestamp: Long?) : String {
+        var calendar : Calendar = Calendar.getInstance()
+        calendar.timeInMillis = timestamp!!*1000
+
+        val simpleDateFormat = SimpleDateFormat(context!!.getString(R.string.partten_birthday_local))
+        return simpleDateFormat.format(calendar.time)
     }
 
 }

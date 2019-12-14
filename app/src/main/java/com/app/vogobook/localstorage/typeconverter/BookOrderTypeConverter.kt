@@ -1,7 +1,7 @@
 package com.app.vogobook.localstorage.typeconverter
 
 import androidx.room.TypeConverter
-import com.app.vogobook.utils.BookOrder
+import com.app.vogobook.service.model.BookOrder
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import java.lang.reflect.Type

@@ -1,4 +1,4 @@
-package com.app.vogobook.utils
+package com.app.vogobook.service.model
 
 import android.os.Parcel
 import android.os.Parcelable

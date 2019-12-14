@@ -9,7 +9,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
-import com.app.vogobook.utils.ItemPersonal
+import com.app.vogobook.service.model.ItemPersonal
 import kotlinx.android.synthetic.main.item_personal_manage_order.view.*
 
 class PersonalAdapter (private var context: Context, private var itemManageList: ArrayList<ItemPersonal>) : RecyclerView.Adapter<PersonalAdapter.ViewHolder>() {

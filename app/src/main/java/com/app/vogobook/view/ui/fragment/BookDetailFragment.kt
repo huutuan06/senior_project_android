@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.OnClick
 import com.app.vogobook.R
@@ -21,6 +23,7 @@ import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Review
 import com.app.vogobook.presenter.BookDetailPresenter
 import com.app.vogobook.utils.Constants
+import com.app.vogobook.view.adapter.BookDetailAdapter
 import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.BookDetailView
@@ -28,7 +31,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import io.reactivex.disposables.Disposable
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayoutInterface,
     BookDetailView {
@@ -54,6 +59,9 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
     @Inject
     lateinit var mPresenter: BookDetailPresenter
 
+    @Inject
+    lateinit var mAdapter: BookDetailAdapter
+
     @BindView(R.id.image_book)
     lateinit var imgBook: ImageView
 
@@ -68,6 +76,9 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
     @BindView(R.id.text_view_book_number_pages)
     lateinit var pages: TextView
+
+    @BindView(R.id.recycler_view_reviews)
+    lateinit var rcvReviews: RecyclerView
 
     interface BookDetailListener {
         fun sendBook(book: Book?)
@@ -111,6 +122,10 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
         price.text = "$" + mBook!!.price.toString()
 
         mPresenter.getReviews(mBook!!.id)
+        rcvReviews.layoutManager = LinearLayoutManager(context)
+        rcvReviews.hasFixedSize()
+        rcvReviews.isNestedScrollingEnabled = false
+        rcvReviews.adapter = mAdapter
     }
 
     @OnClick(R.id.button_write_review, R.id.button_add_to_cart, R.id.view_book_detail)
@@ -122,6 +137,7 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
                 mActivity.mNavController.navigate(R.id.writeReviewFragment, bundle)
             }
             R.id.button_add_to_cart -> {
+                mPresenter.saveCart(mBook)
                 mBookDetailListener.sendBook(mBook)
                 mSnackbar.show()
             }
@@ -137,8 +153,9 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
     }
 
 
-    override fun hello(text: String) {
+    override fun navigateToCart(text: String) {
         Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
+        mActivity.mNavController.navigate(R.id.cartFragment)
         mSnackbar.dismiss()
     }
 
@@ -152,7 +169,8 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
     }
 
     override fun loadReviewsSuccess(reviews: List<Review>) {
-        Log.i("log", reviews.toString())
+        Collections.reverse(reviews)
+        mAdapter.setList(ArrayList(reviews))
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {

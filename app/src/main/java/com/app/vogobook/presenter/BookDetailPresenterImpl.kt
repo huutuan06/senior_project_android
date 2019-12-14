@@ -2,8 +2,11 @@ package com.app.vogobook.presenter
 
 import android.content.Context
 import com.app.vogobook.R
+import com.app.vogobook.localstorage.RoomUIManager
+import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Order
 import com.app.vogobook.localstorage.entities.Review
+import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.ui.callback.BookDetailView
 import com.app.vogobook.view.ui.callback.PersonalView
@@ -18,7 +21,9 @@ import io.reactivex.disposables.Disposable
 class BookDetailPresenterImpl(
     private val view: BookDetailView,
     private val model: BookDetailModel,
-    private val context: Context
+    private val context: Context,
+    private val roomUIManager: RoomUIManager,
+    private val sessionManager: SessionManager
 ) : BookDetailPresenter {
 
     init {
@@ -36,6 +41,10 @@ class BookDetailPresenterImpl(
 
     override fun loadReviewsSuccess(reviews: List<Review>) {
         view.loadReviewsSuccess(reviews)
+    }
+
+    override fun saveCart(mBook: Book?) {
+        roomUIManager.saveCart(mBook, sessionManager.user_id)
     }
 
 
