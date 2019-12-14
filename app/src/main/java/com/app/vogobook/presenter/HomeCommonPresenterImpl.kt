@@ -25,7 +25,7 @@ class HomeCommonPresenterImpl(
             view.updateProgressDialog(true)
             model.getCommonBooks()
         } else {
-            view.showErrorMessageDialog(
+            view.showMessageDialog(
                 context.getString(R.string.label_error),
                 context.getString(R.string.label_no_internet)
             )

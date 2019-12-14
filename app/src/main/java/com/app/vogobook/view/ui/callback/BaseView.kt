@@ -4,7 +4,7 @@ import io.reactivex.disposables.Disposable
 
 interface BaseView {
     fun updateProgressDialog(isShowProgressDialog: Boolean)
-    fun showErrorMessageDialog(
+    fun showMessageDialog(
         errorTitle: String?,
         errorMessage: String?
     )

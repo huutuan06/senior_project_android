@@ -10,16 +10,25 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.app.vogobook.di.scope.FragmentScope
+import com.app.vogobook.localstorage.RoomUIManager
+import com.app.vogobook.presenter.BookDetailPresenter
+import com.app.vogobook.presenter.BookDetailPresenterImpl
+import com.app.vogobook.service.connect.rx.DisposableManager
+import com.app.vogobook.service.repository.BookService
+import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.ui.activity.MainActivity
+import com.app.vogobook.view.ui.callback.BookDetailView
 import com.app.vogobook.view.ui.fragment.BookDetailFragment
+import com.app.vogobook.viewmodel.BookDetailModel
+import com.app.vogobook.viewmodel.BookDetailModelImpl
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.Module
 import dagger.Provides
 
 @Module
-class BookDetailModule(private val bookDetailFragment: BookDetailFragment) {
+class BookDetailModule(private val bookDetailFragment: BookDetailFragment, private val view: BookDetailView) {
 
     @Provides
     @FragmentScope
@@ -33,6 +42,25 @@ class BookDetailModule(private val bookDetailFragment: BookDetailFragment) {
     fun provideSnackBarLayout(context: Context, fragment: BookDetailFragment): CartSnackBarLayout {
         return CartSnackBarLayout(context, fragment)
     }
+
+    @Provides
+    @FragmentScope
+    fun provideBookDetailViewModel(
+        context: Context,
+        disposableManager: DisposableManager,
+        bookService: BookService,
+        mainActivity: MainActivity,
+        roomUIManager: RoomUIManager,
+        sessionManager: SessionManager
+    ): BookDetailModel =
+        BookDetailModelImpl(context, bookService, disposableManager, mainActivity, roomUIManager, sessionManager)
+
+    @Provides
+    @FragmentScope
+    fun provideWriteReviewPresenter(
+        module: BookDetailModel,
+        context: Context
+    ): BookDetailPresenter = BookDetailPresenterImpl(view, module, context)
 
     @Provides
     @FragmentScope

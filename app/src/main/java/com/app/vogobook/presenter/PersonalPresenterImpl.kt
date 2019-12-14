@@ -23,7 +23,7 @@ class PersonalPresenterImpl(
         if (Utils.isInternetOn(context)) {
             model.logOut()
         } else {
-            view.showErrorMessageDialog(
+            view.showMessageDialog(
                 context.getString(R.string.label_error),
                 context.getString(R.string.label_no_internet)
             )

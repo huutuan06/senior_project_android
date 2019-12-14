@@ -4,6 +4,7 @@ import android.content.Context
 import com.app.vogobook.analytics.VogoAnalytics
 import com.app.vogobook.app.Application
 import com.app.vogobook.utils.SessionManager
+import com.app.vogobook.view.ui.dialog.VogoDialog
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
@@ -39,4 +40,8 @@ class AppModule(private val mApplication: Application, private val mContext: Con
     @Provides
     @Singleton
     internal fun provideVogoAnalytics() : VogoAnalytics = VogoAnalytics()
+
+    @Provides
+    @Singleton
+    fun provideVogoDialog() : VogoDialog = VogoDialog()
 }

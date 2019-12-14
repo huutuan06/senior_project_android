@@ -207,7 +207,7 @@ class AccountFragment : BaseFragment(), AccountView {
         //TODO
     }
 
-    override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {
+    override fun showMessageDialog(errorTitle: String?, errorMessage: String?) {
         //TODO
     }
 

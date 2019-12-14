@@ -214,7 +214,7 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
         }
     }
 
-    override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {
+    override fun showMessageDialog(errorTitle: String?, errorMessage: String?) {
         //TODO
     }
 

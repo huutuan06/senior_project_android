@@ -3,7 +3,6 @@ package com.app.vogobook.presenter
 import android.content.Context
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.localstorage.entities.Category
 import com.app.vogobook.view.ui.callback.BookCollectionView
 import com.app.vogobook.viewmodel.BookCollectionModel
 import io.reactivex.disposables.Disposable
@@ -23,7 +22,7 @@ class BookCollectionPresenterImpl(
         if (Utils.isInternetOn(context)) {
             model.getBookCollection(category_id)
         } else {
-            view.showErrorMessageDialog(
+            view.showMessageDialog(
                 context.getString(R.string.label_error),
                 context.getString(R.string.no_internet_connection)
             )

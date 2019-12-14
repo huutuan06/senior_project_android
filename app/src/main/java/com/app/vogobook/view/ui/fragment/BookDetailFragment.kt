@@ -20,12 +20,14 @@ import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.utils.Constants
 import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.ui.activity.MainActivity
+import com.app.vogobook.view.ui.callback.BookDetailView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayoutInterface {
+class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayoutInterface, BookDetailView {
 
     @Inject lateinit var mContext: Context
 
@@ -71,7 +73,7 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity)).plus(
-            BookDetailModule(this)
+            BookDetailModule(this, this)
         ).inject(this)
     }
 
@@ -128,5 +130,17 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
     override fun onPause() {
         super.onPause()
         mSnackbar.dismiss()
+    }
+
+    override fun updateProgressDialog(isShowProgressDialog: Boolean) {
+        //TODO
+    }
+
+    override fun showMessageDialog(errorTitle: String?, errorMessage: String?) {
+        //TODO
+    }
+
+    override fun setDisposable(disposable: Disposable) {
+        //ToDO
     }
 }

@@ -2,6 +2,7 @@ package com.app.vogobook.view.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,15 @@ class OrderDetailAdapter(private var context: Context, private var listBooks: Ar
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Picasso.get().load(listBooks[position].image).into(holder.imgBook)
+        holder.itemView.layoutParams.height =
+            Resources.getSystem().displayMetrics.heightPixels * 2 / 15
+        holder.txtTitle.layoutParams.width =
+            Resources.getSystem().displayMetrics.widthPixels * 2 / 5
+        Picasso.get().load(listBooks[position].image).resize(
+            holder.itemView.layoutParams.height * 9 / 15,
+            holder.itemView.layoutParams.height * 9 / 10
+        )
+            .centerCrop().into(holder.imgBook)
         holder.txtTitle.text = listBooks[position].book_title.toString()
         holder.txtPrice.text = "$" + listBooks[position].price.toString()
     }

@@ -1,5 +1,6 @@
 package com.app.vogobook.service.repository;
 
+import com.app.vogobook.service.response.Error
 import com.app.vogobook.service.response.HomeCommonResponse
 import com.app.vogobook.service.response.OrdersResponse
 import com.app.vogobook.service.response.PersonalResponse
@@ -36,4 +37,6 @@ interface BookService {
     @GET("api/v1/mobile/user/manageorders")
     fun getOrder(@Header("Authorization") accessToken: String) : Observable<Response<OrdersResponse>>
 
+    @POST("api/v1/mobile/user/reviews")
+    fun postReview(@Header("Authorization") accessToken: String, @Body jsonObject: JsonObject): Observable<Response<Error>>
 }
