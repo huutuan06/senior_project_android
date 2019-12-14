@@ -2,17 +2,11 @@ package com.app.vogobook.localstorage
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.app.vogobook.localstorage.dao.BookDAO
-import com.app.vogobook.localstorage.dao.CategoryDAO
-import com.app.vogobook.localstorage.dao.OrderDAO
-import com.app.vogobook.localstorage.dao.UserDAO
-import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.localstorage.entities.Category
-import com.app.vogobook.localstorage.entities.Order
-import com.app.vogobook.localstorage.entities.User
+import com.app.vogobook.localstorage.dao.*
+import com.app.vogobook.localstorage.entities.*
 import com.app.vogobook.utils.Constants
 
-@Database(entities = [Book::class, Category::class, User::class, Order::class], version = Constants.DB_VERSION, exportSchema = false)
+@Database(entities = [Book::class, Category::class, User::class, Order::class, Review::class], version = Constants.DB_VERSION, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
@@ -22,4 +16,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getCategoryDAO() : CategoryDAO
     abstract fun getUserDAO() : UserDAO
     abstract fun getOrderDAO() : OrderDAO
+    abstract fun getReviewDAO() : ReviewDAO
 }

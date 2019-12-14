@@ -126,4 +126,26 @@ constructor() {
 
             })
     }
+
+    fun getReviews(observable: Observable<Response<ReviewsResponse>>, _interface: IDisposableListener<ReviewsResponse>): Disposable {
+        return observable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableObserver<Response<ReviewsResponse>>(){
+                override fun onComplete() {
+                    _interface.onComplete()
+                }
+
+                override fun onNext(value: Response<ReviewsResponse>) {
+                    if (value.isSuccessful) {
+                        _interface.onHandleData(value.body())
+                    } else {
+                        _interface.onRequestWrongData(value.code())
+                    }
+                }
+                override fun onError(e: Throwable) {
+                    _interface.onApiFailure(e)
+                }
+
+            })
+    }
 }

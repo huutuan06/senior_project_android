@@ -3,6 +3,7 @@ package com.app.vogobook.presenter
 import android.content.Context
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Order
+import com.app.vogobook.localstorage.entities.Review
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.ui.callback.BookDetailView
 import com.app.vogobook.view.ui.callback.PersonalView
@@ -24,6 +25,18 @@ class BookDetailPresenterImpl(
         model.attachPresenter(this)
     }
 
+    override fun getReviews(bookId: Int?) {
+        if (Utils.isInternetOn(context)) {
+            model.getReviews(bookId)
+        } else {
+            view.showMessageDialog( context.getString(R.string.label_error),
+                context.getString(R.string.no_internet_connection))
+        }
+    }
+
+    override fun loadReviewsSuccess(reviews: List<Review>) {
+        view.loadReviewsSuccess(reviews)
+    }
 
 
     override fun setDisposable(disposable: Disposable) {

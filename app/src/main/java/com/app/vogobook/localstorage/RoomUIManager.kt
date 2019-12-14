@@ -1,14 +1,8 @@
 package com.app.vogobook.localstorage
 
 import android.os.AsyncTask
-import com.app.vogobook.localstorage.dao.BookDAO
-import com.app.vogobook.localstorage.dao.CategoryDAO
-import com.app.vogobook.localstorage.dao.OrderDAO
-import com.app.vogobook.localstorage.dao.UserDAO
-import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.localstorage.entities.Category
-import com.app.vogobook.localstorage.entities.Order
-import com.app.vogobook.localstorage.entities.User
+import com.app.vogobook.localstorage.dao.*
+import com.app.vogobook.localstorage.entities.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -16,7 +10,8 @@ class RoomUIManager(
     private var mBookDAO: BookDAO,
     private var mCategoryDAO: CategoryDAO,
     private var mUserDAO: UserDAO,
-    private var mOrderDAO: OrderDAO
+    private var mOrderDAO: OrderDAO,
+    private var mReviewDAO: ReviewDAO
 ) {
 
     fun saveAllBooks(listBooks: List<Book>?) {
@@ -94,6 +89,23 @@ class RoomUIManager(
                 if (t != null)
                     _interface.showListData(t)
             }
+        }
+    }
+
+    fun saveAllReviews(listReviews: List<Review>?) {
+        AsyncTask.execute {
+            mReviewDAO.saveAll(listReviews)
+        }
+    }
+
+    fun getAllReviews(_interface: IRoomListener<Review>) {
+        AsyncTask.execute {
+            mReviewDAO.getReviews().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Review>? ->
+                    if (t != null) {
+                        _interface.showListData(t)
+                    }
+                }
         }
     }
 

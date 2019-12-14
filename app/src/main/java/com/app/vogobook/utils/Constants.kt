@@ -78,6 +78,18 @@ class Constants {
         const val TABLE_ORDER_CREATED_AT = "created_at"
         const val TABLE_ORDER_UPDATED_AT = "updated_at"
 
+        const val DB_TABLE_REVIEW = "reviews"
+        const val TABLE_REVIEW_ID = "id"
+        const val TABLE_REVIEW_USER_ID = "user_id"
+        const val TABLE_REVIEW_USER_NAME = "user_name"
+        const val TABLE_REVIEW_USER_AVATAR = "user_avatar"
+        const val TABLE_REVIEW_BOOK_ID = "book_id"
+        const val TABLE_REVIEW_RATE = "rate"
+        const val TABLE_REVIEW_CONTENT = "content"
+        const val TABLE_REVIEW_DATE = "date"
+        const val TABLE_REVIEW_CREATED_AT = "created_at"
+        const val TABLE_REVIEW_UPDATED_AT = "updated_at"
+
         const val BOOK = "book"
         const val CATEGORY = "category"
         const val USER = "user"

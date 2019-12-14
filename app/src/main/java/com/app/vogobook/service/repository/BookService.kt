@@ -1,10 +1,6 @@
 package com.app.vogobook.service.repository;
 
-import com.app.vogobook.service.response.Error
-import com.app.vogobook.service.response.HomeCommonResponse
-import com.app.vogobook.service.response.OrdersResponse
-import com.app.vogobook.service.response.PersonalResponse
-import com.app.vogobook.service.response.UserResponse
+import com.app.vogobook.service.response.*
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import okhttp3.RequestBody
@@ -12,14 +8,6 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
-/**
- * If you want to pass param @Part as GET
- * Example: url/1 => @Part
- * If you want to pass param as POST
- * Example url => @Query
- * If you want o pass @Header.
- *
- */
 interface BookService {
 
     @POST("api/v1/mobile/user/login")
@@ -39,4 +27,7 @@ interface BookService {
 
     @POST("api/v1/mobile/user/reviews")
     fun postReview(@Header("Authorization") accessToken: String, @Body jsonObject: JsonObject): Observable<Response<Error>>
+
+    @GET("api/v1/mobile/user/reviews/{id}")
+    fun getReviews(@Path("id") bookId: Int?): Observable<Response<ReviewsResponse>>
 }
