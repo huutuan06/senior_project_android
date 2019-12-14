@@ -26,6 +26,7 @@ class Constants {
         const val DB_TABLE_BOOK = "books"
         const val TABLE_BOOK_ID = "id"
         const val TABLE_BOOK_TITLE = "title"
+        const val TABLE_BOOK_NUMERAL = "numeral"
         const val TABLE_BOOK_IMAGE = "image"
         const val TABLE_BOOK_CATEGORY_ID = "category_id"
         const val TABLE_BOOK_DESCRIPTION = "description"

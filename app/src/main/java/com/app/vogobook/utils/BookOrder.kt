@@ -14,6 +14,10 @@ class BookOrder() : Parcelable {
     @Expose
     var book_id: Int? = null
 
+    @SerializedName("book_title")
+    @Expose
+    var book_title: String? = null
+
     @SerializedName("order_id")
     @Expose
     var order_id: Int? = null
@@ -26,9 +30,14 @@ class BookOrder() : Parcelable {
     @Expose
     var price: Float? = null
 
+    @SerializedName("image")
+    @Expose
+    var image: String? = null
+
     constructor(parcel: Parcel) : this() {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         book_id = parcel.readValue(Int::class.java.classLoader) as? Int
+        book_title = parcel.readString()
         order_id = parcel.readValue(Int::class.java.classLoader) as? Int
         total_book = parcel.readValue(Int::class.java.classLoader) as? Int
         price = parcel.readValue(Float::class.java.classLoader) as? Float
@@ -37,6 +46,7 @@ class BookOrder() : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeValue(book_id)
+        parcel.writeString(book_title)
         parcel.writeValue(order_id)
         parcel.writeValue(total_book)
         parcel.writeValue(price)
@@ -55,4 +65,6 @@ class BookOrder() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
+
 }

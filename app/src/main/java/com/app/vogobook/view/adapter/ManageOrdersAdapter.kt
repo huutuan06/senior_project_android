@@ -17,7 +17,7 @@ class ManageOrdersAdapter(private var context: Context, private var orderList: A
     lateinit var mListener: ManageOrderListener
 
     interface ManageOrderListener {
-        fun NavigateToOrderDetail()
+        fun NavigateToOrderDetail(position: Int)
     }
 
     fun setInterface(listener: ManageOrderListener) {
@@ -47,7 +47,7 @@ class ManageOrdersAdapter(private var context: Context, private var orderList: A
         }
 
         holder.itemOrder.setOnClickListener {
-            mListener.NavigateToOrderDetail()
+            mListener.NavigateToOrderDetail(position)
         }
     }
 

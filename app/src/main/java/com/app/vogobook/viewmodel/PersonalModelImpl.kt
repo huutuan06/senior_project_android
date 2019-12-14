@@ -58,7 +58,7 @@ class PersonalModelImpl (
             }
 
             override fun onHandleData(response: OrdersResponse?) {
-                if (response!!.message!!.status == "success") {
+                if (response!!.error!!.code == 0) {
                     mActivity.runOnUiThread {
                         ProcessDatabase().execute(response)
                     }

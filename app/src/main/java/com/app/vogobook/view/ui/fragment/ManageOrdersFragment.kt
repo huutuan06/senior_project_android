@@ -110,8 +110,10 @@ class ManageOrdersFragment : BaseFragment(), ManageOrdersAdapter.ManageOrderList
         }
     }
 
-    override fun NavigateToOrderDetail() {
-        mActivity.mNavController.navigate(R.id.orderDetailFragment)
+    override fun NavigateToOrderDetail(position: Int) {
+        val bundle = Bundle()
+        bundle.putParcelable(context!!.getString(R.string.label_order),mOrderArraylist[position])
+        mActivity.mNavController.navigate(R.id.orderDetailFragment, bundle)
     }
 
 }

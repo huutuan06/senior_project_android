@@ -22,6 +22,11 @@ class Book() : Parcelable {
     @Expose
     var title: String? = null
 
+    @ColumnInfo(name = Constants.TABLE_BOOK_NUMERAL)
+    @SerializedName("numeral")
+    @Expose
+    var numeral: Int? = null
+
     @ColumnInfo(name = Constants.TABLE_BOOK_IMAGE)
     @SerializedName("image")
     @Expose
@@ -65,6 +70,7 @@ class Book() : Parcelable {
     constructor(parcel: Parcel) : this() {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
         title = parcel.readString()
+        numeral = parcel.readValue(Int::class.java.classLoader) as? Int
         image = parcel.readString()
         category_id = parcel.readValue(Int::class.java.classLoader) as? Int
         description = parcel.readString()
@@ -78,6 +84,7 @@ class Book() : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeString(title)
+        parcel.writeValue(numeral)
         parcel.writeString(image)
         parcel.writeValue(category_id)
         parcel.writeString(description)

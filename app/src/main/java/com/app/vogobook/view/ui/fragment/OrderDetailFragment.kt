@@ -6,9 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import butterknife.BindView
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
+import com.app.vogobook.di.module.OrderDetailModule
+import com.app.vogobook.localstorage.entities.Order
+import com.app.vogobook.view.adapter.OrderDetailAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import javax.inject.Inject
@@ -27,6 +33,14 @@ class OrderDetailFragment : BaseFragment() {
     @Inject
     lateinit var mBottomNavigation: BottomNavigationView
 
+    @Inject
+    lateinit var mAdapter: OrderDetailAdapter
+
+    @BindView(R.id.recycler_view_books)
+    lateinit var rcvBook: RecyclerView
+
+    var mOrder = Order()
+
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
@@ -38,7 +52,7 @@ class OrderDetailFragment : BaseFragment() {
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity))
-            .inject(this)
+            .plus(OrderDetailModule(this)).inject(this)
     }
 
     @SuppressLint("SetTextI18n")
@@ -49,6 +63,13 @@ class OrderDetailFragment : BaseFragment() {
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mBottomNavigation.visibility = View.GONE
 
+
+        mOrder = arguments!!.getParcelable(mContext.getString(R.string.label_order))
+        mAdapter.setList(ArrayList(mOrder.arrBooks))
+
+        rcvBook.layoutManager = LinearLayoutManager(context)
+        rcvBook.hasFixedSize()
+        rcvBook.adapter = mAdapter
     }
 
 

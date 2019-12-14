@@ -35,10 +35,12 @@ class PersonalPresenterImpl(
     }
 
     override fun getOrders() {
+        view.updateProgressDialog(true)
         model.getOrders()
     }
 
     override fun getOrdersSuccess(orders: List<Order>) {
+        view.updateProgressDialog(false)
         view.getOrdersSuccess(orders)
     }
 

@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
 
 class OrdersResponse {
 
-    @SerializedName("message")
+    @SerializedName("error")
     @Expose
-    val message: Message? = null
+    val error: Error? = null
 
     @SerializedName("data")
     @Expose

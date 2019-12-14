@@ -24,6 +24,7 @@ import com.app.vogobook.utils.ItemPersonal
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.PersonalAdapter
 import com.app.vogobook.view.custom.CircleTransform
+import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.LoginActivity
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.PersonalView
@@ -61,6 +62,9 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
 
     @Inject
     lateinit var mOrderList: ArrayList<Order>
+
+    @Inject
+    lateinit var mPgDialog: VogoLoadingDialog
 
     @BindView(R.id.recycler_view_personal)
     @JvmField
@@ -179,18 +183,6 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
             }
             R.id.button_logout -> {
                 mPresenter.logOut()
-                /**
-                 * Work-flow of Logout @Ben.
-                 * Please notice here:
-                 * 1. You should call API Logout to ensure token is destroyed in Server.
-                 * 2. API logout return success/failure => we still remove token in Local to ensure user exist their system.
-                 * 3.
-                 * val intent = Intent(mActivity, LoginActivity::class.java)
-                 * intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                 * mActivity.startActivity(intent)
-                 * mActivity.finish()
-                 * This paragraph code will be proceeded when logout success or failure. Not call here.
-                 */
             }
         }
     }
@@ -212,7 +204,14 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
-        //TODO
+        if (isShowProgressDialog) {
+            if (!mPgDialog.isShowing) {
+                mPgDialog.show()
+            }
+        } else {
+            if (!mActivity.isDestroyed && mPgDialog.isShowing)
+                mPgDialog.dismiss()
+        }
     }
 
     override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {

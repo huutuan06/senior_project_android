@@ -17,6 +17,7 @@ interface MainComponent {
     fun plus(bookDetailModule: BookDetailModule) : BookDetailComponent
     fun plus(accountModule: AccountModule) : AccountComponent
     fun plus(manageOrdersModule: ManageOrdersModule) : ManageOrdersComponent
+    fun plus(orderDetailModule: OrderDetailModule) : OrderDetailComponent
 
     fun inject(activity: MainActivity): MainActivity
 //    fun inject(bookDetailFragment: BookDetailFragment) : BookDetailFragment
@@ -26,7 +27,7 @@ interface MainComponent {
     fun inject(writeReviewFragment: WriteReviewFragment) : WriteReviewFragment
 //    fun inject(accountFragment: AccountFragment) : AccountFragment
     fun inject(confirmOrderFragment: ConfirmOrderFragment) : ConfirmOrderFragment
-    fun inject(orderDetailFragment: OrderDetailFragment) : OrderDetailFragment
+//    fun inject(orderDetailFragment: OrderDetailFragment) : OrderDetailFragment
 
     fun inject(searchActivity: SearchActivity) : SearchActivity
 }
