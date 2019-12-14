@@ -64,35 +64,6 @@ class ConfirmOrderFragment : BaseFragment() {
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mToolbar.title = "Confirm Order"
 
-//        mConFirmOrderArrayList.add(
-//            Book(
-//                "Alibaba: The House That Jack Ma Built",
-//                "https://images-na.ssl-images-amazon.com/images/I/81WWiiLgEyL._AC_UL200_SR200,200_.jpg",
-//                "$100"
-//            )
-//        )
-//        mConFirmOrderArrayList.add(
-//            Book(
-//                "Alibaba: The House That Jack Ma Built",
-//                "https://images-na.ssl-images-amazon.com/images/I/81h2gWPTYJL._AC_UL200_SR200,200_.jpg",
-//                "$100"
-//            )
-//        )
-//        mConFirmOrderArrayList.add(
-//            Book(
-//                "Alibaba: The House That Jack Ma Built",
-//                "https://images-na.ssl-images-amazon.com/images/I/81XR45UdqkL._AC_UL200_SR200,200_.jpg",
-//                "$100"
-//            )
-//        )
-//        mConFirmOrderArrayList.add(
-//            Book(
-//                "Alibaba: The House That Jack Ma Built",
-//                "https://images-na.ssl-images-amazon.com/images/I/91ibhD5nhUL._AC_UL200_SR200,200_.jpg",
-//                "$100"
-//            )
-//        )
-
         setList(mConFirmOrderArrayList)
         rcvConfirmOrder.layoutParams.height = Resources.getSystem().displayMetrics.heightPixels*23/32
         rcvConfirmOrder.layoutManager = LinearLayoutManager(context)
@@ -100,7 +71,6 @@ class ConfirmOrderFragment : BaseFragment() {
         rcvConfirmOrder.adapter = mConFirmOrderAdapter
 
         mBottomNavigation.visibility = View.GONE
-
 
         btnOrder.setOnClickListener {
             val dialogBuilder = AlertDialog.Builder(context)
