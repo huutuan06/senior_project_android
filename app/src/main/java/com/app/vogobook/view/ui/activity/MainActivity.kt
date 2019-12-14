@@ -17,6 +17,7 @@ import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.MainPresenter
 import com.app.vogobook.utils.SessionManager
+import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.callback.MainView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -68,7 +69,7 @@ class MainActivity : BaseActivity(), MainView,
         mBottomNavigation.setOnNavigationItemSelectedListener(this)
         mNavController.setGraph(R.navigation.navigation_graph)
         mNavController.addOnDestinationChangedListener(this)
-        mToolbar.title = "Vogo Book"
+        mToolbar.title = mContext.getString(R.string.app_name)
         setSupportActionBar(mToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -77,7 +78,6 @@ class MainActivity : BaseActivity(), MainView,
                 if (t.isNotEmpty())
                     user = t[0]
             }
-
         })
     }
 

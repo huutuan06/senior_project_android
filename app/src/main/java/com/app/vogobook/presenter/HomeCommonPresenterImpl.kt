@@ -22,6 +22,7 @@ class HomeCommonPresenterImpl(
 
     override fun getCommonBooks() {
         if (Utils.isInternetOn(context)) {
+            view.updateProgressDialog(true)
             model.getCommonBooks()
         } else {
             view.showErrorMessageDialog(
@@ -39,6 +40,7 @@ class HomeCommonPresenterImpl(
         categories: List<Category>,
         books: List<Book>
     ) {
+        view.updateProgressDialog(false)
         for  (category in categories) {
             val temps: ArrayList<Book> = ArrayList()
             for (book in books) {

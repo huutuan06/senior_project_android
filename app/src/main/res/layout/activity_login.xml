@@ -17,17 +17,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/Description"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imvLogo" />
-
     <ImageButton
             android:id="@+id/imvSignInByFacebook"
             android:layout_width="wrap_content"
@@ -38,7 +27,7 @@
             android:src="@drawable/ic_register_facebook"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+            app:layout_constraintTop_toBottomOf="@id/imvLogo" />
     <ImageButton
             android:id="@+id/imvSignInByGoogle"
             android:layout_width="wrap_content"

@@ -16,6 +16,7 @@ import com.app.vogobook.di.scope.ActivityScope
 import com.app.vogobook.presenter.MainPresenter
 import com.app.vogobook.presenter.MainPresenterImpl
 import com.app.vogobook.view.custom.CartSnackBarLayout
+import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.MainView
 import com.app.vogobook.view.ui.fragment.BookDetailFragment
@@ -76,4 +77,8 @@ class MainModule {
     @Provides
     @ActivityScope
     fun provideCreateToolbar(): androidx.appcompat.widget.Toolbar = activity!!.findViewById(R.id.toolbar_main) as androidx.appcompat.widget.Toolbar
+
+    @Provides
+    @ActivityScope
+    fun provideVogoLoadingDialog() : VogoLoadingDialog = VogoLoadingDialog(activity)
 }

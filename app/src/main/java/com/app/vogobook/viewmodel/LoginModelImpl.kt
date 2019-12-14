@@ -3,7 +3,6 @@ package com.app.vogobook.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
-import android.util.Log
 import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.User
@@ -38,7 +37,7 @@ class LoginModelImpl(
      */
     override fun loginSocial(jsonObject: JsonObject) {
         if (Utils.isInternetOn(context)) {
-            disposableManager.login(
+            mPresenter!!.setDisposable(disposableManager.login(
                 (service.login(jsonObject)),
                 object : IDisposableListener<UserResponse> {
                     override fun onComplete() {
@@ -55,13 +54,13 @@ class LoginModelImpl(
                     }
 
                     override fun onRequestWrongData(code: Int) {
-//                    mloginPresenter!!.loginFailure()
+//                        mloginPresenter!!.loginFailure()
                     }
 
                     override fun onApiFailure(error: Throwable?) {
-//                    mloginPresenter!!.loginFailure()
+//                        mloginPresenter!!.loginFailure()
                     }
-                })
+                }))
         } else {
             mPresenter!!.loginFailure()
         }
@@ -72,10 +71,8 @@ class LoginModelImpl(
             override fun showListData(users: List<User>) {
                 mPresenter!!.loadUserSuccess(users[0])
             }
-
         })
     }
-
 
     @SuppressLint("StaticFieldLeak")
     inner class ProcessDatabase : AsyncTask<UserResponse, UserResponse, Boolean>() {
@@ -96,7 +93,6 @@ class LoginModelImpl(
                 activity.runOnUiThread { loadUserFromLocal() }
             }
         }
-
     }
 }
 

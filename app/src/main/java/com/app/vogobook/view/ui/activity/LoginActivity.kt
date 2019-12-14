@@ -17,7 +17,7 @@ import com.app.vogobook.presenter.LoginPresenter
 import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.utils.objects.Utils
-import com.app.vogobook.utils.VogoLoadingDialog
+import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.callback.LoginView
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -36,6 +36,9 @@ import io.reactivex.disposables.Disposable
 import org.json.JSONObject
 import javax.inject.Inject
 
+/**
+ * Created by ben on xx/xxx/2019.
+ */
 class LoginActivity : BaseActivity(), LoginView,
     GoogleApiClient.OnConnectionFailedListener {
 
@@ -50,12 +53,12 @@ class LoginActivity : BaseActivity(), LoginView,
     @Inject lateinit var mPresenter: LoginPresenter
     @Inject lateinit var mCallbackManager: CallbackManager
     @Inject lateinit var mSessionManager: SessionManager
-//    @Inject lateinit var mPgDialog: VogoLoadingDialog
+    @Inject lateinit var mPgDialog: VogoLoadingDialog
     @Inject lateinit var mFirebaseAnalytics: FirebaseAnalytics
     @Inject lateinit var mVogoAnalytics: VogoAnalytics
 
     private var googleApiClient: GoogleApiClient? = null
-
+    private var mDisposable: Disposable? = null
     private val  TAG = LoginActivity::class.qualifiedName
 
     public override val layoutRes: Int
@@ -69,6 +72,11 @@ class LoginActivity : BaseActivity(), LoginView,
     override fun initAttributes() {
         Application.mCallbackManager = mCallbackManager
         configureGoogleSignIn()
+    }
+
+    override fun onResume() {
+        updateProgressDialog(false);
+        super.onResume()
     }
 
     @OnClick(R.id.imvSignInByGoogle, R.id.imvSignInByFacebook)
@@ -86,6 +94,7 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     private fun loginFacebookApp() {
+        updateProgressDialog(true);
         LoginManager.getInstance().logInWithReadPermissions(
             mActivity,
             listOf(Constants.EMAIL, Constants.PUBLIC_PROFILE)
@@ -134,6 +143,7 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     private fun loginGoogleApp() {
+        updateProgressDialog(true);
         val signInIntent: Intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, Constants.RC_SIGN_IN)
     }
@@ -174,14 +184,14 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
-//        if (isShowProgressDialog) {
-//            if (!mPgDialog.isShowing) {
-//                mPgDialog.show()
-//            }
-//        } else {
-//            if (!mActivity.isDestroyed && mPgDialog.isShowing)
-//                mPgDialog.dismiss()
-//        }
+        if (isShowProgressDialog) {
+            if (!mPgDialog.isShowing) {
+                mPgDialog.show()
+            }
+        } else {
+            if (!mActivity.isDestroyed && mPgDialog.isShowing)
+                mPgDialog.dismiss()
+        }
     }
 
     override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {
@@ -189,10 +199,15 @@ class LoginActivity : BaseActivity(), LoginView,
     }
 
     override fun setDisposable(disposable: Disposable) {
-        // TODO
+        mDisposable = disposable
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
         Utils.showLog(Utils.LogType.DEBUG, TAG,p0.errorMessage.toString())
+    }
+
+    override fun onDestroy() {
+        if (mDisposable!!.isDisposed) mDisposable!!.dispose()
+        super.onDestroy()
     }
 }

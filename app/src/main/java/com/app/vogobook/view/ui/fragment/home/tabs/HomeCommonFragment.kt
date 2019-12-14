@@ -20,6 +20,7 @@ import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Category
 import com.app.vogobook.utils.Constants
 import com.app.vogobook.view.adapter.CommonAdapter
+import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.HomeCommonView
 import com.app.vogobook.view.ui.fragment.BaseFragment
@@ -47,6 +48,8 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
     @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
 
     @Inject lateinit var mPresenter: HomeCommonPresenter
+
+    @Inject lateinit var mPgDialog: VogoLoadingDialog
 
     @BindView(R.id.recycler_view_common)
     @JvmField var rcvCommon : RecyclerView? = null
@@ -112,7 +115,14 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
-        // TODO
+        if (isShowProgressDialog) {
+            if (!mPgDialog.isShowing) {
+                mPgDialog.show()
+            }
+        } else {
+            if (!mActivity.isDestroyed && mPgDialog.isShowing)
+                mPgDialog.dismiss()
+        }
     }
 
     override fun showErrorMessageDialog(errorTitle: String?, errorMessage: String?) {

@@ -8,7 +8,7 @@ import com.app.vogobook.presenter.LoginPresenterImpl
 import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.repository.BookService
 import com.app.vogobook.utils.SessionManager
-import com.app.vogobook.utils.VogoLoadingDialog
+import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.LoginActivity
 import com.app.vogobook.view.ui.callback.LoginView
 import com.app.vogobook.viewmodel.LoginModel
@@ -47,10 +47,4 @@ class LoginModule(private val activity: LoginActivity, private val view: LoginVi
     @Provides
     @ActivityScope
     fun provideVogoLoadingDialog() : VogoLoadingDialog = VogoLoadingDialog(activity)
-//
-//    @Provides
-//    @ActivityScope
-//    fun provideProgressDialog(activity: LoginActivity): VogoLoadingDialog {
-//        return VogoLoadingDialog(activity)
-//    }
 }

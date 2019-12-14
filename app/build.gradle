@@ -50,7 +50,7 @@ android {
         dev {
             resValue "string", "app_name", "Vogo Book"
             buildConfigField "Boolean", LOG, "true"
-            buildConfigField "String", BASE_URL, '"http://127.0.0.1:8000/"'
+            buildConfigField "String", BASE_URL, '"https://vogobook.luisnguyen.com/"'
         }
         prod {
             resValue "string", "app_name", "Vogo Book"
