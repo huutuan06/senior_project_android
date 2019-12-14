@@ -108,5 +108,14 @@ class RoomUIManager(
                 }
         }
     }
-
+    fun getReviewsByBook(bookId: Int?,_interface: IRoomListener<Review>) {
+        AsyncTask.execute {
+            mReviewDAO.getReviewByBook(bookId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Review>? ->
+                    if (t != null) {
+                        _interface.showListData(t)
+                    }
+                }
+        }
+    }
 }

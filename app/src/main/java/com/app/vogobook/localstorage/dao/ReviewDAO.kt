@@ -19,4 +19,7 @@ interface ReviewDAO {
 
     @Query("SELECT * FROM " + Constants.DB_TABLE_REVIEW)
     fun getReviews() : Maybe<List<Review>>
+
+    @Query("SELECT * FROM " + Constants.DB_TABLE_REVIEW + " WHERE " + Constants.TABLE_REVIEW_BOOK_ID + "= :bookId")
+    fun getReviewByBook(bookId: Int?) : Maybe<List<Review>>
 }

@@ -25,7 +25,7 @@ class BookDetailModelImpl (
     private val mRoomUIManager: RoomUIManager,
     private val mSessionManager: SessionManager
 ) : BookDetailModel {
-
+    private var mBookId: Int? = null
     private var mPresenter: BookDetailPresenter? = null
 
     override fun attachPresenter(presenter: BookDetailPresenter) {
@@ -33,6 +33,7 @@ class BookDetailModelImpl (
     }
 
     override fun getReviews(bookId: Int?) {
+        mBookId = bookId
         mPresenter!!.setDisposable(disposableManager.getReviews(service.getReviews(bookId), object : IDisposableListener<ReviewsResponse> {
             override fun onComplete() {
             }
@@ -58,7 +59,7 @@ class BookDetailModelImpl (
     }
 
     override fun loadReviewsFromLocal() {
-        mRoomUIManager.getAllReviews(object : IRoomListener<Review> {
+        mRoomUIManager.getReviewsByBook(mBookId ,object : IRoomListener<Review> {
             override fun showListData(reviews: List<Review>) {
                 mPresenter!!.loadReviewsSuccess(reviews)
             }
