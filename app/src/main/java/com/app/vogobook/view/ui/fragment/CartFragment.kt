@@ -84,6 +84,13 @@ class CartFragment : BaseFragment() {
         mRoomUIManager.getAllCarts(mSessionManager.user_id, object : IRoomListener<Cart> {
             override fun showListData(carts: List<Cart>) {
                 mCartAdapter!!.setList(carts as ArrayList<Cart>)
+                if (carts.isNotEmpty()) {
+                    emptyCartScreen.visibility = View.GONE
+                    valueCartScreen.visibility = View.VISIBLE
+                } else {
+                    emptyCartScreen.visibility = View.VISIBLE
+                    valueCartScreen.visibility = View.GONE
+                }
             }
         })
         mBottomNavigation.visibility = View.GONE

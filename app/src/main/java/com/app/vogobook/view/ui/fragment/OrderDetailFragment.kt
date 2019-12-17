@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
@@ -39,6 +40,15 @@ class OrderDetailFragment : BaseFragment() {
     @BindView(R.id.recycler_view_books)
     lateinit var rcvBook: RecyclerView
 
+    @BindView(R.id.text_view_order_code)
+    lateinit var tvOrderCode: TextView
+
+    @BindView(R.id.text_view_order_date)
+    lateinit var tvOrderDate: TextView
+
+    @BindView(R.id.text_view_order_status)
+    lateinit var tvOrderStatus: TextView
+
     var mOrder = Order()
 
 
@@ -66,6 +76,29 @@ class OrderDetailFragment : BaseFragment() {
 
         mOrder = arguments!!.getParcelable(mContext.getString(R.string.label_order))
         mAdapter.setList(ArrayList(mOrder.arrBooks))
+
+        tvOrderCode.text = mOrder.code.toString()
+        tvOrderDate.text = mOrder.updated_at.toString()
+        when (1) {
+            mOrder.confirm_ordering -> {
+                tvOrderStatus.text = "Confirmed"
+            }
+            mOrder.delivery -> {
+                tvOrderStatus.text = "Being Transsported"
+            }
+            mOrder.success -> {
+                tvOrderStatus.text = "Successful"
+            }
+            mOrder.cancel -> {
+                tvOrderStatus.text = "Canceled"
+            }
+            mOrder.payment -> {
+                tvOrderStatus.text = "Paid"
+            }
+        }
+        if (mOrder.confirm_ordering == mOrder.delivery && mOrder.delivery == mOrder.success && mOrder.success == mOrder.cancel
+            && mOrder.cancel == mOrder.payment && mOrder.payment == 0)
+            tvOrderStatus.text = "Seen"
 
         rcvBook.layoutManager = LinearLayoutManager(context)
         rcvBook.hasFixedSize()

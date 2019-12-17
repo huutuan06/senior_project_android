@@ -8,10 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
-import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Cart
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_cart.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CartAdapter(private var cartList: ArrayList<Cart>) :
@@ -20,16 +21,13 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var count: Int = 1
 
-        holder.itemView.layoutParams.height =
-            Resources.getSystem().displayMetrics.heightPixels * 2 / 9
-        holder.txtTitle.layoutParams.width =
-            Resources.getSystem().displayMetrics.widthPixels * 3 / 5
-
-
-        holder.txtTitle.text = cartList[position].book_title
+        holder.txtTitle.text = cartList[position].book_title.toString()
+        holder.txtPrice.text = cartList[position].price.toString()
+        holder.txtAuthor.text = cartList[position].book_author.toString()
+        holder.txtCount!!.text = cartList[position].total_book.toString()
         Picasso.get().load(cartList[position].image).resize(
-            holder.itemView.layoutParams.height * 9 / 15,
-            holder.itemView.layoutParams.height * 9 / 10
+            Resources.getSystem().displayMetrics.heightPixels * 2 / 9 * 9 / 15,
+            Resources.getSystem().displayMetrics.widthPixels * 3 / 10
         )
             .centerCrop().into(holder.imgBook)
 //        holder.txtPrice.text = cartList[position].price
@@ -40,14 +38,14 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
         }
         holder.btnPlus?.setOnClickListener {
             count++
-            holder.txtCount!!.text = count.toString()
+//            holder.txtCount!!.text = count.toString()
         }
         holder.btnMinus?.setOnClickListener {
             if (count > 1)
                 count--
-            holder.txtCount!!.text = count.toString()
+//            holder.txtCount!!.text = count.toString()
         }
-        holder.txtCount!!.text = count.toString()
+//        holder.txtCount!!.text = count.toString()
 
 
     } 
@@ -70,6 +68,7 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
         var txtTitle: TextView = itemView.text_view_book_title
         var imgBook: ImageView = itemView.image_book
         var txtPrice: TextView = itemView.text_view_book_price
+        var txtAuthor: TextView = itemView.text_view_book_author
 
         var btnDelete: ImageView? = itemView.button_delete
         var btnPlus: ImageView? = itemView.button_plus
@@ -78,6 +77,7 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
     }
 
     fun setList(arr: ArrayList<Cart>) {
+        arr.reverse()
         cartList = arr
         notifyDataSetChanged()
     }

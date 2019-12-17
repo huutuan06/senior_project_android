@@ -44,12 +44,11 @@ class BookDetailAdapter(private var context: Context, private var listReviews: A
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
-            ButterKnife.bind(this, itemView)
-        }
+
 
         @BindView(R.id.image_view_avatar)
         lateinit var imgAvatar: ImageView
+
 
         @BindView(R.id.text_view_user_name)
         lateinit var txtName: TextView
@@ -62,6 +61,10 @@ class BookDetailAdapter(private var context: Context, private var listReviews: A
 
         @BindView(R.id.text_view_content)
         lateinit var txtContent: TextView
+
+        init {
+            ButterKnife.bind(this, itemView)
+        }
     }
 
 

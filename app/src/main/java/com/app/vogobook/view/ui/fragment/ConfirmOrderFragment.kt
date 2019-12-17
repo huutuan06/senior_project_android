@@ -14,7 +14,11 @@ import butterknife.BindView
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
+import com.app.vogobook.localstorage.IRoomListener
+import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.Book
+import com.app.vogobook.localstorage.entities.Cart
+import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.ConfirmOrderAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -34,13 +38,19 @@ class ConfirmOrderFragment : BaseFragment() {
     @Inject
     lateinit var mBottomNavigation: BottomNavigationView
 
+    @Inject
+    lateinit var mRoomUIManager: RoomUIManager
+
+    @Inject
+    lateinit var mSessionManager: SessionManager
+
     @BindView(R.id.recycler_view_confirm_order)
     lateinit var rcvConfirmOrder: RecyclerView
 
     @BindView(R.id.button_order)
     lateinit var btnOrder: Button
 
-    private var mConFirmOrderArrayList = ArrayList<Book>()
+    private var mConFirmOrderArrayList = ArrayList<Cart>()
 
     private var mConFirmOrderAdapter = ConfirmOrderAdapter(mConFirmOrderArrayList)
 
@@ -65,18 +75,25 @@ class ConfirmOrderFragment : BaseFragment() {
         mToolbar.title = "Confirm Order"
 
         setList(mConFirmOrderArrayList)
-        rcvConfirmOrder.layoutParams.height = Resources.getSystem().displayMetrics.heightPixels*23/32
+        rcvConfirmOrder.layoutParams.height =
+            Resources.getSystem().displayMetrics.heightPixels * 23 / 32
         rcvConfirmOrder.layoutManager = LinearLayoutManager(context)
         rcvConfirmOrder.hasFixedSize()
         rcvConfirmOrder.adapter = mConFirmOrderAdapter
+
+        mRoomUIManager.getAllCarts(mSessionManager.user_id, object : IRoomListener<Cart> {
+            override fun showListData(carts: List<Cart>) {
+                mConFirmOrderAdapter.setList(carts as ArrayList<Cart>)
+            }
+        })
 
         mBottomNavigation.visibility = View.GONE
 
         btnOrder.setOnClickListener {
             val dialogBuilder = AlertDialog.Builder(context)
             dialogBuilder.setMessage("Thank for your order!\n Let's move to main screen.")
-                .setPositiveButton("OK", DialogInterface.OnClickListener{
-                    dialog, id -> Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show()
+                .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
+                    Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show()
                 })
             val alert = dialogBuilder.create()
             alert.setTitle("Order is successful!")
@@ -84,7 +101,7 @@ class ConfirmOrderFragment : BaseFragment() {
         }
     }
 
-    private fun setList(arr: ArrayList<Book>) {
+    private fun setList(arr: ArrayList<Cart>) {
         mConFirmOrderAdapter.setList(arr)
 
     }

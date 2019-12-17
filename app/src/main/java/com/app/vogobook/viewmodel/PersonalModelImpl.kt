@@ -81,7 +81,7 @@ class PersonalModelImpl (
     }
 
     override fun loadOrdersFromLocal() {
-        mRoomUIManager.getOrders(object : IRoomListener<Order> {
+        mRoomUIManager.getOrdersByUser(mSessionManager.user_id, object : IRoomListener<Order> {
             override fun showListData(orders: List<Order>) {
                 mPresenter!!.getOrdersSuccess(orders)
             }
@@ -93,7 +93,7 @@ class PersonalModelImpl (
     inner class ProcessDatabase : AsyncTask<OrdersResponse, OrdersResponse, Boolean>() {
         override fun doInBackground(vararg response: OrdersResponse): Boolean {
             mRoomUIManager.saveOrders(response[0].data)
-            mRoomUIManager.getOrders(object : IRoomListener<Order>{
+            mRoomUIManager.getOrdersByUser(mSessionManager.user_id, object : IRoomListener<Order>{
                 override fun showListData(t: List<Order>) {
                     onPostExecute(true)
                 }

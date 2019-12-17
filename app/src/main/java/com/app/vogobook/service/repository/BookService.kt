@@ -30,4 +30,7 @@ interface BookService {
 
     @GET("api/v1/mobile/user/reviews/{id}")
     fun getReviews(@Path("id") bookId: Int?): Observable<Response<ReviewsResponse>>
+
+    @POST("api/v1/mobile/order/submit")
+    fun submitOrder(@Body jsonObject: JsonObject) : Observable<Response<UserResponse>>
 }

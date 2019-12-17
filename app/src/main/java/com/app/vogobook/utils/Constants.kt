@@ -96,6 +96,7 @@ class Constants {
         const val TABLE_CART_BOOK_ID = "book_id"
         const val TABLE_CART_BOOK_TITLE = "book_title"
         const val TABLE_CART_TOTAL_BOOK = "total_book"
+        const val TABLE_CART_BOOK_AUTHOR = "book_author"
         const val TABLE_CART_PRICE = "price"
         const val TABLE_CART_IMAGE = "image"
 
