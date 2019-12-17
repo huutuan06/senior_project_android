@@ -26,7 +26,7 @@ class ConfirmOrderAdapter(private var list: ArrayList<Cart>) :
 
         holder.txtTitle.text = list[position].book_title
         Picasso.get().load(list[position].image).resize(
-            Resources.getSystem().displayMetrics.heightPixels * 9 / 45 * 9 / 15,
+            Resources.getSystem().displayMetrics.heightPixels * 8 / 45 * 9 / 15,
             Resources.getSystem().displayMetrics.widthPixels * 3 / 10
         )
             .centerCrop().into(holder.imgBook)
@@ -58,6 +58,7 @@ class ConfirmOrderAdapter(private var list: ArrayList<Cart>) :
     }
 
     fun setList(arr: ArrayList<Cart>) {
+        arr.reverse()
         list = arr
         notifyDataSetChanged()
     }

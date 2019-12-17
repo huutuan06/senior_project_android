@@ -27,7 +27,7 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
         holder.txtCount!!.text = cartList[position].total_book.toString()
         Picasso.get().load(cartList[position].image).resize(
             Resources.getSystem().displayMetrics.heightPixels * 2 / 9 * 9 / 15,
-            Resources.getSystem().displayMetrics.widthPixels * 3 / 10
+            Resources.getSystem().displayMetrics.widthPixels * 4 / 10
         )
             .centerCrop().into(holder.imgBook)
 //        holder.txtPrice.text = cartList[position].price
