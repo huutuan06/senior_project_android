@@ -149,6 +149,7 @@ class RoomUIManager(
             cart.book_title = book.title
             cart.image = book.image
             cart.price = book.price
+            cart.book_author = book.author
             cart.user_id = user_id
             cart.total_book = 1
             mCartDAO.getCartsByBookID(book.id).subscribeOn(Schedulers.io())

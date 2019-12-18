@@ -1,8 +1,9 @@
-package com.app.vogobook.service.response
+package com.app.vogobook.service.model
 
 import android.os.Parcel
 import android.os.Parcelable
 import com.app.vogobook.localstorage.entities.Cart
+import com.app.vogobook.service.response.Address
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -18,7 +19,7 @@ class OrdersData() : Parcelable {
 
     @SerializedName("address")
     @Expose
-    var address: Address ?= null
+    var address: Address?= null
 
     constructor(parcel: Parcel) : this() {
         carts = parcel.createTypedArrayList(Cart)
