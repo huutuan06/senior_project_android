@@ -47,7 +47,7 @@ class AccountModelImpl (
             file.asRequestBody("image/*".toMediaTypeOrNull())
         )
         val requestBody = builder.build()
-        val call = service.profile(mSessionManager.token, requestBody) as Call<UserResponse>
+        val call = service.profile(mSessionManager.token, requestBody)
         call.enqueue(object  : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                if (response.isSuccessful) {

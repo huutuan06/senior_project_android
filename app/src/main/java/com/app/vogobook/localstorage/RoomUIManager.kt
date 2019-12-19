@@ -167,4 +167,15 @@ class RoomUIManager(
                 }
         }
     }
+
+    fun getAllBooksBySearch(key: String?, _interface: IRoomListener<Book>) {
+        AsyncTask.execute {
+            mBookDAO.getBookBySearch(key).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Book>? ->
+                    if (t != null) {
+                        _interface.showListData(t)
+                    }
+                }
+        }
+    }
 }

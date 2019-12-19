@@ -2,7 +2,6 @@ package com.app.vogobook.localstorage.dao
 
 import androidx.room.*
 import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.localstorage.entities.Category
 import com.app.vogobook.utils.Constants
 import io.reactivex.Maybe
 
@@ -25,4 +24,7 @@ interface BookDAO {
 
     @Query("SELECT * FROM " + Constants.DB_TABLE_BOOK + " WHERE " + Constants.TABLE_BOOK_ID + " = :book_id")
     fun getBook(book_id: Int?) : Maybe<Book>
+
+    @Query("SELECT * FROM " + Constants.DB_TABLE_BOOK + " WHERE " + Constants.TABLE_BOOK_TITLE +" LIKE :key")
+    fun getBookBySearch(key: String?) : Maybe<List<Book>>
 }

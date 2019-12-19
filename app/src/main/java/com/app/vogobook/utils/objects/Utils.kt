@@ -6,8 +6,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import com.app.vogobook.BuildConfig
 import com.app.vogobook.R
+import com.app.vogobook.utils.Constants
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -61,6 +63,18 @@ object Utils {
 
         val simpleDateFormat = SimpleDateFormat(context!!.getString(R.string.partten_birthday_local))
         return simpleDateFormat.format(calendar.time)
+    }
+
+    fun hiddenKeyBoard(activity: Activity) {
+        val view = activity.currentFocus
+        if (view != null) {
+            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+    fun enclosePercentage(keyword: String): String {
+        return Constants.PERCENTAGE+(keyword)+(Constants.PERCENTAGE)
     }
 
 }
