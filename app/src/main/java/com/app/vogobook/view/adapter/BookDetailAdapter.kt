@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
 import butterknife.ButterKnife
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Review
@@ -44,24 +43,20 @@ class BookDetailAdapter(private var context: Context, private var listReviews: A
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        var imgAvatar: ImageView = itemView.findViewById(R.id.image_view_avatar)
+
+        var txtName: TextView = itemView.findViewById(R.id.text_view_user_name)
+
+        var rattingBar: RatingBar = itemView.findViewById(R.id.rating_bar)
+
+        var date: TextView = itemView.findViewById(R.id.text_view_date)
+
+        var txtContent: TextView = itemView.findViewById(R.id.text_view_content)
+
         init {
             ButterKnife.bind(this, itemView)
         }
-
-        @BindView(R.id.image_view_avatar)
-        lateinit var imgAvatar: ImageView
-
-        @BindView(R.id.text_view_user_name)
-        lateinit var txtName: TextView
-
-        @BindView(R.id.rating_bar)
-        lateinit var rattingBar: RatingBar
-
-        @BindView(R.id.text_view_date)
-        lateinit var date: TextView
-
-        @BindView(R.id.text_view_content)
-        lateinit var txtContent: TextView
     }
 
 

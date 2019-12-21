@@ -10,20 +10,24 @@ import androidx.navigation.NavController
 import butterknife.BindView
 import butterknife.OnClick
 import com.app.vogobook.R
+import com.app.vogobook.analytics.VogoAnalytics
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
 import com.app.vogobook.di.module.WriteReviewModule
 import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.presenter.WriteReviewPresenter
 import com.app.vogobook.utils.Constants
+import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.WriteReviewView
 import com.app.vogobook.view.ui.dialog.VogoDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import io.reactivex.disposables.Disposable
+import java.util.*
 import javax.inject.Inject
 
 class WriteReviewFragment : BaseFragment(), WriteReviewView, VogoDialog.IListener {
@@ -51,6 +55,15 @@ class WriteReviewFragment : BaseFragment(), WriteReviewView, VogoDialog.IListene
 
     @Inject
     lateinit var mVogoDialog: VogoDialog
+
+    @Inject
+    lateinit var mFirebaseAnalytics: FirebaseAnalytics
+
+    @Inject
+    lateinit var mSessionManager: SessionManager
+
+    @Inject
+    lateinit var mVogoAnalytics: VogoAnalytics
 
     @BindView(R.id.rating_bar)
     lateinit var ratingBar: RatingBar
@@ -113,6 +126,7 @@ class WriteReviewFragment : BaseFragment(), WriteReviewView, VogoDialog.IListene
                 jsonObject.addProperty("review",editTextReview.text.toString())
                 jsonObject.addProperty("date", System.currentTimeMillis()/1000)
                 updateProgressDialog(true)
+                mVogoAnalytics.reportReview(mFirebaseAnalytics, mSessionManager.user_id , editTextReview.text.toString())
                 mPresenter.postReview(jsonObject)
             }
         }

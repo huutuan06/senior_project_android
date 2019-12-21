@@ -17,4 +17,7 @@ interface OrderDAO {
 
     @Query("SELECT * FROM " + Constants.DB_TABLE_ORDER )
     fun getOrders() : Maybe<List<Order>>
+
+    @Query("SELECT * FROM " + Constants.DB_TABLE_ORDER + " WHERE " + Constants.TABLE_ORDER_USER_ID + "= :userID")
+    fun getOrdersByUser(userID: Int?) : Maybe<List<Order>>
 }

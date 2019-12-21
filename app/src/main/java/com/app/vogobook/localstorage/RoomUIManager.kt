@@ -105,6 +105,16 @@ class RoomUIManager(
         }
     }
 
+    fun getOrdersByUser(userId: Int?,_interface: IRoomListener<Order>) {
+        AsyncTask.execute {
+            mOrderDAO.getOrdersByUser(userId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Order>? ->
+                    if (t != null)
+                        _interface.showListData(t)
+                }
+        }
+    }
+
     fun saveAllReviews(listReviews: List<Review>?) {
         AsyncTask.execute {
             mReviewDAO.saveAll(listReviews)
@@ -139,20 +149,31 @@ class RoomUIManager(
             cart.book_title = book.title
             cart.image = book.image
             cart.price = book.price
+            cart.book_author = book.author
             cart.user_id = user_id
             cart.total_book = 1
-            var total_book = 1
             mCartDAO.getCartsByBookID(book.id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Cart>? ->
                     if (t != null) {
-                        if (t.size > 0) {
-                            total_book++
-                            cart.total_book = total_book
+                        if (t.isNotEmpty()) {
+                            cart.id = t[0].id
+                            cart.total_book = t[0].total_book!! + 1
                             AsyncTask.execute { mCartDAO.update(cart) }
                         } else {
-                            cart.total_book = total_book
+                            cart.total_book = 1
                             AsyncTask.execute { mCartDAO.saveCart(cart) }
                         }
+                    }
+                }
+        }
+    }
+
+    fun getAllBooksBySearch(key: String?, _interface: IRoomListener<Book>) {
+        AsyncTask.execute {
+            mBookDAO.getBookBySearch(key).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Book>? ->
+                    if (t != null) {
+                        _interface.showListData(t)
                     }
                 }
         }

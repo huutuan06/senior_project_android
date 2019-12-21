@@ -1,5 +1,6 @@
 package com.app.vogobook.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Book
+import com.app.vogobook.localstorage.entities.Cart
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_cart.view.image_book
 import kotlinx.android.synthetic.main.item_cart.view.text_view_book_price
@@ -16,25 +18,20 @@ import kotlinx.android.synthetic.main.item_cart.view.text_view_book_title
 import kotlinx.android.synthetic.main.item_confirm_order.view.*
 
 
-class ConfirmOrderAdapter(private var bookList: ArrayList<Book>) :
+class ConfirmOrderAdapter(private var list: ArrayList<Cart>) :
     RecyclerView.Adapter<ConfirmOrderAdapter.ViewHolder>() {
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.itemView.layoutParams.height =
-            Resources.getSystem().displayMetrics.heightPixels * 8 / 45
-        holder.txtTitle.layoutParams.width =
-            Resources.getSystem().displayMetrics.widthPixels * 3 / 5
-
-
-        holder.txtTitle.text = bookList[position].title
-        Picasso.get().load(bookList[position].image).resize(
-            holder.itemView.layoutParams.height * 9 / 15,
-            holder.itemView.layoutParams.height * 9 / 10
+        holder.txtTitle.text = list[position].book_title
+        Picasso.get().load(list[position].image).resize(
+            Resources.getSystem().displayMetrics.heightPixels * 8 / 45 * 9 / 15,
+            Resources.getSystem().displayMetrics.widthPixels * 3 / 10
         )
             .centerCrop().into(holder.imgBook)
-//        holder.txtPrice.text = bookList[position].price
-
+        holder.txtPrice.text = "$" + list[position].price.toString()
+        holder.txtAmountBook!!.text = list[position].total_book.toString()
 
     } 
 
@@ -49,7 +46,11 @@ class ConfirmOrderAdapter(private var bookList: ArrayList<Book>) :
     }
 
     override fun getItemCount(): Int {
-        return bookList.size
+        return list.size
+    }
+
+    fun getList() : ArrayList<Cart> {
+        return list;
     }
 
     open class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -60,8 +61,9 @@ class ConfirmOrderAdapter(private var bookList: ArrayList<Book>) :
         var txtAmountBook: TextView? = itemView.text_view_amount_book
     }
 
-    fun setList(arr: ArrayList<Book>) {
-        bookList = arr
+    fun setList(arr: ArrayList<Cart>) {
+        arr.reverse()
+        list = arr
         notifyDataSetChanged()
     }
 

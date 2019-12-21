@@ -38,6 +38,11 @@ class Cart() : Parcelable {
     @Expose
     var total_book: Int? = null
 
+    @ColumnInfo(name = Constants.TABLE_CART_BOOK_AUTHOR)
+    @SerializedName("book_author")
+    @Expose
+    var book_author: String? = null
+
     @ColumnInfo(name = Constants.TABLE_CART_PRICE)
     @SerializedName("price")
     @Expose
@@ -54,6 +59,7 @@ class Cart() : Parcelable {
         book_id = parcel.readValue(Int::class.java.classLoader) as? Int
         book_title = parcel.readString()
         total_book = parcel.readValue(Int::class.java.classLoader) as? Int
+        book_author = parcel.readString()
         price = parcel.readValue(Float::class.java.classLoader) as? Float
         image = parcel.readString()
     }
@@ -64,6 +70,7 @@ class Cart() : Parcelable {
         parcel.writeValue(book_id)
         parcel.writeString(book_title)
         parcel.writeValue(total_book)
+        parcel.writeString(book_author)
         parcel.writeValue(price)
         parcel.writeString(image)
     }
@@ -81,4 +88,5 @@ class Cart() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 }

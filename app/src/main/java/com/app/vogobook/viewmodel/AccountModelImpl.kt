@@ -56,11 +56,11 @@ class AccountModelImpl (
         val requestBody = builder.build()
         service.profile(mSessionManager.token, requestBody).enqueue(object  : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-               if (response.isSuccessful) {
-                   Log.i("TAG", "1")
-               } else {
-                   Log.i("TAG", "2")
-               }
+                if (response.isSuccessful) {
+                    Log.i("TAG", "1")
+                } else {
+                    Log.i("TAG", "2")
+                }
             }
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 Log.i("TAG", "3: " + t.message)

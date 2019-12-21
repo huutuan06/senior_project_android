@@ -3,7 +3,7 @@ package com.app.vogobook.utils
 class Constants {
 
     companion object {
-
+        const val PERCENTAGE = "%"
         const val LIST_ORDERS = "list_orders"
         const val PERMISSION_CODE = 100
         const val IMAGE_PICK_CODE = 101
@@ -96,6 +96,7 @@ class Constants {
         const val TABLE_CART_BOOK_ID = "book_id"
         const val TABLE_CART_BOOK_TITLE = "book_title"
         const val TABLE_CART_TOTAL_BOOK = "total_book"
+        const val TABLE_CART_BOOK_AUTHOR = "book_author"
         const val TABLE_CART_PRICE = "price"
         const val TABLE_CART_IMAGE = "image"
 

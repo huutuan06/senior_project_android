@@ -1,7 +1,6 @@
 package com.app.vogobook.analytics
 
 import android.os.Bundle
-import com.app.vogobook.utils.Constants
 import com.app.vogobook.view.ui.activity.BaseActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 
@@ -21,6 +20,13 @@ class VogoAnalytics {
         val bundle = Bundle()
         bundle.putString(AnalyticsConstant.LOCAL_LANGUAGE, localLanguage)
         bundle.putLong(AnalyticsConstant.TIME_USING, time)
+        analytics.logEvent(AnalyticsConstant.EVENT_CONFIG, bundle)
+    }
+
+    fun reportReview(analytics: FirebaseAnalytics, id: Int, message: String) {
+        val bundle = Bundle()
+        bundle.putInt(AnalyticsConstant.USER_ID, id)
+        bundle.putString(AnalyticsConstant.USER_REVIEW, message)
         analytics.logEvent(AnalyticsConstant.EVENT_CONFIG, bundle)
     }
 }
