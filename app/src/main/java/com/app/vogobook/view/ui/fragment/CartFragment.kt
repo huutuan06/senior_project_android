@@ -1,5 +1,6 @@
 package com.app.vogobook.view.ui.fragment
 
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
@@ -48,6 +49,9 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
 
     @Inject
     lateinit var mPresenter: CartPresenter
+
+    @Inject
+    lateinit var mContext: Context
 
     @BindView(R.id.layout_empty_cart)
     lateinit var emptyCartScreen: ConstraintLayout

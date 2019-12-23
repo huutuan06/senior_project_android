@@ -38,7 +38,7 @@ class CartModule (private val fragment : CartFragment, private var view: CartVie
 
     @Provides
     @FragmentScope
-    fun provideCartAdapter() =  CartAdapter(ArrayList<Cart>())
+    fun provideCartAdapter(context: Context) =  CartAdapter(ArrayList<Cart>())
 
 
     @Provides

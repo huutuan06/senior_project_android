@@ -26,7 +26,7 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var count: Int = 1
+        var count: Int? = cartList[position].total_book
 
         holder.txtTitle.text = cartList[position].book_title.toString()
         holder.txtPrice.text = "$" + cartList[position].price.toString()
@@ -45,18 +45,15 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
             mCartEventListener.deleteCart(cartList[position])
         }
         holder.btnPlus?.setOnClickListener {
-            count++
-//            holder.txtCount!!.text = count.toString()
+            if (count!= null) count++
+            holder.txtCount!!.text = count.toString()
         }
         holder.btnMinus?.setOnClickListener {
-            if (count > 1)
+            if ( count != null && count > 1)
                 count--
-//            holder.txtCount!!.text = count.toString()
+            holder.txtCount!!.text = count.toString()
         }
-//        holder.txtCount!!.text = count.toString()
-
-
-    } 
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

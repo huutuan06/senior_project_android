@@ -155,7 +155,7 @@ class RoomUIManager(
 
     fun saveCart(book: Book?, user_id : Int?) {
         AsyncTask.execute {
-            var cart = Cart()
+            val cart = Cart()
             cart.book_id = book!!.id
             cart.book_title = book.title
             cart.image = book.image
