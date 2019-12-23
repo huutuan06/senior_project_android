@@ -12,17 +12,21 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
+import com.app.vogobook.di.module.CartModule
 import com.app.vogobook.di.module.MainModule
 import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.Cart
+import com.app.vogobook.presenter.CartPresenter
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.CartAdapter
 import com.app.vogobook.view.ui.activity.MainActivity
+import com.app.vogobook.view.ui.callback.CartView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class CartFragment : BaseFragment() {
+class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
 
     @Inject
     lateinit var mActivity: MainActivity
@@ -41,6 +45,9 @@ class CartFragment : BaseFragment() {
 
     @Inject
     lateinit var mBottomNavigation: BottomNavigationView
+
+    @Inject
+    lateinit var mPresenter: CartPresenter
 
     @BindView(R.id.layout_empty_cart)
     lateinit var emptyCartScreen: ConstraintLayout
@@ -67,20 +74,21 @@ class CartFragment : BaseFragment() {
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity))
+            .plus(CartModule(this, this))
             .inject(this)
     }
 
     override fun initAttributes() {
-//        mBottomNavigation.setOnNavigationItemSelectedListener(mActivity)
         mToolbar.setNavigationOnClickListener { mActivity.onSupportNavigateUp() }
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
-        mToolbar.title = "Cart"
+        mToolbar.title = context!!.getString(R.string.label_screen_cart)
         rcvCart.layoutParams.height = Resources.getSystem().displayMetrics.heightPixels*23/32
         rcvCart.layoutManager = LinearLayoutManager(context)
         rcvCart.hasFixedSize()
         mCartAdapter = CartAdapter(ArrayList())
         rcvCart.adapter = mCartAdapter
+        mCartAdapter!!.setInterface(this)
         mRoomUIManager.getAllCarts(mSessionManager.user_id, object : IRoomListener<Cart> {
             override fun showListData(carts: List<Cart>) {
                 mCartAdapter!!.setList(carts as ArrayList<Cart>)
@@ -110,5 +118,21 @@ class CartFragment : BaseFragment() {
                 mNavController.navigate(R.id.confirmOrderFragment)
             }
         }
+    }
+
+    override fun deleteCart(cart: Cart) {
+        mPresenter.deleteCart(cart)
+    }
+
+    override fun updateProgressDialog(isShowProgressDialog: Boolean) {
+        //TODO
+    }
+
+    override fun showMessageDialog(errorTitle: String?, errorMessage: String?) {
+        //TODO
+    }
+
+    override fun setDisposable(disposable: Disposable) {
+        //TODO
     }
 }

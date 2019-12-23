@@ -16,8 +16,12 @@ import kotlinx.android.synthetic.main.item_cart.view.*
 class SearchAdapter(private var booktList: ArrayList<Book>) :
     RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
+    private lateinit var mSearchEventListener: SearchEventListener
+
+    interface SearchEventListener {
+        fun navigateToBookDetail(book: Book)
+    }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var count: Int = 1
         holder.txtTitle.text = booktList[position].title.toString()
         holder.txtPrice.text = booktList[position].price.toString()
         holder.txtAuthor.text = booktList[position].author.toString()
@@ -25,17 +29,6 @@ class SearchAdapter(private var booktList: ArrayList<Book>) :
             Resources.getSystem().displayMetrics.heightPixels * 2 / 9 * 9 / 15,
             Resources.getSystem().displayMetrics.widthPixels * 4 / 10
         ).centerCrop().into(holder.imgBook)
-
-        holder.btnDelete!!.setOnClickListener {
-            deleteItem(position)
-        }
-        holder.btnPlus?.setOnClickListener {
-            count++
-        }
-        holder.btnMinus?.setOnClickListener {
-            if (count > 1)
-                count--
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -77,10 +70,8 @@ class SearchAdapter(private var booktList: ArrayList<Book>) :
         notifyDataSetChanged()
     }
 
-    private fun deleteItem(position: Int) {
-        booktList.removeAt(position)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, booktList.size)
+    fun setInterface(listener: SearchEventListener) {
+        mSearchEventListener = listener
     }
 
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import io.reactivex.disposables.Disposable
+import org.w3c.dom.Text
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -79,6 +81,21 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
     @BindView(R.id.recycler_view_reviews)
     lateinit var rcvReviews: RecyclerView
+
+    @BindView(R.id.text_view_book_number_review)
+    lateinit var txtReviewCount1: TextView
+
+    @BindView(R.id.txt_number_reviews)
+    lateinit var txtReviewCount2: TextView
+
+    @BindView(R.id.rating_bar)
+    lateinit var rattingBar: RatingBar
+
+    @BindView(R.id.text_view_book_rate)
+    lateinit var txtRate1: TextView
+
+    @BindView(R.id.txt_book_rate)
+    lateinit var txtRate2: TextView
 
     interface BookDetailListener {
         fun sendBook(book: Book?)
@@ -171,6 +188,22 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
     override fun loadReviewsSuccess(reviews: List<Review>) {
         Collections.reverse(reviews)
         mAdapter.setList(ArrayList(reviews))
+
+        if (reviews.isEmpty()) {
+            rattingBar.rating = 0F
+            txtRate1.text = "0"
+            txtRate2.text = "0"
+        } else {
+            var rating = 0F
+            reviews.forEach {
+                rating += it.rate!!
+            }
+            rattingBar.rating = rating/reviews.size
+            txtRate1.text = rattingBar.rating.toString()
+            txtRate2.text = rattingBar.rating.toString()
+        }
+        txtReviewCount1.text = reviews.size.toString()
+        txtReviewCount2.text = reviews.size.toString()
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {

@@ -27,4 +27,7 @@ interface BookDAO {
 
     @Query("SELECT * FROM " + Constants.DB_TABLE_BOOK + " WHERE " + Constants.TABLE_BOOK_TITLE +" LIKE :key")
     fun getBookBySearch(key: String?) : Maybe<List<Book>>
+
+    @Query("SELECT * FROM " + Constants.DB_TABLE_BOOK + " ORDER BY " + Constants.TABLE_BOOK_UPDATED_AT + " DESC")
+    fun getBooksByUpdated():  Maybe<List<Book>>
 }

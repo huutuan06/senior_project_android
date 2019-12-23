@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/item_topselling"
     android:layout_margin="5dp">
 
     <TextView
@@ -45,7 +46,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="-5dp"
-            android:textStyle="bold"/>
+            android:textSize="16sp"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/text_view_book_author"

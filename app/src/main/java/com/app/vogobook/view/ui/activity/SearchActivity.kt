@@ -1,6 +1,8 @@
 package com.app.vogobook.view.ui.activity
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -16,11 +18,12 @@ import com.app.vogobook.di.module.SearchModule
 import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.Book
+import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.adapter.SearchAdapter
 import javax.inject.Inject
 
-class SearchActivity : BaseActivity() , TextView.OnEditorActionListener {
+class SearchActivity : BaseActivity() , TextView.OnEditorActionListener, SearchAdapter.SearchEventListener {
 
     @Inject
     lateinit var mContext: Context
@@ -65,6 +68,7 @@ class SearchActivity : BaseActivity() , TextView.OnEditorActionListener {
             this.setHasFixedSize(true)
             adapter = mSearchAdapter
         }
+        mSearchAdapter.setInterface(this)
     }
 
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -88,4 +92,12 @@ class SearchActivity : BaseActivity() , TextView.OnEditorActionListener {
         return true
     }
 
+    override fun navigateToBookDetail(book: Book) {
+        val bundle = Bundle()
+        bundle.putParcelable(Constants.BOOK, book)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(Constants.BOOK, bundle)
+        startActivity(intent)
+        this.onDestroy()
+    }
 }

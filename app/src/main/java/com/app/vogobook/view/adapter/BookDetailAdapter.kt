@@ -16,6 +16,7 @@ import com.app.vogobook.localstorage.entities.Review
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.custom.CircleTransform
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_book_detail.view.*
 
 class BookDetailAdapter(private var context: Context, private var listReviews: ArrayList<Review>) :
     RecyclerView.Adapter<BookDetailAdapter.ViewHolder>() {
@@ -25,7 +26,7 @@ class BookDetailAdapter(private var context: Context, private var listReviews: A
         Picasso.get().load(listReviews[position].user_avatar).transform(CircleTransform()).into(holder.imgAvatar)
         holder.txtName.text = listReviews[position].user_name
         holder.rattingBar.rating = listReviews[position].rate!!
-        holder.date.text = Utils.getDate(context,  listReviews[position].date!!.toLong())
+        holder.date.text = Utils.getDate(context, listReviews[position].date!!.toLong())
         holder.txtContent.text = listReviews[position].content
     }
 
@@ -45,26 +46,16 @@ class BookDetailAdapter(private var context: Context, private var listReviews: A
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        var txtName: TextView = itemView.text_view_user_name
 
-        @BindView(R.id.image_view_avatar)
-        lateinit var imgAvatar: ImageView
+        var rattingBar: RatingBar = itemView.rating_bar
 
+        var date: TextView = itemView.text_view_date
 
-        @BindView(R.id.text_view_user_name)
-        lateinit var txtName: TextView
+        var txtContent: TextView = itemView.text_view_content
 
-        @BindView(R.id.rating_bar)
-        lateinit var rattingBar: RatingBar
+        var imgAvatar: ImageView = itemView.image_view_avatar
 
-        @BindView(R.id.text_view_date)
-        lateinit var date: TextView
-
-        @BindView(R.id.text_view_content)
-        lateinit var txtContent: TextView
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
     }
 
 

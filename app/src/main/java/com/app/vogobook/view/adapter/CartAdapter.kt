@@ -1,5 +1,6 @@
 package com.app.vogobook.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
@@ -11,18 +12,24 @@ import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Cart
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_cart.view.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 
 class CartAdapter(private var cartList: ArrayList<Cart>) :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
+    private lateinit var mCartEventListener: CartEventListener
+
+    interface CartEventListener{
+        fun deleteCart(cart: Cart)
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var count: Int = 1
 
         holder.txtTitle.text = cartList[position].book_title.toString()
-        holder.txtPrice.text = cartList[position].price.toString()
+        holder.txtPrice.text = "$" + cartList[position].price.toString()
         holder.txtAuthor.text = cartList[position].book_author.toString()
         holder.txtCount!!.text = cartList[position].total_book.toString()
         Picasso.get().load(cartList[position].image).resize(
@@ -35,6 +42,7 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
 
         holder.btnDelete!!.setOnClickListener {
             deleteItem(position)
+            mCartEventListener.deleteCart(cartList[position])
         }
         holder.btnPlus?.setOnClickListener {
             count++
@@ -85,7 +93,11 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
     private fun deleteItem(position: Int) {
         cartList.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemRangeChanged(position, cartList.size)
+        notifyItemRangeRemoved(position, cartList.size)
+    }
+
+    fun setInterface(listener: CartEventListener) {
+        mCartEventListener = listener
     }
 
 }
