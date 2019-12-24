@@ -14,9 +14,12 @@ import com.app.vogobook.service.connect.rx.IDisposableListener
 import com.app.vogobook.service.repository.BookService
 import com.app.vogobook.service.response.Address
 import com.app.vogobook.service.model.OrdersData
+import com.app.vogobook.service.response.Error
 import com.app.vogobook.service.response.ReviewsResponse
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.ui.activity.MainActivity
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 
 class ConfirmOrderModelImpl (
     private val context: Context,
@@ -33,14 +36,30 @@ class ConfirmOrderModelImpl (
         mPresenter = presenter
     }
 
-
-
-    fun submitOrder(address: Address, cardList : ArrayList<Cart>) {
-        var orderResponseList = OrdersData()
+    override fun submitOrder(address: Address, listCarts : ArrayList<Cart>) {
+        val orderResponseList = OrdersData()
         orderResponseList.user_id = mSessionManager.user_id
         orderResponseList.address = address
-        orderResponseList.carts = cardList
+        orderResponseList.carts = listCarts
+//        val jsonObject = JsonObject()
+//        jsonObject.addProperty("Order",Gson().toJson(orderResponseList))
+        mPresenter!!.setDisposable(disposableManager.submitOrder(service.submitOrder(mSessionManager.token, orderResponseList), object : IDisposableListener<Error> {
+            override fun onComplete() {
+            }
+
+            override fun onHandleData(t: Error?) {
+                if (t!!.code == 0)
+                    mPresenter!!.submitOrderSuccess()
+                else
+                    mPresenter!!.submitOrderFailed()
+            }
+
+            override fun onRequestWrongData(code: Int) {
+                mPresenter!!.submitOrderFailed()
+            }
+
+            override fun onApiFailure(error: Throwable?) {
+            }
+        }))
     }
-
-
 }

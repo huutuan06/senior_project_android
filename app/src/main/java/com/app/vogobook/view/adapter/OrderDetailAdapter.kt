@@ -14,6 +14,7 @@ import butterknife.ButterKnife
 import com.app.vogobook.R
 import com.app.vogobook.service.model.BookOrder
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_order.view.*
 
 class OrderDetailAdapter(private var context: Context, private var listBooks: ArrayList<BookOrder>) :
     RecyclerView.Adapter<OrderDetailAdapter.ViewHolder>() {
@@ -61,21 +62,11 @@ class OrderDetailAdapter(private var context: Context, private var listBooks: Ar
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
-            ButterKnife.bind(this, itemView)
-        }
 
-        @BindView(R.id.image_book)
-        lateinit var imgBook: ImageView
-
-        @BindView(R.id.text_view_book_title)
-        lateinit var txtTitle: TextView
-
-        @BindView(R.id.text_view_book_price)
-        lateinit var txtPrice: TextView
-
-        @BindView(R.id.text_view_total_book)
-        lateinit var txtTotalBooks: TextView
+        var imgBook = itemView.image_book!!
+        var txtTitle = itemView.text_view_book_title!!
+        var txtPrice = itemView.text_view_book_price!!
+        var txtTotalBooks = itemView.text_view_total_book!!
     }
 
 

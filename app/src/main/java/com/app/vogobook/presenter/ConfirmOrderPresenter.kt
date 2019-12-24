@@ -1,5 +1,10 @@
 package com.app.vogobook.presenter
 
-import com.google.gson.JsonObject
+import com.app.vogobook.localstorage.entities.Cart
+import com.app.vogobook.service.response.Address
 
-interface ConfirmOrderPresenter : BasePresenter
+interface ConfirmOrderPresenter : BasePresenter {
+    fun submitOrder(address: Address, listCarts: ArrayList<Cart>)
+    fun submitOrderSuccess()
+    fun submitOrderFailed()
+}

@@ -1,5 +1,6 @@
 package com.app.vogobook.service.repository;
 
+import com.app.vogobook.service.model.OrdersData
 import com.app.vogobook.service.response.*
 import com.google.gson.JsonObject
 import io.reactivex.Observable
@@ -32,5 +33,5 @@ interface BookService {
     fun getReviews(@Path("id") bookId: Int?): Observable<Response<ReviewsResponse>>
 
     @POST("api/v1/mobile/order/submit")
-    fun submitOrder(@Body jsonObject: JsonObject) : Observable<Response<UserResponse>>
+    fun submitOrder(@Header("Authorization") accessToken: String, @Body ordersData: OrdersData) : Observable<Response<Error>>
 }

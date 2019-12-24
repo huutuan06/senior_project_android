@@ -5,10 +5,7 @@ import android.content.DialogInterface
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,15 +19,18 @@ import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.Cart
 import com.app.vogobook.presenter.ConfirmOrderPresenter
+import com.app.vogobook.service.response.Address
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.ConfirmOrderAdapter
+import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.ConfirmOrderView
+import com.app.vogobook.view.ui.dialog.VogoDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
+class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView, VogoDialog.IListener {
 
     @Inject
     lateinit var mActivity: MainActivity
@@ -53,6 +53,12 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
     @Inject
     lateinit var mPresenter: ConfirmOrderPresenter
 
+    @Inject
+    lateinit var mPgDialog: VogoLoadingDialog
+
+    @Inject
+    lateinit var mVogoDialog: VogoDialog
+
     @BindView(R.id.recycler_view_confirm_order)
     lateinit var rcvConfirmOrder: RecyclerView
 
@@ -68,6 +74,15 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
     @BindView(R.id.edit_text_address)
     lateinit var edtAddress: EditText
 
+    @BindView(R.id.radio_button_cash)
+    lateinit var rbCash: RadioButton
+
+    @BindView(R.id.radio_button_momo)
+    lateinit var rbMomo: RadioButton
+
+    @BindView(R.id.radio_button_credit_card)
+    lateinit var rbCreditCard: RadioButton
+
     @BindView(R.id.text_view_total_price)
     lateinit var mTotalPrice: TextView
 
@@ -77,6 +92,9 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
 
     private var mCartPrice: String = ""
 
+    private var mAddress = Address()
+
+    private var listCarts = ArrayList<Cart>()
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
@@ -96,7 +114,7 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
         mToolbar.title = "Confirm Order"
-
+        mVogoDialog.setListener(this)
         setList(mConFirmOrderArrayList)
         rcvConfirmOrder.layoutParams.height =
             Resources.getSystem().displayMetrics.heightPixels * 23 / 32
@@ -107,6 +125,7 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
         mRoomUIManager.getAllCarts(mSessionManager.user_id, object : IRoomListener<Cart> {
             override fun showListData(carts: List<Cart>) {
                 mConFirmOrderAdapter.setList(carts as ArrayList<Cart>)
+                listCarts = ArrayList(carts)
             }
         })
 
@@ -126,14 +145,22 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
     fun processEventClick(view: View) {
         when (view.id) {
             R.id.button_order -> {
-                val dialogBuilder = AlertDialog.Builder(context)
-                dialogBuilder.setMessage("Thank for your order!\n Let's move to main screen.")
-                    .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
-                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show()
-                    })
-                val alert = dialogBuilder.create()
-                alert.setTitle("Order is successful!")
-                alert.show()
+                mAddress.name = edtName.text.toString()
+                mAddress.phone_number = edtPhone.text.toString()
+                mAddress.address = edtAddress.text.toString()
+                when {
+                    rbCash.isChecked -> {
+                        mAddress.payment_method = rbCash.text.toString()
+                    }
+                    rbMomo.isChecked -> {
+                        mAddress.payment_method = rbMomo.text.toString()
+                    }
+                    else -> {
+                        mAddress.payment_method = rbCreditCard.text.toString()
+                    }
+                }
+                updateProgressDialog(true)
+                mPresenter.submitOrder(mAddress,listCarts)
             }
         }
     }
@@ -143,14 +170,32 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
-        //TODO
+        if (isShowProgressDialog) {
+            if (!mPgDialog.isShowing) {
+                mPgDialog.show()
+            }
+        } else {
+            if (!mActivity.isDestroyed && mPgDialog.isShowing)
+                mPgDialog.dismiss()
+        }
     }
 
     override fun showMessageDialog(errorTitle: String?, errorMessage: String?) {
-        //TODO
+        if (!mVogoDialog.isAdded && !mActivity.isDestroyed) {
+            mVogoDialog.updateMessageDialog(context, errorTitle, errorMessage)
+            mVogoDialog.show(mActivity.supportFragmentManager, "ConfirmOrderFragment")
+        }
     }
 
     override fun setDisposable(disposable: Disposable) {
+        //TODO
+    }
+
+    override fun doYourAction() {
+        mActivity.mNavController.navigate(R.id.homeFragment)
+    }
+
+    override fun dimiss() {
         //TODO
     }
 }
