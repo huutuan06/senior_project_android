@@ -21,7 +21,10 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
     private lateinit var mCartEventListener: CartEventListener
 
     interface CartEventListener{
-        fun deleteCart(cart: Cart)
+        fun deleteCart(cart: Cart, totalBooks: Int)
+        fun updateCart(cartId: Int,totalBooks: Int, price: Float, type: String)
+        fun notifyMaximumBookAllow()
+//        fun notifyNotEnoughBook()
     }
 
     @SuppressLint("SetTextI18n")
@@ -41,17 +44,25 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
 
 
         holder.btnDelete!!.setOnClickListener {
+            mCartEventListener.deleteCart(cartList[position], count!!)
             deleteItem(position)
-            mCartEventListener.deleteCart(cartList[position])
         }
         holder.btnPlus?.setOnClickListener {
-            if (count!= null) count++
-            holder.txtCount!!.text = count.toString()
+            if (count!= null && count < 5) {
+                count++
+                holder.txtCount!!.text = count.toString()
+                mCartEventListener.updateCart(cartList[position].id!!, count, cartList[position].price!!, "Increase")
+            } else if (count == 5){
+                mCartEventListener.notifyMaximumBookAllow()
+            }
         }
         holder.btnMinus?.setOnClickListener {
             if ( count != null && count > 1)
+            {
                 count--
-            holder.txtCount!!.text = count.toString()
+                holder.txtCount!!.text = count.toString()
+                mCartEventListener.updateCart(cartList[position].id!!,count, cartList[position].price!!, "Descrease")
+            }
         }
     }
 

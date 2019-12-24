@@ -1,10 +1,12 @@
 package com.app.vogobook.view.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +28,7 @@ import com.app.vogobook.view.ui.callback.CartView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
+import kotlin.math.round
 
 class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
 
@@ -67,6 +70,8 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
 
     private var mCartAdapter : CartAdapter? = null
 
+    private var mTotalPrice: Float = 0F
+
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
@@ -93,16 +98,23 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
         mCartAdapter = CartAdapter(ArrayList())
         rcvCart.adapter = mCartAdapter
         mCartAdapter!!.setInterface(this)
+
+        mTotalPrice = 0F
         mRoomUIManager.getAllCarts(mSessionManager.user_id, object : IRoomListener<Cart> {
+            @SuppressLint("SetTextI18n")
             override fun showListData(carts: List<Cart>) {
                 mCartAdapter!!.setList(carts as ArrayList<Cart>)
                 if (carts.isNotEmpty()) {
                     emptyCartScreen.visibility = View.GONE
                     valueCartScreen.visibility = View.VISIBLE
+                    carts.forEach {
+                        mTotalPrice += it.total_book!!*it.price!!
+                    }
                 } else {
                     emptyCartScreen.visibility = View.VISIBLE
                     valueCartScreen.visibility = View.GONE
                 }
+                txtTotalPrice.text = "$" +String.format("%.2f",mTotalPrice)
             }
         })
         mBottomNavigation.visibility = View.GONE
@@ -119,13 +131,41 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
             }
 
             R.id.button_order -> {
-                mNavController.navigate(R.id.confirmOrderFragment)
+                val bundle = Bundle()
+                bundle.putString(context!!.getString(R.string.label_cart_price), txtTotalPrice.text.toString())
+                mNavController.navigate(R.id.confirmOrderFragment, bundle)
             }
         }
     }
 
-    override fun deleteCart(cart: Cart) {
+    @SuppressLint("SetTextI18n")
+    override fun deleteCart(cart: Cart, totalBooks: Int) {
         mPresenter.deleteCart(cart)
+        mTotalPrice -= cart.price!!*totalBooks
+        txtTotalPrice.text = "$" +String.format("%.2f",mTotalPrice)
+        if (mCartAdapter!!.itemCount == 1) {
+            emptyCartScreen.visibility = View.VISIBLE
+            valueCartScreen.visibility = View.GONE
+        } else {
+            emptyCartScreen.visibility = View.GONE
+            valueCartScreen.visibility = View.VISIBLE
+        }
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun updateCart(cartId: Int,totalBooks: Int, price: Float, type: String) {
+        if (type == "Increase") {
+            mTotalPrice += price
+        } else {
+            mTotalPrice -= price
+        }
+        mPresenter.updateCart(cartId, totalBooks)
+        txtTotalPrice.text = "$" +String.format("%.2f",mTotalPrice)
+    }
+
+    override fun notifyMaximumBookAllow() {
+        Toast.makeText(context,context!!.getString(R.string.label_maximum_book), Toast.LENGTH_SHORT).show()
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {

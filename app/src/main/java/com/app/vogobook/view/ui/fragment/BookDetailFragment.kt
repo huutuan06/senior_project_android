@@ -154,9 +154,13 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
                 mActivity.mNavController.navigate(R.id.writeReviewFragment, bundle)
             }
             R.id.button_add_to_cart -> {
-                mPresenter.saveCart(mBook)
-                mBookDetailListener.sendBook(mBook)
-                mSnackbar.show()
+                if (mBook!!.amount == 0) {
+                    Toast.makeText(context,"The product is out of stock", Toast.LENGTH_SHORT).show()
+                } else {
+                    mPresenter.saveCart(mBook)
+                    mBookDetailListener.sendBook(mBook)
+                    mSnackbar.show()
+                }
             }
             R.id.view_book_detail -> {
                 if (mSnackbar.isShown)
@@ -171,7 +175,6 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
 
     override fun navigateToCart(text: String) {
-        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
         mActivity.mNavController.navigate(R.id.cartFragment)
         mSnackbar.dismiss()
     }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,9 +68,14 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
     @BindView(R.id.edit_text_address)
     lateinit var edtAddress: EditText
 
+    @BindView(R.id.text_view_total_price)
+    lateinit var mTotalPrice: TextView
+
     private var mConFirmOrderArrayList = ArrayList<Cart>()
 
     private var mConFirmOrderAdapter = ConfirmOrderAdapter(mConFirmOrderArrayList)
+
+    private var mCartPrice: String = ""
 
 
     override fun provideYourFragmentView(
@@ -112,7 +118,8 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
             edtPhone.setText(mActivity.user.phone_number.toString())
         if (mActivity.user.address != null)
             edtAddress.setText(mActivity.user.address.toString())
-
+        mCartPrice = arguments!!.getString(context!!.getString(R.string.label_cart_price))!!
+        mTotalPrice.text = mCartPrice
     }
 
     @OnClick(R.id.button_order)
@@ -133,7 +140,6 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView {
 
     private fun setList(arr: ArrayList<Cart>) {
         mConFirmOrderAdapter.setList(arr)
-
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {

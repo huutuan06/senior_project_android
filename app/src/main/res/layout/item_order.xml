@@ -44,13 +44,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_view_book_title"
                 android:layout_toEndOf="@id/text_view_book_price"
-                android:text="X"/>
+                android:text=" X"/>
             <TextView
                 android:id="@+id/text_view_total_book"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_view_book_title"
-                android:layout_toEndOf="@id/text_view_multiplication"
-                android:text="2"/>
+                android:layout_toEndOf="@id/text_view_multiplication"/>
         </RelativeLayout>
 </LinearLayout>

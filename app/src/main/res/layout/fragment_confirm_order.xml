@@ -163,7 +163,6 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="$789"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"/>

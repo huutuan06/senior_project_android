@@ -18,6 +18,13 @@ import com.squareup.picasso.Picasso
 class OrderDetailAdapter(private var context: Context, private var listBooks: ArrayList<BookOrder>) :
     RecyclerView.Adapter<OrderDetailAdapter.ViewHolder>() {
 
+    private lateinit var mOrderEventListener: OrderDetailEventListener
+    var mOrderPrice: Float = 0F
+
+    interface OrderDetailEventListener {
+        fun setOrderPrice(price: Float)
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.layoutParams.height =
@@ -31,6 +38,12 @@ class OrderDetailAdapter(private var context: Context, private var listBooks: Ar
             .centerCrop().into(holder.imgBook)
         holder.txtTitle.text = listBooks[position].book_title.toString()
         holder.txtPrice.text = "$" + listBooks[position].price.toString()
+        holder.txtTotalBooks.text = listBooks[position].total_book.toString()
+
+        listBooks.forEach {
+            mOrderPrice+= listBooks[position].total_book!! * listBooks[position].price!!
+        }
+        mOrderEventListener.setOrderPrice(mOrderPrice)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -60,11 +73,18 @@ class OrderDetailAdapter(private var context: Context, private var listBooks: Ar
 
         @BindView(R.id.text_view_book_price)
         lateinit var txtPrice: TextView
+
+        @BindView(R.id.text_view_total_book)
+        lateinit var txtTotalBooks: TextView
     }
 
 
     fun setList(arr: ArrayList<BookOrder>) {
         listBooks = arr
         notifyDataSetChanged()
+    }
+
+    fun setInterface(listener: OrderDetailEventListener) {
+        mOrderEventListener = listener
     }
 }

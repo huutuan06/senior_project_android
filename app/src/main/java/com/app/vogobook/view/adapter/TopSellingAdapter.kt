@@ -30,7 +30,7 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         holder.itemView.layoutParams.height =  Resources.getSystem().displayMetrics.heightPixels /7
 
         holder.txtTitle.text = topSellingList[position].title
-        Picasso.get().load(topSellingList[position].image).resize(holder.itemView.layoutParams.height*2/3,  holder.itemView.layoutParams.height)
+        Picasso.get().load(topSellingList[position].image).resize(Resources.getSystem().displayMetrics.heightPixels /7*2/3,  Resources.getSystem().displayMetrics.heightPixels /7)
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = topSellingList[position].author
 //        holder.txtRate.text = topSellingList[position].rate

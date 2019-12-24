@@ -6,4 +6,5 @@ import com.app.vogobook.presenter.CartPresenter
 interface CartModel {
     fun attachPresenter(cartPresenter: CartPresenter)
     fun deleteCart(cart: Cart)
+    fun updateCart(cartId: Int, totalBooks: Int)
 }

@@ -20,7 +20,7 @@ import com.app.vogobook.view.ui.activity.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import javax.inject.Inject
 
-class OrderDetailFragment : BaseFragment() {
+class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventListener {
 
     @Inject
     lateinit var mContext: Context
@@ -49,6 +49,9 @@ class OrderDetailFragment : BaseFragment() {
     @BindView(R.id.text_view_order_status)
     lateinit var tvOrderStatus: TextView
 
+    @BindView(R.id.text_view_total_price)
+    lateinit var tvOrderPrice: TextView
+
     var mOrder = Order()
 
 
@@ -74,8 +77,9 @@ class OrderDetailFragment : BaseFragment() {
         mBottomNavigation.visibility = View.GONE
 
 
-        mOrder = arguments!!.getParcelable(mContext.getString(R.string.label_order))
-        mAdapter.setList(ArrayList(mOrder.arrBooks))
+        mOrder = arguments!!.getParcelable(mContext.getString(R.string.label_order))!!
+        mAdapter.setList(ArrayList(mOrder.arrBooks!!))
+        mAdapter.setInterface(this)
 
         tvOrderCode.text = mOrder.code.toString()
         tvOrderDate.text = mOrder.updated_at.toString()
@@ -95,14 +99,22 @@ class OrderDetailFragment : BaseFragment() {
             mOrder.payment -> {
                 tvOrderStatus.text = "Paid"
             }
+            else -> {
+                tvOrderStatus.text = "Seen"
+            }
         }
-        if (mOrder.confirm_ordering == mOrder.delivery && mOrder.delivery == mOrder.success && mOrder.success == mOrder.cancel
-            && mOrder.cancel == mOrder.payment && mOrder.payment == 0)
-            tvOrderStatus.text = "Seen"
+//        if (mOrder.confirm_ordering == mOrder.delivery && mOrder.delivery == mOrder.success && mOrder.success == mOrder.cancel
+//            && mOrder.cancel == mOrder.payment && mOrder.payment == 0)
+//            tvOrderStatus.text = "Seen"
 
         rcvBook.layoutManager = LinearLayoutManager(context)
         rcvBook.hasFixedSize()
         rcvBook.adapter = mAdapter
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun setOrderPrice(price: Float) {
+        tvOrderPrice.text = "$" +String.format("%.2f",price)
     }
 
 
