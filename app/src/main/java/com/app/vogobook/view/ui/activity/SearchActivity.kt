@@ -96,8 +96,8 @@ class SearchActivity : BaseActivity() , TextView.OnEditorActionListener, SearchA
         val bundle = Bundle()
         bundle.putParcelable(Constants.BOOK, book)
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra(Constants.BOOK, bundle)
+        intent.putExtra("Bundle", bundle)
         startActivity(intent)
-        this.onDestroy()
+        finish()
     }
 }

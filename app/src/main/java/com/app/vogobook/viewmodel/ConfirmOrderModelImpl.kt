@@ -1,13 +1,8 @@
 package com.app.vogobook.viewmodel
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.os.AsyncTask
-import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.Cart
-import com.app.vogobook.localstorage.entities.Review
-import com.app.vogobook.presenter.BookDetailPresenter
 import com.app.vogobook.presenter.ConfirmOrderPresenter
 import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.connect.rx.IDisposableListener
@@ -15,11 +10,8 @@ import com.app.vogobook.service.repository.BookService
 import com.app.vogobook.service.response.Address
 import com.app.vogobook.service.model.OrdersData
 import com.app.vogobook.service.response.Error
-import com.app.vogobook.service.response.ReviewsResponse
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.ui.activity.MainActivity
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 
 class ConfirmOrderModelImpl (
     private val context: Context,
@@ -41,8 +33,6 @@ class ConfirmOrderModelImpl (
         orderResponseList.user_id = mSessionManager.user_id
         orderResponseList.address = address
         orderResponseList.carts = listCarts
-//        val jsonObject = JsonObject()
-//        jsonObject.addProperty("Order",Gson().toJson(orderResponseList))
         mPresenter!!.setDisposable(disposableManager.submitOrder(service.submitOrder(mSessionManager.token, orderResponseList), object : IDisposableListener<Error> {
             override fun onComplete() {
             }
