@@ -7,4 +7,5 @@ import com.app.vogobook.service.response.Address
 interface ConfirmOrderModel {
     fun attachPresenter(confirmOrderPresenter: ConfirmOrderPresenter)
     fun submitOrder(address: Address, listCarts: ArrayList<Cart>)
+    fun logOut()
 }

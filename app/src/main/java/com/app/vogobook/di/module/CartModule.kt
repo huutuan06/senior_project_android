@@ -3,6 +3,7 @@ package com.app.vogobook.di.module
 import android.content.Context
 import com.app.vogobook.di.scope.FragmentScope
 import com.app.vogobook.di.scope.SubFragmentScope
+import com.app.vogobook.livedata.VogoBookLive
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Cart
@@ -38,7 +39,7 @@ class CartModule (private val fragment : CartFragment, private var view: CartVie
 
     @Provides
     @FragmentScope
-    fun provideCartAdapter(context: Context) =  CartAdapter(ArrayList<Cart>())
+    fun provideCartAdapter(context: Context, activity: MainActivity, vogoBookLive: VogoBookLive) =  CartAdapter(ArrayList(), vogoBookLive, activity)
 
 
     @Provides

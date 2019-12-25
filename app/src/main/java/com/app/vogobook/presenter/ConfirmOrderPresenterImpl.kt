@@ -36,6 +36,17 @@ class ConfirmOrderPresenterImpl(
         }
     }
 
+    override fun logOut() {
+        if (Utils.isInternetOn(context)) {
+            model.logOut()
+        } else {
+            view.showMessageDialog(
+                context.getString(R.string.label_error),
+                context.getString(R.string.label_no_internet)
+            )
+        }
+    }
+
     override fun submitOrderSuccess() {
         view.updateProgressDialog(false)
         view.showMessageDialog(context.getString(R.string.label_success), context.getString(R.string.submit_order_successfully))
@@ -46,6 +57,9 @@ class ConfirmOrderPresenterImpl(
         view.showMessageDialog(context.getString(R.string.label_failure), context.getString(R.string.cannot_process_request))
     }
 
+    override fun logoutSuccess() {
+        view.logoutSuccess()
+    }
 
     override fun setDisposable(disposable: Disposable) {
         view.setDisposable(disposable)

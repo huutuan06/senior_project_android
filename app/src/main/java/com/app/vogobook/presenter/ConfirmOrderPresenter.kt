@@ -7,4 +7,6 @@ interface ConfirmOrderPresenter : BasePresenter {
     fun submitOrder(address: Address, listCarts: ArrayList<Cart>)
     fun submitOrderSuccess()
     fun submitOrderFailed()
+    fun logoutSuccess()
+    fun logOut()
 }

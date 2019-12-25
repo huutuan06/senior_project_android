@@ -23,29 +23,37 @@ import javax.inject.Inject
 
 class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener {
 
-    @Inject lateinit var mContext: Context
+    @Inject
+    lateinit var mContext: Context
 
-    @Inject lateinit var mActivity: MainActivity
+    @Inject
+    lateinit var mActivity: MainActivity
 
-    @Inject lateinit var mFragment: HomeFragment
+    @Inject
+    lateinit var mFragment: HomeFragment
 
-    @Inject lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+    @Inject
+    lateinit var mToolbar: androidx.appcompat.widget.Toolbar
 
     @BindView(R.id.bottom_navigation_bar)
-    @JvmField var mBottomNavigation: BottomNavigationView? = null
+    @JvmField
+    var mBottomNavigation: BottomNavigationView? = null
 
     @BindView(R.id.text_view_common)
-    @JvmField var tvCommon : TextView? = null
+    @JvmField
+    var tvCommon: TextView? = null
 
     @BindView(R.id.text_view_top_selling)
-    @JvmField var tvTopSelling : TextView? = null
+    @JvmField
+    var tvTopSelling: TextView? = null
 
     @BindView(R.id.text_view_new_release)
-    @JvmField var tvNewRelease : TextView? = null
+    @JvmField
+    var tvNewRelease: TextView? = null
 
-    private lateinit var mNavHostFragment : NavHostFragment
-    private lateinit var mNavController : NavController
-    private lateinit var mViewFrag : View
+    private lateinit var mNavHostFragment: NavHostFragment
+    private lateinit var mNavController: NavController
+    private lateinit var mViewFrag: View
 
     override fun provideYourFragmentView(
         inflater: LayoutInflater,
@@ -57,13 +65,16 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
     }
 
     override fun distributedDaggerComponents() {
-        Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity)).plus(
-                HomeModule(this, mViewFrag)).inject(this)
+        Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity))
+            .plus(
+                HomeModule(this, mViewFrag)
+            ).inject(this)
     }
 
     override fun initAttributes() {
         mNavHostFragment = mFragment.childFragmentManager.findFragmentById(
-            R.id.fragment_nav_host_home) as NavHostFragment
+            R.id.fragment_nav_host_home
+        ) as NavHostFragment
         mNavController = NavHostFragment.findNavController(mNavHostFragment)
         mNavController.setGraph(R.navigation.navigation_graph_home)
         mNavController.addOnDestinationChangedListener(this)
@@ -75,8 +86,8 @@ class HomeFragment : BaseFragment(), NavController.OnDestinationChangedListener 
     }
 
     @OnClick(R.id.text_view_common, R.id.text_view_top_selling, R.id.text_view_new_release)
-    fun processEventClick(v : View) {
-        when(v.id) {
+    fun processEventClick(v: View) {
+        when (v.id) {
             R.id.text_view_common -> {
                 mNavController.popBackStack()
                 val bundle = Bundle()

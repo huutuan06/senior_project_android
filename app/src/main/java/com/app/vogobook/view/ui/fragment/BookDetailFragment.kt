@@ -20,6 +20,8 @@ import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.BookDetailModule
 import com.app.vogobook.di.module.MainModule
+import com.app.vogobook.livedata.VogoBookLive
+import com.app.vogobook.livedata.`object`.LiveDataBook
 import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Review
 import com.app.vogobook.presenter.BookDetailPresenter
@@ -63,6 +65,9 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
     @Inject
     lateinit var mAdapter: BookDetailAdapter
+
+    @Inject
+    lateinit var mVogoBookLive: VogoBookLive
 
     @BindView(R.id.image_book)
     lateinit var imgBook: ImageView
@@ -157,6 +162,7 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
                 if (mBook!!.amount == 0) {
                     Toast.makeText(context,"The product is out of stock", Toast.LENGTH_SHORT).show()
                 } else {
+                    mVogoBookLive.initLiveDataBook(LiveDataBook("key", mBook))
                     mPresenter.saveCart(mBook)
                     mBookDetailListener.sendBook(mBook)
                     mSnackbar.show()

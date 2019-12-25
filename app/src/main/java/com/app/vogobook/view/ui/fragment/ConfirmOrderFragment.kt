@@ -2,6 +2,7 @@ package com.app.vogobook.view.ui.fragment
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
@@ -23,6 +24,7 @@ import com.app.vogobook.service.response.Address
 import com.app.vogobook.utils.SessionManager
 import com.app.vogobook.view.adapter.ConfirmOrderAdapter
 import com.app.vogobook.view.custom.VogoLoadingDialog
+import com.app.vogobook.view.ui.activity.LoginActivity
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.ConfirmOrderView
 import com.app.vogobook.view.ui.dialog.VogoDialog
@@ -185,6 +187,14 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView, VogoDialog.IListe
             mVogoDialog.updateMessageDialog(context, errorTitle, errorMessage)
             mVogoDialog.show(mActivity.supportFragmentManager, "ConfirmOrderFragment")
         }
+    }
+
+    override fun logoutSuccess() {
+        mSessionManager.clear()
+        val intent = Intent(mActivity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        mActivity.startActivity(intent)
+        mActivity.finish()
     }
 
     override fun setDisposable(disposable: Disposable) {

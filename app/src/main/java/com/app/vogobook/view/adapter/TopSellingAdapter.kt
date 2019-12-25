@@ -39,7 +39,10 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         holder.item.setOnClickListener {
             mHomeTopSellingListener.navigateToBookDetail(topSellingList[position])
         }
-
+        if (topSellingList[position].amount == 0)
+            holder.imgSoldOut.visibility = View.VISIBLE
+        else
+            holder.imgSoldOut.visibility = View.GONE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -63,6 +66,7 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         var txtAuthor: TextView = itemView.text_view_book_author
         var txtRate: TextView = itemView.text_view_rate
         var txtPrice: TextView = itemView.text_view_book_price
+        var imgSoldOut: ImageView = itemView.img_sold_out
         var item: ConstraintLayout = itemView.item_topselling
     }
 

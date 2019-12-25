@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.app.vogobook.R
 import com.app.vogobook.di.scope.ActivityScope
+import com.app.vogobook.livedata.VogoBookLive
 import com.app.vogobook.presenter.MainPresenter
 import com.app.vogobook.presenter.MainPresenterImpl
 import com.app.vogobook.view.custom.CartSnackBarLayout
@@ -81,4 +82,8 @@ class MainModule {
     @Provides
     @ActivityScope
     fun provideVogoLoadingDialog() : VogoLoadingDialog = VogoLoadingDialog(activity)
+
+    @Provides
+    @ActivityScope
+    fun provideVogoBookLive() : VogoBookLive = VogoBookLive()
 }

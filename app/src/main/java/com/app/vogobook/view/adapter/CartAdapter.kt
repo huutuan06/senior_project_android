@@ -7,15 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
+import com.app.vogobook.livedata.VogoBookLive
+import com.app.vogobook.livedata.`object`.LiveDataBook
 import com.app.vogobook.localstorage.entities.Cart
+import com.app.vogobook.view.ui.activity.MainActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_cart.view.*
 import kotlin.collections.ArrayList
 
 
-class CartAdapter(private var cartList: ArrayList<Cart>) :
+class CartAdapter(private var cartList: ArrayList<Cart>, private var vogoBookLive: VogoBookLive, private var activity: MainActivity) :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     private lateinit var mCartEventListener: CartEventListener
@@ -48,6 +52,12 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
             deleteItem(position)
         }
         holder.btnPlus?.setOnClickListener {
+
+
+//            vogoBookLive.implLiveDataBook()!!.observe(activity, Observer<LiveDataBook> { book: LiveDataBook? ->
+//                // Update the UI.
+//            })
+
             if (count!= null && count < 5) {
                 count++
                 holder.txtCount!!.text = count.toString()
