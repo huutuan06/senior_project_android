@@ -30,6 +30,10 @@ import kotlinx.android.synthetic.main.item_home_common_category.view.*
         holder.mItemBook.setOnClickListener {
             mCategoryEventListener.navigateToBookDetail(categoriesList[position])
         }
+        if (categoriesList[position].amount == 0)
+            holder.imgSoldOut.visibility = View.VISIBLE
+        else
+            holder.imgSoldOut.visibility = View.GONE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,6 +59,7 @@ import kotlinx.android.synthetic.main.item_home_common_category.view.*
         var txtTitle = itemView.text_view_book_title!!
         var imgBook = itemView.image_book!!
         var txtPrice = itemView.text_view_book_price!!
+        var imgSoldOut = itemView.img_sold_out!!
 
         init {
             ButterKnife.bind(this, itemView)

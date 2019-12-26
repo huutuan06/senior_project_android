@@ -43,11 +43,7 @@ class WriteReviewModelImpl (
             }
 
             override fun onApiFailure(error: Throwable?) {
-//                mPresenter!!.logoutSuccess()
             }
-
         }))
     }
-
-
 }

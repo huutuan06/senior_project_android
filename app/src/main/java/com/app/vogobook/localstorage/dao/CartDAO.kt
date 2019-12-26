@@ -22,12 +22,15 @@ interface CartDAO {
     @Delete
     fun delete(cart: Cart)
 
-    @Query("SELECT * FROM " + Constants.DB_TABLE_CART )
-    fun getCarts() : Maybe<List<Cart>>
+    @Query("SELECT * FROM " + Constants.DB_TABLE_CART)
+    fun getCarts(): Maybe<List<Cart>>
 
-    @Query("SELECT * FROM " + Constants.DB_TABLE_CART + " WHERE " + Constants.TABLE_CART_BOOK_ID + "= :bookID" )
-    fun getCartsByBookID(bookID: Int?) : Maybe<List<Cart>>
+    @Query("SELECT * FROM " + Constants.DB_TABLE_CART + " WHERE " + Constants.TABLE_CART_BOOK_ID + "= :bookID")
+    fun getCartsByBookID(bookID: Int?): Maybe<List<Cart>>
 
-    @Query("SELECT * FROM " + Constants.DB_TABLE_CART + " WHERE " + Constants.TABLE_CART_USER_ID + "= :userID" )
-    fun getCartsByUserID(userID: Int?) : Maybe<List<Cart>>
+    @Query("SELECT * FROM " + Constants.DB_TABLE_CART + " WHERE " + Constants.TABLE_CART_USER_ID + "= :userID")
+    fun getCartsByUserID(userID: Int?): Maybe<List<Cart>>
+
+    @Query("UPDATE " + Constants.DB_TABLE_CART + " SET " + Constants.TABLE_CART_TOTAL_BOOK + " =:totalBooks WHERE " + Constants.TABLE_CART_ID + " =:cartId")
+    fun updateTotalBookInCart(cartId: Int, totalBooks: Int)
 }

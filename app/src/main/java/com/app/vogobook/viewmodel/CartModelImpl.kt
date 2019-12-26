@@ -28,5 +28,9 @@ class CartModelImpl(
     override fun deleteCart(cart: Cart) {
         mRoomUIManager.deleteCart(cart)
     }
+
+    override fun updateCart(cartId: Int, totalBooks: Int) {
+        mRoomUIManager.updateCart(cartId, totalBooks)
+    }
 }
 

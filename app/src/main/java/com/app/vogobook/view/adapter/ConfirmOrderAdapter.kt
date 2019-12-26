@@ -32,7 +32,7 @@ class ConfirmOrderAdapter(private var list: ArrayList<Cart>) :
             .centerCrop().into(holder.imgBook)
         holder.txtPrice.text = "$" + list[position].price.toString()
         holder.txtAmountBook!!.text = list[position].total_book.toString()
-
+        holder.txtAuthor.text = list[position].book_author.toString()
     } 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -57,6 +57,7 @@ class ConfirmOrderAdapter(private var list: ArrayList<Cart>) :
         var txtTitle: TextView = itemView.text_view_book_title
         var imgBook: ImageView = itemView.image_book
         var txtPrice: TextView = itemView.text_view_book_price
+        var txtAuthor: TextView = itemView.text_view_book_author
 
         var txtAmountBook: TextView? = itemView.text_view_amount_book
     }

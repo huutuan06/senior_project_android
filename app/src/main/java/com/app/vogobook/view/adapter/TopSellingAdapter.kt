@@ -30,7 +30,7 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         holder.itemView.layoutParams.height =  Resources.getSystem().displayMetrics.heightPixels /7
 
         holder.txtTitle.text = topSellingList[position].title
-        Picasso.get().load(topSellingList[position].image).resize(holder.itemView.layoutParams.height*2/3,  holder.itemView.layoutParams.height)
+        Picasso.get().load(topSellingList[position].image).resize(Resources.getSystem().displayMetrics.heightPixels /7*2/3,  Resources.getSystem().displayMetrics.heightPixels /7)
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = topSellingList[position].author
 //        holder.txtRate.text = topSellingList[position].rate
@@ -39,7 +39,10 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         holder.item.setOnClickListener {
             mHomeTopSellingListener.navigateToBookDetail(topSellingList[position])
         }
-
+        if (topSellingList[position].amount == 0)
+            holder.imgSoldOut.visibility = View.VISIBLE
+        else
+            holder.imgSoldOut.visibility = View.GONE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -63,6 +66,7 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         var txtAuthor: TextView = itemView.text_view_book_author
         var txtRate: TextView = itemView.text_view_rate
         var txtPrice: TextView = itemView.text_view_book_price
+        var imgSoldOut: ImageView = itemView.img_sold_out
         var item: ConstraintLayout = itemView.item_topselling
     }
 

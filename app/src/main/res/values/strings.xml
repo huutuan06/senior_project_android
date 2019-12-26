@@ -72,4 +72,8 @@
     <string name="no_search_result">No result search</string>
     <string name="label_book">BOOK</string>
     <string name="label_screen_cart">Cart</string>
+    <string name="label_cart_price">Cart_Price</string>
+    <string name="label_maximum_book">The maximum number of books allowed is 5</string>
+    <string name="label_not_enough_book">Not enough this book in stock</string>
+    <string name="submit_order_successfully">Your order submit successfully</string>
 </resources>

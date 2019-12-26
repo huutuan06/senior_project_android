@@ -53,9 +53,10 @@ class CartSnackBarLayout(context: Context, fragment: BookDetailFragment) : Const
         fragment.attachDialogInterface(object : BookDetailFragment.BookDetailListener {
             @SuppressLint("SetTextI18n")
             override fun sendBook(book: Book?) {
+                book!!.amount
                 Picasso.get().load(book!!.image).resize(Resources.getSystem().displayMetrics.widthPixels ,  Resources.getSystem().displayMetrics.widthPixels*3/2)
                     .centerCrop().into(image)
-                title!!.text = book!!.title.toString()
+                title!!.text = book.title.toString()
                 author!!.text = book.author.toString()
                 price!!.text = "$" + book.price.toString()
             }

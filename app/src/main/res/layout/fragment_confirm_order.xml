@@ -49,6 +49,7 @@
                 android:textSize="14sp"
                 android:textColor="@color/textColorAccent"
                 android:singleLine="true"
+                android:inputType="number"
                 android:hint="Enter your phone number"/>
             <EditText
                 android:id="@+id/edit_text_address"
@@ -81,7 +82,7 @@
                 app:layout_constraintTop_toBottomOf="@id/text_view_delivery">
 
                 <RadioButton
-                    android:id="@+id/rdCash"
+                    android:id="@+id/radio_button_cash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -89,14 +90,14 @@
                     android:text="Cash" />
 
                 <RadioButton
-                    android:id="@+id/rdMomo"
+                    android:id="@+id/radio_button_momo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="Momo" />
 
                 <RadioButton
-                    android:id="@+id/rdCreditCard"
+                    android:id="@+id/radio_button_credit_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
@@ -165,7 +166,6 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="$789"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"/>

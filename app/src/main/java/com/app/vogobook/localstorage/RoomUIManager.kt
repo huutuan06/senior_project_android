@@ -195,4 +195,10 @@ class RoomUIManager(
                 }
         }
     }
+
+    fun updateCart(cartId: Int, totalBooks: Int) {
+        AsyncTask.execute {
+            mCartDAO.updateTotalBookInCart(cartId, totalBooks)
+        }
+    }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Book
@@ -29,6 +30,10 @@ class SearchAdapter(private var booktList: ArrayList<Book>) :
             Resources.getSystem().displayMetrics.heightPixels * 2 / 9 * 9 / 15,
             Resources.getSystem().displayMetrics.widthPixels * 4 / 10
         ).centerCrop().into(holder.imgBook)
+
+        holder.item.setOnClickListener {
+            mSearchEventListener.navigateToBookDetail(booktList[position])
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,6 +55,8 @@ class SearchAdapter(private var booktList: ArrayList<Book>) :
         var imgBook: ImageView = itemView.image_book
         var txtPrice: TextView = itemView.text_view_book_price
         var txtAuthor: TextView = itemView.text_view_book_author
+
+        var item: CardView = itemView.item_cart
 
         var btnDelete: ImageView? = itemView.button_delete
         var btnPlus: ImageView? = itemView.button_plus

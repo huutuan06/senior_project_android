@@ -9,4 +9,6 @@ interface ConfirmOrderModel {
     fun submitOrder(address: Address, list: ArrayList<Cart>)
 
     fun attachPresenter(confirmOrderPresenter: ConfirmOrderPresenter)
+    fun submitOrder(address: Address, listCarts: ArrayList<Cart>)
+    fun logOut()
 }

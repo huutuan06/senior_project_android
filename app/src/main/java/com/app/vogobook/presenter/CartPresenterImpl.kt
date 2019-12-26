@@ -31,6 +31,18 @@ class CartPresenterImpl(
         }
     }
 
+    override fun updateCart(cartId: Int, totalBooks: Int) {
+        if (Utils.isInternetOn(context)) {
+            view.updateProgressDialog(true)
+            model.updateCart(cartId, totalBooks)
+        } else {
+            view.showMessageDialog(
+                context.getString(R.string.label_error),
+                context.getString(R.string.label_no_internet)
+            )
+        }
+    }
+
     override fun setDisposable(disposable: Disposable) {
         view.setDisposable(disposable)
     }

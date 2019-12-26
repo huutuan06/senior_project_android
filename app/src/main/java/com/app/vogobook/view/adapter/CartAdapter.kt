@@ -2,25 +2,35 @@ package com.app.vogobook.view.adapter
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
+import com.app.vogobook.livedata.VogoBookLive
+import com.app.vogobook.livedata.`object`.LiveDataBook
 import com.app.vogobook.localstorage.entities.Cart
+import com.app.vogobook.utils.objects.Utils
+import com.app.vogobook.view.ui.activity.MainActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_cart.view.*
 import kotlin.collections.ArrayList
 
-class CartAdapter(private var cartList: ArrayList<Cart>) :
+
+class CartAdapter(private var cartList: ArrayList<Cart>, private var vogoBookLive: VogoBookLive, private var activity: MainActivity) :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     private lateinit var mCartEventListener: CartEventListener
 
     interface CartEventListener{
-        fun deleteCart(cart: Cart)
+        fun deleteCart(cart: Cart, totalBooks: Int)
+        fun updateCart(cartId: Int,totalBooks: Int, price: Float, type: String)
+        fun notifyMaximumBookAllow()
+//        fun notifyNotEnoughBook()
     }
 
     @SuppressLint("SetTextI18n")
@@ -35,19 +45,32 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
             Resources.getSystem().displayMetrics.heightPixels * 2 / 9 * 9 / 15,
             Resources.getSystem().displayMetrics.widthPixels * 4 / 10
         ).centerCrop().into(holder.imgBook)
+//        holder.txtPrice.text = cartList[position].price
 
         holder.btnDelete!!.setOnClickListener {
-            mCartEventListener.deleteCart(cartList[position])
+            mCartEventListener.deleteCart(cartList[position], count!!)
             deleteItem(position)
         }
         holder.btnPlus?.setOnClickListener {
-            if (count!= null) count++
-            holder.txtCount!!.text = count.toString()
+            vogoBookLive.implLiveDataBook()!!.observe(activity, Observer { book: LiveDataBook? ->
+                if (TextUtils.equals(book!!.key, Utils.generateKeyFromText(cartList[position].book_title))) {
+                    if (count!= null && count < book.book!!.amount!!) {
+                        count++
+                        holder.txtCount!!.text = count.toString()
+                        mCartEventListener.updateCart(cartList[position].id!!, count, cartList[position].price!!, "Increase")
+                    } else if (count == book.book!!.amount!!) {
+                        mCartEventListener.notifyMaximumBookAllow()
+                    }
+                }
+            })
         }
         holder.btnMinus?.setOnClickListener {
             if ( count != null && count > 1)
+            {
                 count--
-            holder.txtCount!!.text = count.toString()
+                holder.txtCount!!.text = count.toString()
+                mCartEventListener.updateCart(cartList[position].id!!,count, cartList[position].price!!, "Descrease")
+            }
         }
     }
 

@@ -62,6 +62,8 @@ class MainActivity : BaseActivity(), MainView,
     lateinit var mSessionManager: SessionManager
 
     var user = User()
+    var book = Book()
+    var bundle = Bundle()
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this, this)).inject(this)
@@ -81,6 +83,19 @@ class MainActivity : BaseActivity(), MainView,
                     user = t[0]
             }
         })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (intent.extras != null) {
+            val intent: Intent = this.intent
+            bundle = intent.getBundleExtra("Bundle")
+            book = bundle.getParcelable(Constants.BOOK)!!
+            val bundle = Bundle()
+            bundle.putParcelable(Constants.BOOK, book)
+            mNavController.navigate(R.id.bookDetailFragment, bundle)
+        }
     }
 
     public override val layoutRes: Int

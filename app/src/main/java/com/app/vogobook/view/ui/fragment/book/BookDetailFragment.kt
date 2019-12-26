@@ -19,10 +19,13 @@ import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.BookDetailModule
 import com.app.vogobook.di.module.MainModule
+import com.app.vogobook.livedata.VogoBookLive
+import com.app.vogobook.livedata.`object`.LiveDataBook
 import com.app.vogobook.localstorage.entities.Book
 import com.app.vogobook.localstorage.entities.Review
 import com.app.vogobook.presenter.BookDetailPresenter
 import com.app.vogobook.utils.Constants
+import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.adapter.BookDetailAdapter
 import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.ui.activity.MainActivity
@@ -61,6 +64,9 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
     @Inject
     lateinit var mAdapter: BookDetailAdapter
+
+    @Inject
+    lateinit var mVogoBookLive: VogoBookLive
 
     @BindView(R.id.image_book)
     lateinit var imgBook: ImageView
@@ -152,9 +158,14 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
                 mActivity.mNavController.navigate(R.id.writeReviewFragment, bundle)
             }
             R.id.button_add_to_cart -> {
-                mPresenter.saveCart(mBook)
-                mBookDetailListener.sendBook(mBook)
-                mSnackbar.show()
+                if (mBook!!.amount == 0) {
+                    Toast.makeText(context,"The product is out of stock", Toast.LENGTH_SHORT).show()
+                } else {
+                    mVogoBookLive.initLiveDataBook(LiveDataBook(Utils.generateKeyFromText(mBook!!.title), mBook))
+                    mPresenter.saveCart(mBook)
+                    mBookDetailListener.sendBook(mBook)
+                    mSnackbar.show()
+                }
             }
             R.id.view_book_detail -> {
                 if (mSnackbar.isShown)
@@ -169,7 +180,6 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
 
     override fun navigateToCart(text: String) {
-        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
         mActivity.mNavController.navigate(R.id.cartFragment)
         mSnackbar.dismiss()
     }

@@ -80,7 +80,7 @@ class ManageOrdersFragment : BaseFragment(), ManageOrdersAdapter.ManageOrderList
         mToolbar.title = mTitle
 
         mBottomNavigation.visibility = View.GONE
-        mOrderArraylist = arguments!!.getParcelableArrayList(Constants.LIST_ORDERS)
+        mOrderArraylist = arguments!!.getParcelableArrayList(Constants.LIST_ORDERS)!!
         if (mOrderArraylist.isEmpty()) {
             mLayoutValueOrders.visibility = View.GONE
             mLayoutEmptyOrders.visibility = View.VISIBLE
