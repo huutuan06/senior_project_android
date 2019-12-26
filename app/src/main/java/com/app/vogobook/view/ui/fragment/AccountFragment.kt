@@ -4,12 +4,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,11 +27,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.fragment_account.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import javax.xml.datatype.DatatypeConstants.MONTHS
 
 class AccountFragment : BaseFragment(), AccountView {
 
