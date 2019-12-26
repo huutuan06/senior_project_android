@@ -28,7 +28,6 @@ import com.app.vogobook.view.ui.callback.CartView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
-import kotlin.math.round
 
 class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
 
@@ -56,6 +55,9 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
     @Inject
     lateinit var mContext: Context
 
+    @Inject
+    lateinit var mCartAdapter: CartAdapter
+
     @BindView(R.id.layout_empty_cart)
     lateinit var emptyCartScreen: ConstraintLayout
 
@@ -67,8 +69,6 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
 
     @BindView(R.id.text_view_total_price)
     lateinit var txtTotalPrice: TextView
-
-    private var mCartAdapter : CartAdapter? = null
 
     private var mTotalPrice: Float = 0F
 
@@ -95,7 +95,6 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
         rcvCart.layoutParams.height = Resources.getSystem().displayMetrics.heightPixels*23/32
         rcvCart.layoutManager = LinearLayoutManager(context)
         rcvCart.hasFixedSize()
-        mCartAdapter = CartAdapter(ArrayList())
         rcvCart.adapter = mCartAdapter
         mCartAdapter!!.setInterface(this)
 

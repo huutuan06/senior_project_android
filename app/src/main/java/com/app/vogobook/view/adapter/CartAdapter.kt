@@ -2,6 +2,7 @@ package com.app.vogobook.view.adapter
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.app.vogobook.R
 import com.app.vogobook.livedata.VogoBookLive
 import com.app.vogobook.livedata.`object`.LiveDataBook
 import com.app.vogobook.localstorage.entities.Cart
+import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_cart.view.*
@@ -42,29 +44,25 @@ class CartAdapter(private var cartList: ArrayList<Cart>, private var vogoBookLiv
         Picasso.get().load(cartList[position].image).resize(
             Resources.getSystem().displayMetrics.heightPixels * 2 / 9 * 9 / 15,
             Resources.getSystem().displayMetrics.widthPixels * 4 / 10
-        )
-            .centerCrop().into(holder.imgBook)
+        ).centerCrop().into(holder.imgBook)
 //        holder.txtPrice.text = cartList[position].price
-
 
         holder.btnDelete!!.setOnClickListener {
             mCartEventListener.deleteCart(cartList[position], count!!)
             deleteItem(position)
         }
         holder.btnPlus?.setOnClickListener {
-
-
-//            vogoBookLive.implLiveDataBook()!!.observe(activity, Observer<LiveDataBook> { book: LiveDataBook? ->
-//                // Update the UI.
-//            })
-
-            if (count!= null && count < 5) {
-                count++
-                holder.txtCount!!.text = count.toString()
-                mCartEventListener.updateCart(cartList[position].id!!, count, cartList[position].price!!, "Increase")
-            } else if (count == 5){
-                mCartEventListener.notifyMaximumBookAllow()
-            }
+            vogoBookLive.implLiveDataBook()!!.observe(activity, Observer { book: LiveDataBook? ->
+                if (TextUtils.equals(book!!.key, Utils.generateKeyFromText(cartList[position].book_title))) {
+                    if (count!= null && count < book.book!!.amount!!) {
+                        count++
+                        holder.txtCount!!.text = count.toString()
+                        mCartEventListener.updateCart(cartList[position].id!!, count, cartList[position].price!!, "Increase")
+                    } else if (count == book.book!!.amount!!) {
+                        mCartEventListener.notifyMaximumBookAllow()
+                    }
+                }
+            })
         }
         holder.btnMinus?.setOnClickListener {
             if ( count != null && count > 1)

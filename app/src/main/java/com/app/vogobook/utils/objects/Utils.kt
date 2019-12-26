@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import com.app.vogobook.BuildConfig
 import com.app.vogobook.R
 import com.app.vogobook.utils.Constants
+import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -75,6 +76,10 @@ object Utils {
 
     fun enclosePercentage(keyword: String): String {
         return Constants.PERCENTAGE+(keyword)+(Constants.PERCENTAGE)
+    }
+
+    fun generateKeyFromText(text: String?) : String {
+        return text!!.replace("[-+.^:,]","").trim()
     }
 
 }

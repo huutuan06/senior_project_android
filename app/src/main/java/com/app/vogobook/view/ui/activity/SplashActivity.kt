@@ -64,5 +64,4 @@ class SplashActivity : BaseActivity() {
         }
         super.onDestroy()
     }
-
 }

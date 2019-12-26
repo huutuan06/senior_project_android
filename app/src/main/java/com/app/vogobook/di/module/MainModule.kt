@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.app.vogobook.R
@@ -83,7 +84,12 @@ class MainModule {
     @ActivityScope
     fun provideVogoLoadingDialog() : VogoLoadingDialog = VogoLoadingDialog(activity)
 
+    /**
+     * @return EventRestore
+     */
     @Provides
     @ActivityScope
-    fun provideVogoBookLive() : VogoBookLive = VogoBookLive()
+    fun provideVogoBookLive(activity: MainActivity): VogoBookLive {
+        return ViewModelProviders.of(activity).get(VogoBookLive::class.java)
+    }
 }
