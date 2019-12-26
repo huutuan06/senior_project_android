@@ -64,5 +64,11 @@
     <string name="label_total_price">Total</string>
     <string name="label_order">Order</string>
     <string name="label_order_detail">orderDetailFragment</string>
-
+    <string name="btn_ok">OK</string>
+    <string name="label_success">Success</string>
+    <string name="submit_review_successfully">Your review submit successfully</string>
+    <string name="label_failure">Failure</string>
+    <string name="cannot_process_request">Something went wrong from server</string>
+    <string name="no_search_result">No result search</string>
+    <string name="label_book">BOOK</string>
 </resources>

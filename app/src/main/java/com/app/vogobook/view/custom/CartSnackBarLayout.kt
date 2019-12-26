@@ -13,7 +13,7 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.view.ui.fragment.BookDetailFragment
+import com.app.vogobook.view.ui.fragment.book.BookDetailFragment
 import com.squareup.picasso.Picasso
 
 

@@ -1,41 +1,8 @@
-package com.app.vogobook.view.ui.fragment
+package com.app.vogobook.view.ui.fragment.book
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.res.Resources
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
-import butterknife.OnClick
-import com.app.vogobook.R
-import com.app.vogobook.app.Application
-import com.app.vogobook.di.module.BookDetailModule
-import com.app.vogobook.di.module.MainModule
-import com.app.vogobook.localstorage.entities.Book
-import com.app.vogobook.localstorage.entities.Review
-import com.app.vogobook.presenter.BookDetailPresenter
-import com.app.vogobook.utils.Constants
-import com.app.vogobook.view.adapter.BookDetailAdapter
 import com.app.vogobook.view.custom.CartSnackBarLayout
-import com.app.vogobook.view.ui.activity.MainActivity
-import com.app.vogobook.view.ui.callback.BookDetailView
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
-import com.squareup.picasso.Picasso
-import io.reactivex.disposables.Disposable
-import java.util.*
-import javax.inject.Inject
-import kotlin.collections.ArrayList
 
-class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayoutInterface,
+class WebsitelFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayoutInterface,
     BookDetailView {
 
     @Inject
@@ -79,6 +46,21 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
 
     @BindView(R.id.recycler_view_reviews)
     lateinit var rcvReviews: RecyclerView
+
+    @BindView(R.id.text_view_book_number_review)
+    lateinit var txtReviewCount1: TextView
+
+    @BindView(R.id.txt_number_reviews)
+    lateinit var txtReviewCount2: TextView
+
+    @BindView(R.id.rating_bar)
+    lateinit var rattingBar: RatingBar
+
+    @BindView(R.id.text_view_book_rate)
+    lateinit var txtRate1: TextView
+
+    @BindView(R.id.txt_book_rate)
+    lateinit var txtRate2: TextView
 
     interface BookDetailListener {
         fun sendBook(book: Book?)
@@ -171,6 +153,22 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
     override fun loadReviewsSuccess(reviews: List<Review>) {
         Collections.reverse(reviews)
         mAdapter.setList(ArrayList(reviews))
+
+        if (reviews.isEmpty()) {
+            rattingBar.rating = 0F
+            txtRate1.text = "0"
+            txtRate2.text = "0"
+        } else {
+            var rating = 0F
+            reviews.forEach {
+                rating += it.rate!!
+            }
+            rattingBar.rating = rating/reviews.size
+            txtRate1.text = rattingBar.rating.toString()
+            txtRate2.text = rattingBar.rating.toString()
+        }
+        txtReviewCount1.text = reviews.size.toString()
+        txtReviewCount2.text = reviews.size.toString()
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {

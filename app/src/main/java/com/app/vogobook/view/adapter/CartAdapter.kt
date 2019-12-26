@@ -1,5 +1,6 @@
 package com.app.vogobook.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
@@ -11,44 +12,44 @@ import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Cart
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_cart.view.*
-import java.util.*
 import kotlin.collections.ArrayList
-
 
 class CartAdapter(private var cartList: ArrayList<Cart>) :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
+    private lateinit var mCartEventListener: CartEventListener
+
+    interface CartEventListener{
+        fun deleteCart(cart: Cart)
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var count: Int = 1
+        var count: Int? = cartList[position].total_book
 
         holder.txtTitle.text = cartList[position].book_title.toString()
-        holder.txtPrice.text = cartList[position].price.toString()
+        holder.txtPrice.text = "$" + cartList[position].price.toString()
         holder.txtAuthor.text = cartList[position].book_author.toString()
         holder.txtCount!!.text = cartList[position].total_book.toString()
         Picasso.get().load(cartList[position].image).resize(
             Resources.getSystem().displayMetrics.heightPixels * 2 / 9 * 9 / 15,
             Resources.getSystem().displayMetrics.widthPixels * 4 / 10
-        )
-            .centerCrop().into(holder.imgBook)
-//        holder.txtPrice.text = cartList[position].price
-
+        ).centerCrop().into(holder.imgBook)
 
         holder.btnDelete!!.setOnClickListener {
+            mCartEventListener.deleteCart(cartList[position])
             deleteItem(position)
         }
         holder.btnPlus?.setOnClickListener {
-            count++
-//            holder.txtCount!!.text = count.toString()
+            if (count!= null) count++
+            holder.txtCount!!.text = count.toString()
         }
         holder.btnMinus?.setOnClickListener {
-            if (count > 1)
+            if ( count != null && count > 1)
                 count--
-//            holder.txtCount!!.text = count.toString()
+            holder.txtCount!!.text = count.toString()
         }
-//        holder.txtCount!!.text = count.toString()
-
-
-    } 
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -85,7 +86,11 @@ class CartAdapter(private var cartList: ArrayList<Cart>) :
     private fun deleteItem(position: Int) {
         cartList.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemRangeChanged(position, cartList.size)
+        notifyItemRangeRemoved(position, cartList.size)
+    }
+
+    fun setInterface(listener: CartEventListener) {
+        mCartEventListener = listener
     }
 
 }

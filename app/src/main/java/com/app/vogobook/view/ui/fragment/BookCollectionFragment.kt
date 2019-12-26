@@ -24,7 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class BookCollectionFragment : BaseFragment(), BookCollectionView {
+class BookCollectionFragment : BaseFragment(), BookCollectionView, CollectionAdapter.ColectionEventListener {
 
     @Inject lateinit var mActivity: MainActivity
 
@@ -64,7 +64,7 @@ class BookCollectionFragment : BaseFragment(), BookCollectionView {
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity)).plus(
-            BookCollectionModule(this, this)
+            BookCollectionModule(this, this,  this)
         ).inject(this)
     }
 
@@ -79,6 +79,7 @@ class BookCollectionFragment : BaseFragment(), BookCollectionView {
 
         rcvCollection!!.layoutManager = GridLayoutManager(context, 3)
         rcvCollection?.hasFixedSize()
+        mCollectionAdapter.setInterface(this)
         rcvCollection!!.adapter = mCollectionAdapter
 
         mPresenter.getBookCollection(category!!.id)
@@ -96,6 +97,12 @@ class BookCollectionFragment : BaseFragment(), BookCollectionView {
         }
     }
 
+    override fun navigateToBookDetail(book: Book) {
+        val bundle = Bundle()
+        bundle.putParcelable(Constants.BOOK, book)
+        mActivity.mNavController.navigate(R.id.bookDetailFragment, bundle)
+    }
+
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
         //TODO
     }
@@ -107,4 +114,6 @@ class BookCollectionFragment : BaseFragment(), BookCollectionView {
     override fun setDisposable(disposable: Disposable) {
         //TODO
     }
+
+
 }

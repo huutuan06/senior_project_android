@@ -50,6 +50,17 @@ class RoomUIManager(
         }
     }
 
+    fun getBooksByUpdated(_interface: IRoomListener<Book>) {
+        AsyncTask.execute {
+            mBookDAO.getBooksByUpdated().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { t: List<Book>? ->
+                    if (t != null) {
+                        _interface.showListData(t)
+                    }
+                }
+        }
+    }
+
     fun getAllCarts(userID: Int?, _interface: IRoomListener<Cart>) {
         AsyncTask.execute {
             mCartDAO.getCartsByUserID(userID).subscribeOn(Schedulers.io())
@@ -144,7 +155,7 @@ class RoomUIManager(
 
     fun saveCart(book: Book?, user_id : Int?) {
         AsyncTask.execute {
-            var cart = Cart()
+            val cart = Cart()
             cart.book_id = book!!.id
             cart.book_title = book.title
             cart.image = book.image
@@ -165,6 +176,12 @@ class RoomUIManager(
                         }
                     }
                 }
+        }
+    }
+
+    fun deleteCart(cart: Cart) {
+        AsyncTask.execute {
+            mCartDAO.delete(cart)
         }
     }
 

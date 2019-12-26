@@ -19,6 +19,6 @@ interface MainComponent {
     fun plus(orderDetailModule: OrderDetailModule) : OrderDetailComponent
     fun plus(writeReviewModule: WriteReviewModule) : WriteReviewComponent
     fun plus(confirmOrderModule: ConfirmOrderModule) : ConfirmOrderComponent
+    fun plus(cartModule: CartModule) : CartComponent
     fun inject(activity: MainActivity): MainActivity
-    fun inject(cartFragment: CartFragment) : CartFragment
 }

@@ -19,7 +19,8 @@ import dagger.Provides
 @Module
 class BookCollectionModule(
     private val fragment: BookCollectionFragment,
-    private val view: BookCollectionView
+    private val view: BookCollectionView,
+    private val listerner: CollectionAdapter.ColectionEventListener
 ) {
 
     @Provides

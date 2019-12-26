@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.ButterKnife
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Review
 import com.app.vogobook.utils.objects.Utils
@@ -24,7 +23,7 @@ class BookDetailAdapter(private var context: Context, private var listReviews: A
         Picasso.get().load(listReviews[position].user_avatar).transform(CircleTransform()).into(holder.imgAvatar)
         holder.txtName.text = listReviews[position].user_name
         holder.rattingBar.rating = listReviews[position].rate!!
-        holder.date.text = Utils.getDate(context,  listReviews[position].date!!.toLong())
+        holder.date.text = Utils.getDate(context, listReviews[position].date!!.toLong())
         holder.txtContent.text = listReviews[position].content
     }
 
@@ -53,10 +52,6 @@ class BookDetailAdapter(private var context: Context, private var listReviews: A
         var date: TextView = itemView.findViewById(R.id.text_view_date)
 
         var txtContent: TextView = itemView.findViewById(R.id.text_view_content)
-
-        init {
-            ButterKnife.bind(this, itemView)
-        }
     }
 
 

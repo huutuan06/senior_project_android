@@ -1,5 +1,6 @@
 package com.app.vogobook.view.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Book
@@ -16,6 +18,13 @@ import kotlinx.android.synthetic.main.item_home_top_selling.view.*
 class TopSellingAdapter(private var context: Context, private var topSellingList: ArrayList<Book>) :
     RecyclerView.Adapter<TopSellingAdapter.ViewHolder>() {
 
+    private lateinit var mHomeTopSellingListener: HomeTopSellingListener
+
+    interface HomeTopSellingListener {
+        fun navigateToBookDetail(book: Book)
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.layoutParams.width = Resources.getSystem().displayMetrics.widthPixels
         holder.itemView.layoutParams.height =  Resources.getSystem().displayMetrics.heightPixels /7
@@ -25,7 +34,11 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = topSellingList[position].author
 //        holder.txtRate.text = topSellingList[position].rate
-//        holder.txtPrice.text = topSellingList[position].price
+        holder.txtPrice.text = "$" + topSellingList[position].price.toString()
+        holder.txtRank.text = (position + 1).toString()
+        holder.item.setOnClickListener {
+            mHomeTopSellingListener.navigateToBookDetail(topSellingList[position])
+        }
 
     }
 
@@ -50,6 +63,7 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         var txtAuthor: TextView = itemView.text_view_book_author
         var txtRate: TextView = itemView.text_view_rate
         var txtPrice: TextView = itemView.text_view_book_price
+        var item: ConstraintLayout = itemView.item_topselling
     }
 
     fun setList(arr: ArrayList<Book>) {
@@ -57,4 +71,7 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         notifyDataSetChanged()
     }
 
+    fun setInterface(listener: HomeTopSellingListener){
+        mHomeTopSellingListener = listener
+    }
 }
