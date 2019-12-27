@@ -2,6 +2,7 @@ package com.app.vogobook.presenter
 
 import android.content.Context
 import com.app.vogobook.R
+import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.Order
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.ui.callback.PersonalView
@@ -12,8 +13,9 @@ import io.reactivex.disposables.Disposable
 class PersonalPresenterImpl(
     private val view: PersonalView,
     private val model: PersonalModel,
-    private val context: Context
-) : PersonalPresenter {
+    private val context: Context,
+    private val roomUIManager: RoomUIManager
+    ) : PersonalPresenter {
 
     init {
         model.attachPresenter(this)
@@ -31,6 +33,7 @@ class PersonalPresenterImpl(
     }
 
     override fun logoutSuccess() {
+        roomUIManager.deleteUser()
         view.logoutSuccess()
     }
 

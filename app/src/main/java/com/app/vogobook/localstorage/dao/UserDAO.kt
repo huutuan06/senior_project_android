@@ -19,4 +19,7 @@ interface UserDAO {
 
     @Query("SELECT * FROM " + Constants.DB_TABLE_USER )
     fun getUser() : Maybe<List<User>>
+
+    @Query("DELETE FROM " + Constants.DB_TABLE_USER)
+    fun deleteAllUsers()
 }

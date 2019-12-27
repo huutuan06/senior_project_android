@@ -1,6 +1,7 @@
 package com.app.vogobook.localstorage
 
 import android.os.AsyncTask
+import com.app.vogobook.livedata.`object`.LiveDataBook
 import com.app.vogobook.localstorage.dao.*
 import com.app.vogobook.localstorage.entities.*
 import com.app.vogobook.utils.objects.Utils
@@ -199,6 +200,12 @@ class RoomUIManager(
     fun updateCart(cartId: Int, totalBooks: Int) {
         AsyncTask.execute {
             mCartDAO.updateTotalBookInCart(cartId, totalBooks)
+        }
+    }
+
+    fun deleteUser() {
+        AsyncTask.execute {
+            mUserDAO.deleteAllUsers()
         }
     }
 }

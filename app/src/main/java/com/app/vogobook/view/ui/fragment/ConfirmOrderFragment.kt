@@ -1,12 +1,14 @@
 package com.app.vogobook.view.ui.fragment
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +38,9 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView, VogoDialog.IListe
 
     @Inject
     lateinit var mActivity: MainActivity
+
+    @Inject
+    lateinit var mContext: Context
 
     @Inject
     lateinit var mNavController: NavController
@@ -147,30 +152,34 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView, VogoDialog.IListe
     fun processEventClick(view: View) {
         when (view.id) {
             R.id.button_order -> {
-                mAddress.name = edtName.text.toString()
-                mAddress.phone_number = edtPhone.text.toString()
-                mAddress.address = edtAddress.text.toString()
-                when {
-                    rbCash.isChecked -> {
-                        mAddress.payment_method = rbCash.text.toString()
-                    }
-                    rbMomo.isChecked -> {
-                        mAddress.payment_method = rbMomo.text.toString()
-                    }
-                    else -> {
-                        mAddress.payment_method = rbCreditCard.text.toString()
-                    }
+                if (edtName.text.toString() == "") {
+                    edtName.background = ContextCompat.getDrawable(mContext, R.drawable.shape_error)
                 }
-                updateProgressDialog(true)
-                mPresenter.submitOrder(mAddress,listCarts)
-//                                val dialogBuilder = AlertDialog.Builder(context)
-//                dialogBuilder.setMessage("Order successfully\n Thank for your order!")
-//                    .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
-//                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show()
-//                    })
-//                val alert = dialogBuilder.create()
-//                alert.setTitle("Order is successful!")
-//                alert.show()
+                if (edtAddress.text.toString() == "") {
+                    edtAddress.background = ContextCompat.getDrawable(mContext, R.drawable.shape_error)
+                }
+                if (edtPhone.text.toString() == "") {
+                    edtPhone.background = ContextCompat.getDrawable(mContext, R.drawable.shape_error)
+                }
+                if (edtName.text.toString() != "" && edtPhone.text.toString() != "" && edtAddress.text.toString() != ""){
+                    mAddress.name = edtName.text.toString()
+                    mAddress.phone_number = edtPhone.text.toString()
+                    mAddress.address = edtAddress.text.toString()
+                    when {
+                        rbCash.isChecked -> {
+                            mAddress.payment_method = rbCash.text.toString()
+                        }
+                        rbMomo.isChecked -> {
+                            mAddress.payment_method = rbMomo.text.toString()
+                        }
+                        else -> {
+                            mAddress.payment_method = rbCreditCard.text.toString()
+                        }
+                    }
+                    updateProgressDialog(true)
+                    mPresenter.submitOrder(mAddress,listCarts)
+                }
+
             }
         }
     }

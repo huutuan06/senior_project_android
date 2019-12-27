@@ -51,6 +51,7 @@ class PersonalModule(private val fragment: PersonalFragment, private val view: P
     @FragmentScope
     fun provideAccountPresenter(
         accountModel: PersonalModel,
-        context: Context
-    ): PersonalPresenter = PersonalPresenterImpl(view, accountModel, context)
+        context: Context,
+        roomUIManager: RoomUIManager
+    ): PersonalPresenter = PersonalPresenterImpl(view, accountModel, context, roomUIManager)
 }

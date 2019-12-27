@@ -58,6 +58,7 @@ class ConfirmOrderPresenterImpl(
     }
 
     override fun logoutSuccess() {
+        roomUIManager.deleteUser()
         view.logoutSuccess()
     }
 

@@ -3,6 +3,8 @@ package com.app.vogobook.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
+import com.app.vogobook.livedata.VogoBookLive
+import com.app.vogobook.livedata.`object`.LiveDataBook
 import com.app.vogobook.localstorage.IRoomListener
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.localstorage.entities.Book
@@ -12,6 +14,7 @@ import com.app.vogobook.service.connect.rx.DisposableManager
 import com.app.vogobook.service.connect.rx.IDisposableListener
 import com.app.vogobook.service.repository.BookService
 import com.app.vogobook.service.response.HomeCommonResponse
+import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.ui.activity.MainActivity
 
 class HomeCommonModelImpl(
@@ -19,7 +22,8 @@ class HomeCommonModelImpl(
     private val service: BookService,
     private val disposableManager: DisposableManager,
     private var mActivity: MainActivity,
-    private val mRoomUIManager: RoomUIManager
+    private val mRoomUIManager: RoomUIManager,
+    private val vogoBookLive: VogoBookLive
 ) :
     HomeCommonModel {
 
@@ -36,6 +40,8 @@ class HomeCommonModelImpl(
             override fun onHandleData(response: HomeCommonResponse?) {
                 if (response!!.error!!.code == 0) {
                     mActivity.runOnUiThread {
+                        // LiveData
+                        implementBookDataLive(response.data!!.books)
                         ProcessDatabase().execute(response)
                     }
                 } else {
@@ -52,6 +58,10 @@ class HomeCommonModelImpl(
                 loadCommonBooksFromLocal()
             }
         }))
+    }
+
+    private fun implementBookDataLive(books: List<Book>?) {
+        books!!.forEach { vogoBookLive.initLiveDataBook(LiveDataBook(Utils.generateKeyFromText(it.title), it)) }
     }
 
     override fun loadCommonBooksFromLocal() {

@@ -2,6 +2,7 @@ package com.app.vogobook.di.module
 
 import android.content.Context
 import com.app.vogobook.di.scope.SubFragmentScope
+import com.app.vogobook.livedata.VogoBookLive
 import com.app.vogobook.localstorage.RoomUIManager
 import com.app.vogobook.presenter.HomeCommonPresenter
 import com.app.vogobook.presenter.HomeCommonPresenterImpl
@@ -36,9 +37,10 @@ class HomeCommonModule(private val fragment: HomeCommonFragment, private val vie
         disposableManager: DisposableManager,
         bookService: BookService,
         mainActivity: MainActivity,
-        roomUIManager: RoomUIManager
+        roomUIManager: RoomUIManager,
+        vogoBookLive: VogoBookLive
     ): HomeCommonModel =
-        HomeCommonModelImpl(context, bookService, disposableManager, mainActivity, roomUIManager)
+        HomeCommonModelImpl(context, bookService, disposableManager, mainActivity, roomUIManager, vogoBookLive)
 
     @Provides
     @SubFragmentScope

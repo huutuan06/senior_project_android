@@ -47,6 +47,8 @@ class ConfirmOrderModelImpl(
                     override fun onHandleData(t: Error?) {
                         if (t!!.code == 0)
                             mPresenter!!.submitOrderSuccess()
+                        else if (t.code == 401)
+                            mPresenter!!.logOut()
                         else
                             mPresenter!!.submitOrderFailed()
                     }

@@ -162,7 +162,6 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
                 if (mBook!!.amount == 0) {
                     Toast.makeText(context,"The product is out of stock", Toast.LENGTH_SHORT).show()
                 } else {
-                    mVogoBookLive.initLiveDataBook(LiveDataBook(Utils.generateKeyFromText(mBook!!.title), mBook))
                     mPresenter.saveCart(mBook)
                     mBookDetailListener.sendBook(mBook)
                     mSnackbar.show()
