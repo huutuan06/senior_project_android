@@ -20,7 +20,7 @@ import com.app.vogobook.view.adapter.BookDetailAdapter
 import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.BookDetailView
-import com.app.vogobook.view.ui.fragment.BookDetailFragment
+import com.app.vogobook.view.ui.fragment.book.BookDetailFragment
 import com.app.vogobook.viewmodel.BookDetailModel
 import com.app.vogobook.viewmodel.BookDetailModelImpl
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -30,8 +30,8 @@ import dagger.Provides
 
 @Module
 class BookDetailModule(
-    private val bookDetailFragment: BookDetailFragment,
-    private val view: BookDetailView
+        private val bookDetailFragment: BookDetailFragment,
+        private val view: BookDetailView
 ) {
 
     @Provides

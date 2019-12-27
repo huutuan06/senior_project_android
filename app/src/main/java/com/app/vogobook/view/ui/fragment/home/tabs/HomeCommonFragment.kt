@@ -77,6 +77,7 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
     }
 
     override fun initAttributes() {
+        homeFragment.tvCommon!!.isSelected = true
         mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         mActivity.supportActionBar!!.setDisplayShowHomeEnabled(false)
 
@@ -136,5 +137,10 @@ class HomeCommonFragment : BaseFragment(), CommonAdapter.CommonEventListener, Ho
     override fun onDestroyView() {
         if (mDisposable != null && mDisposable!!.isDisposed) mDisposable!!.dispose()
         super.onDestroyView()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        homeFragment.tvCommon!!.isSelected = false
     }
 }

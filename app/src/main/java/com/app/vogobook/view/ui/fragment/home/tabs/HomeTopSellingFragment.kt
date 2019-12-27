@@ -23,7 +23,8 @@ import com.app.vogobook.view.ui.fragment.home.HomeFragment
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class HomeTopSellingFragment : BaseFragment(), HomeTopSellingView, TopSellingAdapter.HomeTopSellingListener {
+class HomeTopSellingFragment : BaseFragment(), HomeTopSellingView,
+    TopSellingAdapter.HomeTopSellingListener {
 
     @Inject
     lateinit var mTopSellingAdapter: TopSellingAdapter
@@ -36,6 +37,9 @@ class HomeTopSellingFragment : BaseFragment(), HomeTopSellingView, TopSellingAda
 
     @Inject
     lateinit var mActivity: MainActivity
+
+    @Inject
+    lateinit var homeFragment: HomeFragment
 
     @BindView(R.id.recycler_view_top_selling)
     @JvmField
@@ -63,6 +67,7 @@ class HomeTopSellingFragment : BaseFragment(), HomeTopSellingView, TopSellingAda
     override fun initAttributes() {
         mPresenter.getTopSellingBooks()
         mToolbar.title = context!!.getString(R.string.label_app_name)
+        homeFragment.tvTopSelling!!.isSelected = true
     }
 
     override fun loadTopSellingBooksSuccess(books: List<Book>) {
@@ -89,5 +94,10 @@ class HomeTopSellingFragment : BaseFragment(), HomeTopSellingView, TopSellingAda
         val bundle = Bundle()
         bundle.putParcelable(Constants.BOOK, book)
         mActivity.mNavController.navigate(R.id.bookDetailFragment, bundle)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        homeFragment.tvTopSelling!!.isSelected = false
     }
 }

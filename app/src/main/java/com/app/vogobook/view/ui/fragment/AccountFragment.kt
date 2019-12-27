@@ -20,6 +20,7 @@ import com.app.vogobook.di.module.AccountModule
 import com.app.vogobook.di.module.MainModule
 import com.app.vogobook.presenter.AccountPresenter
 import com.app.vogobook.utils.Constants
+import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.custom.CircleTransform
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.AccountView
@@ -52,9 +53,6 @@ class AccountFragment : BaseFragment(), AccountView {
     @BindView(R.id.edit_text_name)
     lateinit var edtName: EditText
 
-    @BindView(R.id.image_view_birthday)
-    lateinit var imgBirthDay: ImageView
-
     @BindView(R.id.edit_text_birthday)
     lateinit var edtBirthday: EditText
 
@@ -66,9 +64,6 @@ class AccountFragment : BaseFragment(), AccountView {
 
     @BindView(R.id.radioButton_female)
     lateinit var rbFeMale: RadioButton
-
-    @BindView(R.id.button_submit)
-    lateinit var btnSubmit: Button
 
     var pathImage: String? = null
     val mCalendar = Calendar.getInstance()
@@ -114,7 +109,7 @@ class AccountFragment : BaseFragment(), AccountView {
         }
     }
 
-    @OnClick(R.id.image_view_avatar, R.id.image_view_birthday, R.id.button_submit)
+    @OnClick(R.id.image_view_avatar, R.id.edit_text_birthday, R.id.button_submit)
     fun Click(view: View) {
         when (view.id) {
             R.id.image_view_avatar -> {
@@ -129,14 +124,14 @@ class AccountFragment : BaseFragment(), AccountView {
                     pickImageFromGallary()
                 }
             }
-            R.id.image_view_birthday -> {
+            R.id.edit_text_birthday -> {
                 initDatePicker()
             }
             R.id.button_submit -> {
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("image", pathImage)
                 jsonObject.addProperty("name", edtName.text.toString())
-                jsonObject.addProperty("date_of_birth", mCalendar.time.time/1000)
+                jsonObject.addProperty("date_of_birth", mCalendar.time.time / 1000)
                 jsonObject.addProperty("address", edtAddress.text.toString())
                 if (rbMale.isChecked)
                     jsonObject.addProperty("gender", 0)
@@ -156,8 +151,9 @@ class AccountFragment : BaseFragment(), AccountView {
         val dpd = DatePickerDialog(
             context,
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-//                val thisMonth = monthOfYear + 1
-                val simpleDateFormat = SimpleDateFormat(context!!.getString(R.string.partten_birthday_local))
+                //                val thisMonth = monthOfYear + 1
+                val simpleDateFormat =
+                    SimpleDateFormat(context!!.getString(R.string.partten_birthday_local))
                 mCalendar.set(year, monthOfYear, dayOfMonth)
                 edtBirthday.setText(simpleDateFormat.format(mCalendar.time.time))
             },
@@ -195,7 +191,7 @@ class AccountFragment : BaseFragment(), AccountView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == Constants.IMAGE_PICK_CODE) {
             imgAvatar.setImageURI(data?.data)
-            pathImage = data?.data.toString()
+            pathImage = data?.data?.let { Utils.getRealPathFromURI(it, mActivity) }
         }
     }
 

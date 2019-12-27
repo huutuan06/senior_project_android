@@ -99,16 +99,16 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView, VogoDialog.IListe
     private var listCarts = ArrayList<Cart>()
 
     override fun provideYourFragmentView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_confirm_order, container, false)
     }
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity))
-            .plus(ConfirmOrderModule(this, this)).inject(this)
+                .plus(ConfirmOrderModule(this, this)).inject(this)
     }
 
     override fun initAttributes() {
@@ -119,7 +119,7 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView, VogoDialog.IListe
         mVogoDialog.setListener(this)
         setList(mConFirmOrderArrayList)
         rcvConfirmOrder.layoutParams.height =
-            Resources.getSystem().displayMetrics.heightPixels * 23 / 32
+                Resources.getSystem().displayMetrics.heightPixels * 23 / 32
         rcvConfirmOrder.layoutManager = LinearLayoutManager(context)
         rcvConfirmOrder.hasFixedSize()
         rcvConfirmOrder.adapter = mConFirmOrderAdapter
@@ -163,6 +163,14 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView, VogoDialog.IListe
                 }
                 updateProgressDialog(true)
                 mPresenter.submitOrder(mAddress,listCarts)
+//                                val dialogBuilder = AlertDialog.Builder(context)
+//                dialogBuilder.setMessage("Order successfully\n Thank for your order!")
+//                    .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
+//                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show()
+//                    })
+//                val alert = dialogBuilder.create()
+//                alert.setTitle("Order is successful!")
+//                alert.show()
             }
         }
     }

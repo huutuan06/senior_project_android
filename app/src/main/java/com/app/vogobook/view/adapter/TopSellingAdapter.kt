@@ -33,7 +33,6 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         Picasso.get().load(topSellingList[position].image).resize(Resources.getSystem().displayMetrics.heightPixels /7*2/3,  Resources.getSystem().displayMetrics.heightPixels /7)
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = topSellingList[position].author
-//        holder.txtRate.text = topSellingList[position].rate
         holder.txtPrice.text = "$" + topSellingList[position].price.toString()
         holder.txtRank.text = (position + 1).toString()
         holder.item.setOnClickListener {
@@ -64,7 +63,6 @@ class TopSellingAdapter(private var context: Context, private var topSellingList
         var txtTitle: TextView = itemView.text_view_book_title
         var imgBook: ImageView = itemView.image_book
         var txtAuthor: TextView = itemView.text_view_book_author
-        var txtRate: TextView = itemView.text_view_rate
         var txtPrice: TextView = itemView.text_view_book_price
         var imgSoldOut: ImageView = itemView.img_sold_out
         var item: ConstraintLayout = itemView.item_topselling

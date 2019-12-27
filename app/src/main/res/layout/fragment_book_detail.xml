@@ -92,7 +92,6 @@
                             android:id="@+id/text_view_book_rate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4.0"
                             android:textColor="#000000" />
 
                         <ImageView
@@ -106,8 +105,7 @@
                             android:id="@+id/text_view_book_number_review"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/text_view_book_rate"
-                            android:text="425" />
+                            android:layout_below="@+id/text_view_book_rate"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -136,7 +134,7 @@
                         android:id="@+id/text_view_book_number_pages"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="304"
+                        android:text="204"
                         android:textColor="#000000" />
 
                     <TextView
@@ -187,7 +185,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toStartOf="@+id/relative_layout_rate"
-                    android:text="4.0"
                     android:textColor="#000000"
                     android:textSize="40dp" />
 
@@ -205,16 +202,14 @@
                         android:numStars="5"
                         android:stepSize="0.5"
                         android:saveEnabled="true"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:rating="4"/>
+                        style="?android:attr/ratingBarStyleSmall"/>
 
                     <TextView
                         android:id="@+id/txt_number_reviews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rating_bar"
-                        android:layout_centerHorizontal="true"
-                        android:text="425"/>
+                        android:layout_centerHorizontal="true"/>
                 </RelativeLayout>
             </RelativeLayout>
 

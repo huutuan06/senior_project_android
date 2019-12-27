@@ -1,10 +1,9 @@
-package com.app.vogobook.view.ui.fragment
+package com.app.vogobook.view.ui.fragment.book
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,11 +30,11 @@ import com.app.vogobook.view.adapter.BookDetailAdapter
 import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.BookDetailView
+import com.app.vogobook.view.ui.fragment.BaseFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import io.reactivex.disposables.Disposable
-import org.w3c.dom.Text
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList

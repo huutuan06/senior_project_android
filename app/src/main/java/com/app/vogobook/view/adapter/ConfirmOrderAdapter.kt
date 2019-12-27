@@ -49,6 +49,10 @@ class ConfirmOrderAdapter(private var list: ArrayList<Cart>) :
         return list.size
     }
 
+    fun getList() : ArrayList<Cart> {
+        return list;
+    }
+
     open class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var txtTitle: TextView = itemView.text_view_book_title
         var imgBook: ImageView = itemView.image_book

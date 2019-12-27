@@ -62,35 +62,13 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:ellipsize="end"
-            android:singleLine="true"/>
+            android:maxLines="2"/>
 
         <TextView
             android:id="@+id/text_view_book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="5dp" >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rate"/>
-            <TextView
-                android:id="@+id/text_view_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_star_19dp"
-                android:layout_marginStart="2dp"
-                android:contentDescription="@string/image_star" />
-        </LinearLayout>
 
         <TextView
             android:id="@+id/text_view_book_price"

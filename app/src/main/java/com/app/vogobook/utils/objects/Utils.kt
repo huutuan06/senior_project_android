@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
@@ -64,6 +66,20 @@ object Utils {
 
         val simpleDateFormat = SimpleDateFormat(context!!.getString(R.string.partten_birthday_local))
         return simpleDateFormat.format(calendar.time)
+    }
+
+    fun getRealPathFromURI(contentUri: Uri, activity: Activity): String? {
+        var pathFromURI: String? = null
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = activity.contentResolver.query(contentUri, proj, null, null, null)
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                pathFromURI = cursor.getString(column_index)
+            }
+            cursor.close()
+        }
+        return pathFromURI
     }
 
     fun hiddenKeyBoard(activity: Activity) {

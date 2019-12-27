@@ -142,7 +142,7 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
         mPresenter.deleteCart(cart)
         mTotalPrice -= cart.price!!*totalBooks
         txtTotalPrice.text = "$" +String.format("%.2f",mTotalPrice)
-        if (mCartAdapter!!.itemCount == 1) {
+        if (mCartAdapter.itemCount == 1) {
             emptyCartScreen.visibility = View.VISIBLE
             valueCartScreen.visibility = View.GONE
         } else {
@@ -165,6 +165,10 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
 
     override fun notifyMaximumBookAllow() {
         Toast.makeText(context,context!!.getString(R.string.label_maximum_book), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun notifyNotEnoughBook() {
+        Toast.makeText(mContext,mContext.getString(R.string.label_not_enough_book), Toast.LENGTH_SHORT).show()
     }
 
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {

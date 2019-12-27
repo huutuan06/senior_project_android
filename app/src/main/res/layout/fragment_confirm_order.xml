@@ -27,7 +27,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textStyle="bold"
-                android:textColor="@color/colorTextBlack"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginTop="2dp"
                 android:text="Shipping address"/>
             <EditText
@@ -36,8 +36,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_shipping_address"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textColor="@color/textColorAccent"
+                android:background="@drawable/shape_edt"
                 android:singleLine="true"
                 android:hint="Enter your name"/>
             <EditText
@@ -46,9 +48,11 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_name"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textColor="@color/textColorAccent"
                 android:singleLine="true"
+                android:background="@drawable/shape_edt"
                 android:inputType="number"
                 android:hint="Enter your phone number"/>
             <EditText
@@ -57,9 +61,11 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_phone"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textColor="@color/textColorAccent"
                 android:singleLine="true"
+                android:background="@drawable/shape_edt"
                 android:hint="Enter your address"/>
 
             <TextView
@@ -70,7 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_address"
                 android:layout_marginTop="2dp"
                 android:textStyle="bold"
-                android:textColor="@color/colorTextBlack"
+                android:textColor="@color/colorPrimary"
                 android:text="Type of delivery"/>
 
             <RadioGroup
@@ -112,7 +118,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/radio_group"
                 android:layout_marginTop="2dp"
                 android:textStyle="bold"
-                android:textColor="@color/colorTextBlack"
+                android:textColor="@color/colorPrimary"
                 android:text="Your order"/>
 
             <androidx.core.widget.NestedScrollView
@@ -159,7 +165,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="Total"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"/>
             <TextView
                 android:id="@+id/text_view_total_price"
                 android:layout_width="wrap_content"

@@ -9,14 +9,11 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.app.vogobook.R
 import com.app.vogobook.localstorage.entities.Review
 import com.app.vogobook.utils.objects.Utils
 import com.app.vogobook.view.custom.CircleTransform
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_book_detail.view.*
 
 class BookDetailAdapter(private var context: Context, private var listReviews: ArrayList<Review>) :
     RecyclerView.Adapter<BookDetailAdapter.ViewHolder>() {
@@ -46,16 +43,15 @@ class BookDetailAdapter(private var context: Context, private var listReviews: A
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var txtName: TextView = itemView.text_view_user_name
+        var imgAvatar: ImageView = itemView.findViewById(R.id.image_view_avatar)
 
-        var rattingBar: RatingBar = itemView.rating_bar
+        var txtName: TextView = itemView.findViewById(R.id.text_view_user_name)
 
-        var date: TextView = itemView.text_view_date
+        var rattingBar: RatingBar = itemView.findViewById(R.id.rating_bar)
 
-        var txtContent: TextView = itemView.text_view_content
+        var date: TextView = itemView.findViewById(R.id.text_view_date)
 
-        var imgAvatar: ImageView = itemView.image_view_avatar
-
+        var txtContent: TextView = itemView.findViewById(R.id.text_view_content)
     }
 
 

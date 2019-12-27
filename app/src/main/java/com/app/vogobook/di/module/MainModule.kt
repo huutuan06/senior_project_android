@@ -1,14 +1,5 @@
 package com.app.vogobook.di.module
 
-import android.R.id
-import android.annotation.SuppressLint
-import android.content.Context
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -17,15 +8,10 @@ import com.app.vogobook.di.scope.ActivityScope
 import com.app.vogobook.livedata.VogoBookLive
 import com.app.vogobook.presenter.MainPresenter
 import com.app.vogobook.presenter.MainPresenterImpl
-import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.MainView
-import com.app.vogobook.view.ui.fragment.BookDetailFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.snackbar.Snackbar.SnackbarLayout
 import dagger.Module
 import dagger.Provides
 
