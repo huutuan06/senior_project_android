@@ -142,7 +142,7 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
         mPresenter.deleteCart(cart)
         mTotalPrice -= cart.price!!*totalBooks
         txtTotalPrice.text = "$" +String.format("%.2f",mTotalPrice)
-        if (mCartAdapter!!.itemCount == 1) {
+        if (mCartAdapter.itemCount == 1) {
             emptyCartScreen.visibility = View.VISIBLE
             valueCartScreen.visibility = View.GONE
         } else {
