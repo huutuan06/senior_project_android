@@ -30,6 +30,7 @@ import com.app.vogobook.view.adapter.BookDetailAdapter
 import com.app.vogobook.view.custom.CartSnackBarLayout
 import com.app.vogobook.view.ui.activity.MainActivity
 import com.app.vogobook.view.ui.callback.BookDetailView
+import com.app.vogobook.view.ui.fragment.BaseFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
