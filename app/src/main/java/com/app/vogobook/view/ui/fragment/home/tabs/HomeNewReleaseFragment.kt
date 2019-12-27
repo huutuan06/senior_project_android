@@ -37,6 +37,9 @@ class HomeNewReleaseFragment : BaseFragment(), HomeNewReleaseView, NewReleaseAda
     @Inject
     lateinit var mActivity: MainActivity
 
+    @Inject
+    lateinit var homeFragment: HomeFragment
+
     @BindView(R.id.recycler_view_new_release)
     @JvmField
     var rcvNewRelease: RecyclerView? = null
@@ -63,6 +66,7 @@ class HomeNewReleaseFragment : BaseFragment(), HomeNewReleaseView, NewReleaseAda
     override fun initAttributes() {
         mToolbar.title = context!!.getString(R.string.label_app_name)
         mPresenter.getNewReleaseBooks()
+        homeFragment.tvNewRelease!!.isSelected = true
     }
 
     override fun loadNewReleaseBooksSuccess(books: List<Book>) {
@@ -89,5 +93,10 @@ class HomeNewReleaseFragment : BaseFragment(), HomeNewReleaseView, NewReleaseAda
         val bundle = Bundle()
         bundle.putParcelable(Constants.BOOK, book)
         mActivity.mNavController.navigate(R.id.bookDetailFragment, bundle)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        homeFragment.tvNewRelease!!.isSelected = false
     }
 }

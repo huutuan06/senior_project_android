@@ -109,6 +109,7 @@
                 android:focusableInTouchMode="true"
                 android:hint="Write your review for this book"
                 android:maxLines="4"
+                android:background="@drawable/shape_edt"
                 android:textColor="@color/textColorAccent"/>
 
             <Button

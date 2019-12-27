@@ -161,8 +161,16 @@ class ConfirmOrderFragment : BaseFragment(), ConfirmOrderView, VogoDialog.IListe
                         mAddress.payment_method = rbCreditCard.text.toString()
                     }
                 }
-                updateProgressDialog(true)
-                mPresenter.submitOrder(mAddress,listCarts)
+//                updateProgressDialog(true)
+//                mPresenter.submitOrder(mAddress,listCarts)
+                                val dialogBuilder = AlertDialog.Builder(context)
+                dialogBuilder.setMessage("Order successfully\n Thank for your order!")
+                    .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, id ->
+                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show()
+                    })
+                val alert = dialogBuilder.create()
+                alert.setTitle("Order is successful!")
+                alert.show()
             }
         }
     }

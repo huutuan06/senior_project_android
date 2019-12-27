@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import com.app.vogobook.R
@@ -19,7 +18,6 @@ import com.app.vogobook.localstorage.entities.User
 import com.app.vogobook.presenter.MainPresenter
 import com.app.vogobook.utils.Constants
 import com.app.vogobook.utils.SessionManager
-import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.callback.MainView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -83,7 +81,6 @@ class MainActivity : BaseActivity(), MainView,
                     user = t[0]
             }
         })
-
     }
 
     override fun onResume() {
@@ -118,7 +115,6 @@ class MainActivity : BaseActivity(), MainView,
                 return true
             }
         }
-
         return false
     }
 
@@ -228,7 +224,7 @@ class MainActivity : BaseActivity(), MainView,
     }
 
     override fun onDestroy() {
-        mVogoAnalytics.reportDevideInfor(mFirebaseAnalytics, Locale.getDefault().getDisplayLanguage(), System.currentTimeMillis() - mSessionManager.time_using)
+        mVogoAnalytics.reportDevideInfor(mFirebaseAnalytics, Locale.getDefault().displayLanguage, System.currentTimeMillis() - mSessionManager.time_using)
         super.onDestroy()
     }
 }

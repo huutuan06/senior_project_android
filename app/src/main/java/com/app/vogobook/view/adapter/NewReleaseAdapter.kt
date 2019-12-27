@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.item_home_top_selling.view.image_book
 import kotlinx.android.synthetic.main.item_home_top_selling.view.text_view_book_author
 import kotlinx.android.synthetic.main.item_home_top_selling.view.text_view_book_price
 import kotlinx.android.synthetic.main.item_home_top_selling.view.text_view_book_title
-import kotlinx.android.synthetic.main.item_home_top_selling.view.text_view_rate
 
 class NewReleaseAdapter(private var context: Context, private var newReleaseList: ArrayList<Book>) :
     RecyclerView.Adapter<NewReleaseAdapter.ViewHolder>() {
@@ -38,7 +37,6 @@ class NewReleaseAdapter(private var context: Context, private var newReleaseList
         Picasso.get().load(newReleaseList[position].image).resize(holder.itemView.layoutParams.height*2/3,  holder.itemView.layoutParams.height)
             .centerCrop().into(holder.imgBook)
         holder.txtAuthor.text = newReleaseList[position].author
-//        holder.txtRate.text = topSellingList[position].rate
         holder.txtPrice.text = "$" + newReleaseList[position].price.toString()
         holder.txtRank.text = (position + 1).toString()
         holder.item.setOnClickListener {
@@ -69,7 +67,6 @@ class NewReleaseAdapter(private var context: Context, private var newReleaseList
         var txtTitle: TextView = itemView.text_view_book_title
         var imgBook: ImageView = itemView.image_book
         var txtAuthor: TextView = itemView.text_view_book_author
-        var txtRate: TextView = itemView.text_view_rate
         var txtPrice: TextView = itemView.text_view_book_price
         var imgSoldOut: ImageView = itemView.img_sold_out
         var item: ConstraintLayout = itemView.item_new_release

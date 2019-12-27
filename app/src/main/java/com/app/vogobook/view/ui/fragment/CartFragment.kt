@@ -167,6 +167,10 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
         Toast.makeText(context,context!!.getString(R.string.label_maximum_book), Toast.LENGTH_SHORT).show()
     }
 
+    override fun notifyNotEnoughBook() {
+        Toast.makeText(mContext,mContext.getString(R.string.label_not_enough_book), Toast.LENGTH_SHORT).show()
+    }
+
     override fun updateProgressDialog(isShowProgressDialog: Boolean) {
         //TODO
     }
