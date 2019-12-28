@@ -96,7 +96,7 @@ class CartFragment : BaseFragment(), CartAdapter.CartEventListener, CartView {
         rcvCart.layoutManager = LinearLayoutManager(context)
         rcvCart.hasFixedSize()
         rcvCart.adapter = mCartAdapter
-        mCartAdapter!!.setInterface(this)
+        mCartAdapter.setInterface(this)
 
         mTotalPrice = 0F
         mRoomUIManager.getAllCarts(mSessionManager.user_id, object : IRoomListener<Cart> {

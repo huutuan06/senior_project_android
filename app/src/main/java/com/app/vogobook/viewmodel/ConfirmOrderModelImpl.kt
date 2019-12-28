@@ -45,12 +45,16 @@ class ConfirmOrderModelImpl(
                     }
 
                     override fun onHandleData(t: Error?) {
-                        if (t!!.code == 0)
-                            mPresenter!!.submitOrderSuccess()
-                        else if (t.code == 401)
-                            mPresenter!!.logOut()
-                        else
-                            mPresenter!!.submitOrderFailed()
+                        when {
+                            t!!.code == 0 -> {
+                                listCarts.forEach {
+                                    mRoomUIManager.deleteCart(it)
+                                }
+                                mPresenter!!.submitOrderSuccess()
+                            }
+                            t.code == 401 -> mPresenter!!.logOut()
+                            else -> mPresenter!!.submitOrderFailed()
+                        }
                     }
 
                     override fun onRequestWrongData(code: Int) {

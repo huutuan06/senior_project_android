@@ -16,7 +16,10 @@ import com.app.vogobook.service.model.BookOrder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_order.view.*
 
-class OrderDetailAdapter(private var context: Context, private var listBooks: ArrayList<BookOrder>) :
+class OrderDetailAdapter(
+    private var context: Context,
+    private var listBooks: ArrayList<BookOrder>
+) :
     RecyclerView.Adapter<OrderDetailAdapter.ViewHolder>() {
 
     private lateinit var mOrderEventListener: OrderDetailEventListener
@@ -41,9 +44,7 @@ class OrderDetailAdapter(private var context: Context, private var listBooks: Ar
         holder.txtPrice.text = "$" + listBooks[position].price.toString()
         holder.txtTotalBooks.text = listBooks[position].total_book.toString()
 
-        listBooks.forEach {
-            mOrderPrice+= listBooks[position].total_book!! * listBooks[position].price!!
-        }
+        mOrderPrice += listBooks[position].total_book!! * listBooks[position].price!!
         mOrderEventListener.setOrderPrice(mOrderPrice)
     }
 

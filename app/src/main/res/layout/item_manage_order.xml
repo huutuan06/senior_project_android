@@ -66,8 +66,7 @@
         android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="@id/text_view_order_date_text"
         app:layout_constraintTop_toBottomOf="@id/text_view_order_code_text"
-        android:singleLine="true"
-        android:text="11-12-2019"/>
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/text_view_order_status_text"
@@ -91,8 +90,7 @@
         android:textSize="16sp"
         android:singleLine="true"
         app:layout_constraintLeft_toRightOf="@id/text_view_order_status_text"
-        app:layout_constraintTop_toBottomOf="@id/text_view_order_date_text"
-        android:text="OK"/>
+        app:layout_constraintTop_toBottomOf="@id/text_view_order_date_text"/>
 
     <View android:layout_width="match_parent"
         android:layout_height="0.5dp"

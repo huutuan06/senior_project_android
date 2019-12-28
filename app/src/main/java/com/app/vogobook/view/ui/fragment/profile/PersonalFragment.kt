@@ -136,7 +136,10 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
                 listOrder = mOrderList
             }
             1 -> {
-                //TODO
+                mOrderList.forEach {
+                    if (it.confirm_ordering == 0 && it.delivery == 0 && it.success == 0 && it.cancel == 0 && it.payment == 0)
+                        listOrder.add(it)
+                }
             }
             2 -> {
                 mOrderList.forEach {

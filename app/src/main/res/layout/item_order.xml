@@ -30,14 +30,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="title"/>
+                android:maxLines="3"
+                android:ellipsize="end"/>
 
             <TextView
                 android:id="@+id/text_view_book_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text_view_book_title"
-                android:text="$4.99"/>
+                android:layout_below="@+id/text_view_book_title"/>
             <TextView
                 android:id="@+id/text_view_multiplication"
                 android:layout_width="wrap_content"

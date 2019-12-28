@@ -87,9 +87,9 @@ class ManageOrdersFragment : BaseFragment(), ManageOrdersAdapter.ManageOrderList
         } else {
             mLayoutValueOrders.visibility = View.VISIBLE
             mLayoutEmptyOrders.visibility = View.GONE
+            mOrderArraylist.reverse()
             mAdapter.setList(mOrderArraylist)
         }
-
 
         mRecyclerView?.layoutManager = LinearLayoutManager(context)
         mRecyclerView?.hasFixedSize()

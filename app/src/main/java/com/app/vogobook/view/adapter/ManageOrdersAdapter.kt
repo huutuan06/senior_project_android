@@ -44,6 +44,9 @@ class ManageOrdersAdapter(private var context: Context, private var orderList: A
             orderList[position].cancel == 1 -> {
                 holder.txtOrderStatus.text = "Canceled"
             }
+            else -> {
+                holder.txtOrderStatus.text = "Seen"
+            }
         }
 
         holder.itemOrder.setOnClickListener {
