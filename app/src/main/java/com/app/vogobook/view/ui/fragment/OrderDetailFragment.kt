@@ -7,20 +7,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
+import butterknife.OnClick
 import com.app.vogobook.R
 import com.app.vogobook.app.Application
 import com.app.vogobook.di.module.MainModule
 import com.app.vogobook.di.module.OrderDetailModule
 import com.app.vogobook.localstorage.entities.Order
+import com.app.vogobook.presenter.OrderDetailPresenter
 import com.app.vogobook.view.adapter.OrderDetailAdapter
+import com.app.vogobook.view.custom.VogoLoadingDialog
 import com.app.vogobook.view.ui.activity.MainActivity
+import com.app.vogobook.view.ui.callback.OrderDetailView
+import com.app.vogobook.view.ui.dialog.VogoDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventListener {
+class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventListener , OrderDetailView,  VogoDialog.IListener{
 
     @Inject
     lateinit var mContext: Context
@@ -36,6 +43,15 @@ class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventL
 
     @Inject
     lateinit var mAdapter: OrderDetailAdapter
+
+    @Inject
+    lateinit var mPresenter: OrderDetailPresenter
+
+    @Inject
+    lateinit var mPgDialog: VogoLoadingDialog
+
+    @Inject
+    lateinit var mVogoDialog: VogoDialog
 
     @BindView(R.id.recycler_view_books)
     lateinit var rcvBook: RecyclerView
@@ -65,7 +81,7 @@ class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventL
 
     override fun distributedDaggerComponents() {
         Application.instance.getAppComponent()!!.plus(MainModule(this.activity as MainActivity))
-            .plus(OrderDetailModule(this)).inject(this)
+            .plus(OrderDetailModule(this, this)).inject(this)
     }
 
     @SuppressLint("SetTextI18n")
@@ -103,9 +119,6 @@ class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventL
                 tvOrderStatus.text = "Seen"
             }
         }
-//        if (mOrder.confirm_ordering == mOrder.delivery && mOrder.delivery == mOrder.success && mOrder.success == mOrder.cancel
-//            && mOrder.cancel == mOrder.payment && mOrder.payment == 0)
-//            tvOrderStatus.text = "Seen"
 
         rcvBook.layoutManager = LinearLayoutManager(context)
         rcvBook.hasFixedSize()
@@ -117,5 +130,53 @@ class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventL
         tvOrderPrice.text = "$" +String.format("%.2f",price)
     }
 
+    @OnClick(R.id.button_cancel_order)
+    fun processEventClick(view: View) {
+        when(view.id) {
+            R.id.button_cancel_order -> {
+                mVogoDialog.updateMessageDialog(mContext, "Cancel Order!", "Are you sure to cancel this order?")
+                mVogoDialog.show(mActivity.supportFragmentManager, "OrderDetailFragment")
+                mVogoDialog.setListener(object : VogoDialog.IListener {
+                    override fun doYourAction() {
+                        mPresenter.cancelOrder(mOrder.id)
+                    }
+                    override fun dimiss() {
+                        //TODO
+                    }
+                })
+
+            }
+        }
+    }
+
+    override fun updateProgressDialog(isShowProgressDialog: Boolean) {
+        if (isShowProgressDialog) {
+            if (!mPgDialog.isShowing) {
+                mPgDialog.show()
+            }
+        } else {
+            if (!mActivity.isDestroyed && mPgDialog.isShowing)
+                mPgDialog.dismiss()
+        }
+    }
+
+    override fun showMessageDialog(errorTitle: String?, errorMessage: String?) {
+        if (!mVogoDialog.isAdded && !mActivity.isDestroyed) {
+            mVogoDialog.updateMessageDialog(mContext, errorTitle, errorMessage)
+            mVogoDialog.show(mActivity.supportFragmentManager, "OrderDetailFragment")
+        }
+    }
+
+    override fun setDisposable(disposable: Disposable) {
+        //TODO
+    }
+
+    override fun doYourAction() {
+        //TODO
+    }
+
+    override fun dimiss() {
+        //TODO
+    }
 
 }

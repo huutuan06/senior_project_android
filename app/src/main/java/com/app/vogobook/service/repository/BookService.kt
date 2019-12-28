@@ -34,4 +34,7 @@ interface BookService {
 
     @POST("api/v1/mobile/order/submit")
     fun submitOrder(@Header("Authorization") accessToken: String, @Body ordersData: OrdersData) : Observable<Response<Error>>
+
+    @POST("api/v1/mobile/cancelorder")
+    fun cancelOrder(@Header("Authorization") accessToken: String, @Body orderId: Int?): Observable<Response<Error>>
 }

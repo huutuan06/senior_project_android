@@ -76,4 +76,5 @@
     <string name="label_maximum_book">The maximum number of books allowed is 5</string>
     <string name="label_not_enough_book">Not enough this book in stock</string>
     <string name="submit_order_successfully">Your order submit successfully</string>
+    <string name="cancel_order_successfully">Cancel order successfully!</string>
 </resources>
