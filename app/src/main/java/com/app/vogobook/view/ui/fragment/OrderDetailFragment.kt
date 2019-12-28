@@ -84,7 +84,7 @@ class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventL
         tvOrderCode.text = mOrder.code.toString()
         tvOrderDate.text = mOrder.updated_at.toString()
         when (1) {
-            mOrder.confirm_ordering -> {
+            mOrder.confirmed_ordering -> {
                 tvOrderStatus.text = "Confirmed"
             }
             mOrder.delivery -> {

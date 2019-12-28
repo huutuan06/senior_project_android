@@ -29,10 +29,10 @@ class ManageOrdersAdapter(private var context: Context, private var orderList: A
         holder.txtOrderCode.text = orderList[position].code.toString()
         holder.txtOrderDate.text = orderList[position].updated_at.toString()
         when {
-            orderList[position].confirm_ordering == 1 -> {
+            orderList[position].confirmed_ordering == 1 -> {
                 holder.txtOrderStatus.text = "Confirmed"
             }
-            orderList[position].unsuccessfull_payment == 1 -> {
+            orderList[position].unsuccessful_payment == 1 -> {
                 holder.txtOrderStatus.text = "Payment failed"
             }
             orderList[position].delivery == 1 -> {

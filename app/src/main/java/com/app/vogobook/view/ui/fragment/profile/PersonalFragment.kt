@@ -137,13 +137,13 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
             }
             1 -> {
                 mOrderList.forEach {
-                    if (it.confirm_ordering == 0 && it.delivery == 0 && it.success == 0 && it.cancel == 0 && it.payment == 0)
+                    if (it.confirmed_ordering == 0 && it.delivery == 0 && it.success == 0 && it.cancel == 0 && it.payment == 0)
                         listOrder.add(it)
                 }
             }
             2 -> {
                 mOrderList.forEach {
-                    if (it.confirm_ordering == 1)
+                    if (it.confirmed_ordering == 1)
                         listOrder.add(it)
                 }
             }

@@ -40,32 +40,32 @@ class Order() : Parcelable {
     var address: String? = null
 
     @ColumnInfo(name = Constants.TABLE_ORDER_IS_PAYMENT)
-    @SerializedName("is_payment")
+    @SerializedName("payment")
     @Expose
     var payment: Int? = null
 
     @ColumnInfo(name = Constants.TABLE_ORDER_IS_CONFIRMED_ORDERING)
-    @SerializedName("is_confirm_ordering")
+    @SerializedName("confirmed_ordering")
     @Expose
-    var confirm_ordering: Int? = null
+    var confirmed_ordering: Int? = null
 
     @ColumnInfo(name = Constants.TABLE_ORDER_IS_UNSUCCESSFUL_PAYMENT)
-    @SerializedName("is_unsuccessfull_payment")
+    @SerializedName("unsuccessful_payment")
     @Expose
-    var unsuccessfull_payment: Int? = null
+    var unsuccessful_payment: Int? = null
 
     @ColumnInfo(name = Constants.TABLE_ORDER_IS_DELIVERY)
-    @SerializedName("is_delivery")
+    @SerializedName("delivery")
     @Expose
     var delivery: Int? = null
 
     @ColumnInfo(name = Constants.TABLE_ORDER_IS_SUCCESS)
-    @SerializedName("is_success")
+    @SerializedName("success")
     @Expose
     var success: Int? = null
 
     @ColumnInfo(name = Constants.TABLE_ORDER_IS_CANCEL)
-    @SerializedName("is_cancel")
+    @SerializedName("cancel")
     @Expose
     var cancel: Int? = null
 
@@ -87,12 +87,13 @@ class Order() : Parcelable {
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readValue(Int::class.java.classLoader) as? Int
+        name = parcel.readString()
         code = parcel.readString()
         user_id = parcel.readValue(Int::class.java.classLoader) as? Int
         address = parcel.readString()
         payment = parcel.readValue(Int::class.java.classLoader) as? Int
-        confirm_ordering = parcel.readValue(Int::class.java.classLoader) as? Int
-        unsuccessfull_payment = parcel.readValue(Int::class.java.classLoader) as? Int
+        confirmed_ordering = parcel.readValue(Int::class.java.classLoader) as? Int
+        unsuccessful_payment = parcel.readValue(Int::class.java.classLoader) as? Int
         delivery = parcel.readValue(Int::class.java.classLoader) as? Int
         success = parcel.readValue(Int::class.java.classLoader) as? Int
         cancel = parcel.readValue(Int::class.java.classLoader) as? Int
@@ -103,12 +104,13 @@ class Order() : Parcelable {
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
+        parcel.writeString(name)
         parcel.writeString(code)
         parcel.writeValue(user_id)
         parcel.writeString(address)
         parcel.writeValue(payment)
-        parcel.writeValue(confirm_ordering)
-        parcel.writeValue(unsuccessfull_payment)
+        parcel.writeValue(confirmed_ordering)
+        parcel.writeValue(unsuccessful_payment)
         parcel.writeValue(delivery)
         parcel.writeValue(success)
         parcel.writeValue(cancel)
