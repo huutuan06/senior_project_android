@@ -54,13 +54,20 @@ class CartAdapter(private var cartList: ArrayList<Cart>, private var vogoBookLiv
         holder.btnPlus?.setOnClickListener {
             vogoBookLive.implLiveDataBook()!!.observe(activity, Observer { book: LiveDataBook? ->
                 if (TextUtils.equals(book!!.key, Utils.generateKeyFromText(cartList[position].book_title))) {
-                    if (count!= null && count < book.book!!.amount!! && count < 5) {
+//                    if (count!= null && count < book.book!!.amount!! && count < 5) {
+////                        count++
+////                        holder.txtCount!!.text = count.toString()
+////                        mCartEventListener.updateCart(cartList[position].id!!, count, cartList[position].price!!, "Increase")
+////                    } else if (count == book.book!!.amount!! && count < 5) {
+////                        mCartEventListener.notifyNotEnoughBook()
+////                    } else if (count == 5 && count < book.book!!.amount!!) {
+////                        mCartEventListener.notifyMaximumBookAllow()
+////                    }
+                    if (count!= null && count < 5) {
                         count++
                         holder.txtCount!!.text = count.toString()
                         mCartEventListener.updateCart(cartList[position].id!!, count, cartList[position].price!!, "Increase")
-                    } else if (count == book.book!!.amount!! && count < 5) {
-                        mCartEventListener.notifyNotEnoughBook()
-                    } else if (count == 5 && count < book.book!!.amount!!) {
+                    } else if (count == 5) {
                         mCartEventListener.notifyMaximumBookAllow()
                     }
                 }
