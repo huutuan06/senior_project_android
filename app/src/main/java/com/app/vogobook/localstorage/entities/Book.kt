@@ -52,6 +52,11 @@ class Book() : Parcelable {
     @Expose
     var amount: Int? = null
 
+    @ColumnInfo(name = Constants.TABLE_BOOK_TOTAL_PAGES)
+    @SerializedName("total_pages")
+    @Expose
+    var total_pages: Int? = null
+
     @ColumnInfo(name = Constants.TABLE_BOOK_AUTHOR)
     @SerializedName("author")
     @Expose
@@ -76,6 +81,7 @@ class Book() : Parcelable {
         description = parcel.readString()
         price = parcel.readValue(Float::class.java.classLoader) as? Float
         amount = parcel.readValue(Int::class.java.classLoader) as? Int
+        total_pages = parcel.readValue(Int::class.java.classLoader) as? Int
         author = parcel.readString()
         created_at = parcel.readString()
         updated_at = parcel.readString()
@@ -90,6 +96,7 @@ class Book() : Parcelable {
         parcel.writeString(description)
         parcel.writeValue(price)
         parcel.writeValue(amount)
+        parcel.writeValue(total_pages)
         parcel.writeString(author)
         parcel.writeString(created_at)
         parcel.writeString(updated_at)
@@ -108,6 +115,5 @@ class Book() : Parcelable {
             return arrayOfNulls(size)
         }
     }
-
 
 }

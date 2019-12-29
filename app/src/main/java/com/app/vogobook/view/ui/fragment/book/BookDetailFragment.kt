@@ -142,6 +142,7 @@ class BookDetailFragment : BaseFragment(), CartSnackBarLayout.CartSnackBarLayout
         title.text = mBook!!.title.toString()
         author.text = mBook!!.author.toString()
         price.text = "$" + mBook!!.price.toString()
+        pages.text = mBook!!.total_pages.toString()
 
         mPresenter.getReviews(mBook!!.id)
         rcvReviews.layoutManager = LinearLayoutManager(context)

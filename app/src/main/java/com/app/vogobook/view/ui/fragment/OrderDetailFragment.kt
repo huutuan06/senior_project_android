@@ -96,6 +96,7 @@ class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventL
         mOrder = arguments!!.getParcelable(mContext.getString(R.string.label_order))!!
         mAdapter.setList(ArrayList(mOrder.arrBooks!!))
         mAdapter.setInterface(this)
+        mVogoDialog.setListener(this)
 
         tvOrderCode.text = mOrder.code.toString()
         tvOrderDate.text = mOrder.updated_at.toString()
@@ -134,18 +135,8 @@ class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventL
     fun processEventClick(view: View) {
         when(view.id) {
             R.id.button_cancel_order -> {
-                mVogoDialog.updateMessageDialog(mContext, "Cancel Order!", "Are you sure to cancel this order?")
-                mVogoDialog.show(mActivity.supportFragmentManager, "OrderDetailFragment")
-                mVogoDialog.setListener(object : VogoDialog.IListener {
-                    override fun doYourAction() {
-                        mPresenter.cancelOrder(mOrder.id)
-                    }
-                    override fun dimiss() {
-                        //TODO
-                    }
-                })
-
-            }
+                mPresenter.cancelOrder(mOrder.id)
+                           }
         }
     }
 
@@ -172,7 +163,7 @@ class OrderDetailFragment : BaseFragment(), OrderDetailAdapter.OrderDetailEventL
     }
 
     override fun doYourAction() {
-        //TODO
+        mActivity.mNavController.navigate(R.id.personalFragment)
     }
 
     override fun dimiss() {

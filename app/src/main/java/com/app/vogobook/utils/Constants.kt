@@ -33,6 +33,7 @@ class Constants {
         const val TABLE_BOOK_PRICE = "price"
         const val TABLE_BOOK_AMOUNT = "amount"
         const val TABLE_BOOK_AUTHOR = "author"
+        const val TABLE_BOOK_TOTAL_PAGES = "total_pages"
         const val TABLE_BOOK_CREATED_AT = "created_at"
         const val TABLE_BOOK_UPDATED_AT = "updated_at"
 

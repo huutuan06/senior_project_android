@@ -52,8 +52,8 @@ class VogoDialog : DialogFragment() {
         mUnbinder = ButterKnife.bind(this, view)
         tvTitle!!.text = mErrorTitle
         tvDesc!!.text = mErrorDesc
-        if (TextUtils.equals(mContext!!.getString(R.string.submit_review_successfully), mErrorDesc) || TextUtils.equals(mContext!!.getString(R.string.submit_review_successfully), mErrorDesc) ||
-                TextUtils.equals(mContext!!.getString(R.string.cannot_process_request), mErrorDesc)) {
+        if (TextUtils.equals(mContext!!.getString(R.string.submit_review_successfully), mErrorDesc) || TextUtils.equals(mContext!!.getString(R.string.cancel_order_successfully), mErrorDesc) ||
+                TextUtils.equals(mContext!!.getString(R.string.cannot_process_request), mErrorDesc) || TextUtils.equals(mContext!!.getString(R.string.submit_order_successfully), mErrorDesc)) {
             btnCancel!!.visibility = View.GONE
         } else {
             btnCancel!!.visibility = View.VISIBLE

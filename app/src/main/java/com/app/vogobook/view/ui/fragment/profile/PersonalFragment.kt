@@ -109,7 +109,6 @@ class PersonalFragment : BaseFragment(), PersonalAdapter.PersonalEventListener, 
         mItemPersonalArrayList.add(ItemPersonal("The orders successful"))
         mItemPersonalArrayList.add(ItemPersonal("The orders canceled"))
         mItemPersonalArrayList.add(ItemPersonal("The books have been purchased"))
-        mItemPersonalArrayList.add(ItemPersonal("My comments"))
         showList(mItemPersonalArrayList)
 
         rcvPersonal?.layoutManager = LinearLayoutManager(context)
